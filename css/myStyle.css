@@ -1,0 +1,52 @@
+
+/* Mis estilos*/
+
+#titleEmp{
+	margin: 0;
+	color: #0e1a35;
+}
+.avisos{
+	color: #0e1a35;
+	font-weight: 500;
+}
+
+
+
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+	.modulo-slider h4 {
+		font-size: 14px;
+		font-size: 1.4rem;
+	}
+	.modulo-slider p {
+		font-size: 10px;
+		font-size: 1rem;
+	}
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+	.modulo-slider h4 {
+		font-size: 14px;
+		font-size: 1.4rem;
+	}
+	.modulo-slider p {
+		font-size: 10px;
+		font-size: 1rem;
+	}
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+	.modulo-slider h4 {
+		font-size: 18px;
+		font-size: 1.8rem;
+	}
+	.modulo-slider p {
+		font-size: 12px;
+		font-size: 1.2rem;
+	}
+
+}

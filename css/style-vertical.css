@@ -1,0 +1,77 @@
+/**** MIS ESTILOS ****/
+
+.slider-vertical {
+	padding: 0;
+}
+.slider-vertical h3 {
+	margin-bottom: 10px;
+}
+.slider-vertical img {
+	float: left;
+}
+.slider-vertical .vinculo-especial2 {
+	margin-right: 32px;
+}
+.contenedor-slider {
+	/*background: #f1f1f1 url("../images/fondo.jpg") repeat-x scroll 0 0;*/
+	background-color: #fff2ef;
+	border: 1px solid #bbb;
+	height: 150px;
+	margin: 0;
+	overflow: hidden;
+	position: relative;
+}
+.bloque-slider {
+	position: relative;
+	top: 0;
+}
+.modulo-slider {
+	height: 150px;
+	margin: 0 40px 0 0;
+	padding: 13px 10px 5px;
+	position: relative;
+}
+.modulo-slider h4 {
+	margin-top: 0;
+}
+.mover-slider-vertical {
+/*	background: #fff url("../images/slider-vertical-bg.jpg") no-repeat scroll 0 4px;*/
+	margin: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 40px;
+}
+.mover-slider-vertical a {
+/*	background-image: url("../images/boton.gif");
+	background-repeat: no-repeat;*/
+	cursor: pointer;
+	display: block;
+	/*font-size: 0;*/
+	height: 64px;
+	line-height: 0;
+	margin: 10px 0 40px 10px;
+	outline: medium none;
+	/*text-indent: -9999em;*/
+	width: 21px;
+}
+.mover-slider-vertical a:hover {
+}
+.subir-slider {
+	background-position: 0 0;
+}
+.subir-slider:hover {
+	background-position: 0 -21px;
+}
+.subir-slider:active {
+	background-position: 0 0;
+}
+.bajar-slider {
+	background-position: -21px 0;
+}
+.bajar-slider:hover {
+	background-position: -21px -21px;
+}
+.bajar-slider:active {
+	background-position: -21px 0;
+}

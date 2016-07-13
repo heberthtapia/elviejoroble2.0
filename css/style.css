@@ -559,11 +559,6 @@ header {
 	border-top-right-radius: 5px;
 /*Main CSS*/
 
-
-
-
-
-
 @media only screen and (max-device-width: 767px) {
 	.login-logo img {
 		margin: 0 auto;
