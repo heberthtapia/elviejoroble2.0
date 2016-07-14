@@ -494,7 +494,7 @@ header {
 	opacity: 1;
 	text-shadow: none;
 }
-.modal-body input {
+/*.modal-body input {
 	border: 1px solid #d4d9e3;
 	font-size: 14px;
 	font-weight: 300;
