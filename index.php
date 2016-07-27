@@ -67,6 +67,10 @@
                 keyboard: true
             });
 
+            $("#myModal").on('shown.bs.modal', function(){
+                $(this).find('#username').focus();
+            });
+
             /*$("#login").validationEngine({
                 promptPosition: "bottomLeft"
             });*/
