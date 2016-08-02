@@ -5,7 +5,63 @@
  * Date: 11/07/2016
  * Time: 21:24
  */
+  ini_set("session.use_trans_sid","0");
+  ini_set("session.use_only_cookies","1");
 
+  session_start();
+
+  date_default_timezone_set("America/La_Paz" );
+  session_set_cookie_params(0,"/",$_SERVER["HTTP_HOST"],0);
+
+  include 'adodb5/adodb.inc.php';
+  include 'inc/function.php';
+
+  $op = new cnFunction();
+
+  $db = NewADOConnection('mysqli');
+  //$db->debug = true;
+  $db->Connect();
+
+  if(!isset($_SESSION['idUser'])){
+      header('location:index.php');
+  }else{
+      $fechaGuardada = $_SESSION["ultimoAcceso"];
+      $ahora = date("Y-n-j H:i:s");
+      $tiempo_transcurrido = (strtotime($ahora)-strtotime($fechaGuardada));
+
+      if($tiempo_transcurrido >= 2160){
+          $user = $_SESSION["idUser"];
+          $strQuery = 'UPDATE usuario SET status = "Inactivo", dateReg = "0000-00-00 00:00:00" WHERE id_usuario = "'.$user.'"';
+          $str = $db->Execute($strQuery);
+          session_destroy();
+          header('location:index.php');
+      }else{
+          $_SESSION["ultimoAcceso"] = $ahora;
+      }
+  }
+
+  $sql = 'SELECT * ';
+  $sql.= 'FROM empleado ';
+  $sql.= 'WHERE id_empleado = '.$_SESSION['idEmp'].'';
+
+  $reg = $db->Execute($sql);
+
+  $row = $reg->FetchRow();
+
+  $nombre = ltrim($row['nombre']);
+  $nombre = rtrim($nombre);
+
+  $nom = explode(' ',$nombre);
+
+  $nombre1 = strtoupper($nom[0]);
+  $nombre2 = strtoupper($nom[1]);
+
+
+  $apP = strtoupper($row['apP']);
+
+  $_SESSION['inc'] = $nombre1[0].''.$apP[0].'-';
+
+  $cargo = $op->toSelect($row['cargo']);
 ?>
 <!doctype html>
 <html lang="en">
@@ -28,6 +84,8 @@
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/slider-vertical.js"></script>
 
+    <script type="text/javascript" src="js/myJavaScript.js"></script>
+
     <script type="text/javascript" language="javascript" class="init">
 
         $(document).ready(function() {
@@ -49,9 +107,7 @@
                         "next":       "Siguiente",
                         "previous":   "Anterior"
                     }
-
-                },
-
+                }
             });
 
             /*********************/
@@ -137,13 +193,13 @@
                                     <ul class="dropdown-menu">
                                         <li>
                                             <div class="navbar-content">
-                                                <span>JS Krishna</span>
+                                                <span><?=$nombre1[0].$nombre2[0];?>&nbsp;<?=ucwords($row['apP']);?></span>
                                                 <p class="text-muted small">
-                                                    me@jskrishna.com
+                                                    ht.heberth@gmail.com
                                                 </p>
                                                 <div class="divider">
                                                 </div>
-                                                <a href="#" class="view btn-sm active">View Profile</a>
+                                                <a href="#" onclick="outSession('<?=$_SESSION['idUser'];?>');" class="btn-sm active">Cerrar Sesion</a>
                                             </div>
                                         </li>
                                     </ul>

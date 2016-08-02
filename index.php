@@ -167,8 +167,18 @@
         /* highlight required form fields */
         color: red;
     }
-</style>
 
+    .alert {
+        border: 1px solid transparent;
+        border-radius: 4px;
+        margin-bottom: 0px;
+        padding: 10px;
+    }
+
+    #alert{
+        display: none;
+    }
+</style>
 
 <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-login">
@@ -196,6 +206,10 @@
                     </div>
                     <div class="col-xs-4 col-sm-4">
                         <img src="images/lock.png" width="90">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div id="alert" class="alert alert-danger col-xs-offset-1 col-xs-10 col-sm-10 col-md-10">
+                        <strong>¡Error!</strong> Usuario o contrase&ntilde;a no validas.
                     </div>
                 </div>
             </div>

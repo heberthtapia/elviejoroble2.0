@@ -18,18 +18,27 @@ function verifica(id_F, p){
         },
         success: function(data){
             if(data != 0){
-
-                $('#error').html('<p>Redireccionando...</p>');
-
                 $(location).attr('href','admin.php');
-
             }else{
-                $('#error').html('<p>Usuario o contrase&ntilde;a no validas</p>');
-                clearForm('login');
+                $('#alert').css('display','block').fadeIn(5000,function () {
+                    $('#alert').fadeOut(4000);
+                    $('.btn').delay(7000).val('Ingresar');
+                    $('.btn').delay(7000).removeAttr('disabled');
+
+                    $('#login').click();
+                    $('#password').val('');
+                    $('#username').val('');
+
+                    $('input, select, textarea').filter(':first').focus();
+                });
             }
         },
         error: function(data){
             //alert('Error al guardar el formulario');
         }
     });
+}
+
+function outSession(user){
+    $(location).attr('href','inc/outSession.php?user='+user);
 }
