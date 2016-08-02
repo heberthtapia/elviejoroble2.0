@@ -188,8 +188,10 @@
                                     </a>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="http://jskrishna.com/work/merkury/images/user-pic.jpg" alt="user">
-                                        <b class="caret"></b></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <img src="images/iconos/hombre.png" alt="user">
+                                        <b class="caret"></b>
+                                    </a>
                                     <ul class="dropdown-menu">
                                         <li>
                                             <div class="navbar-content">
