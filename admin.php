@@ -22,6 +22,10 @@
   //$db->debug = true;
   $db->Connect();
 
+/**
+ * Inicio de session
+ */
+
   if(!isset($_SESSION['idUser'])){
       header('location:index.php');
   }else{
@@ -62,19 +66,88 @@
   $_SESSION['inc'] = $nombre1[0].''.$apP[0].'-';
 
   $cargo = $op->toSelect($row['cargo']);
+/**
+ * Fin de inicio de session
+ *
+ * Variables para el control de eventos en calendario.
+ */
+
+// Verificamos si se ha enviado el campo con name from
+if (isset($_POST['from']))
+{
+
+    // Si se ha enviado verificamos que no vengan vacios
+    if ($_POST['from']!="" AND $_POST['to']!="")
+    {
+
+        // Recibimos el fecha de inicio y la fecha final desde el form
+
+        $inicio = $op->_formatear($_POST['from']);
+        // y la formateamos con la funcion _formatear
+
+        $final  = $op->_formatear($_POST['to']);
+
+        // Recibimos el fecha de inicio y la fecha final desde el form
+
+        $inicio_normal = $_POST['from'];
+
+        // y la formateamos con la funcion _formatear
+        $final_normal  = $_POST['to'];
+
+        // Recibimos los demas datos desde el form
+        $titulo = $op->evaluar($_POST['title']);
+
+        // y con la funcion evaluar
+        $body   = $op->evaluar($_POST['event']);
+
+        // reemplazamos los caracteres no permitidos
+        $clase  = $op->evaluar($_POST['class']);
+
+        // insertamos el evento
+        $query="INSERT INTO eventos VALUES(null,'$titulo','$body','','$clase','$inicio','$final','$inicio_normal','$final_normal')";
+
+        // Ejecutamos nuestra sentencia sql
+        //$conexion->query($query);
+        $conexion = $db->Execute($query);
+
+        // Obtenemos el ultimo id insetado
+        //$im=$conexion->query("SELECT MAX(id) AS id FROM eventos");
+
+        $im = $db->Execute("SELECT MAX(id) AS id FROM eventos");
+        //$row = $im->fetch_row();
+        $row = $im->FetchRow();
+        $id = trim($row[0]);
+
+        // para generar el link del evento
+        $link = "$base_url"."inc/descripcion_evento.php?id=$id";
+
+        // y actualizamos su link
+        $query="UPDATE eventos SET url = '$link' WHERE id = $id";
+
+        // Ejecutamos nuestra sentencia sql
+        //$conexion->query($query);
+        $conexion = $db->Execute($query);
+
+        // redireccionamos a nuestro calendario
+        header("Location:admin.php");
+    }
+}
+
 ?>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Administrador - El Viejo Roble</title>
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="css/dataTables.bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/dataTables.bootstrap.css">
     <link rel="stylesheet" href="css/style-vertical.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calendar.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="css/myStyle.css">
 
     <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
@@ -84,6 +157,13 @@
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/slider-vertical.js"></script>
 
+    <script type="text/javascript" src="js/es-ES.js"></script>
+    <script src="js/moment.js"></script>
+    <script src="js/bootstrap-datetimepicker.js"></script>
+    <script src="js/bootstrap-datetimepicker.es.js"></script>
+    <script type="text/javascript" src="js/underscore-min.js"></script>
+    <script type="text/javascript" src="js/calendar.js"></script>
+
     <script type="text/javascript" src="js/myJavaScript.js"></script>
 
     <script type="text/javascript" language="javascript" class="init">
@@ -91,23 +171,6 @@
         $(document).ready(function() {
             $('[data-toggle="offcanvas"]').click(function(){
                 $("#navigation").toggleClass("hidden-xs");
-            });
-
-            $('#example').DataTable({
-                "language": {
-                    "lengthMenu": "Mostrar _MENU_ filas por pagina",
-                    "zeroRecords": "No se encontro nada - Lo siento",
-                    "info": "Mostrando _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay registros disponibles",
-                    "infoFiltered": "(Filtrada de _MAX_ registros en total)",
-                    "search":         "Buscar:",
-                    "paginate": {
-                        "first":      "Primero",
-                        "last":       "Ultimo",
-                        "next":       "Siguiente",
-                        "previous":   "Anterior"
-                    }
-                }
             });
 
             /*********************/
@@ -129,9 +192,36 @@
             $(".slider-vertical").mouseout(function(){
                 verificar = 1;
             });
+
+            /**
+             * Menu Desplegable
+             */
+
+            $("ul.subnavegador").not('.selected').hide();
+            $("a.desplegable").click(function(e){
+                var desplegable = $(this).parent().find("ul.subnavegador");
+                $('.desplegable').parent().find("ul.subnavegador").not(desplegable).slideUp('slow');
+                desplegable.slideToggle('slow');
+                e.preventDefault();
+            })
+
         } );
+        function cerrar() {
+            location.href = "admin.php";
+        }
 
     </script>
+    <style>
+        .subnavegador{
+            background: #0e1a49 none repeat scroll 0 0;
+        }
+        ul.subnavegador li{
+            margin-left: 5px;
+        }
+        ul.subnavegador li a{
+            font-size: 15px;
+        }
+    </style>
 </head>
 <body>
 <div class="container-fluid display-table">
@@ -144,13 +234,109 @@
             </div>
             <div class="navi">
                 <ul>
-                    <li class="active"><a href="#"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Inicio</span></a></li>
-                    <li><a href="#"><i class="fa fa-archive" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Pedidos</span></a></li>
-                    <li><a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Almacen</span></a></li>
-                    <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Producción</span></a></li>
-                    <li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Reportes</span></a></li>
-                    <li><a href="#"><i class="fa fa-music" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Empleados</span></a></li>
-                    <li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Clentes</span></a></li>
+                    <li class="active">
+                        <a href="#">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                            <span class="hidden-xs hidden-sm">Inicio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="desplegable">
+                            <i class="fa fa-indent" aria-hidden="true"></i>
+                            <span class="hidden-xs hidden-sm">Pedidos</span>
+                        </a>
+                        <ul class="subnavegador">
+                            <li><a href="#">
+                                    <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">Nuevo Pedido</span>
+                                </a>
+                            </li>
+                            <li><a href="#">
+                                    <i class="fa fa-list" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">Lista de Pedidos</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="desplegable">
+                            <i class="fa fa-archive" aria-hidden="true"></i>
+                            <span class="hidden-xs hidden-sm">Almacen</span>
+                        </a>
+                        <ul class="subnavegador">
+                            <li><a href="#">
+                                    <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">Nuevo Producto</span>
+                                </a>
+                            </li>
+                            <li><a href="#" onclick="despliega('modulo/almacen/producto.php','contenido')">
+                                    <i class="fa fa-list" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">Lista de Productos</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="desplegable">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <span class="hidden-xs hidden-sm">Producción</span>
+                        </a>
+                        <ul class="subnavegador">
+                            <li><a href="#">
+                                    <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">Nueva Orden de Producción</span>
+                                </a>
+                            </li>
+                            <li><a href="#">
+                                    <i class="fa fa-list" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">Ordenes de Producción</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="desplegable">
+                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                            <span class="hidden-xs hidden-sm">Reportes</span>
+                        </a>
+
+                    </li>
+                    <li>
+                        <a href="#" class="desplegable">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <span class="hidden-xs hidden-sm">Empleados</span>
+                        </a>
+                        <ul class="subnavegador">
+                            <li><a href="#">
+                                    <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">Nueva Empleado</span>
+                                </a>
+                            </li>
+                            <li><a href="#">
+                                    <i class="fa fa-list" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">Lista de Empleados</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="desplegable">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            <span class="hidden-xs hidden-sm">Clientes</span>
+                        </a>
+                        <ul class="subnavegador">
+                            <li><a href="#">
+                                    <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">Nuevo Cliente</span>
+                                </a>
+                            </li>
+                            <li><a href="#">
+                                    <i class="fa fa-list" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">Lista de Clientes</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -211,7 +397,7 @@
                     </div>
                 </header>
             </div>
-            <div class="user-dashboard">
+            <div class="user-dashboard" id="contenido">
 
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-md-8">
@@ -275,6 +461,31 @@
                         </div>
                         <!-- fin	contenido -->
                     </div>
+                </div><!-- fin fila -->
+                <div class="row">
+                    <div class="page-header"><h2></h2></div>
+                    <div class="pull-left form-inline"><br>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" data-calendar-nav="prev"><< Anterior</button>
+                            <button class="btn" data-calendar-nav="today">Hoy</button>
+                            <button class="btn btn-primary" data-calendar-nav="next">Siguiente >></button>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-warning" data-calendar-view="year">Año</button>
+                            <button class="btn btn-warning active" data-calendar-view="month">Mes</button>
+                            <button class="btn btn-warning" data-calendar-view="week">Semana</button>
+                            <button class="btn btn-warning" data-calendar-view="day">Dia</button>
+                        </div>
+
+                    </div>
+                    <div class="pull-right form-inline"><br>
+                        <button class="btn btn-info" data-toggle='modal' data-target='#add_evento'>Añadir Evento</button>
+                    </div>
+                </div><hr>
+
+                <div class="row">
+                    <div id="calendar"></div> <!-- Aqui se mostrara nuestro calendario -->
+                    <br><br>
                 </div>
 
             </div>
@@ -283,7 +494,19 @@
 
 </div>
 
-
+<!--ventana modal para el calendario-->
+<div class="modal fade" id="events-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="height: 400px">
+                <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="setTimeout(cerrar(), 5000);" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <!-- Modal -->
 <div id="add_project" class="modal fade" role="dialog">
@@ -307,6 +530,182 @@
             </div>
         </div>
 
+    </div>
+</div>
+
+<script type="text/javascript">
+    (function($){
+        //creamos la fecha actual
+        var date = new Date();
+        var yyyy = date.getFullYear().toString();
+        var mm = (date.getMonth()+1).toString().length == 1 ? "0"+(date.getMonth()+1).toString() : (date.getMonth()+1).toString();
+        var dd  = (date.getDate()).toString().length == 1 ? "0"+(date.getDate()).toString() : (date.getDate()).toString();
+
+        //establecemos los valores del calendario
+        var options = {
+
+            // definimos que los eventos se mostraran en ventana modal
+            modal: '#events-modal',
+
+            // dentro de un iframe
+            modal_type:'iframe',
+
+            //obtenemos los eventos de la base de datos
+            events_source: 'inc/obtener_eventos.php',
+
+            // mostramos el calendario en el mes
+            view: 'month',
+
+            // y dia actual
+            day: yyyy+"-"+mm+"-"+dd,
+
+
+            // definimos el idioma por defecto
+            language: 'es-ES',
+
+            //Template de nuestro calendario
+            tmpl_path: '<?=$base_url?>tmpls/',
+            tmpl_cache: false,
+
+
+            // Hora de inicio
+            time_start: '08:00',
+
+            // y Hora final de cada dia
+            time_end: '22:00',
+
+            // intervalo de tiempo entre las hora, en este caso son 30 minutos
+            time_split: '30',
+
+            // Definimos un ancho del 100% a nuestro calendario
+            width: '100%',
+
+            onAfterEventsLoad: function(events)
+            {
+                if(!events)
+                {
+                    return;
+                }
+                var list = $('#eventlist');
+                list.html('');
+
+                $.each(events, function(key, val)
+                {
+                    $(document.createElement('li'))
+                        .html('<a href="' + val.url + '">' + val.title + '</a>')
+                        .appendTo(list);
+                });
+            },
+            onAfterViewLoad: function(view)
+            {
+                $('.page-header h2').text(this.getTitle());
+                $('.btn-group button').removeClass('active');
+                $('button[data-calendar-view="' + view + '"]').addClass('active');
+            },
+            classes: {
+                months: {
+                    general: 'label'
+                }
+            }
+        };
+
+
+        // id del div donde se mostrara el calendario
+        var calendar = $('#calendar').calendar(options);
+
+        $('.btn-group button[data-calendar-nav]').each(function()
+        {
+            var $this = $(this);
+            $this.click(function()
+            {
+                calendar.navigate($this.data('calendar-nav'));
+            });
+        });
+
+        $('.btn-group button[data-calendar-view]').each(function()
+        {
+            var $this = $(this);
+            $this.click(function()
+            {
+                calendar.view($this.data('calendar-view'));
+            });
+        });
+
+        $('#first_day').change(function()
+        {
+            var value = $(this).val();
+            value = value.length ? parseInt(value) : null;
+            calendar.setOptions({first_day: value});
+            calendar.view();
+        });
+    }(jQuery));
+</script>
+
+<div class="modal fade" id="add_evento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Agregar nuevo evento</h4>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    <label for="from">Inicio</label>
+                    <div class='input-group date' id='from'>
+                        <input type='text' id="from" name="from" class="form-control" readonly />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </div>
+
+                    <br>
+
+                    <label for="to">Final</label>
+                    <div class='input-group date' id='to'>
+                        <input type='text' name="to" id="to" class="form-control" readonly />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </div>
+
+                    <br>
+
+                    <label for="tipo">Tipo de evento</label>
+                    <select class="form-control" name="class" id="tipo">
+                        <option value="event-info">Informacion</option>
+                        <option value="event-success">Exito</option>
+                        <option value="event-important">Importantante</option>
+                        <option value="event-warning">Advertencia</option>
+                        <option value="event-special">Especial</option>
+                    </select>
+
+                    <br>
+
+
+                    <label for="title">Título</label>
+                    <input type="text" required autocomplete="off" name="title" class="form-control" id="title" placeholder="Introduce un título">
+
+                    <br>
+
+
+                    <label for="body">Evento</label>
+                    <textarea id="body" name="event" required class="form-control" rows="3"></textarea>
+
+                    <script type="text/javascript">
+                        $(function () {
+                            $('#from').datetimepicker({
+                                language: 'es',
+                                minDate: new Date()
+                            });
+                            $('#to').datetimepicker({
+                                language: 'es',
+                                minDate: new Date()
+                            });
+
+                        });
+                    </script>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
+                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Agregar</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -42,3 +42,21 @@ function verifica(id_F, p){
 function outSession(user){
     $(location).attr('href','inc/outSession.php?user='+user);
 }
+
+function despliega(p, div, id){
+    $.ajax({
+        url: p,
+        type: 'post',
+        cache: false,
+        data: 'id='+id,
+        beforeSend: function(data){
+            $("#"+div).html('<div id="load" align="center"><p>Cargando contenido. Por favor, espere ...</p></div>');
+        },
+        success: function(data){
+            $("#"+div).fadeOut(1000,function(){
+                $("#"+div).html(data).fadeIn(2000);
+            });
+            //$("#"+div).html(data);
+        }
+    });
+}

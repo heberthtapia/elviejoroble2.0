@@ -2,31 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Administrador - El Viejo Roble</title>
 
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="css/style-vertical.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calendar.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/myStyle.css">
 
     <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 
     <script type="text/javascript" src="js/jquery.dataTables.js"></script>
     <script type="text/javascript" src="js/dataTables.bootstrap.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/slider-vertical.js"></script>
+
+    <script type="text/javascript" src="js/es-ES.js"></script>
+    <script src="js/moment.js"></script>
+    <script src="js/bootstrap-datetimepicker.js"></script>
+    <script src="js/bootstrap-datetimepicker.es.js"></script>
+    <script type="text/javascript" src="js/underscore-min.js"></script>
+    <script type="text/javascript" src="js/calendar.js"></script>
+
+    <script type="text/javascript" src="js/myJavaScript.js"></script>
+
     <script type="text/javascript" language="javascript" class="init">
 
         $(document).ready(function() {
-            $('#example').DataTable({
-                "bFilter": false
-            });
+
+
+
+            despliega('modulo/almacen/producto.php','contenido');
+
         } );
 
     </script>
 
 </head>
 <body>
+<div id="contenido">
+
+</div>
 <section>
-<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+<table id="tablaList" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
     <tr>
         <th>Name</th>
