@@ -48,15 +48,15 @@ $op = new cnFunction();
         <table id="tablaList" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
             <tr>
-                <th width="20px">Nº</th>
-                <th width="70px">Fecha</th>
+                <th>Nº</th>
+                <th>Fecha</th>
                 <th>Codigo</th>
-                <th width="400px">Detalle</th>
+                <th>Detalle</th>
                 <th>Volumen</th>
                 <th>Cantidad</th>
                 <th>Precio C/F</th>
                 <th>Precio S/F</th>
-                <th width="70px">Acciones</th>
+                <th width="140px">Acciones</th>
             </tr>
             </thead>
             <tbody>
