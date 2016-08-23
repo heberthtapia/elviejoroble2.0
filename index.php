@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style-vertical.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/validationEngine.jquery.css">
+
     <link rel="stylesheet" href="css/myStyle.css">
 
     <script type="text/javascript" src="js/jquery-1.10.2.js"></script>

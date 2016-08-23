@@ -489,11 +489,11 @@ header {
 .shield-buttons {
 	display: none;
 }
-.close, .close:focus, .close:hover {
+/*.close, .close:focus, .close:hover {
 	color: #fff;;
 	opacity: 1;
 	text-shadow: none;
-}
+}*/
 /*.modal-body input {
 	border: 1px solid #d4d9e3;
 	font-size: 14px;

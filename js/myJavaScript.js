@@ -60,3 +60,66 @@ function despliega(p, div, id){
         }
     });
 }
+/*
+GUARDA FORMULARIO
+ */
+
+function saveForm(idForm, p){
+
+    var dato = JSON.stringify( $('#'+idForm).serializeObject() );
+
+    $.ajax({
+        url: "modulo/"+p,
+        type: 'post',
+        dataType: 'json',
+        async:true,
+        data:{res:dato},
+        success: function(data){
+            //alert(data.checksEmail);
+            //parent.$.colorbox.close();
+            //ordena(2);
+            //alert(data.tabla);
+            if(data.tabla === 'empleado'){
+                //fnClickAddRow(data,true);
+                despliega('modulo/empleado/listEmpleado.php','contenido');
+            }
+            if(data.tabla === 'inventario'){
+                //fnClickAddRowU(data,true);
+                despliega('modulo/producto/listProducto.php','contenido');
+            }
+            if(data.tabla === 'pedido'){
+                //fnClickAddRowInvG(data,true);
+                /* CAMBIIO STASTUS CONTADOR */
+
+                if(data.OkCont === 0){
+                    $('tr#tb'+data.pedido+' td.Pendiente').removeClass('Pendiente').addClass('Aprobado');
+                    $('tr#tb'+data.pedido+' td.Aprobado a').text('APROBADO');
+                }else{
+                    if(data.OkCont === 1){
+                        $('tr#tb'+data.pedido+' td.Aprobado').removeClass('Aprobado').addClass('Pendiente');
+                        $('tr#tb'+data.pedido+' td.Pendiente a').text('PENDIENTE');
+                    }else{
+                        /* CAMBIIO STASTUS ALMACEN */
+                        if(data.OkAlm === 0){
+                            $('tr#tb'+data.pedido+' td.NoEntregado').removeClass('NoEntregado').addClass('Entregado');
+                            $('tr#tb'+data.pedido+' td.Entregado a').text('ENTREGADO');
+                        }else{
+                            if(data.OkAlm === 1){
+                                $('tr#tb'+data.pedido+' td.Entregado').removeClass('Entregado').addClass('NoEntregado');
+                                $('tr#tb'+data.pedido+' td.NoEntregado a').text('NO ENTREGADO');
+                            }else{
+                                despliega('modulo/pedido/listPedido.php','contenido');
+                            }
+                        }
+                    }
+                }
+            }
+            if(data.tabla === 'cliente'){
+                despliega('modulo/cliente/listCliente.php','contenido');
+            }
+        },
+        error: function(data){
+            alert('Error al guardar el formulario');
+        }
+    });
+}

@@ -148,6 +148,7 @@ if (isset($_POST['from']))
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/calendar.css">
     <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/theme-default.css">
     <link rel="stylesheet" href="css/myStyle.css">
 
     <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
@@ -164,53 +165,14 @@ if (isset($_POST['from']))
     <script type="text/javascript" src="js/underscore-min.js"></script>
     <script type="text/javascript" src="js/calendar.js"></script>
 
+    <script type="text/javascript" src="js/jquery.form-validator.js"></script>
+    <script type="text/javascript" src="js/jquery.json-2.3.js"></script>
+
+    <!--uploadIfy-->
+    <script type="text/javascript" src="uploadify/jquery.uploadify-3.1.js"></script>
+
     <script type="text/javascript" src="js/myJavaScript.js"></script>
 
-    <script type="text/javascript" language="javascript" class="init">
-
-        $(document).ready(function() {
-            $('[data-toggle="offcanvas"]').click(function(){
-                $("#navigation").toggleClass("hidden-xs");
-            });
-
-            /*********************/
-            /* SLIDER DE NOTICIAS*/
-            /*********************/
-            moverSlider();
-            $(".bajar-slider").click(function(){
-                bajarSlider();
-            });
-
-            $(".subir-slider").click(function(){
-                subirSlider();
-            });
-
-            $(".slider-vertical").mouseover(function(){
-                verificar = 0;
-            });
-
-            $(".slider-vertical").mouseout(function(){
-                verificar = 1;
-            });
-
-            /**
-             * Menu Desplegable
-             */
-
-            $("ul.subnavegador").not('.selected').hide();
-            $("a.desplegable").click(function(e){
-                var desplegable = $(this).parent().find("ul.subnavegador");
-                $('.desplegable').parent().find("ul.subnavegador").not(desplegable).slideUp('slow');
-                desplegable.slideToggle('slow');
-                e.preventDefault();
-            })
-
-        } );
-        function cerrar() {
-            location.href = "admin.php";
-        }
-
-    </script>
     <style>
         .subnavegador{
             background: #0e1a49 none repeat scroll 0 0;
@@ -220,6 +182,50 @@ if (isset($_POST['from']))
         }
         ul.subnavegador li a{
             font-size: 15px;
+        }
+/***************************/
+        .at-error {
+            /* placed on a error labels */
+            color: #A94442;
+            margin: 6px 0;
+        }
+
+        .at-warning {
+            /* placed on a warning (invalid) labels */
+            color: #8A6D3B;
+            margin: 6px 0;
+        }
+
+        .at-invalid {
+            /* placed on a invalid fields (which do not match with their filters or masks) */
+        }
+
+        .at-required {
+            /* placed on a required fields (which are not filled) */
+        }
+
+        .at-description {
+            /* placed on description paragrapher, right after TEXTAREA fields. */
+        }
+
+        .at-description > span {
+            /* into description paragrapher, right after TEXTAREA fields there are 2 span TAGs. */
+        }
+
+        .at-required-highlight {
+            /* highlight required form fields */
+            color: red;
+        }
+
+        .alert {
+            border: 1px solid transparent;
+            border-radius: 4px;
+            margin-bottom: 0px;
+            padding: 10px;
+        }
+
+        #alert{
+            display: none;
         }
     </style>
 </head>
@@ -708,6 +714,51 @@ if (isset($_POST['from']))
         </div>
     </div>
 </div>
+
+<script type="text/javascript" language="javascript" class="init">
+
+    $(document).ready(function() {
+        $('[data-toggle="offcanvas"]').click(function(){
+            $("#navigation").toggleClass("hidden-xs");
+        });
+        /*********************/
+        /* SLIDER DE NOTICIAS*/
+        /*********************/
+        moverSlider();
+        $(".bajar-slider").click(function(){
+            bajarSlider();
+        });
+
+        $(".subir-slider").click(function(){
+            subirSlider();
+        });
+
+        $(".slider-vertical").mouseover(function(){
+            verificar = 0;
+        });
+
+        $(".slider-vertical").mouseout(function(){
+            verificar = 1;
+        });
+
+        /**
+         * Menu Desplegable
+         */
+
+        $("ul.subnavegador").not('.selected').hide();
+        $("a.desplegable").click(function(e){
+            var desplegable = $(this).parent().find("ul.subnavegador");
+            $('.desplegable').parent().find("ul.subnavegador").not(desplegable).slideUp('slow');
+            desplegable.slideToggle('slow');
+            e.preventDefault();
+        })
+
+    } );
+    function cerrar() {
+        location.href = "admin.php";
+    }
+
+</script>
 
 </body>
 </html>

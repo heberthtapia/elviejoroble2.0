@@ -29,16 +29,18 @@ $op = new cnFunction();
                 }
             }
         });
-
     } );
 
 </script>
+<?PHP
+include 'newProducto.php';
+?>
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <h1 class="avisos" align="center"><strong>ALMACEN</strong></h1>
         <h2 class="avisos">Lista de Productos</h2>
         <div class="pull-right"><br>
-            <button type="button" class="btn btn-primary">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dataRegister">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 <span>Nuevo</span>
             </button>
@@ -56,7 +58,7 @@ $op = new cnFunction();
                 <th>Cantidad</th>
                 <th>Precio C/F</th>
                 <th>Precio S/F</th>
-                <th width="140px">Acciones</th>
+                <th width="106px">Acciones</th>
             </tr>
             </thead>
             <tbody>
@@ -131,3 +133,8 @@ $op = new cnFunction();
 
     </div>
 </div>
+<style>
+    .btn {
+        margin-bottom: 5px;
+    }
+</style>
