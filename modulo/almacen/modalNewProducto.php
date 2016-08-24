@@ -4,6 +4,18 @@ $strQ = $db->Execute($sql);
 $fecha = $op->ToDay();
 $hora = $op->Time();
 ?>
+<style>
+    #detalle{
+        text-transform: capitalize;
+    }
+    #idInv{
+        text-transform: uppercase;
+    }
+    #alertRegister{
+        margin-bottom: 10px;
+        display: none;
+    }
+</style>
 <form id="form" action="javascript:saveForm('form','almacen/save.php')" class="form-horizontal" >
 	<div class="modal fade" id="dataRegister" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 		<div class="modal-dialog" role="document">
@@ -13,7 +25,10 @@ $hora = $op->Time();
 					<h4 class="modal-title" id="exampleModalLabel">Nuevo Producto</h4>
 				</div>
 				<div class="modal-body">
-					<div id="datos_ajax_register"></div>
+
+                    <div id="alertRegister">
+
+                    </div>
 
 					<div class="form-group">
 						<label for="fecha" class="control-label col-md-2">Fecha:</label>
@@ -21,6 +36,7 @@ $hora = $op->Time();
 							<input id="fecha" name="fecha" type="text" class="form-control" value="<?=$fecha;?> <?=$hora;?>" disabled="disabled" />
 						</div>
 						<input id="date" name="date" type="hidden" value="<?=$fecha;?> <?=$hora;?>" />
+                        <input id="tabla" name="tabla" type="hidden" value="inventario">
 					</div>
 					<div class="form-group">
 						<label for="detalle" class="control-label col-md-2">Producto:</label>
@@ -39,32 +55,34 @@ $hora = $op->Time();
 					<div class="form-group">
 						<label for="cant" class="control-label col-md-2">Cantidad:</label>
 						<div class="col-md-4">
-							<input type="text" class="form-control" id="cant" name="cant" placeholder="Cantidad:" data-validation="required" >
+							<input type="text" class="form-control" id="cant" name="cant" placeholder="Cantidad:" data-validation="required number" >
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="vol" class="control-label col-md-2">Volumen:</label>
 						<div class="col-md-4">
-							<input type="text" class="form-control" id="vol" name="vol" placeholder="Volumen:" data-validation="required" >
+							<input type="text" class="form-control" id="vol" name="vol" placeholder="Volumen:" data-validation="required number" >
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="precioCF" class="control-label col-md-2">Precio C/F:</label>
-						<div class="col-md-4">
-							<input type="text" class="form-control" id="precioCF" name="precioCF" placeholder="Precio C/F:" data-validation="required" >
+                        <div class="col-md-4 input-group">
+                            <div class="input-group-addon">Bs.</div>
+							<input type="text" class="form-control" id="precioCF" name="precioCF" placeholder="Precio C/F:" data-validation="required number" data-validation-allowing="float" >
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="precioSF" class="control-label col-md-2">Precio S/F:</label>
-						<div class="col-md-4">
-							<input type="text" class="form-control" id="precioSF" name="precioSF" placeholder="Precio S/F:" data-validation="required" >
+                        <div class="col-md-4 input-group">
+                            <div class="input-group-addon">Bs.</div>
+							<input type="text" class="form-control" id="precioSF" name="precioSF" placeholder="Precio S/F:" data-validation="required number" data-validation-allowing="float" >
 						</div>
 					</div>
 
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-					<button type="submit" class="btn btn-primary">Guardar datos</button>
+					<button type="submit" class="btn btn-primary" >Guardar datos</button>
 				</div>
 			</div>
 		</div>
@@ -74,12 +92,14 @@ $hora = $op->Time();
 <script>
 	$.validate({
 		lang: 'es',
-		modules : 'security'
+		modules : 'security',
+        decimalSeparator : ','
 	});
 
 	$('#dataRegister').on('hidden.bs.modal', function (e) {
 		// do something...
 		$('#form').get(0).reset();
+        despliega('modulo/almacen/producto.php','contenido');
 	});
 
 	$(document).ready(function(e) {

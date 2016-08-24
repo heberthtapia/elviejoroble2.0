@@ -3823,8 +3823,8 @@ tbody.collapse.in {
 }
 .input-group[class*="col-"] {
   float: none;
-  padding-right: 0;
-  padding-left: 0;
+  /*padding-right: 0;
+  padding-left: 0;*/
 }
 .input-group .form-control {
   position: relative;
@@ -5053,7 +5053,7 @@ a.thumbnail.active {
 }
 .alert-dismissable .close,
 .alert-dismissible .close {
-  position: relative;
+  /*position: relative;*/
   top: -2px;
   right: -21px;
   color: inherit;

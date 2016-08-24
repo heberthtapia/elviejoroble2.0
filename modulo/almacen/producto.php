@@ -33,7 +33,7 @@ $op = new cnFunction();
 
 </script>
 <?PHP
-include 'newProducto.php';
+include 'modalNewProducto.php';
 ?>
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -42,7 +42,7 @@ include 'newProducto.php';
         <div class="pull-right"><br>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dataRegister">
                 <i class="fa fa-plus" aria-hidden="true"></i>
-                <span>Nuevo</span>
+                <span>Agregar Producto</span>
             </button>
         </div>
         <div class="clearfix"></div>
@@ -103,11 +103,11 @@ include 'newProducto.php';
                             <div class="cleafix"></div>
                         </div><!--End accEmp-->
 
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#dataUpdate" data-id="<?php echo $row['id']?>" data-codigo="<?php echo $row['countryCode']?>" data-nombre="<?php echo $row['countryName']?>" data-moneda="<?php echo $row['currencyCode']?>" data-capital="<?php echo $row['capital']?>" data-continente="<?php echo $row['continentName']?>">
+                        <button type="button" class="btnBoot btn btn-info" data-toggle="modal" data-target="#dataUpdate" data-id="<?php echo $row['id']?>" data-codigo="<?php echo $row['countryCode']?>" data-nombre="<?php echo $row['countryName']?>" data-moneda="<?php echo $row['currencyCode']?>" data-capital="<?php echo $row['capital']?>" data-continente="<?php echo $row['continentName']?>">
                             <i class='glyphicon glyphicon-edit'></i> Modificar
                         </button>
 
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#dataDelete" data-id="<?php echo $row['id']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
+                        <button type="button" class="btnBoot btn btn-danger" data-toggle="modal" data-target="#dataDelete" data-id="<?php echo $row['id']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
                         </button>
 
                     </td>
@@ -134,7 +134,7 @@ include 'newProducto.php';
     </div>
 </div>
 <style>
-    .btn {
+    .btnBoot {
         margin-bottom: 5px;
     }
 </style>

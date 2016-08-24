@@ -53,8 +53,8 @@ function despliega(p, div, id){
             $("#"+div).html('<div id="load" align="center"><p>Cargando contenido. Por favor, espere ...</p></div>');
         },
         success: function(data){
-            $("#"+div).fadeOut(1000,function(){
-                $("#"+div).html(data).fadeIn(2000);
+            $("#"+div).fadeOut(500,function(){
+                $("#"+div).html(data).fadeIn(500);
             });
             //$("#"+div).html(data);
         }
@@ -75,17 +75,16 @@ function saveForm(idForm, p){
         async:true,
         data:{res:dato},
         success: function(data){
-            //alert(data.checksEmail);
-            //parent.$.colorbox.close();
-            //ordena(2);
-            //alert(data.tabla);
+
             if(data.tabla === 'empleado'){
                 //fnClickAddRow(data,true);
                 despliega('modulo/empleado/listEmpleado.php','contenido');
             }
             if(data.tabla === 'inventario'){
-                //fnClickAddRowU(data,true);
-                despliega('modulo/producto/listProducto.php','contenido');
+               //fnClickAddRowU(data,true);
+               //$('#dataRegister').modal('hide');
+               $('#alertRegister').css('display','block').html("<div class='alert alert-warning alert-dismissible fade in' role='alert'><button class='close' aria-label='Close' data-dismiss='alert' type='button'><span aria-hidden='true'>×</span></button><strong>Guardado Correctamente!</strong> Puede cerrar la ventana.</div>");
+                $('#form').delay(5000).get(0).reset();
             }
             if(data.tabla === 'pedido'){
                 //fnClickAddRowInvG(data,true);

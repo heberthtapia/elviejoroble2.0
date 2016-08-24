@@ -230,6 +230,7 @@ if (isset($_POST['from']))
     </style>
 </head>
 <body>
+
 <div class="container-fluid display-table">
     <div class="row display-table-row">
         <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
@@ -565,14 +566,12 @@ if (isset($_POST['from']))
             // y dia actual
             day: yyyy+"-"+mm+"-"+dd,
 
-
             // definimos el idioma por defecto
             language: 'es-ES',
 
             //Template de nuestro calendario
             tmpl_path: '<?=$base_url?>tmpls/',
             tmpl_cache: false,
-
 
             // Hora de inicio
             time_start: '08:00',
@@ -762,4 +761,3 @@ if (isset($_POST['from']))
 
 </body>
 </html>
-
