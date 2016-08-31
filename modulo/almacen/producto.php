@@ -34,15 +34,16 @@ $op = new cnFunction();
 </script>
 <?PHP
 include 'newProducto.php';
+include 'editProducto.php';
 ?>
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <h1 class="avisos" align="center"><strong>ALMACEN</strong></h1>
         <h2 class="avisos">Lista de Productos</h2>
         <div class="pull-right"><br>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dataRegister">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#dataRegister">
                 <i class="fa fa-plus" aria-hidden="true"></i>
-                <span>Nuevo</span>
+                <span>Agregar Producto</span>
             </button>
         </div>
         <div class="clearfix"></div>
@@ -103,7 +104,7 @@ include 'newProducto.php';
                             <div class="cleafix"></div>
                         </div><!--End accEmp-->
 
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#dataUpdate" data-id="<?php echo $row['id']?>" data-codigo="<?php echo $row['countryCode']?>" data-nombre="<?php echo $row['countryName']?>" data-moneda="<?php echo $row['currencyCode']?>" data-capital="<?php echo $row['capital']?>" data-continente="<?php echo $row['continentName']?>">
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#dataUpdate" data-detalle="<?=$row['detalle']?>" data-idInv="<?=$row['id_inventario']?>" data-cant="<?=$row['cantidad']?>" data-volumen="<?=$row['volumen']?>" data-precioCF="<?=$row['precioCF']?>" data-precioSF="<?=$row['precioSF']?>">
                             <i class='glyphicon glyphicon-edit'></i> Modificar
                         </button>
 
