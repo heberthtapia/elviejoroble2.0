@@ -6,6 +6,20 @@
  * Time: 23:33
  */
 
+session_start();
+
+include '../../adodb5/adodb.inc.php';
+include '../../inc/function.php';
+
+$db = NewADOConnection('mysqli');
+//$db->debug = true;
+$db->Connect();
+
+$op = new cnFunction();
+
+$fecha = $op->ToDay();
+$hora = $op->Time();
+
 
 $response = array(
     'valid' => false,
@@ -18,7 +32,11 @@ if( isset($_POST['idInv']) ) {
 
     $user = $_POST['idInv'];
 
-    if( $user  == "heberth") {
+    $query = "SELECT id_inventario FROM inventario WHERE id_inventario = '$user'";
+    $sql = $db->Execute($query);
+    $row = $sql->FetchRow();
+
+    if( $user  == $row[0]) {
         // User name is registered on another account
         $response = array('valid' => false, 'message' => 'El codigo ya esta registrado.');
     } else {

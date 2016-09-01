@@ -85,7 +85,7 @@ function saveForm(idForm, p){
             }
             if(data.tabla === 'inventario'){
                 //fnClickAddRowU(data,true);
-                despliega('modulo/producto/listProducto.php','contenido');
+                //despliega('modulo/producto/listProducto.php','contenido');
             }
             if(data.tabla === 'pedido'){
                 //fnClickAddRowInvG(data,true);

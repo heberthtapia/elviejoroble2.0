@@ -4,7 +4,15 @@ $strQ = $db->Execute($sql);
 $fecha = $op->ToDay();
 $hora = $op->Time();
 ?>
-<form id="form" action="javascript:saveForm('form','almacen/save.php')" class="form-horizontal" >
+<style>
+	input{
+		text-transform: capitalize;
+	}
+	input#idInv{
+		text-transform: uppercase;
+	}
+</style>
+<form id="form" action="javascript:saveFormNew('form','almacen/save.php')" class="form-horizontal" >
 	<div class="modal fade" id="dataRegister" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -21,6 +29,7 @@ $hora = $op->Time();
 							<input id="fecha" name="fecha" type="text" class="form-control" value="<?=$fecha;?> <?=$hora;?>" disabled="disabled" />
 						</div>
 						<input id="date" name="date" type="hidden" value="<?=$fecha;?> <?=$hora;?>" />
+						<input id="tabla" name="tabla" type="hidden" value="inventario">
 					</div>
 					<div class="form-group">
 						<label for="detalle" class="control-label col-md-2">Producto:</label>
@@ -80,7 +89,32 @@ $hora = $op->Time();
 	$('#dataRegister').on('hidden.bs.modal', function (e) {
 		// do something...
 		$('#form').get(0).reset();
+		//despliega('modulo/almacen/producto.php','contenido');
 	});
+
+	function saveFormNew(idForm, p){
+
+		var dato = JSON.stringify( $('#'+idForm).serializeObject() );
+
+		$.ajax({
+			url: "modulo/"+p,
+			type: 'post',
+			dataType: 'json',
+			async:true,
+			data:{res:dato},
+			success: function(data){
+				//$('#form').get(0).reset();
+				$('#datos_ajax_register').html('<div class="alert alert-success" role="alert"><strong>Guardado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
+					$('#datos_ajax_register').fadeOut(2000,function () {
+						$('#dataRegister').modal('hide').delay(7000);
+					});
+				});
+			},
+			error: function(data){
+				alert('Error al guardar el formulario');
+			}
+		});
+	}
 
 	$(document).ready(function(e) {
 		/* idealForm */
