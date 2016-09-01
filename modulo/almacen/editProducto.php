@@ -4,7 +4,7 @@ $strQ = $db->Execute($sql);
 $fecha = $op->ToDay();
 $hora = $op->Time();
 ?>
-<form id="form" action="javascript:saveForm('form','almacen/save.php')" class="form-horizontal" >
+<form id="formUpdate" action="javascript:saveFormUpdate('formUpdate','almacen/update.php')" class="form-horizontal" >
 	<div class="modal fade" id="dataUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -13,7 +13,7 @@ $hora = $op->Time();
 					<h4 class="modal-title" id="exampleModalLabel">Modificar Producto</h4>
 				</div>
 				<div class="modal-body">
-					<div id="datos_ajax_register"></div>
+					<div id="datos_ajax_update"></div>
 
 					<div class="form-group">
 						<label for="fecha" class="control-label col-md-2">Fecha:</label>
@@ -31,9 +31,8 @@ $hora = $op->Time();
 					<div class="form-group">
 						<label for="idInv" class="control-label col-md-2">Codigo:</label>
 						<div class="col-md-4">
-							<input type="text" class="form-control" id="idInv" name="idInv" placeholder="Codigo:"
-								   data-validation="required server"
-								   data-validation-url="modulo/almacen/validateCode.php">
+							<input type="text" class="form-control" id="idInv" name="idInv" placeholder="Codigo:" disabled>
+							<input type="hidden" id="idInv" name="idInv">
 						</div>
 					</div>
 					<div class="form-group">
@@ -50,14 +49,16 @@ $hora = $op->Time();
 					</div>
 					<div class="form-group">
 						<label for="precioCF" class="control-label col-md-2">Precio C/F:</label>
-						<div class="col-md-4">
-							<input type="text" class="form-control" id="precioCF" name="precioCF" placeholder="Precio C/F:" data-validation="required" >
+						<div class="col-md-4 input-group">
+							<div class="input-group-addon">Bs</div>
+							<input type="text" class="form-control" id="precioCF" name="precioCF" placeholder="Precio C/F:" data-validation="required number" data-validation-allowing="float" >
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="precioSF" class="control-label col-md-2">Precio S/F:</label>
-						<div class="col-md-4">
-							<input type="text" class="form-control" id="precioSF" name="precioSF" placeholder="Precio S/F:" data-validation="required" >
+						<div class="col-md-4 input-group">
+							<div class="input-group-addon">Bs</div>
+							<input type="text" class="form-control" id="precioSF" name="precioSF" placeholder="Precio S/F:" data-validation="required number" data-validation-allowing="float" >
 						</div>
 					</div>
 
@@ -72,92 +73,57 @@ $hora = $op->Time();
 </form>
 
 <script>
+
 	$.validate({
 		lang: 'es',
 		modules : 'security'
 	});
 
-	$('#dataRegister').on('hidden.bs.modal', function (e) {
+	$('#dataUpdate').on('hidden.bs.modal', function (e) {
 		// do something...
 		$('#form').get(0).reset();
 	});
 
-	$(document).ready(function(e) {
-		/* idealForm */
-		// $('#form').idealForms();
+	$('#dataUpdate').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget); // Botón que activó el modal
+		var detalle = button.data('detalle'); // Extraer la información de atributos de datos
+		var id = button.data('idinv'); // Extraer la información de atributos de datos
+		var cantidad = button.data('cant'); // Extraer la información de atributos de datos
+		var volumen = button.data('vol'); // Extraer la información de atributos de datos
+		var precioCF = button.data('preciocf'); // Extraer la información de atributos de datos
+		var precioSF = button.data('preciosf'); // Extraer la información de atributos de datos
 
-		/* Calendario */
-		$('#dateNac').datetimepicker({
-			dateFormat: 'yy-mm-dd',
-			changeMonth: true,
-			changeYear: true,
-			yearRange: 'c-40:c-0'
-		});
+		var modal = $(this)
+		modal.find('.modal-title').text('Modificar Producto: '+detalle);
+		modal.find('.modal-body #detalle').val(detalle);
+		modal.find('.modal-body #idInv').val(id);
+		modal.find('.modal-body #cant').val(cantidad);
+		modal.find('.modal-body #vol').val(volumen);
+		modal.find('.modal-body #precioCF').val(precioCF);
+		modal.find('.modal-body #precioSF').val(precioSF);
+		//$('.alert').hide();//Oculto alert
+	})
 
-		$('#file_upload').uploadify({
-			'queueID'  		: 'some_file_queue',
-			'swf'      		: 'uploadify/uploadify.swf',
-			'uploader'		: 'uploadify/uploadify.php',
-			'method'   		: 'post',
-			'multi'   		: false,
-			'auto'   			: false,
-			'queueSizeLimit' 	: 1,
-			'fileSizeLimit' 	: '100KB',
-			'fileTypeDesc' 	: 'Imagen',
-			'fileTypeExts' 	: '*.jpg',
-			'removeCompleted' : false,
-			'buttonText'		: 'Examinar...',
-			height       		: 25,
-			width        		: 100,
-			'formData'      	: {
-				'path' : 'empleado'
-			},
-			// ** Eventos **
-			'onSelectOnce':function(event,data){
-				$('#file_upload').uploadifySettings('scriptData',{'directorio':'a','CodeUser': '21'});
-			},
-			'onUploadComplete': function(file) {
-
-				idImg();
-
-				$('#cboxTitle').html('La foto ' + file.name + ' se subio correctamente, <br> ahora puede guardar el formulario.');
-				setTimeout(function(){
-					$( ".uploadShow" ).toggle(2000,function(){
-						$('a#save, a#reset').fadeIn(1000).removeClass('uploadHiden');
-						/*$('.labelUpload').find('p').html('');
-						 $('.labelUpload').find('a').html('');*/
-						$('.labelUpload').find('p').html('Subir Foto haga clik:');
-						$('.labelUpload').find('a').html('Aqu&iacute;');
-
+	function saveFormUpdate(idForm, p){
+		var dato = JSON.stringify( $('#'+idForm).serializeObject() );
+		$.ajax({
+			url: "modulo/"+p,
+			type: 'post',
+			dataType: 'json',
+			async:true,
+			data:{res:dato},
+			success: function(data){
+				//$('#form').get(0).reset();
+				$('#datos_ajax_update').html('<div class="alert alert-success" role="alert"><strong>Modificado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
+					$('#datos_ajax_update').fadeOut(2000,function () {
+						$('#dataUpdate').modal('hide').delay(7000);
 					});
-				},4000);
-
+				});
+			},
+			error: function(data){
+				alert('Error al guardar el formulario');
 			}
 		});
-		/* Abrir y cerrar uploadIfy */
-		$('.openUpload').click(
-			function(){
-				var $this = $(this);
-				var op = $this.text();
-
-				if( op == 'Aquí' ){
-					$('.labelUpload').find('p').html('Imagen:');
-					$('.labelUpload').find('a').html(' ( Cerrar )');
-					$('a#save, a#reset').fadeOut(1000,function(){
-						$('a#save, a#reset').addClass('uploadHiden');
-						$('#cboxTitle').html('La imagen (JPG) debe terner un peso menor a 100 Kb.');
-					});
-				}else{
-					$('.labelUpload').find('p').html('Subir foto haga clik:');
-					$('.labelUpload').find('a').html('Aqu&iacute;');
-					$('a#save, a#reset').fadeIn(1000).removeClass('uploadHiden');
-					$('#cboxTitle').html('');
-				}
-				$( ".uploadShow" ).toggle(1000);
-			}
-		)
-
-
-	});
+	}
 
 </script>

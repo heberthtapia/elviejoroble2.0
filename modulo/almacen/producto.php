@@ -104,11 +104,11 @@ include 'editProducto.php';
                             <div class="cleafix"></div>
                         </div><!--End accEmp-->
 
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#dataUpdate" data-detalle="<?=$row['detalle']?>" data-idInv="<?=$row['id_inventario']?>" data-cant="<?=$row['cantidad']?>" data-volumen="<?=$row['volumen']?>" data-precioCF="<?=$row['precioCF']?>" data-precioSF="<?=$row['precioSF']?>">
+                        <button type="button" class="btn btn-info btn_" data-toggle="modal" data-target="#dataUpdate" data-detalle="<?=$row['detalle']?>" data-idInv="<?=$row['id_inventario']?>" data-cant="<?=$row['cantidad']?>" data-vol="<?=$row['volumen']?>" data-precioCF="<?=$row['precioCF']?>" data-precioSF="<?=$row['precioSF']?>">
                             <i class='glyphicon glyphicon-edit'></i> Modificar
                         </button>
 
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#dataDelete" data-id="<?php echo $row['id']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
+                        <button type="button" class="btn btn-danger btn_" data-toggle="modal" data-target="#dataDelete" data-id="<?php echo $row['id']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
                         </button>
 
                     </td>
@@ -135,7 +135,7 @@ include 'editProducto.php';
     </div>
 </div>
 <style>
-    .btn {
+    .btn_ {
         margin-bottom: 5px;
     }
 </style>

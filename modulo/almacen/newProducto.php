@@ -11,8 +11,11 @@ $hora = $op->Time();
 	input#idInv{
 		text-transform: uppercase;
 	}
+	.form-error{
+		font-size: 9px;
+	}
 </style>
-<form id="form" action="javascript:saveFormNew('form','almacen/save.php')" class="form-horizontal" >
+<form id="formNew" action="javascript:saveFormNew('formNew','almacen/save.php')" class="form-horizontal" >
 	<div class="modal fade" id="dataRegister" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -48,25 +51,27 @@ $hora = $op->Time();
 					<div class="form-group">
 						<label for="cant" class="control-label col-md-2">Cantidad:</label>
 						<div class="col-md-4">
-							<input type="text" class="form-control" id="cant" name="cant" placeholder="Cantidad:" data-validation="required" >
+							<input type="text" class="form-control" id="cant" name="cant" placeholder="Cantidad:" data-validation="required number" >
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="vol" class="control-label col-md-2">Volumen:</label>
 						<div class="col-md-4">
-							<input type="text" class="form-control" id="vol" name="vol" placeholder="Volumen:" data-validation="required" >
+							<input type="text" class="form-control" id="vol" name="vol" placeholder="Volumen:" data-validation="required number" >
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="precioCF" class="control-label col-md-2">Precio C/F:</label>
-						<div class="col-md-4">
-							<input type="text" class="form-control" id="precioCF" name="precioCF" placeholder="Precio C/F:" data-validation="required" >
+						<div class="col-md-4 input-group">
+							<div class="input-group-addon">Bs</div>
+							<input type="text" class="form-control" id="precioCF" name="precioCF" placeholder="Precio C/F:" data-validation="required number" data-validation-allowing="float" >
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="precioSF" class="control-label col-md-2">Precio S/F:</label>
-						<div class="col-md-4">
-							<input type="text" class="form-control" id="precioSF" name="precioSF" placeholder="Precio S/F:" data-validation="required" >
+						<div class="col-md-4 input-group">
+							<div class="input-group-addon">Bs</div>
+							<input type="text" class="form-control" id="precioSF" name="precioSF" placeholder="Precio S/F:" data-validation="required number" data-validation-allowing="float" >
 						</div>
 					</div>
 
@@ -81,6 +86,7 @@ $hora = $op->Time();
 </form>
 
 <script>
+
 	$.validate({
 		lang: 'es',
 		modules : 'security'
@@ -88,7 +94,7 @@ $hora = $op->Time();
 
 	$('#dataRegister').on('hidden.bs.modal', function (e) {
 		// do something...
-		$('#form').get(0).reset();
+		$('#formNew').get(0).reset();
 		//despliega('modulo/almacen/producto.php','contenido');
 	});
 
@@ -100,7 +106,7 @@ $hora = $op->Time();
 			url: "modulo/"+p,
 			type: 'post',
 			dataType: 'json',
-			async:true,
+			async:false,
 			data:{res:dato},
 			success: function(data){
 				//$('#form').get(0).reset();
@@ -115,83 +121,5 @@ $hora = $op->Time();
 			}
 		});
 	}
-
-	$(document).ready(function(e) {
-		/* idealForm */
-		// $('#form').idealForms();
-
-		/* Calendario */
-		$('#dateNac').datetimepicker({
-			dateFormat: 'yy-mm-dd',
-			changeMonth: true,
-			changeYear: true,
-			yearRange: 'c-40:c-0'
-		});
-
-		$('#file_upload').uploadify({
-			'queueID'  		: 'some_file_queue',
-			'swf'      		: 'uploadify/uploadify.swf',
-			'uploader'		: 'uploadify/uploadify.php',
-			'method'   		: 'post',
-			'multi'   		: false,
-			'auto'   			: false,
-			'queueSizeLimit' 	: 1,
-			'fileSizeLimit' 	: '100KB',
-			'fileTypeDesc' 	: 'Imagen',
-			'fileTypeExts' 	: '*.jpg',
-			'removeCompleted' : false,
-			'buttonText'		: 'Examinar...',
-			height       		: 25,
-			width        		: 100,
-			'formData'      	: {
-				'path' : 'empleado'
-			},
-			// ** Eventos **
-			'onSelectOnce':function(event,data){
-				$('#file_upload').uploadifySettings('scriptData',{'directorio':'a','CodeUser': '21'});
-			},
-			'onUploadComplete': function(file) {
-
-				idImg();
-
-				$('#cboxTitle').html('La foto ' + file.name + ' se subio correctamente, <br> ahora puede guardar el formulario.');
-				setTimeout(function(){
-					$( ".uploadShow" ).toggle(2000,function(){
-						$('a#save, a#reset').fadeIn(1000).removeClass('uploadHiden');
-						/*$('.labelUpload').find('p').html('');
-						 $('.labelUpload').find('a').html('');*/
-						$('.labelUpload').find('p').html('Subir Foto haga clik:');
-						$('.labelUpload').find('a').html('Aqu&iacute;');
-
-					});
-				},4000);
-
-			}
-		});
-		/* Abrir y cerrar uploadIfy */
-		$('.openUpload').click(
-			function(){
-				var $this = $(this);
-				var op = $this.text();
-
-				if( op == 'Aquí' ){
-					$('.labelUpload').find('p').html('Imagen:');
-					$('.labelUpload').find('a').html(' ( Cerrar )');
-					$('a#save, a#reset').fadeOut(1000,function(){
-						$('a#save, a#reset').addClass('uploadHiden');
-						$('#cboxTitle').html('La imagen (JPG) debe terner un peso menor a 100 Kb.');
-					});
-				}else{
-					$('.labelUpload').find('p').html('Subir foto haga clik:');
-					$('.labelUpload').find('a').html('Aqu&iacute;');
-					$('a#save, a#reset').fadeIn(1000).removeClass('uploadHiden');
-					$('#cboxTitle').html('');
-				}
-				$( ".uploadShow" ).toggle(1000);
-			}
-		)
-
-
-	});
 
 </script>
