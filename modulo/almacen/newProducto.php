@@ -15,7 +15,7 @@ $hora = $op->Time();
 		font-size: 9px;
 	}
 </style>
-<form id="formNew" action="javascript:saveFormNew('formNew','almacen/save.php')" class="form-horizontal" >
+<form id="formNew" action="javascript:saveFormNew('formNew','almacen/save.php')" class="form-horizontal" autocomplete="off" >
 	<div class="modal fade" id="dataRegister" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -113,6 +113,7 @@ $hora = $op->Time();
 				$('#datos_ajax_register').html('<div class="alert alert-success" role="alert"><strong>Guardado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
 					$('#datos_ajax_register').fadeOut(2000,function () {
 						$('#dataRegister').modal('hide').delay(7000);
+                        despliega('modulo/almacen/listTabla.php','listTabla');
 					});
 				});
 			},

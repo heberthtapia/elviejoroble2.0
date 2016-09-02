@@ -36,7 +36,7 @@ $op = new cnFunction();
 include 'newProducto.php';
 include 'editProducto.php';
 ?>
-<div class="row">
+<div class="row" id="listTabla">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <h1 class="avisos" align="center"><strong>ALMACEN</strong></h1>
         <h2 class="avisos">Lista de Productos</h2>

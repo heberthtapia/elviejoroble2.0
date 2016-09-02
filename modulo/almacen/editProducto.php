@@ -4,7 +4,7 @@ $strQ = $db->Execute($sql);
 $fecha = $op->ToDay();
 $hora = $op->Time();
 ?>
-<form id="formUpdate" action="javascript:saveFormUpdate('formUpdate','almacen/update.php')" class="form-horizontal" >
+<form id="formUpdate" action="javascript:saveFormUpdate('formUpdate','almacen/update.php')" class="form-horizontal" autocomplete="off" >
 	<div class="modal fade" id="dataUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -117,6 +117,7 @@ $hora = $op->Time();
 				$('#datos_ajax_update').html('<div class="alert alert-success" role="alert"><strong>Modificado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
 					$('#datos_ajax_update').fadeOut(2000,function () {
 						$('#dataUpdate').modal('hide').delay(7000);
+						despliega('modulo/almacen/listTabla.php','listTabla');
 					});
 				});
 			},
