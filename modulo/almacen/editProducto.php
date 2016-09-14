@@ -4,7 +4,7 @@ $strQ = $db->Execute($sql);
 $fecha = $op->ToDay();
 $hora = $op->Time();
 ?>
-<form id="formUpdate" action="javascript:saveFormUpdate('formUpdate','almacen/update.php')" class="form-horizontal" autocomplete="off" >
+<form id="formUpdate" action="javascript:saveForm('formUpdate','almacen/update.php')" class="form-horizontal" autocomplete="off" >
 	<div class="modal fade" id="dataUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -13,7 +13,7 @@ $hora = $op->Time();
 					<h4 class="modal-title" id="exampleModalLabel">Modificar Producto</h4>
 				</div>
 				<div class="modal-body">
-					<div id="datos_ajax_update"></div>
+					<div id="datos_ajax"></div>
 
 					<div class="form-group">
 						<label for="fecha" class="control-label col-md-2">Fecha:</label>
@@ -102,9 +102,9 @@ $hora = $op->Time();
 		modal.find('.modal-body #precioCF').val(precioCF);
 		modal.find('.modal-body #precioSF').val(precioSF);
 		//$('.alert').hide();//Oculto alert
-	})
+	});
 
-	function saveFormUpdate(idForm, p){
+	/*function saveFormUpdate(idForm, p){
 		var dato = JSON.stringify( $('#'+idForm).serializeObject() );
 		$.ajax({
 			url: "modulo/"+p,
@@ -125,6 +125,6 @@ $hora = $op->Time();
 				alert('Error al guardar el formulario');
 			}
 		});
-	}
+	}*/
 
 </script>
