@@ -161,7 +161,7 @@ if (isset($_POST['from']))
     <script type="text/javascript" src="js/es-ES.js"></script>
     <script src="js/moment.js"></script>
     <script src="js/bootstrap-datetimepicker.js"></script>
-    <script src="js/bootstrap-datetimepicker.es.js"></script>
+    <script src="js/es.js"></script>
     <script type="text/javascript" src="js/underscore-min.js"></script>
     <script type="text/javascript" src="js/calendar.js"></script>
 
@@ -270,12 +270,13 @@ if (isset($_POST['from']))
                             <span class="hidden-xs hidden-sm">Almacen</span>
                         </a>
                         <ul class="subnavegador">
-                            <li><a href="#">
+                            <!--<li><a href="#">
                                     <i class="fa fa-plus-square-o" aria-hidden="true"></i>
                                     <span class="hidden-xs hidden-sm">Nuevo Producto</span>
                                 </a>
-                            </li>
-                            <li><a href="#" onclick="despliega('modulo/almacen/producto.php','contenido')">
+                            </li>-->
+                            <li>
+                                <a href="#" onclick="despliega('modulo/almacen/producto.php','contenido')">
                                     <i class="fa fa-list" aria-hidden="true"></i>
                                     <span class="hidden-xs hidden-sm">Lista de Productos</span>
                                 </a>
@@ -313,12 +314,12 @@ if (isset($_POST['from']))
                             <span class="hidden-xs hidden-sm">Empleados</span>
                         </a>
                         <ul class="subnavegador">
-                            <li><a href="#">
+                            <!--<li><a href="#">
                                     <i class="fa fa-plus-square-o" aria-hidden="true"></i>
                                     <span class="hidden-xs hidden-sm">Nueva Empleado</span>
                                 </a>
-                            </li>
-                            <li><a href="#">
+                            </li>-->
+                            <li><a href="#" onclick="despliega('modulo/empleado/empleado.php','contenido')">
                                     <i class="fa fa-list" aria-hidden="true"></i>
                                     <span class="hidden-xs hidden-sm">Lista de Empleados</span>
                                 </a>
@@ -546,7 +547,6 @@ if (isset($_POST['from']))
         var yyyy = date.getFullYear().toString();
         var mm = (date.getMonth()+1).toString().length == 1 ? "0"+(date.getMonth()+1).toString() : (date.getMonth()+1).toString();
         var dd  = (date.getDate()).toString().length == 1 ? "0"+(date.getDate()).toString() : (date.getDate()).toString();
-
         //establecemos los valores del calendario
         var options = {
 
@@ -564,6 +564,7 @@ if (isset($_POST['from']))
 
             // y dia actual
             day: yyyy+"-"+mm+"-"+dd,
+
 
 
             // definimos el idioma por defecto
@@ -657,7 +658,7 @@ if (isset($_POST['from']))
                 <form action="" method="post">
                     <label for="from">Inicio</label>
                     <div class='input-group date' id='from'>
-                        <input type='text' id="from" name="from" class="form-control" readonly />
+                        <input type='text' id="from" name="from" class="form-control" />
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                     </div>
 
@@ -665,7 +666,7 @@ if (isset($_POST['from']))
 
                     <label for="to">Final</label>
                     <div class='input-group date' id='to'>
-                        <input type='text' name="to" id="to" class="form-control" readonly />
+                        <input type='text' name="to" id="to" class="form-control"  />
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                     </div>
 
@@ -695,12 +696,18 @@ if (isset($_POST['from']))
                     <script type="text/javascript">
                         $(function () {
                             $('#from').datetimepicker({
-                                language: 'es',
-                                minDate: new Date()
+                                locale: 'es'
                             });
                             $('#to').datetimepicker({
-                                language: 'es',
-                                minDate: new Date()
+                                locale: 'es',
+                                useCurrent: false //Important! See issue #1075
+                            });
+
+                            $("#from").on("dp.change", function (e) {
+                                $('#to').data("DateTimePicker").minDate(e.date);
+                            });
+                            $("#to").on("dp.change", function (e) {
+                                $('#from').data("DateTimePicker").maxDate(e.date);
                             });
 
                         });
