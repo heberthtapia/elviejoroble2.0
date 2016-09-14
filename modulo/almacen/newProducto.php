@@ -15,7 +15,7 @@ $hora = $op->Time();
 		font-size: 9px;
 	}
 </style>
-<form id="formNew" action="javascript:saveFormNew('formNew','almacen/save.php')" class="form-horizontal" autocomplete="off" >
+<form id="formNew" action="javascript:saveForm('formNew','almacen/save.php')" class="form-horizontal" autocomplete="off" >
 	<div class="modal fade" id="dataRegister" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -24,7 +24,7 @@ $hora = $op->Time();
 					<h4 class="modal-title" id="exampleModalLabel">Nuevo Producto</h4>
 				</div>
 				<div class="modal-body">
-					<div id="datos_ajax_register"></div>
+					<div id="datos_ajax"></div>
 
 					<div class="form-group">
 						<label for="fecha" class="control-label col-md-2">Fecha:</label>
@@ -98,7 +98,7 @@ $hora = $op->Time();
 		//despliega('modulo/almacen/producto.php','contenido');
 	});
 
-	function saveFormNew(idForm, p){
+	/*function saveFormNew(idForm, p){
 
 		var dato = JSON.stringify( $('#'+idForm).serializeObject() );
 
@@ -121,6 +121,6 @@ $hora = $op->Time();
 				alert('Error al guardar el formulario');
 			}
 		});
-	}
+	}*/
 
 </script>
