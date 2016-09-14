@@ -27,14 +27,7 @@ $op = new cnFunction();
                     "next":       "Siguiente",
                     "previous":   "Anterior"
                 }
-            },
-            "columnDefs": [
-                {
-                    "targets": [ 1 ],
-                    "visible": false,
-                    "searchable": false
-                }
-            ]
+            }
         });
     } );
 
@@ -42,7 +35,6 @@ $op = new cnFunction();
 <?PHP
 include 'newProducto.php';
 include 'editProducto.php';
-include 'delProducto.php';
 ?>
 <div class="row" id="listTabla">
     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -67,7 +59,7 @@ include 'delProducto.php';
                 <th>Cantidad</th>
                 <th>Precio C/F</th>
                 <th>Precio S/F</th>
-                <th>Acciones</th>
+                <th width="106px">Acciones</th>
             </tr>
             </thead>
             <tbody>
@@ -95,11 +87,30 @@ include 'delProducto.php';
                     <td class="last center"><?=$row['precioCF'];?></td>
                     <td class="last center"><?=$row['precioSF'];?></td>
                     <td>
+                        <div class="accPro">
+
+                            <div class="accion">
+                                <a href="javascript:void(0);" onClick="open_win('modulo/producto/editProducto.php', '', '710', '310', '<?=$row['id_inventario']?>');">
+                                    <img src="images/icono/edit1.png" width="32" alt="" title="Editar" />
+                                </a>
+                            </div><!--End accion-->
+
+                            <div class="accion">
+                                <a href="javascript:void(0);" onclick="deleteRow('delProducto.php', '<?=$row['id_inventario']?>', 'producto','inventario');">
+                                    <img src="images/icono/recycle.png" width="32" height="32" alt="" title="Eliminar" />
+                                </a>
+                            </div><!--End accion-->
+
+                            <div class="cleafix"></div>
+                        </div><!--End accEmp-->
+
                         <button type="button" class="btn btn-info btn_" data-toggle="modal" data-target="#dataUpdate" data-detalle="<?=$row['detalle']?>" data-idInv="<?=$row['id_inventario']?>" data-cant="<?=$row['cantidad']?>" data-vol="<?=$row['volumen']?>" data-precioCF="<?=$row['precioCF']?>" data-precioSF="<?=$row['precioSF']?>">
                             <i class='glyphicon glyphicon-edit'></i> Modificar
                         </button>
-                        <button type="button" class="btn btn-danger btn_" data-toggle="modal" data-target="#dataDelete" data-id="<?=$row['id_inventario']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
+
+                        <button type="button" class="btn btn-danger btn_" data-toggle="modal" data-target="#dataDelete" data-id="<?php echo $row['id']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
                         </button>
+
                     </td>
                 </tr>
                 <?PHP
