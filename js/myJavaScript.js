@@ -60,12 +60,23 @@ function despliega(p, div, id){
         }
     });
 }
-/***
 
- GUARDA FORMULARIO
-
- ***/
-
+/**
+ * GENERA CONTRASEÑA
+ */
+function generaPass(id){
+    $.ajax({
+        url: 'inc/generaPass.php',
+        type: 'post',
+        cache: false,
+        success: function(data){
+            $("#"+id).attr('value',data);
+        }
+    });
+}
+/**
+ *  GUARDA FORMULARIO
+ */
 function saveFormNew(idForm, p){
 
     var dato = JSON.stringify( $('#'+idForm).serializeObject() );

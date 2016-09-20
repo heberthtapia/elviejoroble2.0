@@ -31,213 +31,213 @@ $hora = $op->Time();
 		//Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
 		initMap();
 	});
-	
-  $(document).ready(function(e) {
 
-  /* Calendario */
+	$(document).ready(function(e) {
 
-	  $('#dateNac').datetimepicker({
-		  locale: 'es'
-	  });
+		/* Calendario */
 
-  /* uploadIfy */
-	  $('#file_upload').uploadify({
-		  'queueID'  		: 'some_file_queue',
-		  'swf'      		: 'uploadify/uploadify.swf',
-		  'uploader'		: 'uploadify/uploadify.php',
-		  'method'   		: 'post',
-		  'multi'   		: false,
-		  'auto'   			: false,
-		  'queueSizeLimit' 	: 1,
-		  'fileSizeLimit' 	: '100KB',
-		  'fileTypeDesc' 	: 'Imagen',
-		  'fileTypeExts' 	: '*.jpg',
-		  'removeCompleted' : false,
-		  'buttonText'		: 'Examinar...',			
-		  height       		: 25,
-		  width        		: 100,			
-		  'formData'      	: {
-			  'path' : 'empleado'
-			},  
-		  // ** Eventos **
-		  'onSelectOnce':function(event,data){
-            $('#file_upload').uploadifySettings('scriptData',{'directorio':'a','CodeUser': '21'});
-        	},
-		  'onUploadComplete': function(file) {
-			  
-			  idImg();
-			  
-			  $('#cboxTitle').html('La foto ' + file.name + ' se subio correctamente, <br> ahora puede guardar el formulario.');			
-			  setTimeout(function(){
-				  $( ".uploadShow" ).toggle(2000,function(){
-					  $('a#save, a#reset').fadeIn(1000).removeClass('uploadHiden');
-					  /*$('.labelUpload').find('p').html('');
-					  $('.labelUpload').find('a').html('');*/
-					  $('.labelUpload').find('p').html('Subir Foto haga clik:');
-					  $('.labelUpload').find('a').html('Aqu&iacute;');
-					  
-				  });
-			  },4000);
-			  
-		  }
-	  });
-  /* Abrir y cerrar uploadIfy */
-	  $('.openUpload').click(
-		function(){			
-		  var $this = $(this);
-		  var op = $this.text();
-					  
-		  if( op == 'Aquí' ){
-			  $('.labelUpload').find('p').html('Imagen:');
-			  $('.labelUpload').find('a').html(' ( Cerrar )');
-			  $('a#save, a#reset').fadeOut(1000,function(){
-				  $('a#save, a#reset').addClass('uploadHiden');
-				  $('#cboxTitle').html('La imagen (JPG) debe terner un peso menor a 100 Kb.');
-			  });					
-		  }else{
-			  $('.labelUpload').find('p').html('Subir foto haga clik:');
-			  $('.labelUpload').find('a').html('Aqu&iacute;');
-			  $('a#save, a#reset').fadeIn(1000).removeClass('uploadHiden');
-			  $('#cboxTitle').html('');					
-		  }			
-		  $( ".uploadShow" ).toggle(1000);
-		  }
-	   ) 
-	   
-	   // BUSCADOR
-		$('#search').on('click', function() {			
+		$('#dateNac').datetimepicker({
+			locale: 'es'
+		});
+
+		/* uploadIfy */
+		$('#file_upload').uploadify({
+			'queueID'  		: 'some_file_queue',
+			'swf'      		: 'uploadify/uploadify.swf',
+			'uploader'		: 'uploadify/uploadify.php',
+			'method'   		: 'post',
+			'multi'   		: false,
+			'auto'   			: false,
+			'queueSizeLimit' 	: 1,
+			'fileSizeLimit' 	: '100KB',
+			'fileTypeDesc' 	: 'Imagen',
+			'fileTypeExts' 	: '*.jpg',
+			'removeCompleted' : false,
+			'buttonText'		: 'Examinar...',
+			height       		: 25,
+			width        		: 100,
+			'formData'      	: {
+				'path' : 'empleado'
+			},
+			// ** Eventos **
+			'onSelectOnce':function(event,data){
+				$('#file_upload').uploadifySettings('scriptData',{'directorio':'a','CodeUser': '21'});
+			},
+			'onUploadComplete': function(file) {
+
+				idImg();
+
+				$('#cboxTitle').html('La foto ' + file.name + ' se subio correctamente, <br> ahora puede guardar el formulario.');
+				setTimeout(function(){
+					$( ".uploadShow" ).toggle(2000,function(){
+						$('a#save, a#reset').fadeIn(1000).removeClass('uploadHiden');
+						/*$('.labelUpload').find('p').html('');
+						 $('.labelUpload').find('a').html('');*/
+						$('.labelUpload').find('p').html('Subir Foto haga clik:');
+						$('.labelUpload').find('a').html('Aqu&iacute;');
+
+					});
+				},4000);
+
+			}
+		});
+		/* Abrir y cerrar uploadIfy */
+		$('.openUpload').click(
+			function(){
+				var $this = $(this);
+				var op = $this.text();
+
+				if( op == 'Aquí' ){
+					$('.labelUpload').find('p').html('Imagen:');
+					$('.labelUpload').find('a').html(' ( Cerrar )');
+					$('a#save, a#reset').fadeOut(1000,function(){
+						$('a#save, a#reset').addClass('uploadHiden');
+						$('#cboxTitle').html('La imagen (JPG) debe terner un peso menor a 100 Kb.');
+					});
+				}else{
+					$('.labelUpload').find('p').html('Subir foto haga clik:');
+					$('.labelUpload').find('a').html('Aqu&iacute;');
+					$('a#save, a#reset').fadeIn(1000).removeClass('uploadHiden');
+					$('#cboxTitle').html('');
+				}
+				$( ".uploadShow" ).toggle(1000);
+			}
+		)
+
+		// BUSCADOR
+		$('#search').on('click', function() {
 			// Obtenemos la dirección y la asignamos a una variable
-			var address = $('#buscar').val();			
+			var address = $('#buscar').val();
 			// Creamos el Objeto Geocoder
 			var geocoder = new google.maps.Geocoder();
 			// Hacemos la petición indicando la dirección e invocamos la función
 			// geocodeResult enviando todo el resultado obtenido
 			geocoder.geocode({ 'address': address}, geocodeResult);
 		});
-  });
+	});
 
-  function openWebCam(){
-	  openWebcam();//document.write( webcam.get_html(320, 240) );
-	  webcam.set_api_url( 'modulo/empleado/uploadEmp.php' );
-	  webcam.set_hook( 'onComplete', 'my_callback_function');	  
-  }
-  function my_callback_function(response) {
-	//alert("Success! PHP returned: " + response);
-	msg = $.parseJSON(response);
-	//alert(msg.filename);	
-	//modificado
-	recargaImg(msg.filename, 'empleado');
-	//
-  }
+	function openWebCam(){
+		openWebcam();//document.write( webcam.get_html(320, 240) );
+		webcam.set_api_url( 'modulo/empleado/uploadEmp.php' );
+		webcam.set_hook( 'onComplete', 'my_callback_function');
+	}
+	function my_callback_function(response) {
+		//alert("Success! PHP returned: " + response);
+		msg = $.parseJSON(response);
+		//alert(msg.filename);
+		//modificado
+		recargaImg(msg.filename, 'empleado');
+		//
+	}
 
-  function initMap(){	  
-/* GOOGLE MAPS */
-	var formulario = $('#formNew');
-	//COODENADAS INICIALES -16.5207007,-68.1615534
-	//VARIABLE PARA EL PUNTO INICIAL
-	var punto = new google.maps.LatLng(-16.499299167397574, -68.1646728515625);
-	//VARIABLE PARA CONFIGURACION INICIAL
-	var config = {
-		zoom:10,
-		center:punto,
-		mapTypeId: google.maps.MapTypeId.ROADMAP
+	function initMap(){
+		/* GOOGLE MAPS */
+		var formulario = $('#formNew');
+		//COODENADAS INICIALES -16.5207007,-68.1615534
+		//VARIABLE PARA EL PUNTO INICIAL
+		var punto = new google.maps.LatLng(-16.499299167397574, -68.1646728515625);
+		//VARIABLE PARA CONFIGURACION INICIAL
+		var config = {
+			zoom:10,
+			center:punto,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
 
-	mapa = new google.maps.Map( $("#mapa")[0], config );
-			
-	google.maps.event.addListener(mapa, "click", function(event){			
-		//OBTENER COORDENADAS POR SEPARADO						
-		var coordenadas = event.latLng.toString();
-		coordenadas = coordenadas.replace("(", "");
-		coordenadas = coordenadas.replace(")", "");
-		
-		var lista = coordenadas.split(",");			
-		//alert(lista[0]+"---"+lista[1])
-		var direccion = new google.maps.LatLng(lista[0], lista[1]);
-		//variable marcador
-		var marcador = new google.maps.Marker({
-			//titulo: prompt("Titulo del marcador"),
-			position: direccion,
-			map: mapa, //ENQUE MAPA SE UBICARA EL MARCADOR
-			animation: google.maps.Animation.DROP, //COMO APARECERA EL MARCADOR
-			draggable: false // NO PERMITIR EL ARRASTRE DEL MARCADOR
-			//title:"Hello World!"
+		mapa = new google.maps.Map( $("#mapa")[0], config );
+
+		google.maps.event.addListener(mapa, "click", function(event){
+			//OBTENER COORDENADAS POR SEPARADO
+			var coordenadas = event.latLng.toString();
+			coordenadas = coordenadas.replace("(", "");
+			coordenadas = coordenadas.replace(")", "");
+
+			var lista = coordenadas.split(",");
+			//alert(lista[0]+"---"+lista[1])
+			var direccion = new google.maps.LatLng(lista[0], lista[1]);
+			//variable marcador
+			var marcador = new google.maps.Marker({
+				//titulo: prompt("Titulo del marcador"),
+				position: direccion,
+				map: mapa, //ENQUE MAPA SE UBICARA EL MARCADOR
+				animation: google.maps.Animation.DROP, //COMO APARECERA EL MARCADOR
+				draggable: false // NO PERMITIR EL ARRASTRE DEL MARCADOR
+				//title:"Hello World!"
+			});
+
+			//PASAR LAS COORDENADAS AL FORMULARIO
+			formulario.find("input[name='cx']").val(lista[0]);
+			formulario.find("input[name='cy']").val(lista[1]);
+			//UBICAR EL FOCO EN EL CAMPO TITULO
+			formulario.find("input[name='addresC']").focus();
+
+			//UBICAR EL MARCADOR EN EL MAPA
+			//setMapOnAll(null);
+			markers.push(marcador);
+
+			//AGREGAR EVENTO CLICK AL MARCADOR
+			google.maps.event.addListener(marcador, "click", function(){
+				//alert(marcador.titulo);
+			});
+			deleteMarkers(markers);
+			marcador.setMap(mapa);
 		});
-		
-		//PASAR LAS COORDENADAS AL FORMULARIO
-		formulario.find("input[name='cx']").val(lista[0]);
-		formulario.find("input[name='cy']").val(lista[1]);
-		//UBICAR EL FOCO EN EL CAMPO TITULO
-		formulario.find("input[name='addresC']").focus();
-		
-		//UBICAR EL MARCADOR EN EL MAPA
-		//setMapOnAll(null);
-		markers.push(marcador);
-		
-		//AGREGAR EVENTO CLICK AL MARCADOR
-		google.maps.event.addListener(marcador, "click", function(){
-			//alert(marcador.titulo);
-		});
-		deleteMarkers(markers);
-		marcador.setMap(mapa);
-	});
-	
-}
-   
-  //FUNCIONES PARA EL GOOGLE MAPS
-  
-  function deleteMarkers(lista){		
-	  for(i in lista){
-		  lista[i].setMap(null);
-	  }
-  }
-  
-  function geocodeResult(results, status) {
-	  // Verificamos el estatus
-	  if (status == 'OK') {		 
-		  // Si hay resultados encontrados, centramos y repintamos el mapa
-		  // esto para eliminar cualquier pin antes puesto
-		  var mapOptions = {
-			  center: results[0].geometry.location,
-			  mapTypeId: google.maps.MapTypeId.ROADMAP
-		  };
-		  //mapa = new google.maps.Map($("#mapa").get(0), mapOptions);
-		  // fitBounds acercará el mapa con el zoom adecuado de acuerdo a lo buscado
-		  mapa.fitBounds(results[0].geometry.viewport);
-		  // Dibujamos un marcador con la ubicación del primer resultado obtenido
-		  //var markerOptions = { position: results[0].geometry.location }
-		  var direccion = results[0].geometry.location;
-		  var coordenadas = direccion.toString();
-		  
-		  coordenadas = coordenadas.replace("(", "");
-		  coordenadas = coordenadas.replace(")", "");			
-		  var lista = coordenadas.split(",");
-		  
-		  //var direccion = new google.maps.LatLng(lista[0], lista[1]);		  	  
-		  //PASAR LAS COORDENADAS AL FORMULARIO
-		  
-		  $('#formNew').find("input[name='cx']").val(lista[0]);
-		  $('#formNew').find("input[name='cy']").val(lista[1]);
-		  //$('#form').find("input[name='buscar']").val('');
-		 	  
-		  var marcador = new google.maps.Marker({
-			  position: direccion,
-			  zoom:15,
-			  map: mapa, //ENQUE MAPA SE UBICARA EL MARCADOR
-			  animation: google.maps.Animation.DROP, //COMO APARECERA EL MARCADOR
-			  draggable: false // NO PERMITIR EL ARRASTRE DEL MARCADOR
-		  });
-		  markers.push(marcador);
-		  deleteMarkers(markers);	 
-		  marcador.setMap(mapa);
-		  //marker.setMap(mapa);		  
-		  
-	  } else {
-		  // En caso de no haber resultados o que haya ocurrido un error
-		  // lanzamos un mensaje con el error
-		  alert("El buscador no tuvo éxito debido a: " + status);
-	  }
-  }
+
+	}
+
+	//FUNCIONES PARA EL GOOGLE MAPS
+
+	function deleteMarkers(lista){
+		for(i in lista){
+			lista[i].setMap(null);
+		}
+	}
+
+	function geocodeResult(results, status) {
+		// Verificamos el estatus
+		if (status == 'OK') {
+			// Si hay resultados encontrados, centramos y repintamos el mapa
+			// esto para eliminar cualquier pin antes puesto
+			var mapOptions = {
+				center: results[0].geometry.location,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			//mapa = new google.maps.Map($("#mapa").get(0), mapOptions);
+			// fitBounds acercará el mapa con el zoom adecuado de acuerdo a lo buscado
+			mapa.fitBounds(results[0].geometry.viewport);
+			// Dibujamos un marcador con la ubicación del primer resultado obtenido
+			//var markerOptions = { position: results[0].geometry.location }
+			var direccion = results[0].geometry.location;
+			var coordenadas = direccion.toString();
+
+			coordenadas = coordenadas.replace("(", "");
+			coordenadas = coordenadas.replace(")", "");
+			var lista = coordenadas.split(",");
+
+			//var direccion = new google.maps.LatLng(lista[0], lista[1]);
+			//PASAR LAS COORDENADAS AL FORMULARIO
+
+			$('#formNew').find("input[name='cx']").val(lista[0]);
+			$('#formNew').find("input[name='cy']").val(lista[1]);
+			//$('#form').find("input[name='buscar']").val('');
+
+			var marcador = new google.maps.Marker({
+				position: direccion,
+				zoom:15,
+				map: mapa, //ENQUE MAPA SE UBICARA EL MARCADOR
+				animation: google.maps.Animation.DROP, //COMO APARECERA EL MARCADOR
+				draggable: false // NO PERMITIR EL ARRASTRE DEL MARCADOR
+			});
+			markers.push(marcador);
+			deleteMarkers(markers);
+			marcador.setMap(mapa);
+			//marker.setMap(mapa);
+
+		} else {
+			// En caso de no haber resultados o que haya ocurrido un error
+			// lanzamos un mensaje con el error
+			alert("El buscador no tuvo éxito debido a: " + status);
+		}
+	}
   
 </script>
 <form id="formNew" action="javascript:saveForm('formNew','empleado/save.php')" class="form-inline" autocomplete="off" >

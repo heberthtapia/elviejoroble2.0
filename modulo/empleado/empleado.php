@@ -41,7 +41,7 @@ $op = new cnFunction();
 
 </script>
 <?PHP
-include 'newsEmp.php';
+include 'newEmpleado.php';
 
 ?>
 <div class="row" id="listTabla">
@@ -150,3 +150,4 @@ include 'newsEmp.php';
 
     </div>
 </div>
+<script  src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBIG-WEdvtbElIhE06jzL5Kk1QkFWCvymQ" async  defer ></script>
