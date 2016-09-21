@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="73c4bc01-f6ca-4825-b2bd-cb905a4b665c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modulo/empleado/newEmpleado.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/myJavaScript.js" afterPath="$PROJECT_DIR$/js/myJavaScript.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modulo/empleado/empleado.php" afterPath="$PROJECT_DIR$/modulo/empleado/empleado.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modulo/empleado/newsEmp.php" afterPath="$PROJECT_DIR$/modulo/empleado/newsEmp.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modulo/empleado/newEmpleado.php" afterPath="$PROJECT_DIR$/modulo/empleado/newEmpleado.php" />
     </list>
     <ignored path="elviejoroble2.0.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,34 +29,14 @@
       <file leaf-file-name="admin.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1005">
-              <caret line="67" column="8" selection-start-line="67" selection-start-column="6" selection-end-line="67" selection-end-column="8" />
+            <state relative-caret-position="319">
+              <caret line="659" column="48" selection-start-line="659" selection-start-column="32" selection-end-line="659" selection-end-column="48" />
               <folding>
                 <marker date="1473877764960" expanded="true" signature="846:948" ph="UPDATE usuar... " />
                 <marker date="1473877764960" expanded="true" signature="2656:2770" ph="INSERT INTO eventos... " />
                 <marker date="1473877764960" expanded="true" signature="3038:3071" ph="SELECT MAX(i... eventos" />
                 <marker date="1473877764960" expanded="true" signature="3331:3375" ph="UPDATE event... " />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="newProducto.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulo/almacen/newProducto.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1155">
-              <caret line="77" column="22" selection-start-line="77" selection-start-column="22" selection-end-line="77" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="producto.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulo/almacen/producto.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="45" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="45" selection-end-column="2" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -88,8 +64,8 @@
       <file leaf-file-name="newsEmp.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulo/empleado/newsEmp.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="296" column="92" selection-start-line="295" selection-start-column="8" selection-end-line="296" selection-end-column="92" />
+            <state relative-caret-position="195">
+              <caret line="353" column="143" selection-start-line="353" selection-start-column="8" selection-end-line="353" selection-end-column="143" />
               <folding />
             </state>
           </provider>
@@ -110,8 +86,30 @@
       <file leaf-file-name="newEmpleado.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modulo/empleado/newEmpleado.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="216" column="42" selection-start-line="216" selection-start-column="42" selection-end-line="216" selection-end-column="42" />
+            <state relative-caret-position="300">
+              <caret line="268" column="40" selection-start-line="268" selection-start-column="40" selection-end-line="268" selection-end-column="40" />
+              <folding>
+                <element signature="e#14312#14319#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bootstrap-datetimepicker.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/bootstrap-datetimepicker.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="687">
+              <caret line="517" column="59" selection-start-line="517" selection-start-column="53" selection-end-line="517" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="myStyle.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/myStyle.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="19" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -192,8 +190,8 @@
         <option value="$PROJECT_DIR$/tabla.php" />
         <option value="$PROJECT_DIR$/modulo/empleado/newsEmp.php" />
         <option value="$PROJECT_DIR$/modulo/empleado/empleado.php" />
-        <option value="$PROJECT_DIR$/modulo/empleado/newEmpleado.php" />
         <option value="$PROJECT_DIR$/js/myJavaScript.js" />
+        <option value="$PROJECT_DIR$/modulo/empleado/newEmpleado.php" />
       </list>
     </option>
   </component>
@@ -447,12 +445,12 @@
       <workItem from="1473804495108" duration="16699000" />
       <workItem from="1473878771385" duration="12985000" />
       <workItem from="1473982929089" duration="3392000" />
-      <workItem from="1474383685316" duration="9595000" />
+      <workItem from="1474383685316" duration="19298000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="251584000" />
+    <option name="totallyTimeSpent" value="261287000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -500,7 +498,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../sitios/plugins+ejemplos/Calendario-Bootstrap-php-mysql/index.php" />
     <entry file="file://$PROJECT_DIR$/../elviejoroble/modulo/cliente/listCliente.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -681,13 +678,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/bootstrap-datetimepicker.es.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="21" selection-start-line="0" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/bootstrap-datetimepicker_.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -706,13 +696,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="63615">
           <caret line="4235" column="0" selection-start-line="4235" selection-start-column="0" selection-end-line="4235" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/bootstrap-datetimepicker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16995">
-          <caret line="2623" column="0" selection-start-line="2623" selection-start-column="0" selection-end-line="2623" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -754,19 +737,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1005">
-          <caret line="67" column="8" selection-start-line="67" selection-start-column="6" selection-end-line="67" selection-end-column="8" />
-          <folding>
-            <marker date="1473877764960" expanded="true" signature="846:948" ph="UPDATE usuar... " />
-            <marker date="1473877764960" expanded="true" signature="2656:2770" ph="INSERT INTO eventos... " />
-            <marker date="1473877764960" expanded="true" signature="3038:3071" ph="SELECT MAX(i... eventos" />
-            <marker date="1473877764960" expanded="true" signature="3331:3375" ph="UPDATE event... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../elviejoroble/modulo/empleado/newsEmp.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4457">
@@ -792,14 +762,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modulo/empleado/newsEmp.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="296" column="92" selection-start-line="295" selection-start-column="8" selection-end-line="296" selection-end-column="92" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../elviejoroble/js/miScript.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -816,11 +778,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/bootstrap-datetimepicker.es.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="659" column="48" selection-start-line="659" selection-start-column="32" selection-end-line="659" selection-end-column="48" />
+          <folding>
+            <marker date="1473877764960" expanded="true" signature="846:948" ph="UPDATE usuar... " />
+            <marker date="1473877764960" expanded="true" signature="2656:2770" ph="INSERT INTO eventos... " />
+            <marker date="1473877764960" expanded="true" signature="3038:3071" ph="SELECT MAX(i... eventos" />
+            <marker date="1473877764960" expanded="true" signature="3331:3375" ph="UPDATE event... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/bootstrap-datetimepicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="687">
+          <caret line="517" column="59" selection-start-line="517" selection-start-column="53" selection-end-line="517" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/myStyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="19" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulo/empleado/newsEmp.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="353" column="143" selection-start-line="353" selection-start-column="8" selection-end-line="353" selection-end-column="143" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modulo/empleado/newEmpleado.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="216" column="42" selection-start-line="216" selection-start-column="42" selection-end-line="216" selection-end-column="42" />
-          <folding />
+        <state relative-caret-position="300">
+          <caret line="268" column="40" selection-start-line="268" selection-start-column="40" selection-end-line="268" selection-end-column="40" />
+          <folding>
+            <element signature="e#14312#14319#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

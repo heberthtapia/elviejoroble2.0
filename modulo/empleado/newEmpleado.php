@@ -29,6 +29,9 @@ $hora = $op->Time();
         border: 1px solid #cccccc;
         padding: 3px;
     }
+    option:first {
+        color: #CCCCCC;
+    }
 </style>
 
 <script>
@@ -152,6 +155,16 @@ $hora = $op->Time();
             alert("El buscador no tuvo éxito debido a: " + status);
         }
     }
+
+
+    $(function () {
+        $('#dateNac').datetimepicker({
+            locale: 'es',
+            viewMode: 'years',
+            format: 'YYYY-MM-DD'
+        });
+    });
+
 </script>
 
 <form id="formNew" action="javascript:saveForm('formNew','empleado/save.php')" class="" autocomplete="off" >
@@ -199,9 +212,9 @@ $hora = $op->Time();
                         <input id="ci" name="ci" type="text" placeholder="N° C.I." value="" class="form-control validate[required,custom[integer1],ajax[ajaxCiCallPhp]] text-input" />
                     </div>
                     <div class="col-md-2 form-group">
-                        <label for="dep" class="sr-only">Lugar:</label>
-                        <select data-placeholder="Departamento" id="dep" name="dep" title="Seleccione" class="form-control chosen-select validate[required]">
-                            <option value=""></option>
+                        <label for="dep" class="sr-only">Lugar Exp.:</label>
+                        <select id="dep" name="dep" class="form-control chosen-select validate[required]">
+                            <option value="" disabled selected hidden>Lugar Exp.</option>
                             <option value="lp">La Paz</option>
                             <option value="cbb">Cochabamba</option>
                             <option value="sz">Santa Cruz</option>
@@ -214,20 +227,53 @@ $hora = $op->Time();
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-2 form-group">
+                        <label for="dateNac" class="sr-only">Fecha de Nacimiento:</label>
+                        <input id="dateNac" name="dateNac" type="text" placeholder="Fecha Nac." class="form-control validate[required,custom[date]] text-input datepicker" />
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <label for="fono" class="sr-only">Telefono:</label>
+                        <input id="fono" name="fono" type="text" placeholder="Telefono" class="form-control validate[custom[phone]] text-input" />
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <label for="celular" class="sr-only">Celular:</label>
+                        <input id="celular" name="celular" type="text" placeholder="Celular" class="form-control validate[required,custom[celular]] text-input" />
+                    </div>
+                    <div class="col-md-2 form-group">
                         <label for="codUser" class="sr-only">Usuario:</label>
                         <input id="codUser" name="codUser" type="text" placeholder="Usuario" class="form-control validate[required,custom[onlyLetterNumber],maxSize[20],ajax[ajaxUserCallPhp]] text-input" />
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 form-group">
                         <label for="password" class="sr-only">Contraseña:</label>
                         <input id="password" name="password" type="text" placeholder="Contraseña" value="" class="form-control"/>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2 form-group">
                         <input type="button" id="genera" value="Generar" onclick="generaPass('password');" class="btn btn-primary"/>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 col-md-offset-3">.col-md-6 .col-md-offset-3</div>
+                    <div class="col-md-4 form-group">
+                        <label for="emailC" class="sr-only">Correo Electronico:</label>
+                        <input id="emailC" name="emailC" type="text" placeholder="Correo Electronico" value="" class="form-control validate[required, custom[email]] text-input" />
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <label for="cargo" class="sr-only">Cargo:</label>
+                        <select id="cargo" name="cargo" class="form-control validate[required]">
+                            <option value="" disabled selected hidden>Cargo</option>
+                            <option value="adm">Administrador</option>
+                            <option value="alm">Almacen</option>
+                            <option value="con">Contador</option>
+                            <option value="pre">Preventista</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="addresC" class="sr-only"></label>
+                        <input id="addresC" name="addresC" type="text" placeholder="Direcci&oacute;n" class="form-control validate[required] text-input" />
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <label for="Nro" class="sr-only"></label>
+                        <input id="Nro" name="Nro" type="text" placeholder="N° de domicilio" class="form-control validate[required] text-input" />
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-9">
@@ -236,17 +282,7 @@ $hora = $op->Time();
                             <div class="col-xs-8 col-sm-6">
                                 Level 2: .col-xs-8 .col-sm-6
                             </div>
-                            <div class="col-xs-4 col-sm-6">
-                                Level 2: .col-xs-4 .col-sm-6
-                                <label for="cargo" class="control-label">Cargo: </label>
-                                <select id="cargo" name="cargo" class="form-control validate[required]">
-                                    <option value=""></option>
-                                    <option value="adm">Administrador</option>
-                                    <option value="alm">Almacen</option>
-                                    <option value="con">Contador</option>
-                                    <option value="pre">Preventista</option>
-                                </select>
-                            </div>
+
                         </div>
                     </div>
                 </div>
