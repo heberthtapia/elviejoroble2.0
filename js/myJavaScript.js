@@ -185,3 +185,32 @@ function fDelete(idForm, p){
         }
     });
 }
+
+/**
+ *  WEB CAM
+ * */
+
+/* RECARGA IMAGEN */
+
+function recargaImg(img, mod){
+    $('#foto').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/'+mod+'/uploads/photos/'+img+'&amp;w=90&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+}
+
+function recargaImgC(img, mod){
+    $('#fotoC').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/'+mod+'/uploads/photos/'+img+'&amp;w=90&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+}
+
+function closeWebcam(){
+    $('#camera').css('display','none');
+    $('#save').removeAttr('disabled', 'disabled');
+}
+
+function openWebcam(){
+    alert("entra....!!!");
+    $('#camera').css('display','block');
+    $('#save').attr('disabled', 'disabled');
+}
+
+/**
+ *  WEB CAM
+ */

@@ -26,10 +26,15 @@ $hora = $op->Time();
 <script  src = "https://maps.googleapis.com/maps/api/js" async  defer ></script>
 
 <script>
-
 	$('#dataRegister').on('show.bs.modal', function() {
 		//Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
 		initMap();
+	});
+
+	$('#dataRegister').on('hidden.bs.modal', function (e) {
+		// do something...
+		$('#formNew').get(0).reset();
+		//despliega('modulo/almacen/producto.php','contenido');
 	});
 
 	$(document).ready(function(e) {

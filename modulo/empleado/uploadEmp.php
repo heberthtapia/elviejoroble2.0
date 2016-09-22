@@ -3,13 +3,11 @@
 	
 	$db = NewADOConnection('mysqli');
 	//$db->debug = true;
-	$db->Connect();	
-
+	$db->Connect();
 /*
 	This file receives the JPEG snapshot
 	from webcam.swf as a POST request.
 */
-
 // We only need to handle POST requests:
 if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 	exit;
@@ -53,7 +51,6 @@ $original = 'uploads/photos/'.$filename;
 	$strQuery.= "VALUES( '$filename' ) ";
 	
 	$reg = $db->Execute($strQuery);
-
 //
 
 // Using the GD library to resize 

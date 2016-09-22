@@ -10,7 +10,8 @@ $db->Connect();
 
 $op = new cnFunction();
 ?>
-
+<script type="text/javascript" src="webcam/webcam.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" language="javascript" class="init">
 
     $(document).ready(function() {
@@ -21,13 +22,13 @@ $op = new cnFunction();
                 "info": "Mostrando _PAGE_ de _PAGES_",
                 "infoEmpty": "No hay registros disponibles",
                 "infoFiltered": "(Filtrada de _MAX_ registros en total)",
-                "search":         "Buscar:",
-                "paginate": {
+                "search":         "Buscar:"
+                /*"paginate": {
                     "first":      "Primero",
                     "last":       "Ultimo",
                     "next":       "Siguiente",
                     "previous":   "Anterior"
-                }
+                }*/
             },
             "columnDefs": [
                 {
@@ -150,4 +151,4 @@ include 'newEmpleado.php';
 
     </div>
 </div>
-<script  src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBIG-WEdvtbElIhE06jzL5Kk1QkFWCvymQ" async  defer ></script>
+<script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIG-WEdvtbElIhE06jzL5Kk1QkFWCvymQ" async  defer></script>
