@@ -4,17 +4,6 @@ $strQ = $db->Execute($sql);
 $fecha = $op->ToDay();
 $hora = $op->Time();
 ?>
-<style>
-	input{
-		text-transform: capitalize;
-	}
-	input#idInv{
-		text-transform: uppercase;
-	}
-	.form-error{
-		font-size: 9px;
-	}
-</style>
 <form id="formNew" action="javascript:saveForm('formNew','almacen/save.php')" class="form-horizontal" autocomplete="off" >
 	<div class="modal fade" id="dataRegister" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 		<div class="modal-dialog" role="document">
@@ -77,8 +66,8 @@ $hora = $op->Time();
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-					<button type="submit" class="btn btn-primary">Guardar datos</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+					<button type="submit" class="btn btn-success">Agregar Producto</button>
 				</div>
 			</div>
 		</div>
@@ -86,41 +75,9 @@ $hora = $op->Time();
 </form>
 
 <script>
-
-	$.validate({
-		lang: 'es',
-		modules : 'security'
-	});
-
 	$('#dataRegister').on('hidden.bs.modal', function (e) {
 		// do something...
 		$('#formNew').get(0).reset();
 		//despliega('modulo/almacen/producto.php','contenido');
 	});
-
-	/*function saveFormNew(idForm, p){
-
-		var dato = JSON.stringify( $('#'+idForm).serializeObject() );
-
-		$.ajax({
-			url: "modulo/"+p,
-			type: 'post',
-			dataType: 'json',
-			async:false,
-			data:{res:dato},
-			success: function(data){
-				//$('#form').get(0).reset();
-				$('#datos_ajax_register').html('<div class="alert alert-success" role="alert"><strong>Guardado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
-					$('#datos_ajax_register').fadeOut(2000,function () {
-						$('#dataRegister').modal('hide').delay(7000);
-                        despliega('modulo/almacen/listTabla.php','listTabla');
-					});
-				});
-			},
-			error: function(data){
-				alert('Error al guardar el formulario');
-			}
-		});
-	}*/
-
 </script>

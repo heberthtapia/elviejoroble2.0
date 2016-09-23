@@ -149,9 +149,10 @@ if (isset($_POST['from']))
     <link rel="stylesheet" href="css/calendar.css">
     <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="css/theme-default.css">
+    <link rel="stylesheet" href="uploadify/uploadify.css">
     <link rel="stylesheet" href="css/myStyle.css">
 
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 
     <script type="text/javascript" src="js/jquery.dataTables.js"></script>
     <script type="text/javascript" src="js/dataTables.bootstrap.js"></script>
@@ -167,10 +168,8 @@ if (isset($_POST['from']))
 
     <script type="text/javascript" src="js/jquery.form-validator.js"></script>
     <script type="text/javascript" src="js/jquery.json-2.3.js"></script>
-
     <!--uploadIfy-->
     <script type="text/javascript" src="uploadify/jquery.uploadify-3.1.js"></script>
-
     <script type="text/javascript" src="js/myJavaScript.js"></script>
 
     <style>
@@ -226,6 +225,20 @@ if (isset($_POST['from']))
 
         #alert{
             display: none;
+        }
+
+        input{
+            text-transform: capitalize;
+        }
+        input#idInv{
+            text-transform: uppercase;
+        }
+        input#codUser,
+        input#password{
+            text-transform: none;
+        }
+        .form-error{
+            font-size: 9px;
         }
     </style>
 </head>

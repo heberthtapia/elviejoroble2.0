@@ -88,13 +88,22 @@ function saveFormNew(idForm, p){
         async:false,
         data:{res:dato},
         success: function(data){
-            //$('#form').get(0).reset();
-            $('#datos_ajax_register').html('<div class="alert alert-success" role="alert"><strong>Guardado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
-                $('#datos_ajax_register').fadeOut(2000,function () {
-                    $('#dataRegister').modal('hide').delay(7000);
-                    despliega('modulo/almacen/listTabla.php','listTabla');
+            if(data.tabla === 'producto') {
+                $('#datos_ajax_register').html('<div class="alert alert-success" role="alert"><strong>Guardado Correctamente!!!</strong></div><br>').fadeIn(4000, function () {
+                    $('#datos_ajax_register').fadeOut(2000, function () {
+                        $('#dataRegister').modal('hide').delay(7000);
+                        despliega('modulo/almacen/listTabla.php', 'listTabla');
+                    });
                 });
-            });
+            }
+            if(data.tabla === 'empleado') {
+                $('#datos_ajax_register').html('<div class="alert alert-success" role="alert"><strong>Guardado Correctamente!!!</strong></div><br>').fadeIn(4000, function () {
+                    $('#datos_ajax_register').fadeOut(2000, function () {
+                        $('#dataRegister').modal('hide').delay(7000);
+                        despliega('modulo/empleado/listTabla.php', 'listTabla');
+                    });
+                });
+            }
         },
         error: function(data){
             alert('Error al guardar el formulario');
@@ -118,8 +127,13 @@ function saveForm(idForm, p){
             //ordena(2);
             //alert(data.tabla);
             if(data.tabla === 'empleado'){
-                //fnClickAddRow(data,true);
-                despliega('modulo/empleado/listEmpleado.php','contenido');
+                $('#datos_ajax').html('<div class="alert alert-success" role="alert"><strong>Guardado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
+                    $('#datos_ajax').fadeOut(2000,function () {
+                        $('#dataRegister').modal('hide').delay(7000);
+                        $('#dataUpdate').modal('hide').delay(7000);
+                        despliega('modulo/empleado/listTabla.php','listTabla');
+                    });
+                });
             }
             if(data.tabla === 'inventario'){
                 //fnClickAddRowU(data,true);
@@ -193,11 +207,11 @@ function fDelete(idForm, p){
 /* RECARGA IMAGEN */
 
 function recargaImg(img, mod){
-    $('#foto').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/'+mod+'/uploads/photos/'+img+'&amp;w=90&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+    $('#foto').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/'+mod+'/uploads/photos/'+img+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
 }
 
 function recargaImgC(img, mod){
-    $('#fotoC').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/'+mod+'/uploads/photos/'+img+'&amp;w=90&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+    $('#fotoC').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/'+mod+'/uploads/photos/'+img+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
 }
 
 function closeWebcam(){
@@ -206,9 +220,20 @@ function closeWebcam(){
 }
 
 function openWebcam(){
-    alert("entra....!!!");
     $('#camera').css('display','block');
     $('#save').attr('disabled', 'disabled');
+}
+
+function idImg(mod){
+    $.ajax({
+        url: 'inc/img.php',
+        type: 'post',
+        cache: false,
+        success: function(data){
+            recargaImg(data,mod);
+            recargaImgC(data,mod);
+        }
+    });
 }
 
 /**

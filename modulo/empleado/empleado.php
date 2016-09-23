@@ -22,13 +22,13 @@ $op = new cnFunction();
                 "info": "Mostrando _PAGE_ de _PAGES_",
                 "infoEmpty": "No hay registros disponibles",
                 "infoFiltered": "(Filtrada de _MAX_ registros en total)",
-                "search":         "Buscar:"
-                /*"paginate": {
+                "search":         "Buscar:",
+                "paginate": {
                     "first":      "Primero",
                     "last":       "Ultimo",
                     "next":       "Siguiente",
                     "previous":   "Anterior"
-                }*/
+                }
             },
             "columnDefs": [
                 {
@@ -38,12 +38,15 @@ $op = new cnFunction();
                 }
             ]
         });
-    } );
-
+    });
+    $.validate({
+        lang: 'es',
+        modules : 'security, modules/logic'
+    });
+    $('#obser').restrictLength( $('#max-length-element') );
 </script>
 <?PHP
 include 'newEmpleado.php';
-
 ?>
 <div class="row" id="listTabla">
     <div class="col-xs-12 col-sm-12 col-md-12">

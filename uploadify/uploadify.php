@@ -1,6 +1,6 @@
 <?php
-include("../adodb5/adodb.inc.php");
-include '../classes/function.php';
+include '../adodb5/adodb.inc.php';
+include '../inc/function.php';
 
 $db = NewADOConnection('mysqli');
 //$db->debug = true;

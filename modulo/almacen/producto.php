@@ -36,7 +36,12 @@ $op = new cnFunction();
                 }
             ]
         });
-    } );
+    });
+
+    $.validate({
+        lang: 'es',
+        modules : 'security'
+    });
 
 </script>
 <?PHP
