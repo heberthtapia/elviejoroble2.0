@@ -325,12 +325,12 @@ var id_empleado;
     $('#subirU').click(
         function(){
             var $this = $(this);
-            var op = $this.text();
+            var op = $this.find('span').text();
             if( op == 'Subir Foto' ){
-                $('#subirU').text("Cancelar");
+                $('#subirU').find('span').text("Cancelar");
                 $('#saveU, #closeU').attr('disabled','disabled');
             }else{
-                $('#subirU').text("Subir Foto");
+                $('#subirU').find('span').text("Subir Foto");
                 $('#saveU, #closeU').removeAttr('disabled','disabled');
                 $('#file_uploadU').uploadify('cancel', '*');
             }
@@ -348,7 +348,7 @@ var id_empleado;
         $('.uploadShowU').css('display','none');
         //$('#file_upload').uploadify('cancel', '*');
         $('#saveU, #closeU').removeAttr('disabled','disabled');
-        $('#subirU').text("Subir Foto");
+        $('#subirU').find('span').text("Subir Foto");
         $('#fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/photos/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
     });
 
@@ -520,7 +520,7 @@ var id_empleado;
                             </button>
                         </div>
                         <div class="col-md-2 form-group">
-                            <button type="button" id="subirU" class="btn btn-primary" ">
+                            <button type="button" id="subirU" class="btn btn-primary">
                                 <i class="fa fa-upload" aria-hidden="true"></i>
                                 <span>Subir Foto</span>
                             </button>
