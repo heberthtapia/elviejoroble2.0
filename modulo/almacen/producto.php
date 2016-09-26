@@ -93,7 +93,7 @@ include 'delProducto.php';
                 <tr id="tb<?=$row[0]?>">
                     <td class="last center"><?=$cont++;?></td>
                     <td class="last center"><?=$row['dateReg']?></td>
-                    <td class="last center"><?=$row['id_inventario'];?></td>
+                    <td class="last center" style="text-transform: uppercase"><?=$row['id_inventario'];?></td>
                     <td class="last center"><?=$row['detalle'];?></td>
                     <td class="last center"><?=$row['volumen'];?></td>
                     <td class="last center"><?=$row['cantidad'];?></td>

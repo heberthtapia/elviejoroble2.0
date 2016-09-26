@@ -17,7 +17,7 @@ function verifica(id_F, p){
             $('#error').html('<div id="loader"><p>Validando...</p></div>');
         },
         success: function(data){
-            if(data != 0){
+            if(data !== 0){
                 $(location).attr('href','admin.php');
             }else{
                 $('#alert').css('display','block').fadeIn(5000,function () {
@@ -70,7 +70,8 @@ function generaPass(id){
         type: 'post',
         cache: false,
         success: function(data){
-            $("#"+id).attr('value',data);
+            //alert();
+            $("#"+id).val(data);
         }
     });
 }
@@ -200,6 +201,22 @@ function fDelete(idForm, p){
     });
 }
 
+function obtenerCoor(id){
+    $.ajax({
+        url: "modulo/empleado/obtenerCoor.php",
+        type: 'post',
+        dataType: 'json',
+        async:false,
+        data:{res:id},
+        success: function(data){
+            return data;
+        },
+        error: function(data){
+            alert('Error al eliminar');
+        }
+    });
+}
+
 /**
  *  WEB CAM
  * */
@@ -210,8 +227,8 @@ function recargaImg(img, mod){
     $('#foto').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/'+mod+'/uploads/photos/'+img+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
 }
 
-function recargaImgC(img, mod){
-    $('#fotoC').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/'+mod+'/uploads/photos/'+img+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+function recargaImgU(img, mod){
+    $('#fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/'+mod+'/uploads/photos/'+img+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
 }
 
 function closeWebcam(){
@@ -231,7 +248,7 @@ function idImg(mod){
         cache: false,
         success: function(data){
             recargaImg(data,mod);
-            recargaImgC(data,mod);
+            recargaImgU(data,mod);
         }
     });
 }

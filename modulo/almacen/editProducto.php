@@ -64,8 +64,14 @@ $hora = $op->Time();
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-					<button type="submit" class="btn btn-success">Modificar Producto</button>
+					<button type="button" id="close" class="btn btn-danger" data-dismiss="modal">
+						<i class="fa fa-close" aria-hidden="true"></i>
+						<span>Cancelar</span>
+					</button>
+					<button type="submit" id="save" class="btn btn-success">
+						<i class="fa fa-check" aria-hidden="true"></i>
+						<span>Modificar Producto</span>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -103,28 +109,5 @@ $hora = $op->Time();
 		modal.find('.modal-body #precioSF').val(precioSF);
 		//$('.alert').hide();//Oculto alert
 	});
-
-	/*function saveFormUpdate(idForm, p){
-		var dato = JSON.stringify( $('#'+idForm).serializeObject() );
-		$.ajax({
-			url: "modulo/"+p,
-			type: 'post',
-			dataType: 'json',
-			async:true,
-			data:{res:dato},
-			success: function(data){
-				//$('#form').get(0).reset();
-				$('#datos_ajax_update').html('<div class="alert alert-success" role="alert"><strong>Modificado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
-					$('#datos_ajax_update').fadeOut(2000,function () {
-						$('#dataUpdate').modal('hide').delay(7000);
-						despliega('modulo/almacen/listTabla.php','listTabla');
-					});
-				});
-			},
-			error: function(data){
-				alert('Error al guardar el formulario');
-			}
-		});
-	}*/
 
 </script>

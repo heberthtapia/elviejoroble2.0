@@ -1,6 +1,6 @@
 <?php
 	include '../../adodb5/adodb.inc.php';
-	
+
 	$db = NewADOConnection('mysqli');
 	//$db->debug = true;
 	$db->Connect();
@@ -49,16 +49,16 @@ $original = 'uploads/photos/'.$filename;
 
 	$strQuery = "INSERT INTO aux_img( imagen ) ";
 	$strQuery.= "VALUES( '$filename' ) ";
-	
+
 	$reg = $db->Execute($strQuery);
 //
 
-// Using the GD library to resize 
+// Using the GD library to resize
 // the image into a thumbnail:
 
 /*$origImage	= imagecreatefromjpeg($original);
 $newImage	= imagecreatetruecolor(154,110);
-imagecopyresampled($newImage,$origImage,0,0,0,0,154,110,520,370); 
+imagecopyresampled($newImage,$origImage,0,0,0,0,154,110,520,370);
 
 imagejpeg($newImage,'uploads/thumbs/'.$filename);
 */

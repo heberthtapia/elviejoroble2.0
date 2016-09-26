@@ -4,34 +4,226 @@ $strQ = $db->Execute($sql);
 $fecha = $op->ToDay();
 $hora = $op->Time();
 ?>
-<style>
-    #mapa{
-        width:345px;
-        height:220px;
-        border:1px #CCCCCC solid;
+
+<script>
+    //VARIABLES GENERALES
+    //DECLARAS FUERA DEL READY DE JQUERY
+    var map;
+    var markers = [];
+    var marcadores_bd=[];
+    var mapa = null; //VARIABLE GENERAL PARA EL MAPA
+
+    function openWebCam(){
+        openWebcam();//document.write( webcam.get_html(320, 240) );
+        webcam.set_api_url( 'modulo/empleado/uploadEmp.php' );
+        webcam.set_hook( 'onComplete', 'my_callback_function');
     }
-    textarea {
-        height: 4em;
+    function my_callback_function(response) {
+        //alert("Success! PHP returned: " + response);
+        msg = $.parseJSON(response);
+        //alert(msg.filename);
+        //modificado
+        recargaImg(msg.filename, 'empleado');
     }
-    #camera{
-        margin: -490px auto auto 100px;
-        position:absolute;
+
+    function initMap(){
+        /* GOOGLE MAPS */
+        var formulario = $('#formNew');
+        //COODENADAS INICIALES -16.5207007,-68.1615534
+        //VARIABLE PARA EL PUNTO INICIAL
+        var punto = new google.maps.LatLng(-16.499299167397574, -68.1646728515625);
+        //VARIABLE PARA CONFIGURACION INICIAL
+        var config = {
+            zoom:10,
+            center:punto,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        mapa = new google.maps.Map( $("#mapa")[0], config );
+
+        google.maps.event.addListener(mapa, "click", function(event){
+            //OBTENER COORDENADAS POR SEPARADO
+            var coordenadas = event.latLng.toString();
+            coordenadas = coordenadas.replace("(", "");
+            coordenadas = coordenadas.replace(")", "");
+
+            var lista = coordenadas.split(",");
+            //alert(lista[0]+"---"+lista[1])
+            var direccion = new google.maps.LatLng(lista[0], lista[1]);
+            //variable marcador
+            var marcador = new google.maps.Marker({
+                //titulo: prompt("Titulo del marcador"),
+                position: direccion,
+                map: mapa, //ENQUE MAPA SE UBICARA EL MARCADOR
+                animation: google.maps.Animation.DROP, //COMO APARECERA EL MARCADOR
+                draggable: false // NO PERMITIR EL ARRASTRE DEL MARCADOR
+                //title:"Hello World!"
+            });
+
+            //PASAR LAS COORDENADAS AL FORMULARIO
+            formulario.find("input[name='cx']").val(lista[0]);
+            formulario.find("input[name='cy']").val(lista[1]);
+            //UBICAR EL FOCO EN EL CAMPO TITULO
+            formulario.find("input[name='addres']").focus();
+
+            //UBICAR EL MARCADOR EN EL MAPA
+            //setMapOnAll(null);
+            markers.push(marcador);
+
+            //AGREGAR EVENTO CLICK AL MARCADOR
+            google.maps.event.addListener(marcador, "click", function(){
+                //alert(marcador.titulo);
+            });
+            deleteMarkers(markers);
+            marcador.setMap(mapa);
+        });
+
     }
-    div#foto {
-        width: 98px;
-        /*margin-right: 5px;
-        margin-left: 554px;
-        position: absolute;*/
+
+    //FUNCIONES PARA EL GOOGLE MAPS
+
+    function deleteMarkers(lista){
+        for(i in lista){
+            lista[i].setMap(null);
+        }
     }
-    div#foto img {
-        border: 1px solid #cccccc;
-        padding: 3px;
+
+    function geocodeResult(results, status) {
+        // Verificamos el estatus
+        if (status == 'OK') {
+            // Si hay resultados encontrados, centramos y repintamos el mapa
+            // esto para eliminar cualquier pin antes puesto
+            var mapOptions = {
+                center: results[0].geometry.location,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            //mapa = new google.maps.Map($("#mapa").get(0), mapOptions);
+            // fitBounds acercará el mapa con el zoom adecuado de acuerdo a lo buscado
+            mapa.fitBounds(results[0].geometry.viewport);
+            // Dibujamos un marcador con la ubicación del primer resultado obtenido
+            //var markerOptions = { position: results[0].geometry.location }
+            var direccion = results[0].geometry.location;
+            var coordenadas = direccion.toString();
+
+            coordenadas = coordenadas.replace("(", "");
+            coordenadas = coordenadas.replace(")", "");
+            var lista = coordenadas.split(",");
+
+            //var direccion = new google.maps.LatLng(lista[0], lista[1]);
+            //PASAR LAS COORDENADAS AL FORMULARIO
+
+            $('#formNew').find("input[name='cx']").val(lista[0]);
+            $('#formNew').find("input[name='cy']").val(lista[1]);
+            //$('#form').find("input[name='buscar']").val('');
+
+            var marcador = new google.maps.Marker({
+                position: direccion,
+                zoom:15,
+                map: mapa, //ENQUE MAPA SE UBICARA EL MARCADOR
+                animation: google.maps.Animation.DROP, //COMO APARECERA EL MARCADOR
+                draggable: false // NO PERMITIR EL ARRASTRE DEL MARCADOR
+            });
+            markers.push(marcador);
+            deleteMarkers(markers);
+            marcador.setMap(mapa);
+            //marker.setMap(mapa);
+
+        } else {
+            // En caso de no haber resultados o que haya ocurrido un error
+            // lanzamos un mensaje con el error
+            alert("El buscador no tuvo éxito debido a: " + status);
+        }
     }
-    .fecha{
-        float: right;
-        margin-right: 15px;
-    }
-</style>
+
+    // $(document).ready(function(e) {
+
+    $('#dateNac').datetimepicker({
+        locale: 'es',
+        viewMode: 'years',
+        format: 'YYYY-MM-DD'
+    });
+
+    // BUSCADOR
+    $('#search').on('click', function() {
+        // Obtenemos la dirección y la asignamos a una variable
+        var address = $('#buscar').val();
+        // Creamos el Objeto Geocoder
+        var geocoder = new google.maps.Geocoder();
+        // Hacemos la petición indicando la dirección e invocamos la función
+        // geocodeResult enviando todo el resultado obtenido
+        geocoder.geocode({ 'address': address}, geocodeResult);
+    });
+
+    /* uploadIfy */
+    $('#file_upload').uploadify({
+        'queueID'  		: 'some_file_queue',
+        'swf'      		: 'uploadify/uploadify.swf',
+        'uploader'		: 'uploadify/uploadify.php',
+        'method'   		: 'post',
+        'multi'   		: false,
+        'auto'   			: false,
+        'queueSizeLimit' 	: 1,
+        'fileSizeLimit' 	: '100KB',
+        'fileTypeDesc' 	: 'Imagen',
+        'fileTypeExts' 	: '*.jpg',
+        'removeCompleted' : false,
+        'buttonText'		: 'Examinar...',
+        height       		: 25,
+        width        		: 100,
+        'formData'      	: {
+            'path' : 'empleado'
+        },
+        // ** Eventos **
+        'onSelectOnce':function(event,data){
+            $('#file_upload').uploadifySettings('scriptData',{'directorio':'a','CodeUser': '21'});
+        },
+        'onUploadComplete': function(file){
+            idImg('empleado');
+            //$('#cboxTitle').html('La foto ' + file.name + ' se subio correctamente, <br> ahora puede guardar el formulario.');
+
+            setTimeout(function(){
+                $( ".uploadShow" ).toggle(2000,function(){
+                    $('#save, #close').removeAttr('disabled','disabled');
+                    $('#subir').text("Subir Foto");
+                    $('#file_upload').uploadify('cancel', '*');
+                });
+            },4000);
+        }
+    });
+    /* Abrir y cerrar uploadIfy */
+    $('#subir').click(
+        function(){
+            var $this = $(this);
+            var op = $this.text();
+            if( op == 'Subir Foto' ){
+                $('#subir').text("Cancelar");
+                $('#save, #close').attr('disabled','disabled');
+            }else{
+                $('#subir').text("Subir Foto");
+                $('#save, #close').removeAttr('disabled','disabled');
+                $('#file_upload').uploadify('cancel', '*');
+            }
+            $( ".uploadShow" ).toggle(1000);
+        });
+
+    $('#dataRegister').on('show.bs.modal', function() {
+        //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
+        initMap();
+    });
+
+    $('#dataRegister').on('hidden.bs.modal', function (e) {
+        // do something...
+        $('#formNew').get(0).reset();
+        $('.uploadShow').css('display','none');
+        //$('#file_upload').uploadify('cancel', '*');
+        $('#save, #close').removeAttr('disabled','disabled');
+        $('#subir').text("Subir Foto");
+        $('#foto').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/photos/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+    });
+
+    // });
+
+</script>
 
 <form id="formNew" action="javascript:saveForm('formNew','empleado/save.php')" class="" autocomplete="off" >
 <div class="modal fade bs-example-modal-lg" id="dataRegister" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
@@ -108,8 +300,8 @@ $hora = $op->Time();
                 </div>
                 <div class="row">
                     <div class="col-md-4 form-group">
-                        <label for="emailC" class="sr-only">Correo Electronico:</label>
-                        <input id="emailC" name="emailC" type="text" placeholder="Correo Electronico" value="" class="form-control" data-validation="email"/>
+                        <label for="email" class="sr-only">Correo Electronico:</label>
+                        <input id="email" name="email" type="text" placeholder="Correo Electronico" value="" class="form-control" data-validation="email"/>
                     </div>
                     <div class="col-md-2 form-group">
                         <label for="cargo" class="sr-only">Cargo:</label>
@@ -132,13 +324,16 @@ $hora = $op->Time();
                         <input id="password" name="password" type="text" placeholder="Contraseña" value="" class="form-control" data-validation="required"/>
                     </div>
                     <div class="col-md-2 form-group">
-                        <input type="button" id="genera" value="Generar" onclick="generaPass('password');" class="btn btn-primary"/>
+                        <button type="button" id="genera" class="btn btn-primary" onclick="generaPass('password');">
+                            <i class="fa fa-cog" aria-hidden="true"></i>
+                            <span>Generar</span>
+                        </button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-8 form-group">
-                        <label for="addresC" class="sr-only"></label>
-                        <input id="addresC" name="addresC" type="text" placeholder="Direcci&oacute;n" class="form-control" data-validation="required"/>
+                        <label for="addres" class="sr-only"></label>
+                        <input id="addres" name="addres" type="text" placeholder="Direcci&oacute;n" class="form-control" data-validation="required"/>
                     </div>
                     <div class="col-md-2 form-group">
                         <label for="Nro" class="sr-only"></label>
@@ -155,7 +350,10 @@ $hora = $op->Time();
                                 <input id="buscar" name="buscar" type="text" placeholder="Buscar en Google Maps" value="" class="form-control" autocomplete="off"/>
                             </div>
                             <div class="col-md-3  form-group">
-                                <input id="search" name="search" type="button" value="Buscar" class="btn btn-primary"/>
+                                <button type="button" id="search" class="btn btn-primary" >
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                    <span>Buscar</span>
+                                </button>
                             </div>
                         </div>
                         <div class="row">
@@ -187,11 +385,15 @@ $hora = $op->Time();
                 <div class="row">
                     <div class="col-md-2 form-group">
                         <button type="button" id="capturar" class="btn btn-primary" onclick="openWebCam()">
-                            Capturar Foto
+                            <i class="fa fa-camera" aria-hidden="true"></i>
+                            <span>Capturar Foto</span>
                         </button>
                     </div>
                     <div class="col-md-2 form-group">
-                        <button type="button" id="subir" class="btn btn-primary" ">Subir Foto</button>
+                        <button type="button" id="subir" class="btn btn-primary" ">
+                            <i class="fa fa-upload" aria-hidden="true"></i>
+                            <span>Subir Foto</span>
+                        </button>
                     </div>
                 </div>
                 <div class="row">
@@ -209,231 +411,19 @@ $hora = $op->Time();
 
             </div>
             <div class="modal-footer">
-                <button type="button" id="close" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                <button type="submit" id="save" class="btn btn-success">Agregar Empleado</button>
+                <button type="button" id="close" class="btn btn-danger" data-dismiss="modal">
+                    <i class="fa fa-close" aria-hidden="true"></i>
+                    <span>Cancelar</span>
+                </button>
+                <button type="submit" id="save" class="btn btn-success">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    <span>Agregar Empleado</span>
+                </button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 </form>
-
-<script>
-    //VARIABLES GENERALES
-    //DECLARAS FUERA DEL READY DE JQUERY
-    var map;
-    var markers = [];
-    var marcadores_bd=[];
-    var mapa = null; //VARIABLE GENERAL PARA EL MAPA
-
-    $('#dataRegister').on('show.bs.modal', function() {
-        //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
-        initMap();
-    });
-
-    $('#dataRegister').on('hidden.bs.modal', function (e) {
-        // do something...
-        $('#formNew').get(0).reset();
-        $('#file_upload').uploadify('cancel', '*');
-        $('#save, #close').removeAttr('disabled','disabled');
-        $('#subir').text("Subir Foto");
-        $('.uploadShow').toggle(1000);
-        $('#foto').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/photos/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
-    });
-
-    function openWebCam(){
-        openWebcam();//document.write( webcam.get_html(320, 240) );
-        webcam.set_api_url( 'modulo/empleado/uploadEmp.php' );
-        webcam.set_hook( 'onComplete', 'my_callback_function');
-    }
-    function my_callback_function(response) {
-        //alert("Success! PHP returned: " + response);
-        msg = $.parseJSON(response);
-        //alert(msg.filename);
-        //modificado
-        recargaImg(msg.filename, 'empleado');
-    }
-
-    function initMap(){
-        /* GOOGLE MAPS */
-        var formulario = $('#formNew');
-        //COODENADAS INICIALES -16.5207007,-68.1615534
-        //VARIABLE PARA EL PUNTO INICIAL
-        var punto = new google.maps.LatLng(-16.499299167397574, -68.1646728515625);
-        //VARIABLE PARA CONFIGURACION INICIAL
-        var config = {
-            zoom:10,
-            center:punto,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-
-        mapa = new google.maps.Map( $("#mapa")[0], config );
-
-        google.maps.event.addListener(mapa, "click", function(event){
-            //OBTENER COORDENADAS POR SEPARADO
-            var coordenadas = event.latLng.toString();
-            coordenadas = coordenadas.replace("(", "");
-            coordenadas = coordenadas.replace(")", "");
-
-            var lista = coordenadas.split(",");
-            //alert(lista[0]+"---"+lista[1])
-            var direccion = new google.maps.LatLng(lista[0], lista[1]);
-            //variable marcador
-            var marcador = new google.maps.Marker({
-                //titulo: prompt("Titulo del marcador"),
-                position: direccion,
-                map: mapa, //ENQUE MAPA SE UBICARA EL MARCADOR
-                animation: google.maps.Animation.DROP, //COMO APARECERA EL MARCADOR
-                draggable: false // NO PERMITIR EL ARRASTRE DEL MARCADOR
-                //title:"Hello World!"
-            });
-
-            //PASAR LAS COORDENADAS AL FORMULARIO
-            formulario.find("input[name='cx']").val(lista[0]);
-            formulario.find("input[name='cy']").val(lista[1]);
-            //UBICAR EL FOCO EN EL CAMPO TITULO
-            formulario.find("input[name='addresC']").focus();
-
-            //UBICAR EL MARCADOR EN EL MAPA
-            //setMapOnAll(null);
-            markers.push(marcador);
-
-            //AGREGAR EVENTO CLICK AL MARCADOR
-            google.maps.event.addListener(marcador, "click", function(){
-                //alert(marcador.titulo);
-            });
-            deleteMarkers(markers);
-            marcador.setMap(mapa);
-        });
-
-    }
-
-    //FUNCIONES PARA EL GOOGLE MAPS
-
-    function deleteMarkers(lista){
-        for(i in lista){
-            lista[i].setMap(null);
-        }
-    }
-
-    function geocodeResult(results, status) {
-        // Verificamos el estatus
-        if (status == 'OK') {
-            // Si hay resultados encontrados, centramos y repintamos el mapa
-            // esto para eliminar cualquier pin antes puesto
-            var mapOptions = {
-                center: results[0].geometry.location,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-            //mapa = new google.maps.Map($("#mapa").get(0), mapOptions);
-            // fitBounds acercará el mapa con el zoom adecuado de acuerdo a lo buscado
-            mapa.fitBounds(results[0].geometry.viewport);
-            // Dibujamos un marcador con la ubicación del primer resultado obtenido
-            //var markerOptions = { position: results[0].geometry.location }
-            var direccion = results[0].geometry.location;
-            var coordenadas = direccion.toString();
-
-            coordenadas = coordenadas.replace("(", "");
-            coordenadas = coordenadas.replace(")", "");
-            var lista = coordenadas.split(",");
-
-            //var direccion = new google.maps.LatLng(lista[0], lista[1]);
-            //PASAR LAS COORDENADAS AL FORMULARIO
-
-            $('#formNew').find("input[name='cx']").val(lista[0]);
-            $('#formNew').find("input[name='cy']").val(lista[1]);
-            //$('#form').find("input[name='buscar']").val('');
-
-            var marcador = new google.maps.Marker({
-                position: direccion,
-                zoom:15,
-                map: mapa, //ENQUE MAPA SE UBICARA EL MARCADOR
-                animation: google.maps.Animation.DROP, //COMO APARECERA EL MARCADOR
-                draggable: false // NO PERMITIR EL ARRASTRE DEL MARCADOR
-            });
-            markers.push(marcador);
-            deleteMarkers(markers);
-            marcador.setMap(mapa);
-            //marker.setMap(mapa);
-
-        } else {
-            // En caso de no haber resultados o que haya ocurrido un error
-            // lanzamos un mensaje con el error
-            alert("El buscador no tuvo éxito debido a: " + status);
-        }
-    }
-
-    $(document).ready(function(e) {
-
-        $('#dateNac').datetimepicker({
-            locale: 'es',
-            viewMode: 'years',
-            format: 'YYYY-MM-DD'
-        });
-
-        // BUSCADOR
-        $('#search').on('click', function() {
-            // Obtenemos la dirección y la asignamos a una variable
-            var address = $('#buscar').val();
-            // Creamos el Objeto Geocoder
-            var geocoder = new google.maps.Geocoder();
-            // Hacemos la petición indicando la dirección e invocamos la función
-            // geocodeResult enviando todo el resultado obtenido
-            geocoder.geocode({ 'address': address}, geocodeResult);
-        });
-
-        /* uploadIfy */
-        $('#file_upload').uploadify({
-            'queueID'  		: 'some_file_queue',
-            'swf'      		: 'uploadify/uploadify.swf',
-            'uploader'		: 'uploadify/uploadify.php',
-            'method'   		: 'post',
-            'multi'   		: false,
-            'auto'   			: false,
-            'queueSizeLimit' 	: 1,
-            'fileSizeLimit' 	: '100KB',
-            'fileTypeDesc' 	: 'Imagen',
-            'fileTypeExts' 	: '*.jpg',
-            'removeCompleted' : false,
-            'buttonText'		: 'Examinar...',
-            height       		: 25,
-            width        		: 100,
-            'formData'      	: {
-                'path' : 'empleado'
-            },
-            // ** Eventos **
-            'onSelectOnce':function(event,data){
-                $('#file_upload').uploadifySettings('scriptData',{'directorio':'a','CodeUser': '21'});
-            },
-            'onUploadComplete': function(file){
-                idImg('empleado');
-                //$('#cboxTitle').html('La foto ' + file.name + ' se subio correctamente, <br> ahora puede guardar el formulario.');
-                setTimeout(function(){
-                    $( ".uploadShow" ).toggle(2000,function(){
-                        $('#save, #close').removeAttr('disabled','disabled');
-                        $('#subir').text("Subir Foto");
-                        $('#file_upload').uploadify('cancel', '*');
-                    });
-                },4000);
-            }
-        });
-        /* Abrir y cerrar uploadIfy */
-        $('#subir').click(
-            function(){
-                var $this = $(this);
-                var op = $this.text();
-                if( op == 'Subir Foto' ){
-                    $('#subir').text("Cerrar");
-                    $('#save, #close').attr('disabled','disabled');
-                }else{
-                    $('#subir').text("Subir Foto");
-                    $('#save, #close').removeAttr('disabled','disabled');
-                    $('#file_upload').uploadify('cancel', '*');
-                }
-                $( ".uploadShow" ).toggle(1000);
-            });
-    });
-
-</script>
 
 <div id="camera">
     <span class="tooltip"></span>
@@ -453,161 +443,3 @@ $hora = $op->Time();
 
     <span class="settings"></span>
 </div>
-
-<style>
-    /*----------------------
-	Camera slide up
-	-----------------------*/
-
-    #camera {
-        position: absolute;
-
-        display: none;
-
-        width: 465px;
-        height: 330px;
-        margin: 0 auto 0 auto;
-
-        border: 1px solid #f0f0f0;
-        -webkit-border-radius: 4px 4px 0 0;
-        -moz-border-radius: 4px 4px 0 0;
-        border-radius: 4px 4px 0 0;
-        background: url('../images/cam_bg.jpg') repeat-y;
-        -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, .6);
-        -moz-box-shadow: 0 0 4px rgba(0, 0, 0, .6);
-        box-shadow: 0 0 4px rgba(0, 0, 0, .6);
-        z-index: 10000;
-    }
-
-    .camTop {
-        position: absolute;
-        top: 0;
-        left: 0;
-
-        width: 100%;
-        height: 66px;
-
-        cursor: pointer;
-
-        background: url('../img/cam.png') no-repeat center center;
-    }
-
-    .settings {
-        position: absolute;
-        top: 448px;
-        right: 37px;
-
-        width: 30px;
-        height: 28px;
-
-        cursor: pointer;
-
-        background: url('../img/settings.png') no-repeat;
-    }
-
-    .settings:hover {
-        background-position: left bottom;
-    }
-
-    #screen {
-        width: 450px;
-        height: 320px;
-        margin: 5px auto 5px;
-
-        text-align: center;
-
-        color: #666;
-        background: #ccc;
-    }
-
-    .buttonPane {
-        margin-top: 10px;
-
-        text-align: center;
-    }
-
-    /*.tooltip{
-        background:url('../img/tooltip.png') no-repeat;
-        position:absolute;
-        width:177px;
-        height:146px;
-        right: 38px;
-        top: -140px;
-        }*/
-
-    .blueButton,
-    .greenButton {
-        font-family: 'Century Gothic';
-        font-size: 16px;
-        line-height: 32px;
-
-        display: inline-block;
-
-        width: 99px;
-        height: 38px;
-        margin: 0 4px;
-
-        text-align: center;
-        text-decoration: none;
-
-        color: #fff !important;
-        border: none;
-        background: url('../images/buttons.png') no-repeat;
-        text-shadow: 1px 1px 1px #277c9b;
-    }
-
-    .greenButton {
-        background: url('../images/buttons.png') no-repeat right top;
-        text-shadow: 1px 1px 1px #498917;
-    }
-
-    .blueButton:hover,
-    .greenButton:hover {
-        text-decoration: none !important;
-
-        background-position: left bottom;
-    }
-
-    .greenButton:hover {
-        background-position: right bottom;
-    }
-
-    .blueButton:active,
-    .greenButton:active {
-        position: relative;
-        bottom: -1px;
-    }
-
-
-
-    h3 {
-        font-family: 'Century Gothic';
-    }
-
-    div#load {
-        width: 300px;
-        margin: -30px auto 0 auto;
-        padding: 10px 0;
-
-        border: 2px solid #f0c36d;
-        -webkit-border-radius: 0 0 5px 5px;
-        -moz-border-radius: 0 0 5px 5px;
-        border-radius: 0 0 5px 5px;
-        background-color: #f9edbe;
-    }
-
-    div#load p {
-        font-family: 'Century Gothic';
-        font-size: 14px;
-
-        text-align: center;
-
-        color: #000;
-    }
-
-    p.rojo {
-        font-size: 9px;
-
-        color: #fc070b;
-    }
-</style>

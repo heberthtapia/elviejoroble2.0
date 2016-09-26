@@ -5,23 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="73c4bc01-f6ca-4825-b2bd-cb905a4b665c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modulo/empleado/validateCI.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modulo/empleado/validateUser.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modulo/empleado/editEmpleado.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin.php" afterPath="$PROJECT_DIR$/admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap.css" afterPath="$PROJECT_DIR$/css/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/theme-default.css" afterPath="$PROJECT_DIR$/css/theme-default.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/myJavaScript.js" afterPath="$PROJECT_DIR$/js/myJavaScript.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/myStyle.css" afterPath="$PROJECT_DIR$/css/myStyle.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modulo/almacen/delProducto.php" afterPath="$PROJECT_DIR$/modulo/almacen/delProducto.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modulo/almacen/editProducto.php" afterPath="$PROJECT_DIR$/modulo/almacen/editProducto.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modulo/almacen/newProducto.php" afterPath="$PROJECT_DIR$/modulo/almacen/newProducto.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modulo/almacen/producto.php" afterPath="$PROJECT_DIR$/modulo/almacen/producto.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modulo/empleado/empleado.php" afterPath="$PROJECT_DIR$/modulo/empleado/empleado.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modulo/empleado/newEmpleado.php" afterPath="$PROJECT_DIR$/modulo/empleado/newEmpleado.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modulo/empleado/save.php" afterPath="$PROJECT_DIR$/modulo/empleado/save.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploadify/jquery.uploadify-3.1.js" afterPath="$PROJECT_DIR$/uploadify/jquery.uploadify-3.1.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploadify/jquery.uploadify-3.1.min.js" afterPath="$PROJECT_DIR$/uploadify/jquery.uploadify-3.1.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modulo/empleado/update.php" afterPath="$PROJECT_DIR$/modulo/empleado/update.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploadify/uploadify.css" afterPath="$PROJECT_DIR$/uploadify/uploadify.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploadify/uploadify.php" afterPath="$PROJECT_DIR$/uploadify/uploadify.php" />
     </list>
     <ignored path="elviejoroble2.0.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,44 +37,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="newProducto.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulo/almacen/newProducto.php">
+      <file leaf-file-name="admin.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="listTabla.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/modulo/almacen/listTabla.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="16" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="validateUser.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulo/empleado/validateUser.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="39" column="68" selection-start-line="39" selection-start-column="68" selection-end-line="39" selection-end-column="68" />
+            <state relative-caret-position="226">
+              <caret line="249" column="6" selection-start-line="249" selection-start-column="6" selection-end-line="249" selection-end-column="6" />
               <folding>
-                <marker date="1474654280427" expanded="true" signature="618:663" ph="SELECT user usuario" />
+                <marker date="1474770407669" expanded="true" signature="846:948" ph="UPDATE usuar... " />
+                <marker date="1474770407669" expanded="true" signature="2656:2770" ph="INSERT INTO eventos... " />
+                <marker date="1474770407669" expanded="true" signature="3038:3071" ph="SELECT MAX(i... eventos" />
+                <marker date="1474770407669" expanded="true" signature="3331:3375" ph="UPDATE event... " />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="producto.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulo/almacen/producto.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="50" column="2" selection-start-line="50" selection-start-column="2" selection-end-line="50" selection-end-column="2" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -87,8 +55,18 @@
       <file leaf-file-name="empleado.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulo/empleado/empleado.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="49" column="2" selection-start-line="49" selection-start-column="2" selection-end-line="49" selection-end-column="2" />
+            <state relative-caret-position="226">
+              <caret line="122" column="68" selection-start-line="122" selection-start-column="68" selection-end-line="122" selection-end-column="68" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="producto.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulo/almacen/producto.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="95" column="76" selection-start-line="95" selection-start-column="76" selection-end-line="95" selection-end-column="76" />
               <folding />
             </state>
           </provider>
@@ -97,9 +75,33 @@
       <file leaf-file-name="newEmpleado.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulo/empleado/newEmpleado.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="586" column="12" selection-start-line="586" selection-start-column="8" selection-end-line="586" selection-end-column="12" />
+            <state relative-caret-position="496">
+              <caret line="220" column="217" selection-start-line="220" selection-start-column="8" selection-end-line="220" selection-end-column="217" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="editEmpleado.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modulo/empleado/editEmpleado.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3735">
+              <caret line="248" column="41" selection-start-line="248" selection-start-column="41" selection-end-line="248" selection-end-column="41" />
+              <folding>
+                <element signature="e#11845#11852#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="uploadify.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/uploadify/uploadify.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="445">
+              <caret line="49" column="49" selection-start-line="49" selection-start-column="49" selection-end-line="49" selection-end-column="49" />
+              <folding>
+                <marker date="1474747168988" expanded="true" signature="1317:1346" ph="INSERT INTO aux_img... " />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -107,24 +109,49 @@
       <file leaf-file-name="save.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulo/empleado/save.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-108">
+            <state relative-caret-position="345">
               <caret line="23" column="52" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
               <folding>
-                <marker date="1474661299656" expanded="true" signature="345:429" ph="INSERT INTO empleado... " />
-                <marker date="1474661299656" expanded="true" signature="972:1026" ph="INSERT INTO usuario... " />
-                <marker date="1474661299656" expanded="true" signature="1302:1323" ph="SELECT * FRO... aux_img" />
-                <marker date="1474661299656" expanded="true" signature="1458:1495" ph="UPDATE emple... " />
+                <marker date="1474747168892" expanded="true" signature="345:429" ph="INSERT INTO empleado... " />
+                <marker date="1474747168892" expanded="true" signature="972:1026" ph="INSERT INTO usuario... " />
+                <marker date="1474747168892" expanded="true" signature="1302:1323" ph="SELECT * FRO... aux_img" />
+                <marker date="1474747168892" expanded="true" signature="1458:1495" ph="UPDATE emple... " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="myJavaScript.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/myJavaScript.js">
+      <file leaf-file-name="myStyle.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/myStyle.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="104" column="19" selection-start-line="104" selection-start-column="19" selection-end-line="104" selection-end-column="19" />
+            <state relative-caret-position="331">
+              <caret line="164" column="13" selection-start-line="164" selection-start-column="13" selection-end-line="164" selection-end-column="13" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="editProducto.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulo/almacen/editProducto.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="20" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="update.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulo/empleado/update.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="8" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+              <folding>
+                <marker date="1474782719232" expanded="true" signature="380:574" ph="UPDATE emple... " />
+                <marker date="1474782719232" expanded="true" signature="860:956" ph="UPDATE usuar... " />
+                <marker date="1474782719232" expanded="true" signature="1186:1207" ph="SELECT * FRO... aux_img" />
+                <marker date="1474782719232" expanded="true" signature="1342:1379" ph="UPDATE emple... " />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -145,10 +172,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/css/style-vertical.css" />
-        <option value="$PROJECT_DIR$/css/myStyle.css" />
-        <option value="$PROJECT_DIR$/js/jquery.validationEngine.js" />
-        <option value="$PROJECT_DIR$/css/alert.css" />
         <option value="$PROJECT_DIR$/../sitios/plugins+ejemplos/valida-master/sample/index.html" />
         <option value="$PROJECT_DIR$/js/valida.2.1.6.js" />
         <option value="$PROJECT_DIR$/index1.php" />
@@ -182,20 +205,24 @@
         <option value="$PROJECT_DIR$/uploadify/jquery.uploadify-3.1.min.js" />
         <option value="$PROJECT_DIR$/modulo/empleado/newsEmp.php" />
         <option value="$PROJECT_DIR$/uploadify/uploadify.php" />
-        <option value="$PROJECT_DIR$/uploadify/uploadify.css" />
-        <option value="$PROJECT_DIR$/modulo/almacen/editProducto.php" />
         <option value="$PROJECT_DIR$/modulo/empleado/validateCI.php" />
         <option value="$PROJECT_DIR$/css/theme-default.css" />
         <option value="$PROJECT_DIR$/css/bootstrap.css" />
         <option value="$PROJECT_DIR$/modulo/empleado/validateUser.php" />
-        <option value="$PROJECT_DIR$/admin.php" />
-        <option value="$PROJECT_DIR$/modulo/almacen/newProducto.php" />
-        <option value="$PROJECT_DIR$/modulo/empleado/newEmpleado.php" />
         <option value="$PROJECT_DIR$/modulo/empleado/save.php" />
         <option value="$PROJECT_DIR$/modulo/empleado/listaTabla.php" />
         <option value="$PROJECT_DIR$/js/myJavaScript.js" />
+        <option value="$PROJECT_DIR$/uploadify/uploadify.css" />
         <option value="$PROJECT_DIR$/modulo/almacen/producto.php" />
+        <option value="$PROJECT_DIR$/modulo/almacen/newProducto.php" />
+        <option value="$PROJECT_DIR$/modulo/almacen/delProducto.php" />
+        <option value="$PROJECT_DIR$/modulo/almacen/editProducto.php" />
+        <option value="$PROJECT_DIR$/admin.php" />
+        <option value="$PROJECT_DIR$/modulo/empleado/newEmpleado.php" />
         <option value="$PROJECT_DIR$/modulo/empleado/empleado.php" />
+        <option value="$PROJECT_DIR$/modulo/empleado/update.php" />
+        <option value="$PROJECT_DIR$/css/myStyle.css" />
+        <option value="$PROJECT_DIR$/modulo/empleado/editEmpleado.php" />
       </list>
     </option>
   </component>
@@ -212,8 +239,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="width" value="1616" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -241,7 +268,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -362,30 +388,13 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="elviejoroble2.0" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="elviejoroble2.0" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="css" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -488,23 +497,25 @@
       <workItem from="1473982929089" duration="3392000" />
       <workItem from="1474383685316" duration="29081000" />
       <workItem from="1474572618501" duration="45446000" />
+      <workItem from="1474752076046" duration="5999000" />
+      <workItem from="1474762394021" duration="19014000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="316516000" />
+    <option name="totallyTimeSpent" value="341529000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21522693" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22043702" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32839838" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="CSS-X-Fire" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -513,8 +524,8 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32839838" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="CSS-X-Fire" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -540,42 +551,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../sitios/plugins+ejemplos/modal/modal_eliminar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../sitios/plugins+ejemplos/modal/eliminar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulo/almacen/update.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/browse.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/bootstrap-datetimepicker_.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="6" column="21" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/es.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -601,9 +576,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
           <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="46" selection-end-column="66" />
-          <folding>
-            <marker date="1466135548000" expanded="true" signature="385:434" ph="SELECT COUNT... cliente" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -618,15 +590,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="687">
           <caret line="517" column="59" selection-start-line="517" selection-start-column="53" selection-end-line="517" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/myStyle.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="19" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -634,9 +597,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="780">
           <caret line="52" column="35" selection-start-line="52" selection-start-column="35" selection-end-line="52" selection-end-column="35" />
-          <folding>
-            <marker date="1474574617288" expanded="true" signature="1116:1145" ph="INSERT INTO aux_img... " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -644,45 +605,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="611" column="20" selection-start-line="611" selection-start-column="20" selection-end-line="611" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../sitios/plugins+ejemplos/webcam jquery/webcam.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../sitios/plugins+ejemplos/webcam jquery/webcam.js" />
     <entry file="file://$PROJECT_DIR$/webcam/webcam.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
           <caret line="36" column="11" selection-start-line="36" selection-start-column="9" selection-end-line="36" selection-end-column="11" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../sitios/plugins+ejemplos/webcam jquery/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="83" column="13" selection-start-line="81" selection-start-column="4" selection-end-line="83" selection-end-column="13" />
-          <folding>
-            <marker date="1474578547373" expanded="true" signature="3580:3621" ph="select * fro... fotos" />
-            <marker date="1474578547373" expanded="true" signature="3801:3995" ph="..." />
-            <marker date="1474578547373" expanded="true" signature="3873:3981" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../sitios/plugins+ejemplos/webcam jquery/index.php" />
     <entry file="file://$PROJECT_DIR$/../elviejoroble/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2467">
           <caret line="516" column="1" selection-start-line="361" selection-start-column="0" selection-end-line="516" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -690,73 +628,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1472656267679" expanded="true" signature="185:227" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../sitios/plugins+ejemplos/webcam jquery/test.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1329193220000" expanded="true" signature="107:150" ph="insert into fotos... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../sitios/plugins+ejemplos/webcam jquery/test.php" />
     <entry file="file://$PROJECT_DIR$/../elviejoroble/admin.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="277">
           <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="62" />
-          <folding>
-            <marker date="1474596642537" expanded="true" signature="720:822" ph="UPDATE usuar... " />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../sitios/plugins+ejemplos/uploadify/jquery.uploadify.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="985" selection-end-column="6" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../sitios/plugins+ejemplos/uploadify/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="79" selection-start-line="18" selection-start-column="8" selection-end-line="19" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../sitios/plugins+ejemplos/uploadify/jquery.uploadify.js" />
+    <entry file="file://$PROJECT_DIR$/../sitios/plugins+ejemplos/uploadify/index.php" />
     <entry file="file://$PROJECT_DIR$/uploadify/jquery.uploadify-3.1.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="100" selection-start-line="6" selection-start-column="100" selection-end-line="6" selection-end-column="100" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uploadify/uploadify.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="49" column="49" selection-start-line="49" selection-start-column="49" selection-end-line="49" selection-end-column="49" />
-          <folding>
-            <marker date="1474602685704" expanded="true" signature="1317:1346" ph="INSERT INTO aux_img... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uploadify/uploadify.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="73" column="33" selection-start-line="73" selection-start-column="33" selection-end-line="73" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -764,10 +652,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1466135546000" expanded="true" signature="143:174" ph="SELECT max(i... aux_img" />
-            <marker date="1466135546000" expanded="true" signature="257:311" ph="SELECT image... aux_img" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -775,9 +660,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3034">
           <caret line="337" column="47" selection-start-line="337" selection-start-column="41" selection-end-line="337" selection-end-column="47" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -785,17 +667,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="63">
           <caret line="31" column="7" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
-          <folding>
-            <element signature="n#style#0;n#div#36;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulo/almacen/editProducto.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="67" column="75" selection-start-line="67" selection-start-column="75" selection-end-line="67" selection-end-column="75" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -803,9 +674,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="40" column="63" selection-start-line="40" selection-start-column="63" selection-end-line="40" selection-end-column="63" />
-          <folding>
-            <marker date="1474644949768" expanded="true" signature="609:669" ph="SELECT id_em... empleado" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -813,9 +682,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
           <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
-          <folding>
-            <marker date="1472750239867" expanded="true" signature="615:681" ph="SELECT id_in... inventario" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -823,7 +690,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
           <caret line="2913" column="26" selection-start-line="2913" selection-start-column="26" selection-end-line="2913" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -831,7 +697,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="49" column="28" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -839,9 +704,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1466135548000" expanded="true" signature="355:413" ph="SELECT user usuario" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -849,30 +711,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="790">
           <caret line="298" column="36" selection-start-line="298" selection-start-column="36" selection-end-line="298" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="236" column="22" selection-start-line="236" selection-start-column="22" selection-end-line="236" selection-end-column="22" />
-          <folding>
-            <marker date="1474656950320" expanded="true" signature="846:948" ph="UPDATE usuar... " />
-            <marker date="1474656950320" expanded="true" signature="2656:2770" ph="INSERT INTO eventos... " />
-            <marker date="1474656950320" expanded="true" signature="3038:3071" ph="SELECT MAX(i... eventos" />
-            <marker date="1474656950320" expanded="true" signature="3331:3375" ph="UPDATE event... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulo/empleado/validateUser.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="39" column="68" selection-start-line="39" selection-start-column="68" selection-end-line="39" selection-end-column="68" />
-          <folding>
-            <marker date="1474654280427" expanded="true" signature="618:663" ph="SELECT user usuario" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -880,23 +718,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../GitHub/jQuery-Form-Validator/form-validator/security.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="9086" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../GitHub/jQuery-Form-Validator/form-validator/security.js" />
     <entry file="file://$PROJECT_DIR$/js/security.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="8" column="2313" selection-start-line="8" selection-start-column="2313" selection-end-line="8" selection-end-column="2313" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -904,29 +733,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1472750239866" expanded="true" signature="387:492" ph="INSERT INTO inventario... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulo/empleado/save.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-108">
-          <caret line="23" column="52" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
-          <folding>
-            <marker date="1474661299656" expanded="true" signature="345:429" ph="INSERT INTO empleado... " />
-            <marker date="1474661299656" expanded="true" signature="972:1026" ph="INSERT INTO usuario... " />
-            <marker date="1474661299656" expanded="true" signature="1302:1323" ph="SELECT * FRO... aux_img" />
-            <marker date="1474661299656" expanded="true" signature="1458:1495" ph="UPDATE emple... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulo/almacen/newProducto.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
           <folding />
         </state>
       </provider>
@@ -935,55 +741,174 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="574">
           <caret line="82" column="42" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modulo/almacen/producto.php">
+    <entry file="file://$PROJECT_DIR$/modulo/empleado/listaTabla.php" />
+    <entry file="file://$PROJECT_DIR$/modulo/almacen/listTabla.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="50" column="2" selection-start-line="50" selection-start-column="2" selection-end-line="50" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulo/empleado/empleado.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="49" column="2" selection-start-line="49" selection-start-column="2" selection-end-line="49" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulo/empleado/newEmpleado.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="586" column="12" selection-start-line="586" selection-start-column="8" selection-end-line="586" selection-end-column="12" />
+        <state relative-caret-position="480">
+          <caret line="32" column="46" selection-start-line="32" selection-start-column="46" selection-end-line="32" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/myJavaScript.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="104" column="19" selection-start-line="104" selection-start-column="19" selection-end-line="104" selection-end-column="19" />
+        <state relative-caret-position="2175">
+          <caret line="145" column="19" selection-start-line="139" selection-start-column="16" selection-end-line="145" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modulo/empleado/listaTabla.php">
+    <entry file="file://$PROJECT_DIR$/uploadify/uploadify.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="44" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
+        <state relative-caret-position="1470">
+          <caret line="98" column="14" selection-start-line="98" selection-start-column="14" selection-end-line="98" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modulo/almacen/listTabla.php">
+    <entry file="file://$PROJECT_DIR$/modulo/almacen/newProducto_.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1784">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulo/almacen/newProducto.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="75" column="29" selection-start-line="68" selection-start-column="20" selection-end-line="75" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulo/almacen/delProducto.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="47" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulo/empleado/validateUser.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="39" column="68" selection-start-line="39" selection-start-column="68" selection-end-line="39" selection-end-column="68" />
+          <folding>
+            <marker date="1474747168913" expanded="true" signature="618:663" ph="SELECT user usuario" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="249" column="6" selection-start-line="249" selection-start-column="6" selection-end-line="249" selection-end-column="6" />
+          <folding>
+            <marker date="1474770407669" expanded="true" signature="846:948" ph="UPDATE usuar... " />
+            <marker date="1474770407669" expanded="true" signature="2656:2770" ph="INSERT INTO eventos... " />
+            <marker date="1474770407669" expanded="true" signature="3038:3071" ph="SELECT MAX(i... eventos" />
+            <marker date="1474770407669" expanded="true" signature="3331:3375" ph="UPDATE event... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulo/almacen/update.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="16" selection-end-column="23" />
+          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+          <folding>
+            <marker date="1472758114000" expanded="true" signature="369:424" ph="UPDATE inven... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulo/almacen/producto.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="95" column="76" selection-start-line="95" selection-start-column="76" selection-end-line="95" selection-end-column="76" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulo/empleado/save.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="52" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
+          <folding>
+            <marker date="1474747168892" expanded="true" signature="345:429" ph="INSERT INTO empleado... " />
+            <marker date="1474747168892" expanded="true" signature="972:1026" ph="INSERT INTO usuario... " />
+            <marker date="1474747168892" expanded="true" signature="1302:1323" ph="SELECT * FRO... aux_img" />
+            <marker date="1474747168892" expanded="true" signature="1458:1495" ph="UPDATE emple... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulo/almacen/editProducto.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="20" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulo/empleado/empleado.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="122" column="68" selection-start-line="122" selection-start-column="68" selection-end-line="122" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/myStyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="164" column="13" selection-start-line="164" selection-start-column="13" selection-end-line="164" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uploadify/uploadify.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="445">
+          <caret line="49" column="49" selection-start-line="49" selection-start-column="49" selection-end-line="49" selection-end-column="49" />
+          <folding>
+            <marker date="1474747168988" expanded="true" signature="1317:1346" ph="INSERT INTO aux_img... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulo/empleado/update.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="8" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+          <folding>
+            <marker date="1474782719232" expanded="true" signature="380:574" ph="UPDATE emple... " />
+            <marker date="1474782719232" expanded="true" signature="860:956" ph="UPDATE usuar... " />
+            <marker date="1474782719232" expanded="true" signature="1186:1207" ph="SELECT * FRO... aux_img" />
+            <marker date="1474782719232" expanded="true" signature="1342:1379" ph="UPDATE emple... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulo/empleado/newEmpleado.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="220" column="217" selection-start-line="220" selection-start-column="8" selection-end-line="220" selection-end-column="217" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulo/empleado/editEmpleado.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3735">
+          <caret line="248" column="41" selection-start-line="248" selection-start-column="41" selection-end-line="248" selection-end-column="41" />
+          <folding>
+            <element signature="e#11845#11852#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

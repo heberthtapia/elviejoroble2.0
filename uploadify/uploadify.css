@@ -91,12 +91,13 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 	width: 1px;
 }
 /***********/
-#some_file_queue {
+#some_file_queue,
+#some_file_queueU {
 	float:left;
     background-color: #FFF;
     border-radius: 3px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-    height: 55px;
+    height: 66px;
     margin-bottom: 10px;
     overflow: auto;
     padding: 5px 10px;
@@ -108,7 +109,7 @@ div#buttonFile{
 	float: left;
     margin: 0 0 0 15px;
 	}
-div#buttonFile #upload{
+#upload, #uploadU{
 	margin:5px 0 0 4px;
 	}
 .uploadHiden{

@@ -1,11 +1,11 @@
 <?php
-class cnFunction{		
-	public function toSelect($op){		
-        switch( $op ){         
+class cnFunction{
+	public function toSelect($op){
+        switch( $op ){
 			case "adm": $select = 'Administrador';
-            break;      
+            break;
       		case "alm": $select = 'Almacen';
-            break;      
+            break;
          	case "con": $select = 'Contador';
             break;
          	case "pre": $select = 'Preventista';
@@ -15,7 +15,7 @@ class cnFunction{
 			case "cbb": $select = 'Cochabamba';
             break;
 			case "sz": $select = 'Santa Cruz';
-            break;      
+            break;
 			case "bn": $select = 'Beni';
             break;
 			case "tr": $select = 'Tarija';
@@ -27,11 +27,11 @@ class cnFunction{
 			case "pd": $select = 'Pando';
             break;
 			case "chu": $select = 'Chuquisaca';
-            break;			
+            break;
         }
-   		return $select; 
-    } 
-	
+   		return $select;
+    }
+
 	public function ToMes(){
 		date_default_timezone_set("America/La_Paz" ) ;
 		return date( 'm' );
@@ -44,42 +44,42 @@ class cnFunction{
 		date_default_timezone_set("America/La_Paz" ) ;
 		return date( 'Y-m-d' );
 		}
-	public function Time(){		
-		$hora = time();		
+	public function Time(){
+		$hora = time();
 		$hora = getdate(time());
 		$h = $hora["hours"];
 		$m = $hora["minutes"];
-		
+
 		if($h < 10)
 			$h = "0".$h;
 		if($m < 10)
 			$m = "0".$m;
-		
+
 		$hora = ($h . ":" . $m . ":" . $hora["seconds"] );
 		return ($hora);
 		}
-	public function TimeC(){		
-		$hora = time();		
+	public function TimeC(){
+		$hora = time();
 		$hora = getdate(time());
 		$h = $hora["hours"];
 		$m = $hora["minutes"];
 		$s = $hora["seconds"];
-		
+
 		if($h < 10)
 			$h = "0".$h;
 		if($m < 10)
 			$m = "0".$m;
-		
+
 		$hora = ($h . ":" . $m . ":" . $s );
 		return ($hora);
-		} 	
+		}
 	public function ToDateTime(){
 		date_default_timezone_set("America/La_Paz" ) ;
 		return date( 'Y-m-d H:i', time());
 		}
 	public function ToFormatToDay(){
-		$today = date( 'w' ); 
-		switch( $today ){         
+		$today = date( 'w' );
+		switch( $today ){
 			case 1: $dia = 'Lunes';
             break;
          	case 2: $dia = 'Martes';
@@ -94,17 +94,17 @@ class cnFunction{
             break;
         	case 7: $dia = 'Domingo';
             break;
-       	} 
+       	}
 		return $dia;
 	}
-	
+
 	public function ToMonth($month){
-		//$month = date( 'm' );	
-        switch( $month ){         
+		//$month = date( 'm' );
+        switch( $month ){
 			case 1: $mes = 'Enero';
-            break;      
+            break;
       		case 2: $mes = 'Febrero';
-            break;      
+            break;
          	case 3: $mes = 'Marzo';
             break;
          	case 4: $mes = 'Abril';
@@ -126,20 +126,20 @@ class cnFunction{
          	case 12: $mes = 'Diciembre';
             break;
         }
-   		return $mes;  
-    } 
-	
+   		return $mes;
+    }
+
 	public function ToYear(){
 		return date( 'Y' );
 	}
-	
+
 	public function ActiveMonth(){
-		$month = date( 'm' );	
-        switch( $month ){         
+		$month = date( 'm' );
+        switch( $month ){
 			case 1: $mes = 'Diciembre';
-            break;      
+            break;
       		case 2: $mes = 'Enero';
-            break;      
+            break;
          	case 3: $mes = 'Febrero';
             break;
          	case 4: $mes = 'Marzo';
@@ -161,9 +161,9 @@ class cnFunction{
          	case 12: $mes = 'Noviembre';
             break;
         }
-   		return $mes;  
+   		return $mes;
     }
-	
+
 	public function validPage(){
 		session_start();
 		if( !session_is_registered( $_SESSION['user'] )  ){
@@ -171,44 +171,44 @@ class cnFunction{
 			die();
 		}
 	}
-	
+
 
 	public function IP(){
-		if ($_SERVER){ 
-  			if ($_SERVER["HTTP_X_FORWARDED_FOR"]) 
-    			$realip = $_SERVER["HTTP_X_FORWARDED_FOR"]; 
-  			elseif ($_SERVER["HTTP_CLIENT_IP"]) 
-    				$realip = $_SERVER["HTTP_CLIENT_IP"]; 
-  				else 
-    				$realip = $_SERVER["REMOTE_ADDR"]; 
-		} 
-		else{ 
-  			if (getenv ("HTTP_X_FORWARDED_FOR")) 
-    			$realip = getenv ("HTTP_X_FORWARDED_FOR"); 
-  			elseif (getenv ("HTTP_CLIENT_IP")) 
-    				$realip = getenv ("HTTP_CLIENT_IP"); 
-  				else 
-    				$realip = getenv ("REMOTE_ADDR"); 
+		if ($_SERVER){
+  			if ($_SERVER["HTTP_X_FORWARDED_FOR"])
+    			$realip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+  			elseif ($_SERVER["HTTP_CLIENT_IP"])
+    				$realip = $_SERVER["HTTP_CLIENT_IP"];
+  				else
+    				$realip = $_SERVER["REMOTE_ADDR"];
+		}
+		else{
+  			if (getenv ("HTTP_X_FORWARDED_FOR"))
+    			$realip = getenv ("HTTP_X_FORWARDED_FOR");
+  			elseif (getenv ("HTTP_CLIENT_IP"))
+    				$realip = getenv ("HTTP_CLIENT_IP");
+  				else
+    				$realip = getenv ("REMOTE_ADDR");
 		}
 		return $realip;
 	}
-	
-	public function video($video, $width){		
-		
+
+	public function video($video, $width){
+
 		$height = round($width*0.8235);
-	
+
 		$fv	= htmlentities("<iframe width='$width' height='$height' src='video' frameborder='0' allowfullscreen></iframe>");
-		
+
 		$dv		= explode('/',$video);
-		
+
 		$vc		= 'http://www.youtube.com/embed/'.$dv[count($dv)-1];
-		 
+
 		$vtr	= strtok ($fv,' ');
-		
+
 		$cad='';
-		
+
 		while($vtr!=FALSE){
-			 
+
 			$w=explode('=',$vtr);
 			if($w[0]=='src'){
 						 $cad.=' '.'src="'.$vc.'"';
@@ -216,12 +216,12 @@ class cnFunction{
 			else{
 				$cad.=' '.$vtr;}
 			  $vtr=strtok (' ');
-			 }	
-			 
-		return html_entity_decode($cad);	 
-			 	
+			 }
+
+		return html_entity_decode($cad);
+
 		}
-	
+
 	public function ceros($numero, $ceros){
 		return sprintf("%0".$ceros."s", $numero );
 	}

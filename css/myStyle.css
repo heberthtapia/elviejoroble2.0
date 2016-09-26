@@ -1,52 +1,184 @@
 
 /* Mis estilos*/
 
-#titleEmp{
-	margin: 0;
-	color: #0e1a35;
-}
-.avisos{
-	color: #0e1a35;
-	font-weight: 500;
-}
+#titleEmp {
+    margin: 0;
 
+    color: #0e1a35;
+}
+.avisos {
+    font-weight: 500;
 
+    color: #0e1a35;
+}
 
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-
-	.modulo-slider h4 {
-		font-size: 14px;
-		font-size: 1.4rem;
-	}
-	.modulo-slider p {
-		font-size: 10px;
-		font-size: 1rem;
-	}
+    .modulo-slider h4 {
+        font-size: 14px;
+        font-size: 1.4rem;
+    }
+    .modulo-slider p {
+        font-size: 10px;
+        font-size: 1rem;
+    }
 }
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-	.modulo-slider h4 {
-		font-size: 14px;
-		font-size: 1.4rem;
-	}
-	.modulo-slider p {
-		font-size: 10px;
-		font-size: 1rem;
-	}
+    .modulo-slider h4 {
+        font-size: 14px;
+        font-size: 1.4rem;
+    }
+    .modulo-slider p {
+        font-size: 10px;
+        font-size: 1rem;
+    }
 }
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
-	.modulo-slider h4 {
-		font-size: 18px;
-		font-size: 1.8rem;
-	}
-	.modulo-slider p {
-		font-size: 12px;
-		font-size: 1.2rem;
-	}
+    .modulo-slider h4 {
+        font-size: 18px;
+        font-size: 1.8rem;
+    }
+    .modulo-slider p {
+        font-size: 12px;
+        font-size: 1.2rem;
+    }
+}
 
+/*----------------------
+Camera slide up
+-----------------------*/
+
+#camera {
+    position: relative;
+    z-index: 10000;
+
+    display: none;
+
+    width: 465px;
+    height: 330px;
+    margin: 0 auto 0 auto;
+
+    border: 1px solid #f0f0f0;
+    -webkit-border-radius: 4px 4px 0 0;
+       -moz-border-radius: 4px 4px 0 0;
+            border-radius: 4px 4px 0 0;
+    background: url('../images/cam_bg.jpg') repeat-y;
+    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, .6);
+       -moz-box-shadow: 0 0 4px rgba(0, 0, 0, .6);
+            box-shadow: 0 0 4px rgba(0, 0, 0, .6);
+}
+
+.camTop {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 66px;
+
+    cursor: pointer;
+
+    background: url('../img/cam.png') no-repeat center center;
+}
+
+.settings {
+    position: absolute;
+    top: 448px;
+    right: 37px;
+
+    width: 30px;
+    height: 28px;
+
+    cursor: pointer;
+
+    background: url('../img/settings.png') no-repeat;
+}
+
+.settings:hover {
+    background-position: left bottom;
+}
+
+#screen {
+    width: 450px;
+    height: 320px;
+    margin: 5px auto 5px;
+
+    text-align: center;
+
+    color: #666;
+    background: #ccc;
+}
+
+.buttonPane {
+    margin-top: 10px;
+
+    text-align: center;
+}
+
+.blueButton, .greenButton {
+    font-family: 'Century Gothic';
+    font-size: 16px;
+    line-height: 32px;
+
+    display: inline-block;
+
+    width: 99px;
+    height: 38px;
+    margin: 0 4px;
+
+    text-align: center;
+    text-decoration: none;
+
+    color: #fff !important;
+    border: none;
+    background: url('../images/buttons.png') no-repeat;
+    text-shadow: 1px 1px 1px #277c9b;
+}
+
+.greenButton {
+    background: url('../images/buttons.png') no-repeat right top;
+    text-shadow: 1px 1px 1px #498917;
+}
+
+.blueButton:hover, .greenButton:hover {
+    text-decoration: none !important;
+
+    background-position: left bottom;
+}
+
+.greenButton:hover {
+    background-position: right bottom;
+}
+
+.blueButton:active, .greenButton:active {
+    position: relative;
+    bottom: -1px;
+}
+
+/***  Estilos para el modal  ****/
+
+#mapa, #mapaU {
+    width: 345px;
+    height: 220px;
+
+    border: 1px #ccc solid;
+}
+textarea {
+    height: 4em;
+}
+
+div#foto img, div#fotoU img {
+    padding: 3px;
+
+    border: 1px solid #ccc;
+}
+.fecha {
+    float: right;
+
+    margin-right: 15px;
 }

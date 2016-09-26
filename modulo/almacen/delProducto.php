@@ -13,8 +13,14 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Eliminar</button>
+                    <button type="button" id="close" class="btn btn-danger" data-dismiss="modal">
+                        <i class="fa fa-close" aria-hidden="true"></i>
+                        <span>Cancelar</span>
+                    </button>
+                    <button type="submit" id="save" class="btn btn-success">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        <span>Eliminar</span>
+                    </button>
                 </div>
             </div>
         </div>

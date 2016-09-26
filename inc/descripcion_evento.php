@@ -18,7 +18,7 @@
 **********************************************************************
 **********************************************************************
 **/
-    
+
     //incluimos nuestro archivo config
     //include 'config.php';
 
@@ -45,7 +45,7 @@
     //$row = $bd->fetch_assoc();
     $row = $bd->FetchRow();
 
-    // titulo 
+    // titulo
     $titulo=$row['title'];
 
     // cuerpo
@@ -58,7 +58,7 @@
     $final=$row['final_normal'];
 
 // Eliminar evento
-if (isset($_POST['eliminar_evento'])) 
+if (isset($_POST['eliminar_evento']))
 {
     $id  = $op->evaluar($_GET['id']);
     $sql = "DELETE FROM eventos WHERE id = $id";

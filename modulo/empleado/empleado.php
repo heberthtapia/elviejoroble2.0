@@ -47,6 +47,7 @@ $op = new cnFunction();
 </script>
 <?PHP
 include 'newEmpleado.php';
+include 'editEmpleado.php';
 ?>
 <div class="row" id="listTabla">
     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -75,9 +76,10 @@ include 'newEmpleado.php';
             </thead>
             <tbody>
             <?PHP
-            $sql	 = "SELECT * ";
-            $sql	.= "FROM empleado ";
-            $sql	.= "ORDER BY (dateReg) DESC ";
+            $sql = "SELECT * ";
+            $sql.= "FROM empleado AS e, usuario AS u ";
+            $sql.= "WHERE e.id_empleado = u.id_empleado ";
+            $sql.= "ORDER BY (e.dateReg) DESC ";
 
             $cont = 1;
 
@@ -117,8 +119,28 @@ include 'newEmpleado.php';
                                     <i class='fa fa-external-link'></i> Vista Previa
                                     </button>
 
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataUpdate" data-detalle="<?=$row['detalle']?>" data-idInv="<?=$row['id_inventario']?>" data-cant="<?=$row['cantidad']?>" data-vol="<?=$row['volumen']?>" data-precioCF="<?=$row['precioCF']?>" data-precioSF="<?=$row['precioSF']?>">
-                                        <i class='fa fa-pencil-square-o '></i> Modificar
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataUpdate"
+                                            data-foto="<?=$row['foto']?>"
+                                            data-name="<?=$row['nombre']?>"
+                                            data-paterno="<?=$row['apP']?>"
+                                            data-materno="<?=$row['apM']?>"
+                                            data-ci="<?=$row['id_empleado']?>"
+                                            data-dep="<?=$row['depa']?>"
+                                            data-dateNac="<?=$row['dateNac']?>"
+                                            data-fono="<?=$row['phone']?>"
+                                            data-celular="<?=$row['celular']?>"
+                                            data-emailC="<?=$row['email']?>"
+                                            data-cargo="<?=$row['cargo']?>"
+                                            data-codUser="<?=$row['user']?>"
+                                            data-password="<?=$row['pass']?>"
+                                            data-addresC="<?=$row['direccion']?>"
+                                            data-Nro="<?=$row['numero']?>"
+                                            data-cx="<?=$row['coorX']?>"
+                                            data-cy="<?=$row['coorY']?>"
+                                            data-obser="<?=$row['obser']?>"
+                                    >
+                                        <i class='fa fa-pencil-square-o '></i>
+                                        <span>Modificar</span>
                                     </button>
                         </div>
                         <div style="width: 188px; margin-top: 5px">

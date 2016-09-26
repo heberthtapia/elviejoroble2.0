@@ -66,8 +66,14 @@ $hora = $op->Time();
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-					<button type="submit" class="btn btn-success">Agregar Producto</button>
+					<button type="button" id="close" class="btn btn-danger" data-dismiss="modal">
+						<i class="fa fa-close" aria-hidden="true"></i>
+						<span>Cancelar</span>
+					</button>
+					<button type="submit" id="save" class="btn btn-success">
+						<i class="fa fa-check" aria-hidden="true"></i>
+						<span>Agregar Producto</span>
+					</button>
 				</div>
 			</div>
 		</div>

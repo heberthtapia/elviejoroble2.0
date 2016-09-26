@@ -234,15 +234,27 @@ if (isset($_POST['from']))
             text-transform: uppercase;
         }
         input#codUser,
-        input#password{
+        input#codUserU,
+        input#password,
+        input#passwordU,
+        input#email,
+        input#emailU{
             text-transform: none;
         }
         .form-error{
             font-size: 9px;
         }
+        #tablaList tbody tr td{
+            text-transform: capitalize;
+        }
+        #max-length-element,
+        #maxText{
+            font-size: 11px;
+        }
     </style>
 </head>
 <body>
+
 <div class="container-fluid display-table">
     <div class="row display-table-row">
         <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
