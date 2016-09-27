@@ -78,40 +78,6 @@ function generaPass(id){
 /**
  *  GUARDA FORMULARIO
  */
-function saveFormNew(idForm, p){
-
-    var dato = JSON.stringify( $('#'+idForm).serializeObject() );
-
-    $.ajax({
-        url: "modulo/"+p,
-        type: 'post',
-        dataType: 'json',
-        async:false,
-        data:{res:dato},
-        success: function(data){
-            if(data.tabla === 'producto') {
-                $('#datos_ajax_register').html('<div class="alert alert-success" role="alert"><strong>Guardado Correctamente!!!</strong></div><br>').fadeIn(4000, function () {
-                    $('#datos_ajax_register').fadeOut(2000, function () {
-                        $('#dataRegister').modal('hide').delay(7000);
-                        despliega('modulo/almacen/listTabla.php', 'listTabla');
-                    });
-                });
-            }
-            if(data.tabla === 'empleado') {
-                $('#datos_ajax_register').html('<div class="alert alert-success" role="alert"><strong>Guardado Correctamente!!!</strong></div><br>').fadeIn(4000, function () {
-                    $('#datos_ajax_register').fadeOut(2000, function () {
-                        $('#dataRegister').modal('hide').delay(7000);
-                        despliega('modulo/empleado/listTabla.php', 'listTabla');
-                    });
-                });
-            }
-        },
-        error: function(data){
-            alert('Error al guardar el formulario');
-        }
-    });
-}
-
 function saveForm(idForm, p){
 
     var dato = JSON.stringify( $('#'+idForm).serializeObject() );
@@ -131,7 +97,6 @@ function saveForm(idForm, p){
                 $('#datos_ajax').html('<div class="alert alert-success" role="alert"><strong>Guardado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
                     $('#datos_ajax').fadeOut(2000,function () {
                         $('#dataRegister').modal('hide').delay(7000);
-                        $('#dataUpdate').modal('hide').delay(7000);
                         despliega('modulo/empleado/listTabla.php','listTabla');
                     });
                 });
@@ -141,7 +106,6 @@ function saveForm(idForm, p){
                 $('#datos_ajax').html('<div class="alert alert-success" role="alert"><strong>Guardado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
                     $('#datos_ajax').fadeOut(2000,function () {
                         $('#dataRegister').modal('hide').delay(7000);
-                        $('#dataUpdate').modal('hide').delay(7000);
                         despliega('modulo/almacen/listTabla.php','listTabla');
                     });
                 });
@@ -178,7 +142,41 @@ function saveForm(idForm, p){
             }
         },
         error: function(data){
-            alert('Error al guardar el formulario');
+            alert('Error al guardar datos');
+        }
+    });
+}
+
+function updateForm(idForm, p){
+
+    var dato = JSON.stringify( $('#'+idForm).serializeObject() );
+
+    $.ajax({
+        url: "modulo/"+p,
+        type: 'post',
+        dataType: 'json',
+        async:false,
+        data:{res:dato},
+        success: function(data){
+            if(data.tabla === 'empleado'){
+                $('#datos_ajax_update').html('<div class="alert alert-success" role="alert"><strong>Modificado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
+                    $('#datos_ajax_update').fadeOut(2000,function () {
+                        $('#dataUpdate').modal('hide').delay(7000);
+                        despliega('modulo/empleado/listTabla.php','listTabla');
+                    });
+                });
+            }
+            if(data.tabla === 'inventario'){
+                $('#datos_ajax_update').html('<div class="alert alert-success" role="alert"><strong>Modificado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
+                    $('#datos_ajax_update').fadeOut(2000,function () {
+                        $('#dataUpdate').modal('hide').delay(7000);
+                        despliega('modulo/almacen/listTabla.php','listTabla');
+                    });
+                });
+            }
+        },
+        error: function(data){
+            alert('Error al modificar datos');
         }
     });
 }

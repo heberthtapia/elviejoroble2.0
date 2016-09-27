@@ -66,6 +66,7 @@ var id_empleado;
         modal.find('.modal-body #cxU').val(coorX);
         modal.find('.modal-body #cyU').val(coorY);
         modal.find('.modal-body #obserU').val(obser);
+
         if(foto !== ''){
             modal.find('.modal-body #fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/photos/'+foto+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
         }else {
@@ -146,12 +147,12 @@ var id_empleado;
         deleteMarkers(marcadores_bd);
         marcador.setMap(mapa);
     });
-    listar();
+    listarU();
   }
 
     //FUNCIONES PARA EL GOOGLE MAPS
 
-    function deleteMarkers(lista){
+    function deleteMarkersU(lista){
         for(i in lista){
             lista[i].setMap(null);
         }
@@ -193,7 +194,7 @@ var id_empleado;
                 draggable: false // NO PERMITIR EL ARRASTRE DEL MARCADOR
             });
             markers.push(marcador);
-            deleteMarkers(markers);
+            deleteMarkersU(markers);
             marcador.setMap(mapa);
             //marker.setMap(mapa);
 
@@ -206,7 +207,7 @@ var id_empleado;
 
     //FUERA DE READY DE JQUERY
   //FUNCION PARA RECUPERAR PUNTOS DE LA BD
-  function listar(){
+  function listarU(){
     //ANTES DE LISTAR MARCADORES
     //SE DEBEN QUITAR LOS ANTERIORES DEL MAPA
     deleteMarkers(markers);
@@ -357,7 +358,7 @@ var id_empleado;
 
 </script>
 
-<form id="formUpdate" action="javascript:saveForm('formUpdate','empleado/update.php')" class="" autocomplete="off" >
+<form id="formUpdate" action="javascript:updateForm('formUpdate','empleado/update.php')" class="" autocomplete="off" >
     <div class="modal fade bs-example-modal-lg" id="dataUpdate" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -368,7 +369,7 @@ var id_empleado;
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <div id="datos_ajax"></div>
+                            <div id="datos_ajax_update"></div>
                         </div>
                     </div>
                     <div class="row">
@@ -424,9 +425,7 @@ var id_empleado;
                             </div>
                         </div>
                         <div class="col-md-3" align="center">
-                            <div id="fotoU" class="form-group">
-                                <img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/photos/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
-                            </div>
+                            <div id="fotoU" class="form-group"></div>
                         </div>
                     </div>
                     <div class="row">

@@ -20,9 +20,9 @@
 	//print_r($data);
 
 	/* ACTUALIZACION DE EMPLEADO */
-	$strQuery = "UPDATE empleado SET nombre = '".$data->nameU."', apP = '".$data->paternoU."', apM = '".$data->maternoU."', dateNac = '".$data->dateNacU."', phone = '".$data->fonoU."', celular = '".$data->celularU."', ";
+	$strQuery = "UPDATE empleado SET nombre = '".$data->nameU."', apP = '".$data->paternoU."', apM = '".$data->maternoU."', dateNac = '".$data->dateNacU."', phone = '".$data->fonoU."', celular = '".$data->celularU."', depa = '".$data->depU."', ";
 	$strQuery.= "direccion = '".$data->addresU."', numero = '".$data->NroU."', obser = '".$data->obserU."', ";
-	$strQuery.= "email  = '".$data->emailU."', coorX  = '".$data->cxU."', coorY  = '".$data->cyU."' ";
+	$strQuery.= "email  = '".$data->emailU."', coorX  = '".$data->cxU."', coorY  = '".$data->cyU."', cargo = '".$data->cargoU."' ";
 	$strQuery.= "WHERE id_empleado = '".$data->ciU."' ";
 
 	$sql = $db->Execute($strQuery);

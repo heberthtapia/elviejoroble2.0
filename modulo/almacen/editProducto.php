@@ -4,7 +4,7 @@ $strQ = $db->Execute($sql);
 $fecha = $op->ToDay();
 $hora = $op->Time();
 ?>
-<form id="formUpdate" action="javascript:saveForm('formUpdate','almacen/update.php')" class="form-horizontal" autocomplete="off" >
+<form id="formUpdate" action="javascript:updateForm('formUpdate','almacen/update.php')" class="form-horizontal" autocomplete="off" >
 	<div class="modal fade" id="dataUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -13,7 +13,7 @@ $hora = $op->Time();
 					<h4 class="modal-title" id="exampleModalLabel">Modificar Producto</h4>
 				</div>
 				<div class="modal-body">
-					<div id="datos_ajax"></div>
+					<div id="datos_ajax_update"></div>
 
 					<div class="form-group">
 						<label for="fecha" class="control-label col-md-2">Fecha:</label>
@@ -21,6 +21,7 @@ $hora = $op->Time();
 							<input id="fecha" name="fecha" type="text" class="form-control" value="<?=$fecha;?> <?=$hora;?>" disabled="disabled"/>
 						</div>
 						<input id="date" name="date" type="hidden" value="<?=$fecha;?> <?=$hora;?>" />
+						<input id="tabla" name="tabla" type="hidden" value="inventario">
 					</div>
 					<div class="form-group">
 						<label for="detalle" class="control-label col-md-2">Producto:</label>
