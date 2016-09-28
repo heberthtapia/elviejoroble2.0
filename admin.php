@@ -150,6 +150,7 @@ if (isset($_POST['from']))
     <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="css/theme-default.css">
     <link rel="stylesheet" href="uploadify/uploadify.css">
+    <link rel="stylesheet" href="css/square/blue.css">
     <link rel="stylesheet" href="css/myStyle.css">
 
     <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
@@ -170,6 +171,8 @@ if (isset($_POST['from']))
     <script type="text/javascript" src="js/jquery.json-2.3.js"></script>
     <!--uploadIfy-->
     <script type="text/javascript" src="uploadify/jquery.uploadify-3.1.js"></script>
+    <!--icheck-->
+    <script type="text/javascript" src="js/icheck.js"></script>
     <script type="text/javascript" src="js/myJavaScript.js"></script>
 
     <style>
@@ -254,7 +257,6 @@ if (isset($_POST['from']))
     </style>
 </head>
 <body>
-
 <div class="container-fluid display-table">
     <div class="row display-table-row">
         <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
@@ -784,7 +786,6 @@ if (isset($_POST['from']))
             desplegable.slideToggle('slow');
             e.preventDefault();
         })
-
     } );
     function cerrar() {
         location.href = "admin.php";

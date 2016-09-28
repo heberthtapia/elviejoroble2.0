@@ -48,7 +48,7 @@ var id_empleado;
         var obser = button.data('obser');
 
         var modal = $(this);
-        modal.find('.modal-title').text('Modificar Empleado: '+nombre+' '+apP);
+        //modal.find('.modal-title').text('Modificar Empleado: '+nombre+' '+apP);
         modal.find('.modal-body #nameU').val(nombre);
         modal.find('.modal-body #paternoU').val(apP);
         modal.find('.modal-body #maternoU').val(apM);

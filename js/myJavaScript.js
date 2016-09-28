@@ -254,3 +254,18 @@ function idImg(mod){
 /**
  *  WEB CAM
  */
+
+/**
+ * STATUS EMPLEADO
+ */
+function statusEmp(id, status){
+    $.ajax({
+        url: 'inc/statusEmp.php',
+        type: 'post',
+        async:true,
+        data: 'id='+id+'&status='+status,
+        success: function(data){
+
+        }
+    });
+}

@@ -27,7 +27,7 @@
 
 	$sql = $db->Execute($strQuery);
 
-	$strQuery = "UPDATE usuario SET user ='".$data->codUserU."', pass = '".$data->passwordU."', status = 'Inactivo' ";
+	$strQuery = "UPDATE usuario SET user ='".$data->codUserU."', pass = '".$data->passwordU."', statusEmp = 'Inactivo' ";
 	$strQuery.= "WHERE id_empleado = '".$data->ciU."' ";
 
 	$sql = $db->Execute($strQuery);

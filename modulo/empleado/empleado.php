@@ -38,6 +38,21 @@ $op = new cnFunction();
                 }
             ]
         });
+
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            //increaseArea: '100%' // optional
+          });
+
+        $('input').on('ifChecked', function(event){
+            id = $(this).attr('id');
+            statusEmp(id, 'Activo');
+        });
+        $('input').on('ifUnchecked',function(event){
+            id = $(this).attr('id');
+            statusEmp(id, 'Inactivo');
+        });
     });
     $.validate({
         lang: 'es',
@@ -144,15 +159,24 @@ include 'editEmpleado.php';
                                     </button>
                         </div>
                         <div style="width: 188px; margin-top: 5px">
-                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#dataDelete" data-id="<?=$row['id_inventario']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
-                                    </button>
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#dataDelete" data-id="<?=$row['id_inventario']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
+                            </button>
 
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Status
-                                        </label>
-                                    </div>
-
+                            <div class="checkbox" id="status<?=$row['id_empleado']?>">
+                                    <?PHP
+                                    if( $row['statusEmp'] == 'Activo' ){
+                                    ?>
+                                        <input type="checkbox" name="checks" checked id="<?=$row['id_empleado']?>"/>
+                                        <label>Status</label>
+                                    <?PHP
+                                    }else{
+                                    ?>
+                                        <input type="checkbox" name="checks" id="<?=$row['id_empleado']?>"/>
+                                        <label>Status</label>
+                                    <?PHP
+                                    }
+                                    ?>
+                            </div>
                         </div>
                     </td>
                 </tr>
