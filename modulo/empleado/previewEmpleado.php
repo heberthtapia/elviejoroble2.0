@@ -26,7 +26,7 @@ var coorX;
 var coorY;
 var id_empleado;
 
-    $('#dataUpdate').on('show.bs.modal', function (event) {
+    $('#dataPreview').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Botón que activó el modal
         var foto = button.data('foto'); // Extraer la información de atributos de datos
         var nombre = button.data('name'); // Extraer la información de atributos de datos
@@ -49,28 +49,28 @@ var id_empleado;
 
         var modal = $(this);
         //modal.find('.modal-title').text('Modificar Empleado: '+nombre+' '+apP);
-        modal.find('.modal-body #nameU').val(nombre);
-        modal.find('.modal-body #paternoU').val(apP);
-        modal.find('.modal-body #maternoU').val(apM);
-        modal.find('.modal-body #ciU').val(id_empleado);
-        modal.find('.modal-body #depU').val(depa);
-        modal.find('.modal-body #dateNacU').val(dateNac);
-        modal.find('.modal-body #fonoU').val(phone);
-        modal.find('.modal-body #celularU').val(celular);
-        modal.find('.modal-body #emailU').val(email);
-        modal.find('.modal-body #cargoU').val(cargo);
-        modal.find('.modal-body #codUserU').val(user);
-        modal.find('.modal-body #passwordU').val(pass);
-        modal.find('.modal-body #addresU').val(direccion);
-        modal.find('.modal-body #NroU').val(numero);
-        modal.find('.modal-body #cxU').val(coorX);
-        modal.find('.modal-body #cyU').val(coorY);
-        modal.find('.modal-body #obserU').val(obser);
+        modal.find('.modal-body #nameP').val(nombre);
+        modal.find('.modal-body #paternoP').val(apP);
+        modal.find('.modal-body #maternoP').val(apM);
+        modal.find('.modal-body #ciP').val(id_empleado);
+        modal.find('.modal-body #depP').val(depa);
+        modal.find('.modal-body #dateNacP').val(dateNac);
+        modal.find('.modal-body #fonoP').val(phone);
+        modal.find('.modal-body #celularP').val(celular);
+        modal.find('.modal-body #emailP').val(email);
+        modal.find('.modal-body #cargoP').val(cargo);
+        modal.find('.modal-body #codUserP').val(user);
+        modal.find('.modal-body #passwordP').val(pass);
+        modal.find('.modal-body #addresP').val(direccion);
+        modal.find('.modal-body #NroP').val(numero);
+        modal.find('.modal-body #cxP').val(coorX);
+        modal.find('.modal-body #cyP').val(coorY);
+        modal.find('.modal-body #obserP').val(obser);
 
         if(foto !== ''){
-            modal.find('.modal-body #fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/photos/'+foto+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+            modal.find('.modal-body #fotoP').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/photos/'+foto+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
         }else {
-            modal.find('.modal-body #fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/photos/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+            modal.find('.modal-body #fotoP').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/photos/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
         }
         //$('.alert').hide();//Oculto alert
     });
@@ -97,7 +97,7 @@ var id_empleado;
 
     function initMapU(){
         /* GOOGLE MAPS */
-        var formulario = $('#formUpdate');
+        var formulario = $('#formPreview');
         //COODENADAS INICIALES -16.5207007,-68.1615534
         //VARIABLE PARA EL PUNTO INICIAL
         var punto = new google.maps.LatLng(coorX, coorY);
@@ -108,45 +108,9 @@ var id_empleado;
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
-        mapa = new google.maps.Map( $("#mapaU")[0], config );
+        mapa = new google.maps.Map( $("#mapaP")[0], config );
 
-        google.maps.event.addListener(mapa, "click", function(event){
-        //OBTENER COORDENADAS POR SEPARADO
-        var coordenadas = event.latLng.toString();
-        coordenadas = coordenadas.replace("(", "");
-        coordenadas = coordenadas.replace(")", "");
 
-        var lista = coordenadas.split(",");
-        //alert(lista[0]+"---"+lista[1])
-        var direccion = new google.maps.LatLng(lista[0], lista[1]);
-        //variable marcador
-        var marcador = new google.maps.Marker({
-            //titulo: prompt("Titulo del marcador"),
-            position: direccion,
-            map: mapa, //ENQUE MAPA SE UBICARA EL MARCADOR
-            animation: google.maps.Animation.DROP, //COMO APARECERA EL MARCADOR
-            draggable: false // NO PERMITIR EL ARRASTRE DEL MARCADOR
-            //title:"Hello World!"
-        });
-
-        //PASAR LAS COORDENADAS AL FORMULARIO
-        formulario.find("input[name='cxU']").val(lista[0]);
-        formulario.find("input[name='cyU']").val(lista[1]);
-        //UBICAR EL FOCO EN EL CAMPO TITULO
-        formulario.find("input[name='addresC']").focus();
-
-        //UBICAR EL MARCADOR EN EL MAPA
-        //setMapOnAll(null);
-        markers.push(marcador);
-
-        //AGREGAR EVENTO CLICK AL MARCADOR
-        google.maps.event.addListener(marcador, "click", function(){
-            //alert(marcador.titulo);
-        });
-        deleteMarkers(markers);
-        deleteMarkers(marcadores_bd);
-        marcador.setMap(mapa);
-    });
     listarU();
   }
 
@@ -182,8 +146,8 @@ var id_empleado;
             //var direccion = new google.maps.LatLng(lista[0], lista[1]);
             //PASAR LAS COORDENADAS AL FORMULARIO
 
-            $('#formUpdate').find("input[name='cxU']").val(lista[0]);
-            $('#formUpdate').find("input[name='cyU']").val(lista[1]);
+            $('#formPreview').find("input[name='cxP']").val(lista[0]);
+            $('#formPreview').find("input[name='cyP']").val(lista[1]);
             //$('#form').find("input[name='buscar']").val('');
 
             var marcador = new google.maps.Marker({
@@ -211,7 +175,7 @@ var id_empleado;
     //ANTES DE LISTAR MARCADORES
     //SE DEBEN QUITAR LOS ANTERIORES DEL MAPA
     deleteMarkers(markers);
-    var formulario_edicion = $("#formUpdate");
+    var formulario_edicion = $("#formPreview");
     $.ajax({
         type:"POST",
         url:"inc/listaPuntos.php?bd=empleado",
@@ -269,7 +233,7 @@ var id_empleado;
 
     // $(document).ready(function(e) {
 
-    $('#dateNacU').datetimepicker({
+    $('#dateNacP').datetimepicker({
         locale: 'es',
         viewMode: 'years',
         format: 'YYYY-MM-DD'
@@ -338,19 +302,25 @@ var id_empleado;
             $( ".uploadShowU" ).toggle(1000);
         });
 
-    $('#dataUpdate').on('show.bs.modal', function() {
+    $('#dataPreview').on('show.bs.modal', function() {
         //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
         initMapU();
+        $( "#mapaP" ).animate({
+        	width: "345px"
+	    }, 500, "linear");
     });
 
-    $('#dataUpdate').on('hidden.bs.modal', function (e) {
+    $('#dataPreview').on('hidden.bs.modal', function (e) {
         // do something...
-        $('#formUpdate').get(0).reset();
+        $( "#mapaP" ).animate({
+        	width: "0px"
+	    }, 3000, "swing");
+        $('#formPreview').get(0).reset();
         $('.uploadShowU').css('display','none');
         //$('#file_upload').uploadify('cancel', '*');
         $('#saveU, #closeU').removeAttr('disabled','disabled');
         $('#subirU').find('span').text("Subir Foto");
-        $('#fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/photos/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+        $('#fotoP').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/photos/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
     });
 
 
@@ -358,13 +328,13 @@ var id_empleado;
 
 </script>
 
-<form id="formUpdate" action="javascript:updateForm('formUpdate','empleado/update.php')" class="" autocomplete="off" >
-    <div class="modal fade bs-example-modal-lg" id="dataUpdate" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+<form id="formPreview" action="javascript:updateForm('formPreview','empleado/update.php')" class="" autocomplete="off" >
+    <div class="modal fade bs-example-modal-lg" id="dataPreview" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">Modificar Empleado <span class="fecha">Fecha: <?=$fecha;?> <?=$hora;?></span></h4>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Vista Previa Empleado <span class="fecha">Fecha: <?=$fecha;?> <?=$hora;?></span></h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -374,31 +344,29 @@ var id_empleado;
                     </div>
                     <div class="row">
                         <input id="date" name="date" type="hidden" value="<?=$fecha;?> <?=$hora;?>" />
-                        <input id="tabla" name="tabla" type="hidden" value="empleado">
                         <div class="col-md-9">
                             <div class="row">
                                 <div class="col-md-4 form-group">
-                                    <label for="nameU" class="sr-only">Nombre:</label>
-                                    <input id="nameU" name="nameU" type="text" placeholder="Nombre" class="form-control" data-validation="required" autocomplete="off"/>
+                                    <label for="nameP" class="sr-only">Nombre:</label>
+                                    <input id="nameP" name="nameP" type="text" placeholder="Nombre" class="form-control" disabled="" />
                                 </div>
                                 <div class="col-md-4 form-group">
-                                    <label for="paternoU" class="sr-only">Paterno:</label>
-                                    <input id="paternoU" name="paternoU" type="text" placeholder="Paterno" data-validation="required" class="form-control" />
+                                    <label for="paternoP" class="sr-only">Paterno:</label>
+                                    <input id="paternoP" name="paternoP" type="text" placeholder="Paterno" class="form-control" disabled="" />
                                 </div>
                                 <div class="col-md-4 form-group">
-                                    <label for="maternoU" class="sr-only">Materno:</label>
-                                    <input id="maternoU" name="maternoU" type="text" placeholder="Materno" data-validation="required" class="form-control" />
+                                    <label for="maternoP" class="sr-only">Materno:</label>
+                                    <input id="maternoP" name="maternoP" type="text" placeholder="Materno" class="form-control" disabled="" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-2 form-group">
-                                    <label for="ciU" class="sr-only">N° C.I.:</label>
-                                    <input id="ciU" name="ciU" type="text" placeholder="N° C.I." class="form-control" disabled="" />
-                                    <input id="ciU" name="ciU" type="hidden" />
+                                    <label for="ciP" class="sr-only">N° C.I.:</label>
+                                    <input id="ciP" name="ciP" type="text" placeholder="N° C.I." class="form-control" disabled="" />
                                 </div>
                                 <div class="col-md-3 form-group">
-                                    <label for="depU" class="sr-only">Lugar Exp.:</label>
-                                    <select id="depU" name="depU" class="form-control" data-validation="required">
+                                    <label for="depP" class="sr-only">Lugar Exp.:</label>
+                                    <select id="depP" name="depP" class="form-control" disabled="">
                                         <option value="" disabled selected hidden>Lugar Exp.</option>
                                         <option value="lp">La Paz</option>
                                         <option value="cbb">Cochabamba</option>
@@ -411,31 +379,31 @@ var id_empleado;
                                     </select>
                                 </div>
                                 <div class="col-md-3 form-group">
-                                    <label for="dateNacU" class="sr-only">Fecha de Nacimiento:</label>
-                                    <input id="dateNacU" name="dateNacU" type="text" placeholder="Fecha Nac." class="form-control" data-validation="date" data-validation-format="yyyy-mm-dd"/>
+                                    <label for="dateNacP" class="sr-only">Fecha de Nacimiento:</label>
+                                    <input id="dateNacP" name="dateNacP" type="text" placeholder="Fecha Nac." class="form-control" disabled=""/>
                                 </div>
                                 <div class="col-md-2 form-group">
-                                    <label for="fonoU" class="sr-only">Telefono:</label>
-                                    <input id="fonoU" name="fonoU" type="text" placeholder="Telefono" class="form-control" data-validation="number" data-validation-optional-if-answered="celularU"/>
+                                    <label for="fonoP" class="sr-only">Telefono:</label>
+                                    <input id="fonoP" name="fonoP" type="text" placeholder="Telefono" class="form-control" disabled=""/>
                                 </div>
                                 <div class="col-md-2 form-group">
-                                    <label for="celularU" class="sr-only">Celular:</label>
-                                    <input id="celularU" name="celularU" type="text" placeholder="Celular" class="form-control" data-validation="number" data-validation-optional-if-answered="fonoU"/>
+                                    <label for="celularP" class="sr-only">Celular:</label>
+                                    <input id="celularP" name="celularP" type="text" placeholder="Celular" class="form-control" disabled=""/>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3" align="center">
-                            <div id="fotoU" class="form-group"></div>
+                            <div id="fotoP" class="form-group"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4 form-group">
-                            <label for="emailU" class="sr-only">Correo Electronico:</label>
-                            <input id="emailU" name="emailU" type="text" placeholder="Correo Electronico" value="" class="form-control" data-validation="email"/>
+                            <label for="emailP" class="sr-only">Correo Electronico:</label>
+                            <input id="emailP" name="emailP" type="text" placeholder="Correo Electronico" value="" class="form-control" disabled=""/>
                         </div>
                         <div class="col-md-2 form-group">
-                            <label for="cargoU" class="sr-only">Cargo:</label>
-                            <select id="cargoU" name="cargoU" class="form-control" data-validation="required">
+                            <label for="cargoP" class="sr-only">Cargo:</label>
+                            <select id="cargoP" name="cargoP" class="form-control" disabled="">
                                 <option value="" disabled selected hidden>Cargo</option>
                                 <option value="adm">Administrador</option>
                                 <option value="alm">Almacen</option>
@@ -444,16 +412,15 @@ var id_empleado;
                             </select>
                         </div>
                         <div class="col-md-2 form-group">
-                            <label for="codUserU" class="sr-only">Usuario:</label>
-                            <input id="codUserU" name="codUserU" type="text" placeholder="Usuario" class="form-control" disabled="" />
-                            <input id="codUserU" name="codUserU" type="hidden" />
+                            <label for="codUserP" class="sr-only">Usuario:</label>
+                            <input id="codUserP" name="codUserP" type="text" placeholder="Usuario" class="form-control" disabled="" />
                         </div>
                         <div class="col-md-2 form-group">
-                            <label for="passwordU" class="sr-only">Contraseña:</label>
-                            <input id="passwordU" name="passwordU" type="text" placeholder="Contraseña" class="form-control" data-validation="required"/>
+                            <label for="passwordP" class="sr-only">Contraseña:</label>
+                            <input id="passwordP" name="passwordP" type="text" placeholder="Contraseña" class="form-control" disabled=""/>
                         </div>
                         <div class="col-md-2 form-group">
-                            <button type="button" id="genera" class="btn btn-primary" onclick="generaPass('passwordU');">
+                        	<button type="button" id="genera" class="btn btn-primary" onclick="generaPass('passwordU');" disabled="">
                                 <i class="fa fa-cog" aria-hidden="true"></i>
                                 <span>Generar</span>
                             </button>
@@ -461,25 +428,25 @@ var id_empleado;
                     </div>
                     <div class="row">
                         <div class="col-md-8 form-group">
-                            <label for="addresU" class="sr-only"></label>
-                            <input id="addresU" name="addresU" type="text" placeholder="Direcci&oacute;n" class="form-control" data-validation="required"/>
+                            <label for="addresP" class="sr-only"></label>
+                            <input id="addresP" name="addresP" type="text" placeholder="Direcci&oacute;n" class="form-control" disabled=""/>
                         </div>
                         <div class="col-md-2 form-group">
-                            <label for="NroU" class="sr-only"></label>
-                            <input id="NroU" name="NroU" type="text" placeholder="N° de domicilio" class="form-control" data-validation="required number"/>
+                            <label for="NroP" class="sr-only"></label>
+                            <input id="NroP" name="NroP" type="text" placeholder="N° de domicilio" class="form-control" disabled=""/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-5" align="center">
-                            <div id="mapaU" class="form-group"></div><!--End mapa-->
+                            <div id="mapaP" class="form-group"></div><!--End mapa-->
                         </div>
                         <div class="col-md-7">
                             <div class="row">
                                 <div class="col-md-9 form-group">
-                                    <input id="buscarU" name="buscarU" type="text" placeholder="Buscar en Google Maps" value="" class="form-control" autocomplete="off"/>
+                                    <input id="buscarU" name="buscarU" type="text" placeholder="Buscar en Google Maps" value="" class="form-control" autocomplete="off"  disabled=""/>
                                 </div>
                                 <div class="col-md-3  form-group">
-                                    <button type="button" id="searchU" class="btn btn-primary">
+                                    <button type="button" id="searchU" class="btn btn-primary" disabled="">
                                         <i class="fa fa-search" aria-hidden="true"></i>
                                         <span>Buscar</span>
                                     </button>
@@ -487,18 +454,18 @@ var id_empleado;
                             </div>
                             <div class="row">
                                 <div class="col-md-12 form-group">
-                                    <input id="cxU" name="cxU" type="text" placeholder="Latitud" value="" readonly class="form-control" data-validation="required"/>
+                                    <input id="cxP" name="cxP" type="text" placeholder="Latitud" class="form-control" disabled=""/>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 form-group">
-                                    <input id="cyU" name="cyU" type="text" placeholder="Longitud" value="" readonly class="form-control" data-validation="required"/>
+                                    <input id="cyP" name="cyP" type="text" placeholder="Longitud" class="form-control" disabled=""/>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 form-group">
                                     <div class="checkbox">
-                                        <input id="checksEmailU" name="checksEmailU" type="checkbox" checked/>
+                                        <input id="checksEmailU" name="checksEmailU" type="checkbox" checked disabled="" />
                                         <label>Enviar datos por E-mail</label>
                                     </div>
                                 </div>
@@ -509,45 +476,15 @@ var id_empleado;
                         <div class="col-md-12 form-group">
                             <label for="obser" class="sr-only"></label>
                             <span id="max-length-element">200</span><span id="maxText"> caracteres restantes</span>
-                            <textarea id="obserU" name="obserU" cols="2" placeholder="Observaciones" class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2 form-group">
-                            <button type="button" id="capturar" class="btn btn-primary" onclick="openWebCam()">
-                                <i class="fa fa-camera" aria-hidden="true"></i>
-                                <span>Capturar Foto</span>
-                            </button>
-                        </div>
-                        <div class="col-md-2 form-group">
-                            <button type="button" id="subirU" class="btn btn-primary">
-                                <i class="fa fa-upload" aria-hidden="true"></i>
-                                <span>Subir Foto</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="idealWrap uploadShowU" style="display:none;">
-                                <div id="some_file_queueU"></div>
-                                <div id="buttonFile">
-                                    <input type="file" name="file_uploadU" id="file_uploadU" />
-                                    <button type="button" id="uploadU" class="btn btn-success" onclick="$('#file_uploadU').uploadify('upload')">Subir Foto</button>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div><!--End idealWrap-->
+                            <textarea id="obserP" name="obserP" cols="2" placeholder="Observaciones" class="form-control" disabled=""></textarea>
                         </div>
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="closeU" class="btn btn-danger" data-dismiss="modal">
+                    <button type="button" id="closeU" class="btn btn-success" data-dismiss="modal">
                         <i class="fa fa-close" aria-hidden="true"></i>
-                        <span>Cancelar</span>
-                    </button>
-                    <button type="submit" id="saveU" class="btn btn-success">
-                        <i class="fa fa-check" aria-hidden="true"></i>
-                        <span>Modificar Empleado</span>
+                        <span>Cerrar</span>
                     </button>
                 </div>
             </div><!-- /.modal-content -->

@@ -1,88 +1,135 @@
-<h1 class="">Lazy Load Google Map</h1>
-<a href="#myMapModal" class="btn" data-toggle="modal">Launch Map Modal</a>
-
-<div class="modal fade" id="myMapModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Modal title</h4>
-
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div id="map-canvas" class=""></div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Scroll</title>
+    <style>
+    #detectascroll{
+        background-color: #cfc;
+    }
+    body{
+        font-size: 1.2em;
+    }
+    p{
+        max-width: 800px;
+    }
+    .mayor{
+        width: 3500px;
+        padding: 20px;
+        background-color: #ccf;
+    }
+    .conscroll{
+        height: 90px;
+        width: 320px;
+        padding: 15px;
+        overflow: scroll;
+        background-color: #cdd;
+    }
+    #animarscroll{
+        background-color: #fcc;
+    }
+    #hastaaqui{
+        background-color: #900;
+        padding: 10px;
+        color: white;
+        font-size: 0.6em;
+        width: 200px;
+    }
+    #irarriba{
+        padding: 5px;
+        position: fixed;
+        bottom: 40px;
+        right: 50px;
+        background-color: #009;
+        font-weight: bold;
+        width: 50px;
+        font-size: 0.8em;
+        text-align: center;
+        display: none;
+    }
+    #irarriba a{
+        color: #fff;
+    }
+    </style>
+</head>
+<body>
+   <div class="mayor">Este DIV se sale!!</div>
+    <p>Lorem...</p>
+    <p>Lorem...</p>
+    <button id="detectascroll">Detecta el scroll <span></span></button> <button id="animarscroll">Animar hasta la caja roja</button>
+    <p>Lorem...</p>
+    <div class="conscroll">
+        <p>Este párrafo y la siguiente lista están en una división que tiene scroll.</p>
+        <button id="scrollelemento">Saber el scroll en el elemento <span></span></button>
+        <ul>
+            <li><a href="">enlace 1</a></li>
+            <li><a href="">enlace 2</a></li>
+            <li><a href="">enlace 3</a></li>
+            <li><a href="">enlace 4</a></li>
+            <li><a href="">enlace 5</a></li>
+        </ul>
     </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
+    <p>Lorem...</p>
+    <p>Lorem...</p>
+    <p>Lorem...</p>
+    <div id="hastaaqui">Animar scroll hasta aquí</div>
+    <p>Lorem...</p>
+<p>Lorem...</p>
+<p>Lorem...</p>
+<p>Lorem...</p>
+<p>Lorem...</p>
+<p>Lorem...</p>
+<p>Lorem...</p>
+<p>Lorem...</p>
+<p>Lorem...</p>
+<p>Lorem...</p>
+<div id="irarriba"><a href="#">Ir arriba</a></div>
 
-<script>
-    var map;
-    var myCenter=new google.maps.LatLng(53, -1.33);
-    var marker=new google.maps.Marker({
-        position:myCenter
-    });
-
-    function initialize() {
-        var mapProp = {
-            center:myCenter,
-            zoom: 14,
-            draggable: false,
-            scrollwheel: false,
-            mapTypeId:google.maps.MapTypeId.ROADMAP
-        };
-
-        map=new google.maps.Map(document.getElementById("map-canvas"),mapProp);
-        marker.setMap(map);
-
-        google.maps.event.addListener(marker, 'click', function() {
-
-            infowindow.setContent(contentString);
-            infowindow.open(map, marker);
-
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script>
+    $(function(){
+        $("#detectascroll").on("click", function () {
+            //scroll vertical
+            var sv = $(document).scrollTop();
+            //scroll horizontal
+            var sh = $(document).scrollLeft();
+            console.log("El scroll es: Vertical->", sv, " Horizontal->" , sh);
+            $(this).find("span").text("(" + sh + "," + sv+ ")");
         });
-    };
-    google.maps.event.addDomListener(window, 'load', initialize);
-
-    google.maps.event.addDomListener(window, "resize", resizingMap());
-
-    $('#myMapModal').on('show.bs.modal', function() {
-        //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
-        resizeMap();
-    })
-
-    function resizeMap() {
-        if(typeof map =="undefined") return;
-        setTimeout( function(){resizingMap();} , 400);
-    }
-
-    function resizingMap() {
-        if(typeof map =="undefined") return;
-        var center = map.getCenter();
-        google.maps.event.trigger(map, "resize");
-        map.setCenter(center);
-    }
-</script>
-<style>
-    html, body, #map-canvas  {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-    }
-
-    #map-canvas {
-        width:500px;
-        height:480px;
-    }
-</style>
+        $("#scrollelemento").on("click", function () {
+            var boton = $(this);
+            var elemento = boton.parent();
+            //scroll vertical
+            var sv = elemento.scrollTop();
+            //scroll horizontal
+            var sh = elemento.scrollLeft();
+            console.log("El scroll del elemento es: Vertical->", sv, " Horizontal->" , sh);
+            boton.find("span").text("(" + sh + "," + sv+ ")");
+        });
+        $("#animarscroll").on("click", function(){
+            var posicion = $("#hastaaqui").offset().top;
+            $("html, body").animate({
+                scrollTop: posicion
+            }, 2000);
+        });
+        $(document).on("scroll", function(){
+            var desplazamientoActual = $(document).scrollTop();
+            var controlArriba = $("#irarriba");
+            console.log("Estoy en " , desplazamientoActual);
+            if(desplazamientoActual > 100 && controlArriba.css("display") == "none"){
+                controlArriba.fadeIn(500);
+            }
+            if(desplazamientoActual < 100 && controlArriba.css("display") == "block"){
+                controlArriba.fadeOut(500);
+            }
+        });
+        $("#irarriba a").on("click", function(e){
+            e.preventDefault();
+            $("html, body").animate({
+                scrollTop: 0
+            }, 1000);
+        });
+    });
+    </script>
+</body>
+</html>

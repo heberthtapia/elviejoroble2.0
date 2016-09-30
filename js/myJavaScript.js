@@ -191,7 +191,7 @@ function fDelete(idForm, p){
         data:{res:dato},
         success: function(data){
             $('#dataDelete').modal('hide');
-            despliega('modulo/almacen/listTabla.php','listTabla');
+            despliega('modulo/'+data.tabla+'/listTabla.php','listTabla');
         },
         error: function(data){
             alert('Error al eliminar');
@@ -267,5 +267,279 @@ function statusEmp(id, status){
         success: function(data){
 
         }
+    });
+}
+
+/**
+ * MODULO PEDIDO
+ * AGREGA PEDIDO
+ */
+
+function adicFila(idForm, p){
+
+    var dato = JSON.stringify( $('#'+idForm).serializeObject() );
+    //alert(dato);
+    $.ajax({
+        url: "inc/"+p,
+        type: 'post',
+        dataType: 'json',
+        async:true,
+        data:{res:dato},
+        success: function(data){
+            sw = 0;
+
+            $('#tabla tbody').find('tr').each(function(index, element){
+                cod = $(this).attr('id');
+
+                if( cod === data.producto ){
+                    cantidad = $('tr#'+data.producto).find('td').eq(1).find('input').val();
+                    //alert('******'+cantidad);
+                    cantidad = parseInt(cantidad) + parseInt(data.cant);
+                    //alert('-------'+cantidad);
+                    if( parseFloat(cantidad) <= parseFloat(data.cantI) ){
+
+                      precio = $('tr#'+data.producto).find('td').eq(2).find('input').val();
+                      precio = parseFloat(precio) * parseFloat(cantidad);
+                      $('tr#'+data.producto).find('td').eq(1).find('input').val(cantidad);
+                      //$('tr#'+data.producto).find('td').eq(3).find('input').val(cant);
+                      $('tr#'+data.producto).find('td').eq(5).find('input').val(precio.toFixed(2));
+                      //$('tr#'+data.producto).find('td').eq(4).find('input').val(precio);
+
+                    }else{
+                        alert('Producto sin Stock.....');
+                    }
+                    sw = 1;
+                }
+            });
+
+            if( sw === 0 && data.producto !== undefined ){
+                agregarFila(data);
+            }
+            $('#producto').val('');
+            $('#cant').val('');
+            subPrecio = 0;
+            $('#tabla tbody').find('tr').each(function(index, element){
+                subPrecio = parseFloat(subPrecio) + parseFloat($(this).find('td').eq(5).find('input').val());
+            });
+            $('#tabla tfoot').find('th').eq(1).find('input').val(subPrecio.toFixed(2));
+
+            des = $('#tabla tfoot').find('tr').eq(1).find('th').eq(1).find('input').val();
+            if(des === '') des = 0;
+
+            bon = $('#tabla tfoot').find('tr').eq(2).find('th').eq(1).find('input').val();
+            if(bon === '') bon = 0;
+
+            total = parseFloat(subPrecio)-parseFloat(des)-parseFloat(bon);
+            $('#tabla tfoot').find('tr').eq(3).find('th').eq(1).find('input').val(total.toFixed(2));
+
+        },
+        error: function(data){
+            alert('Error al guardar el formulario');
+            }
+    });
+    $('#efectivo').val('');
+    $('#cambio').val('');
+    $('#codigo').focus();
+}
+
+/* EDITA PEDIDO */
+
+function adicFilaEdit(idForm, p){
+    "use strict";
+    var dato = JSON.stringify( $('#'+idForm).serializeObject() );
+    $.ajax({
+        url: "inc/"+p,
+        type: 'post',
+        dataType: 'json',
+        async:true,
+        data:{res:dato},
+        success: function(data){
+            sw = 0;
+            $('#tabla tbody').find('tr').each(function(index, element){
+                cod = $(this).attr('id');
+                if( cod === data.producto ){
+                    cant = $('tr#'+data.producto).find('td').eq(1).find('input#cantidad').val();
+                    cant = parseInt(cant) + parseInt(data.cant);
+                    if( parseFloat(cant) <= (parseFloat(data.cantI) + parseInt(data.cantInv)) ){
+                      precio = $('tr#'+data.producto).find('td').eq(2).find('input').val();
+                      precio = parseFloat(precio) * parseFloat(cant);
+                      $('tr#'+data.producto).find('td').eq(1).find('input#cantidad').val(cant);
+                      //$('tr#'+data.producto).find('td').eq(3).find('input').val(cant);
+                      $('tr#'+data.producto).find('td').eq(5).find('input').val(precio.toFixed(2));
+                      //$('tr#'+data.producto).find('td').eq(4).find('input').val(precio);
+                    }else{
+                        alert('Producto sin Stock.....');
+                    }
+                    sw = 1;
+                }
+            });
+
+            if( sw === 0 && data.producto !== undefined ){
+                agregarFila(data);
+            }
+            $('#producto').val('');
+            $('#cant').val('');
+            subPrecio = 0;
+            $('#tabla tbody').find('tr').each(function(index, element){
+                subPrecio = parseFloat(subPrecio) + parseFloat($(this).find('td').eq(5).find('input').val());
+            });
+            $('#tabla tfoot').find('th').eq(1).find('input').val(subPrecio.toFixed(2));
+
+            des = $('#tabla tfoot').find('tr').eq(1).find('th').eq(1).find('input').val();
+            if(des === '') des = 0;
+
+            bon = $('#tabla tfoot').find('tr').eq(2).find('th').eq(1).find('input').val();
+            if(bon === '') bon = 0;
+
+            total = parseFloat(subPrecio)-parseFloat(des)-parseFloat(bon);
+            $('#tabla tfoot').find('tr').eq(3).find('th').eq(1).find('input').val(total.toFixed(2));
+
+        },
+        error: function(data){
+            alert('Error al guardar el formulario');
+            }
+    });
+    $('#efectivo').val('');
+    $('#cambio').val('');
+    $('#codigo').focus();
+}
+
+function agregarFila(data){
+
+  cant = $('input#cant').val();
+  //cant = parseInt(cant) + parseInt(data.cant);
+  if( parseFloat(cant) <= parseFloat(data.cantI) ){
+  // Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
+  //if( data.cantidad > 0 ){
+      //$('#tabla thead').removeAttr('hidden');
+      $('#tabla tfoot').removeAttr('hidden');
+      //$('#submitVenta').removeAttr('hidden');
+      //alert(data.cant);
+      precio = parseFloat(data.cant) * parseFloat(data.precio);
+
+      var strNueva_Fila = '<tr id="'+data.producto+'">'+
+      '<td class="det">'+data.producto+' '+data.detalle+''+
+      '<input type="hidden" id="item" name="item" value="'+data.producto+'" ></td>'+
+
+      '<td><input type="text" disabled="disabled" id="cantidad" name="cantidad" value="'+data.cant+'" >'+
+      '<input type="hidden" id="cantidad" name="cantidad" value="'+data.cant+'" ></td>'+
+
+      '<td><input type="text" disabled="disabled" id="precio" name="precio" value="'+data.precio+'" >'+
+      '<input type="hidden" id="precio" name="precio" value="'+data.precio+'" ></td>'+
+
+      '<td></td>'+
+      '<td></td>'+
+      '<td><input type="text" disabled="disabled" id="subTotal" name="subTotal" value="'+precio.toFixed(2)+'" ></td>'+
+      '<td align="right" class="delete"><a class="del" onclick="eliminarFila(&#39;'+data.producto+'&#39;)"><i class="fa fa-ban fa-2x" aria-hidden="true"></i></a></td>'+
+      '</tr>';
+
+      $("#tabla tbody").append(strNueva_Fila);
+
+      $('#tabla tbody').find('tr').each(function(index, element){
+          if( (index % 2) === 0 ){
+              $(this).addClass('odd');
+          }else{
+              $(this).addClass('even');
+          }
+      });
+
+      $('#tabla tbody').find('tr').each(function(index, element){
+        var p = parseFloat($(this).find('td').eq(6).find('input').val());
+        $(this).find('td').eq(6).find('input').val(p.toFixed(2));
+      });
+
+  }else{
+
+      alert('Producto sin Stock');
+
+    }
+}
+
+function eliminarFila(idTr){
+
+    if( $('#tabla tbody').find('tr').length == 1 ){
+        if( !confirm('¿Esta seguro que desea eliminar el pedido?')){
+            return;
+        }
+        despliega('modulo/pedido/newPedido.php','contenido');
+    }
+
+    $('#'+idTr).remove();
+
+    subPrecio = 0;
+    $('#tabla tbody').find('tr').each(function(index, element){
+        subPrecio = parseFloat(subPrecio) + parseFloat($(this).find('td').eq(5).find('input').val());
+    });
+    $('#tabla tfoot').find('th').eq(1).find('input').val(subPrecio.toFixed(2));
+
+    des = $('#tabla tfoot').find('tr').eq(1).find('th').eq(1).find('input').val();
+    if(des === '') des = 0;
+
+    bon = $('#tabla tfoot').find('tr').eq(2).find('th').eq(1).find('input').val();
+    if(bon === '') bon = 0;
+
+    total = parseFloat(subPrecio)-parseFloat(des)-parseFloat(bon);
+    $('#tabla tfoot').find('tr').eq(3).find('th').eq(1).find('input').val(total.toFixed(2));
+
+    if( total < 0  )
+        $('#tabla tfoot').find('tr').eq(1).find('th').eq(1).find('input').css('color','#F7070B');
+    else
+        $('#tabla tfoot').find('tr').eq(1).find('th').eq(1).find('input').css('color','#000000');
+
+    $('#tabla tbody').find('tr').each(function(index, element){
+        if( index/2 === 0 ){
+            $(this).removeClass('even');
+            $(this).addClass('odd');
+        }else{
+            $(this).removeClass('odd');
+            $(this).addClass('even');
+        }
+    });
+    $('#efectivo').val('');
+    $('#cambio').val('');
+    $('#codigo').focus();
+}
+
+/* RECARGA TOTALES DEL EDIT */
+
+function recargaFila(){
+    subPrecio = 0;
+    $('#tabla tbody').find('tr').each(function(index, element){
+        subPrecio = parseFloat(subPrecio) + parseFloat($(this).find('td').eq(5).find('input').val());
+    });
+    $('#tabla tfoot').find('th').eq(1).find('input').val(subPrecio.toFixed(2));
+
+    des = $('#tabla tfoot').find('tr').eq(1).find('th').eq(1).find('input').val();
+    if(des === '') des = 0;
+
+    bon = $('#tabla tfoot').find('tr').eq(2).find('th').eq(1).find('input').val();
+    if(bon === '') bon = 0;
+
+    total = parseFloat(subPrecio)-parseFloat(des)-parseFloat(bon);
+    $('#tabla tfoot').find('tr').eq(3).find('th').eq(1).find('input').val(total.toFixed(2));
+
+    }
+
+/* GUARDA PEDIDO */
+
+function savePedido(idForm, p){
+
+    if( !confirm('CONFIRMAR PEDIDO!!!')){
+        return;
+    }
+    var dato = JSON.stringify( $('#'+idForm).serializeObject() );
+    $.ajax({
+        url: "modulo/pedido/"+p,
+        type: 'post',
+        dataType: 'json',
+        async:true,
+        data:{res:dato},
+        success: function(data){
+            despliega('modulo/pedido/listPedido.php','contenido');
+            window.open('modulo/pedido/pdfPedido.php?res='+dato, '_blank');
+        },
+        error: function(data){
+            alert('Error al guardar el formulario');
+            }
     });
 }

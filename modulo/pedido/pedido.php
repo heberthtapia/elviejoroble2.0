@@ -9,9 +9,10 @@ $db = NewADOConnection('mysqli');
 $db->Connect();
 
 $op = new cnFunction();
+
+$idEmp = $_SESSION['idEmp'];
+$cargo = $_SESSION['cargo'];
 ?>
-<script type="text/javascript" src="webcam/webcam.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" language="javascript" class="init">
 
     $(document).ready(function() {
@@ -61,19 +62,17 @@ $op = new cnFunction();
     $('#obser').restrictLength( $('#max-length-element') );
 </script>
 <?PHP
-include 'newEmpleado.php';
-include 'editEmpleado.php';
-include 'previewEmpleado.php';
-include 'delEmpleado.php';
+//include 'newEmpleado.php';
+
 ?>
 <div class="row" id="listTabla">
     <div class="col-xs-12 col-sm-12 col-md-12">
-        <h1 class="avisos" align="center"><strong>EMPLEADOS</strong></h1>
-        <h2 class="avisos">Lista de Empleados</h2>
+        <h1 class="avisos" align="center"><strong>PEDIDOS</strong></h1>
+        <h2 class="avisos">Lista de Pedidos</h2>
         <div class="pull-right"><br>
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#dataRegister">
+            <button type="button" class="btn btn-success" data-toggle="modal" onClick="despliega('modulo/pedido/newPedido.php','contenido');">
                 <i class="fa fa-plus" aria-hidden="true"></i>
-                <span>Agregar Empleado</span>
+                <span>Nuevo Pedido</span>
             </button>
         </div>
         <div class="clearfix"></div>
@@ -83,20 +82,29 @@ include 'delEmpleado.php';
             <tr>
                 <th>Nº</th>
                 <th>Fecha</th>
-                <th>Foto</th>
-                <th>Nombre</th>
-                <th>Ap. Paterno</th>
-                <th>Ap. Materno</th>
-                <th>Cargo</th>
+                <th>N&deg; pedido</th>
+                <th>SubTotal</th>
+                <th>Des.</th>
+                <th>Bonf.</th>
+                <th>Total</th>
+                <th>a cuenta</th>
+                <th>saldo</th>
+                <th>Observaciones</th>
+                <th>Tipo de Pago</th>
+                <th>Status Contador</th>
+                <th>Status Almacen</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
             <?PHP
             $sql = "SELECT * ";
-            $sql.= "FROM empleado AS e, usuario AS u ";
-            $sql.= "WHERE e.id_empleado = u.id_empleado ";
-            $sql.= "ORDER BY (e.dateReg) DESC ";
+            $sql.= "FROM pedido AS p, empleado AS e ";
+            $sql.= "WHERE p.id_empleado = e.id_empleado ";
+            if($cargo!='adm'){
+                $sql.= "AND p.id_empleado = ".$idEmp." ";
+            }
+            $sql.= "ORDER BY (p.dateReg) DESC ";
 
             $cont = 1;
 
@@ -108,28 +116,32 @@ include 'delEmpleado.php';
 
                 ?>
                 <tr id="tb<?=$row[0]?>">
-                    <td class="last center"><?=$cont++;?></td>
+                    <td class="last center"><?=$cont;?></td>
                     <td class="last center"><?=$row['dateReg']?></td>
-                    <td class="last center" align="center" width="10%">
-                        <?PHP
-                        if( $row['foto'] != '' )
-                        {
-                            ?>
-                            <img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/photos/<?=($row['foto']);?>&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
-
-                            <?PHP
-                        }
-                        else{
-                            ?>
-                            <img class="thumb" src="thumb/phpThumb.php?src=../images/sin_imagen.jpg&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
-                            <?PHP
-                        }
-                        ?>
+                    <td class="last center">PD-<?=$op->ceros($row['id_pedido'],7);?></td>
+                    <td class="last center"><?=$row['subTotal'];?></td>
+                    <td class="last center"><?=$row['descuento'];?></td>
+                    <td class="last center"><?=$row['bonificacion'];?></td>
+                    <td class="last center"><?=$row['total'];?></td>
+                    <td class="last center"><?=$row['aCuenta'];?></td>
+                    <td class="last center"><?=$row['saldo'];?></td>
+                    <td class="last center"><?=$row['obser'];?></td>
+                    <td class="last center">
+                    <?PHP
+                      if( $row['tipo']=='con' )
+                        echo 'Al Contado';
+                      else
+                        echo 'Al Credito';
+                    ?>
                     </td>
-                    <td class="last center"><?=$row['nombre'];?></td>
-                    <td class="last center"><?=$row['apP'];?></td>
-                    <td class="last center"><?=$row['apM'];?></td>
-                    <td class="last center"><?=$op->toSelect($row['cargo']);?></td>
+                    <td class="last center <?=$row['status1'];?>">
+
+                        <a class="status1" href="javascript:void(0)" onClick="open_win('modulo/pedido/checkPedido.php', '', '710', '520', '<?=$row['id_pedido'];?>');"><?=$row['status1'];?></a></td>
+
+                    <td class="last center <?=str_replace(' ', '', $row['status2']);?>">
+
+                        <a class="status2" href="javascript:void(0)" onClick="open_win('modulo/pedido/checkPedidoA.php', '', '710', '520', '<?=$row['id_pedido'];?>');"><?=$row['status2'];?></a></td>
+
                     <td width="15%">
                         <div class="btn-group" style="width: 188px">
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataPreview"
@@ -181,22 +193,6 @@ include 'delEmpleado.php';
                         <div style="width: 188px; margin-top: 5px">
                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#dataDelete" data-id="<?=$row['id_empleado']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
                             </button>
-
-                            <div class="checkbox" id="status<?=$row['id_empleado']?>">
-                                    <?PHP
-                                    if( $row['statusEmp'] == 'Activo' ){
-                                    ?>
-                                        <input type="checkbox" name="checks" checked id="<?=$row['id_empleado']?>"/>
-                                        <label>Status</label>
-                                    <?PHP
-                                    }else{
-                                    ?>
-                                        <input type="checkbox" name="checks" id="<?=$row['id_empleado']?>"/>
-                                        <label>Status</label>
-                                    <?PHP
-                                    }
-                                    ?>
-                            </div>
                         </div>
                     </td>
                 </tr>
@@ -208,11 +204,17 @@ include 'delEmpleado.php';
             <tr>
                 <th>Nº</th>
                 <th>Fecha</th>
-                <th>Foto</th>
-                <th>Nombre</th>
-                <th>Ap. Paterno</th>
-                <th>Ap. Materno</th>
-                <th>Cargo</th>
+                <th>N&deg; pedido</th>
+                <th>SubTotal</th>
+                <th>Des.</th>
+                <th>Bonf.</th>
+                <th>Total</th>
+                <th>a cuenta</th>
+                <th>saldo</th>
+                <th>Observaciones</th>
+                <th>Tipo de Pago</th>
+                <th>Status Contador</th>
+                <th>Status Almacen</th>
                 <th>Acciones</th>
             </tr>
             </tfoot>

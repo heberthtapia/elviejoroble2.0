@@ -160,9 +160,11 @@ Camera slide up
     bottom: -1px;
 }
 
-/***  Estilos para el modal  ****/
+/**
+ * Estilos para el modal
+ */
 
-#mapa, #mapaU {
+#mapa, #mapaU, #mapaP {
     width: 345px;
     height: 220px;
 
@@ -182,3 +184,484 @@ div#foto img, div#fotoU img {
 
     margin-right: 15px;
 }
+
+/**
+ *  ESTILOS GENERALES ADMIN
+ */
+
+       .subnavegador{
+            background: #0e1a49 none repeat scroll 0 0;
+        }
+        ul.subnavegador li{
+            margin-left: 5px;
+        }
+        ul.subnavegador li a{
+            font-size: 15px;
+        }
+/***************************/
+        .at-error {
+            /* placed on a error labels */
+            color: #A94442;
+            margin: 6px 0;
+        }
+
+        .at-warning {
+            /* placed on a warning (invalid) labels */
+            color: #8A6D3B;
+            margin: 6px 0;
+        }
+
+        .at-invalid {
+            /* placed on a invalid fields (which do not match with their filters or masks) */
+        }
+
+        .at-required {
+            /* placed on a required fields (which are not filled) */
+        }
+
+        .at-description {
+            /* placed on description paragrapher, right after TEXTAREA fields. */
+        }
+
+        .at-description > span {
+            /* into description paragrapher, right after TEXTAREA fields there are 2 span TAGs. */
+        }
+
+        .at-required-highlight {
+            /* highlight required form fields */
+            color: red;
+        }
+
+        .alert {
+            border: 1px solid transparent;
+            border-radius: 4px;
+            margin-bottom: 0px;
+            padding: 10px;
+        }
+
+        #alert{
+            display: none;
+        }
+
+        input{
+            text-transform: capitalize;
+        }
+        input#idInv, input#producto{
+            text-transform: uppercase;
+        }
+        input#codUser,
+        input#codUserU,
+        input#password,
+        input#passwordU,
+        input#email,
+        input#emailU{
+            text-transform: none;
+        }
+        .form-error{
+            font-size: 9px;
+        }
+        #tablaList tbody tr td{
+            text-transform: capitalize;
+        }
+        #max-length-element,
+        #maxText{
+            font-size: 11px;
+            margin: 0;
+        }
+
+        .ui-helper-hidden-accessible {
+            border: 0 none;
+            clip: rect(0px, 0px, 0px, 0px);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+
+/**
+ * MODULO PEDIDO
+ */
+.ui-autocomplete-loading {
+    background: white url('../images/ui-anim_basic_16x16.gif') right center no-repeat;
+}
+
+div#preventa {
+    /* width: 1100px;
+    margin: auto;*/
+}
+
+/*div#preventa p {
+    font-family: 'Century Gothic';
+    font-size: 14px;
+    font-weight: bold;
+
+    margin: 10px 0 10px 0;
+
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #a3321d;
+    text-shadow: 2px 2px 2px #999;
+}
+
+div#preizq {
+    float: left;
+}
+
+div#preder {
+    float: right;
+}
+*/
+div#ventIzq {
+    padding: 10px 10px;
+
+    border-top: 2px #01406b groove;
+}
+
+div#ventIzq h4, div#ventDe h4, div#listaProd h4 {
+    font-family: 'Century Gothic';
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    color: #a3321d;
+    text-shadow: 2px 2px 2px #999;
+}
+
+div#ventCent {
+    min-height: 420px;
+    padding: 10px 10px;
+
+    border-top: 2px #01406b groove;
+    border-right: 2px #01406b groove;
+    border-left: 2px #01406b groove;
+}
+
+div#ventDer {
+    border-top: 2px #01406b groove;
+}
+
+div#ventDer1 {
+    border-top: 2px #01406b groove;
+    border-left: 2px #01406b groove;
+}
+
+textarea#obs {
+    font-size: 10px;
+    height: 15em;
+    overflow: auto;
+}
+
+#tabla {
+    font-family: 'Century Gothic';
+    font-size: 11px;
+
+    width: 100%;
+
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+#tabla thead tr {
+    background-color: #a3321d;
+}
+
+#tabla thead tr, table tfoot tr {
+    font-weight: bold;
+
+    /*text-shadow: 1px 1px #000;*/
+}
+
+#tabla tbody tr.odd {
+    background-color: #f0f0f6;
+}
+
+#tabla tbody tr.even {
+    background-color: #fff;
+}
+
+/**
+ * TABLA DE PRODUCTO
+ */
+table thead tr, table tfoot tr {
+    font-weight: bold;
+    text-shadow: 1px 1px #000000;
+}
+
+form#venta {
+    width: 700px;
+    margin: auto;
+}
+
+#tabla {
+    font-family: 'Century Gothic';
+    font-size: 11px;
+
+    width: 100%;
+}
+#tabla tr th#oculto {
+    margin: 0;
+    padding: 0;
+
+    border: none;
+}
+#tabla thead tr {
+    background-color: #a3321d;
+}
+#tabla tbody tr.odd {
+    background-color: #f0f0f6;
+}
+#tabla tbody tr.even {
+    background-color: #fff;
+}
+#tabla thead tr th {
+    padding: 5px;
+
+    text-align: center;
+    vertical-align: middle;
+
+    color: #fff;
+    border: 1px solid #999;
+}
+form#formPreVenta input[type='text']#subTotal, form#formPreVenta input[type='text']#total, form#formPreVenta input[type='text']#descuento, form#formPreVenta input[type='text']#bonificacion {
+    font-size: 12px;
+
+    width: 4.5em;
+
+    text-align: right;
+    /*font-weight:bold;*/
+
+    color: #000;
+    border: none;
+    background-color: transparent;
+}
+form#formPreVenta input[type='text']#cantidad, form#formPreVenta input[type='text']#precio {
+    font-size: 12px;
+    /* Para la fecha */
+
+    width: 100%;
+
+    text-align: center;
+    /*font-weight:bold;*/
+
+    color: #000;
+    border: none;
+    background-color: transparent;
+}
+form#venta input[type='text']#subTotal:hover, form#venta input[type='text']#total:hover, form#venta input[type='text']#cantidad:hover, form#venta input[type='text']#precio:hover {
+    border: none;
+    -webkit-box-shadow: 0 0 0 #fff;
+       -moz-box-shadow: 0 0 0 #fff;
+            box-shadow: 0 0 0 #fff;
+}
+#tabla tbody tr td {
+    text-align: center;
+
+    border: 1px solid #999;
+}
+#tabla tbody tr td.det {
+    font-size: 12px;
+
+    padding: 7px 0 ;
+}
+#tabla tfoot tr {
+    margin: 5px 0;
+}
+#tabla tfoot tr th {
+    padding: 4px 0;
+
+    text-align: right;
+}
+.delet {
+    margin-top: 5px;
+}
+form#venta input[type='text']#name, form#venta input[type='text']#paterno, form#venta input[type='text']#materno {
+    font-family: 'Century Gothic';
+    font-size: 12px;
+
+    width: 8.5em;
+
+    text-align: left;
+
+    border: 1px solid #666;
+    background-color: #fff;
+}
+form#venta input[type='text']#nit {
+    font-family: 'Century Gothic';
+    font-size: 12px;
+
+    width: 8.5em;
+
+    text-align: left;
+
+    border: 1px solid #666;
+    background-color: #fff;
+}
+form#venta input[type='text']#name:hover, form#venta input[type='text']#name:focus, form#venta input[type='text']#paterno:hover, form#venta input[type='text']#paterno:focus, form#venta input[type='text']#materno:hover, form#venta input[type='text']#materno:focus {
+    border: 1px solid #207ce5;
+    -webkit-box-shadow: 0 0 3px #207ce5;
+       -moz-box-shadow: 0 0 3px #207ce5;
+            box-shadow: 0 0 3px #207ce5;
+}
+
+form#venta input[type='text']#materno:nit {
+    border: 1px solid #207ce5;
+    -webkit-box-shadow: 0 0 3px #207ce5;
+       -moz-box-shadow: 0 0 3px #207ce5;
+            box-shadow: 0 0 3px #207ce5;
+}
+
+form#venta div.idealWrap > label {
+    font-weight: bold;
+
+    float: left;
+
+    width: 6em;  /* Label width */
+}
+
+form#venta div.Wrap {
+    float: left;
+
+    width: 222px;
+    margin: .5em 0;
+}
+
+form#venta div.WrapD {
+    float: left;
+
+    width: 185px;
+    margin: .5em 0;
+}
+
+.delete{
+    padding: 0 5px;
+}
+
+.del{
+    color: #0E1A35;
+    cursor: pointer;
+}
+.del:hover{
+    color: red;
+}
+
+/**
+ * TABLA LISTA PRODUCTO
+ */
+
+table#listaP * {height: auto; min-height: none;} /* fixed ie9 & <*/
+table#listaP {
+  background: ##F7F7F7;
+  table-layout: fixed;
+  /*margin: 1rem auto;*/
+  width: 100%;
+  /*box-shadow: 0 0 4px 2px rgba(0,0,0,.4);*/
+  border-collapse: collapse;
+ /* border: 1px solid rgba(0,0,0,.5);*/
+  border-top: 0 none;
+}
+table#listaP thead {
+  background: #A3321D;
+  z-index: 2;
+}
+table#listaP thead tr {
+  padding-right: 17px;
+  /*box-shadow: 0 4px 6px rgba(0,0,0,.6);*/
+  z-index: 2;
+}
+table#listaP th {
+  border-right: 1px solid rgba(0,0,0,.2);
+  text-align: center;
+  padding: 5px;
+  font-size: 11px;
+  font-weight: normal;
+  font-variant: small-caps;
+}
+table#listaP tbody {
+  display: block;
+  height: 350px;/*calc(50vh - 1px);*/
+  min-height: 295px; /*calc(200px + 1 px);*/
+  /*use calc for fixed ie9 & <*/
+  overflow-Y: scroll;
+  color: #000;
+}
+table#listaP tr {
+  display: block;
+  overflow: hidden;
+}
+table#listaP tbody tr:nth-child(odd) {
+  background: rgba(0,0,0,.2);
+}
+table#listaP td{
+    width: 80px;
+    }
+table#listaP th {
+  width: 80px;
+  /*float:left;*/
+  color: #ffffff;
+  font-weight: bold;
+}
+table#listaP td {
+  padding: 5px;
+  border-right: 1px solid rgba(0,0,0,.2);
+  vertical-align: middle;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+table#listaP td:nth-child(2n) {color: #000;}
+
+table#listaP th:last-child, table#listaP td:last-child {
+  width: 90px;
+  text-align: center;
+  border-right: 0 none;
+  padding-left: 0;
+}
+
+
+@media only screen and (max-width:600px) {
+ table#listaP {
+    border-top: 1px solid ;
+  }
+ table#listaP thead {display: none;}
+ table#listaP tbody {
+    height: auto;
+    max-height: 55vh;
+  }
+ table#listaP tr {
+    border-bottom: 1px solid rgba(0,0,0,.35);
+  }
+ table#listaP tbody tr:nth-child(odd) {background: #15BFCC;}
+ table#listaP tbody tr:nth-child(even) {background:#FF7361;}
+ table#listaP td {
+    display: block;
+    width: 100%;
+    min-width: 100%;
+    padding: .4rem .5rem .4rem 40%;
+    border-right: 0 none;
+  }
+ table#listaP td:before {
+    content: attr(data-campo);
+    background: rgba(0,0,0,.1);
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: auto;
+    min-width: 37%;
+    padding-left: .5rem;
+    font-family: monospace;
+    font-size: 150%;
+    font-variant: small-caps;
+    line-height: 1.8;
+  }
+ table#listaP tbody td:last-child {
+    text-align: left;
+    padding-left: 40%;
+  }
+ table#listaP td:nth-child(even) {
+    background: rgba(0,0,0,.2);
+  }
+}
+a {color: #FF7361}

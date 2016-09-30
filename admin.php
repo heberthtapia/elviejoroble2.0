@@ -151,6 +151,10 @@ if (isset($_POST['from']))
     <link rel="stylesheet" href="css/theme-default.css">
     <link rel="stylesheet" href="uploadify/uploadify.css">
     <link rel="stylesheet" href="css/square/blue.css">
+    <!--Autocomplete-->
+    <link rel="stylesheet" href="css/themes/base/jquery.ui.autocomplete.css">
+
+    <link rel="stylesheet" href="css/themes/base/jquery-ui-1.10.4.custom.css">
     <link rel="stylesheet" href="css/myStyle.css">
 
     <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
@@ -173,88 +177,16 @@ if (isset($_POST['from']))
     <script type="text/javascript" src="uploadify/jquery.uploadify-3.1.js"></script>
     <!--icheck-->
     <script type="text/javascript" src="js/icheck.js"></script>
+    <!--Autocomplete-->
+    <script src="js/ui/jquery.ui.core.js"></script>
+    <script src="js/ui/jquery.ui.widget.js"></script>
+    <script src="js/ui/jquery.ui.position.js"></script>
+    <script src="js/ui/jquery.ui.menu.js"></script>
+    <script src="js/ui/jquery.ui.autocomplete.js"></script>
+
+
     <script type="text/javascript" src="js/myJavaScript.js"></script>
 
-    <style>
-        .subnavegador{
-            background: #0e1a49 none repeat scroll 0 0;
-        }
-        ul.subnavegador li{
-            margin-left: 5px;
-        }
-        ul.subnavegador li a{
-            font-size: 15px;
-        }
-/***************************/
-        .at-error {
-            /* placed on a error labels */
-            color: #A94442;
-            margin: 6px 0;
-        }
-
-        .at-warning {
-            /* placed on a warning (invalid) labels */
-            color: #8A6D3B;
-            margin: 6px 0;
-        }
-
-        .at-invalid {
-            /* placed on a invalid fields (which do not match with their filters or masks) */
-        }
-
-        .at-required {
-            /* placed on a required fields (which are not filled) */
-        }
-
-        .at-description {
-            /* placed on description paragrapher, right after TEXTAREA fields. */
-        }
-
-        .at-description > span {
-            /* into description paragrapher, right after TEXTAREA fields there are 2 span TAGs. */
-        }
-
-        .at-required-highlight {
-            /* highlight required form fields */
-            color: red;
-        }
-
-        .alert {
-            border: 1px solid transparent;
-            border-radius: 4px;
-            margin-bottom: 0px;
-            padding: 10px;
-        }
-
-        #alert{
-            display: none;
-        }
-
-        input{
-            text-transform: capitalize;
-        }
-        input#idInv{
-            text-transform: uppercase;
-        }
-        input#codUser,
-        input#codUserU,
-        input#password,
-        input#passwordU,
-        input#email,
-        input#emailU{
-            text-transform: none;
-        }
-        .form-error{
-            font-size: 9px;
-        }
-        #tablaList tbody tr td{
-            text-transform: capitalize;
-        }
-        #max-length-element,
-        #maxText{
-            font-size: 11px;
-        }
-    </style>
 </head>
 <body>
 <div class="container-fluid display-table">
@@ -279,12 +211,12 @@ if (isset($_POST['from']))
                             <span class="hidden-xs hidden-sm">Pedidos</span>
                         </a>
                         <ul class="subnavegador">
-                            <li><a href="#">
+                            <li><a href="#" onClick="despliega('modulo/pedido/newPedido.php','contenido')">
                                     <i class="fa fa-plus-square-o" aria-hidden="true"></i>
                                     <span class="hidden-xs hidden-sm">Nuevo Pedido</span>
                                 </a>
                             </li>
-                            <li><a href="#">
+                            <li><a href="#" onclick="despliega('modulo/pedido/pedido.php','contenido')">
                                     <i class="fa fa-list" aria-hidden="true"></i>
                                     <span class="hidden-xs hidden-sm">Lista de Pedidos</span>
                                 </a>

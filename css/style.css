@@ -4,6 +4,7 @@
 a:focus,a:hover,a{
 	outline:none;
 	text-decoration: none;
+	text-transform: capitalize;
 }
 li,ul{
 	list-style: none;

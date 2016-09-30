@@ -378,8 +378,8 @@ $hora = $op->Time();
                 <div class="row">
                     <div class="col-md-12 form-group">
                         <label for="obser" class="sr-only"></label>
-                        <span id="max-length-element">200</span> caracteres restantes
-                        <textarea id="obser" name="obser" cols="2" placeholder="Observaciones" class="form-control validate[custom[onlyLetterSp]]"></textarea>
+                        <p id="maxText"><span id="max-length-element">200</span> caracteres restantes</p>
+                        <textarea id="obser" name="obser" cols="2" placeholder="Observaciones" class="form-control"></textarea>
                     </div>
                 </div>
                 <div class="row">
