@@ -254,15 +254,44 @@ div#foto img, div#fotoU img {
         input#password,
         input#passwordU,
         input#email,
-        input#emailU{
+        input#emailU,
+        input#username{
             text-transform: none;
         }
         .form-error{
             font-size: 9px;
         }
+        #error-container, #error-container1{
+            margin-left: 114px;
+        }
+        #tablaList{
+            font-size: 12px;
+        }
+        #tablaList thead tr th, #tablaList tfoot tr th{
+            text-transform: uppercase;
+            text-align: center;
+            vertical-align: middle;
+        }
         #tablaList tbody tr td{
             text-transform: capitalize;
+            vertical-align: middle;
         }
+
+        .Pendiente, .NoEntregado {
+            background-color: rgba(249, 2, 2, 0.8);
+            text-align: center;
+        }
+        .Aprobado, .Entregado {
+            background-color: rgba(34, 178, 6, 0.8);
+            text-align: center;
+        }
+        table#tablaList td a {
+            color: #f0f0f0;
+            font-weight: bold;
+            text-decoration: none;
+            text-shadow: 1px 1px #000;
+        }
+
         #max-length-element,
         #maxText{
             font-size: 11px;
@@ -387,7 +416,7 @@ textarea#obs {
  */
 table thead tr, table tfoot tr {
     font-weight: bold;
-    text-shadow: 1px 1px #000000;
+    /*text-shadow: 1px 1px #000000;*/
 }
 
 form#venta {
@@ -458,6 +487,7 @@ form#venta input[type='text']#subTotal:hover, form#venta input[type='text']#tota
 }
 #tabla tbody tr td {
     text-align: center;
+    text-transform: uppercase;
 
     border: 1px solid #999;
 }
@@ -609,6 +639,11 @@ table#listaP td {
   vertical-align: middle;
   text-transform: uppercase;
   font-size: 10px;
+}
+table#listaP td a{
+    text-transform: uppercase;
+    cursor: pointer;
+    color: blue;
 }
 table#listaP td:nth-child(2n) {color: #000;}
 

@@ -113,25 +113,29 @@ function saveForm(idForm, p){
             if(data.tabla === 'pedido'){
                 //fnClickAddRowInvG(data,true);
                 /* CAMBIIO STASTUS CONTADOR */
-
+                $('#modalCheckPedido').modal('hide');
                 if(data.OkCont === 0){
                     $('tr#tb'+data.pedido+' td.Pendiente').removeClass('Pendiente').addClass('Aprobado');
-                    $('tr#tb'+data.pedido+' td.Aprobado a').text('APROBADO');
+                    $('tr#tb'+data.pedido+' td.Aprobado a').text('Aprobado');
+                    $('tr#tb'+data.pedido+' td.Aprobado a').removeAttr('data-status1');
+                    $('tr#tb'+data.pedido+' td.Aprobado a').attr('data-status1','Aprobado');
                 }else{
                     if(data.OkCont === 1){
                         $('tr#tb'+data.pedido+' td.Aprobado').removeClass('Aprobado').addClass('Pendiente');
-                        $('tr#tb'+data.pedido+' td.Pendiente a').text('PENDIENTE');
+                        $('tr#tb'+data.pedido+' td.Pendiente a').text('Pendiente');
+                        $('tr#tb'+data.pedido+' td.Pendiente a').removeAttr('data-status1');
+                        $('tr#tb'+data.pedido+' td.Pendiente a').attr('data-status1','Pendiente');
                     }else{
                         /* CAMBIIO STASTUS ALMACEN */
                         if(data.OkAlm === 0){
                             $('tr#tb'+data.pedido+' td.NoEntregado').removeClass('NoEntregado').addClass('Entregado');
-                            $('tr#tb'+data.pedido+' td.Entregado a').text('ENTREGADO');
+                            $('tr#tb'+data.pedido+' td.Entregado a').text('Entregado');
                         }else{
                             if(data.OkAlm === 1){
                                 $('tr#tb'+data.pedido+' td.Entregado').removeClass('Entregado').addClass('NoEntregado');
-                                $('tr#tb'+data.pedido+' td.NoEntregado a').text('NO ENTREGADO');
+                                $('tr#tb'+data.pedido+' td.NoEntregado a').text('No Entregado');
                             }else{
-                                despliega('modulo/pedido/listPedido.php','contenido');
+                                despliega('modulo/pedido/pedido.php','contenido');
                             }
                         }
                     }
@@ -332,6 +336,15 @@ function adicFila(idForm, p){
             total = parseFloat(subPrecio)-parseFloat(des)-parseFloat(bon);
             $('#tabla tfoot').find('tr').eq(3).find('th').eq(1).find('input').val(total.toFixed(2));
 
+            /**
+             * Quitar la validacion
+             */
+            $('#ventIzq').find('div').removeClass('has-success');
+            $('#ventIzq').find('label').removeClass('has-success');
+            $('#ventIzq').find('#producto, #cant').removeClass('valid');
+            /**
+             * Fin
+             */
         },
         error: function(data){
             alert('Error al guardar el formulario');
@@ -535,11 +548,62 @@ function savePedido(idForm, p){
         async:true,
         data:{res:dato},
         success: function(data){
-            despliega('modulo/pedido/listPedido.php','contenido');
+            despliega('modulo/pedido/pedido.php','contenido');
             window.open('modulo/pedido/pdfPedido.php?res='+dato, '_blank');
         },
         error: function(data){
             alert('Error al guardar el formulario');
             }
     });
+}
+
+/**
+ * CANCELAR PEDIDO
+ */
+
+function cancelarPedido(){
+    despliega('modulo/pedido/tabla.php','ventCent');
+}
+/**
+ * [detalle description genera pdf]
+ * @param  {[type]} id [description]
+ * @return {[type]}    [description]
+ */
+function detalle(id){
+    window.open('modulo/pedido/pdfPedDet.php?res='+id, '_blank');
+}
+/**
+ * [selecCampo Recarga camppo producto]
+ * @param  {[type]} name [input producto]
+ * @return {[type]}      [description]
+ */
+function selecCampo( name ){
+    $('#producto').val(name);
+}
+/**
+ * [deleteRowBD Elimina un registritro del modulo de pedido]
+ * @param  {[type]} p     [pagina]
+ * @param  {[type]} idTr  [id a eliminar]
+ * @param  {[type]} tipo  [descripticion de modulo]
+ * @param  {[type]} table [tabla de BD]
+ * @return {[type]}       [Elimina el item]
+ */
+function deleteRowBD(p, idTr, tipo, table){
+  var resp=0;
+   rr = $.ajax({
+        url: 'modulo/'+tipo+'/'+p,
+        type: 'post',
+        async:false,
+        data: 'id='+idTr+'&tipo='+tipo+'&table='+table,
+        success: function(data){
+            if(data!=1)
+                alert('No se puede eliminar el ITEM.');
+            else
+                resp = data;
+        },
+        error: function(data){
+            alert('Error al eliminar el ITEM.');
+            }
+      });
+      return resp;
 }

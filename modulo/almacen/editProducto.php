@@ -100,7 +100,7 @@ $hora = $op->Time();
 		var precioCF = button.data('preciocf'); // Extraer la información de atributos de datos
 		var precioSF = button.data('preciosf'); // Extraer la información de atributos de datos
 
-		var modal = $(this)
+		var modal = $(this);
 		modal.find('.modal-title').text('Modificar Producto: '+detalle);
 		modal.find('.modal-body #detalle').val(detalle);
 		modal.find('.modal-body #idInv').val(id);

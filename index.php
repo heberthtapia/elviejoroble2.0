@@ -38,28 +38,6 @@
     <script type="text/javascript" language="javascript" class="init">
 
         $(document).ready(function() {
-            $('[data-toggle="offcanvas"]').click(function(){
-                $("#navigation").toggleClass("hidden-xs");
-            });
-
-            $('#example').DataTable({
-                "language": {
-                    "lengthMenu": "Mostrar _MENU_ filas por pagina",
-                    "zeroRecords": "No se encontro nada - Lo siento",
-                    "info": "Mostrando _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay registros disponibles",
-                    "infoFiltered": "(Filtrada de _MAX_ registros en total)",
-                    "search":         "Buscar:",
-                    "paginate": {
-                        "first":      "Primero",
-                        "last":       "Ultimo",
-                        "next":       "Siguiente",
-                        "previous":   "Anterior"
-                    }
-
-                },
-
-            });
 
             $('#myModal').modal({
                 show: true,

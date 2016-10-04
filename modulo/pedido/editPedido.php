@@ -1,6 +1,6 @@
 <?PHP
 	include '../../adodb5/adodb.inc.php';
-	include '../../classes/function.php';
+	include '../../inc/function.php';
 
 	$db = NewADOConnection('mysqli');
 	//$db->debug = true;
@@ -25,111 +25,122 @@
 	$rcl = $sql->FetchRow();
 
 ?>
-<style>
-a.button{
-	width:11.5em;
-	}
-.obs{
-	padding:0 20px;
-	width:198px;
-	}
-textarea#obs {     	/* Para el resumen */
-	width: 185px;
-	height: 12em;
-	overflow: auto;
-}
-.ui-autocomplete-loading { background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat; }
-
+<style type="text/css">
+  #error-container-radio{
+    margin: 5px 0 0 15px;
+  }
 </style>
-<div class="titulo">
-  <div class="subTit"><p class="text_titulo">PEDIDO</p></div>
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12">
+    <h1 class="avisos" align="center"><strong>PEDIDO</strong></h1>
+  </div>
+</div>
 
-  <form id="formPreVenta" class="ideal-form" action="javascript:savePedido('formPreVenta','update.php')" >
+<form id="formPreVenta" class="form-horizontal" action="javascript:savePedido('formPreVenta','update.php')" >
 
-  <div id="preventa">
-  	<div id="preizq">
-        <div class="idealWrap WrapPre">
-        <label>FECHA: </label>
-        <input id="fecha" name="fecha" type="text" value="<?=$fecha;?> <?=$hora;?>" disabled="disabled" />
-        <input id="date" name="date" type="hidden" value="<?=$fecha;?> <?=$hora;?>" />
-        </div><!--End idealWrap-->
-        <div class="clearfix"></div>
+<div class="row">
+  <div id="preventa" class="col-xs-12 col-sm-12 col-md-12">
+    <div id="preizq" class="col-md-6">
+        <div class="form-group">
+          <label for="fecha" class="col-sm-2 control-label">FECHA: </label>
+          <div class="col-sm-6">
+            <input id="fecha" name="fecha" type="text" value="<?=$fecha;?> <?=$hora;?>" disabled="disabled" class="form-control"/>
+            <input id="date" name="date" type="hidden" value="<?=$fecha;?> <?=$hora;?>" />
+          </div>
+        </div>
 
-        <div class="idealWrap">
-        <label>Cliente: </label>
-        <input id="cliente" name="cliente" type="text" class="validate[required] text-input" value="<?=$rcl['nombreEmp'].' - '.$rcl['nombre'].' '.$rcl['apP'].' '.$rcl['apM']?>"/>
-
-        <input id="idCliente" name="idCliente" type="hidden" value="<?=$rcl['id_cliente']?>" />
-        </div><!--End idealWrap-->
+        <div class="form-group">
+        <label for="cliente" class="col-sm-2 control-label">Cliente: </label>
+        <div class="col-sm-10">
+          <input id="cliente" name="cliente" type="text" class="form-control" data-validation="required" value="<?=$rcl['nombreEmp'].' - '.$rcl['nombre'].' '.$rcl['apP'].' '.$rcl['apM']?>"/>
+          <input id="idCliente" name="idCliente" type="hidden" value="<?=$rcl['id_cliente']?>" />
+        </div>
+        </div>
     </div><!--End preizq-->
-    <div id="preder">
-        <div class="idealWrap WrapPre">
-        <label>N&deg; pedido: </label>
-        <input id="pedido" name="pedido" type="text" disabled value="PD-<?=$op->ceros($file['id_pedido'],7);?>"/>
-        <input id="pedido" name="pedido" type="hidden" value="<?=$op->ceros($file['id_pedido'],7);?>"/>
-        </div><!--End idealWrap-->
+    <div id="preder" class="col-md-3 col-md-offset-3">
+
+        <div class="form-group">
+        <label class="col-sm-4 control-label">N&deg; pedido: </label>
+        <div class="col-sm-8">
+          <input id="pedido" name="pedido" type="text" disabled value="PD-<?=$op->ceros($file['id_pedido'],5);?>" class="form-control"/>
+          <input id="pedido" name="pedido" type="hidden" value="<?=$op->ceros($file['id_pedido'],5);?>"/>
+        </div>
+        </div>
+
     </div><!--End preder-->
-    <div class="clearfix"></div>
+  </div><!--End preventa-->
+</div>
 
-    <div id="ventIzq">
-      <div id="ventIq">
-        <p>NUEVO PRODUCTO</p>
-        <div class="idealWrap WrapPre">
-        <label>Producto: </label>
-        <input id="producto" name="producto" type="text"/>
-        </div><!--End idealWrap-->
+  <div class="row" style="border-bottom: 2px #01406b groove;">
+    <div id="ventIzq" class="col-md-2">
 
-        <div class="idealWrap WrapPre">
-        <label>Cantidad: </label>
-        <input id="cant" name="cant" type="text" autocomplete="off"/>
-        </div><!--End idealWrap-->
+        <h4 align="center">NUEVO<br>PRODUCTO</h4>
+
+        <div class="col-md-12">
+        <label class="control-label">Producto: </label>
+        <input id="producto" name="producto" type="text" class="form-control" data-validation="required" data-validation-optional="true"/>
+        </div>
+
+        <div class="col-md-12">
+        <label class="control-label">Cantidad: </label>
+        <input id="cant" name="cant" type="text" autocomplete="off" class="form-control" data-validation="number" data-validation-optional="true" />
+        </div>
         <div class="clearfix"></div>
-
-        <div class="idealWrap" align="center">
-            <input type="button" id="confPedido" value="Añadir" onclick="adicFilaEdit('formPreVenta','producto.php');"/>
-        </div>
-      </div>
-
-        <div class="idealWrap" align="center">
-            <input type="submit" id="submit" value="Confirmar Pedido" class="formPedido"/>
+        <br>
+        <div class="form-group" align="center">
+            <button id="confPedido" type="button" class="btn btn-primary" onclick="adicFila('formPreVenta','producto.php');">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              <span>Anadir</span>
+            </button>
         </div>
 
-        <div class="idealWrap" align="center">
-            <input type="button" id="cancelar" value="Cancelar" class="formPedido" onclick=""/>
+        <div class="form-group" align="center">
+            <button id="submit" type="submit" class="btn btn-success" >
+              <i class="fa fa-check" aria-hidden="true"></i>
+              <span>Confirmar pedido</span>
+            </button>
         </div>
 
-        <div class="idealWrap" align="center">
-            <input type="button" id="imprimir" value="Imprimir" class="formPedido" onclick=""/>
+        <div class="form-group" align="center">
+            <button id="submit" type="reset" class="btn btn-danger" onclick="cancelarPedido();">
+              <i class="fa fa-close" aria-hidden="true"></i>
+              <span>Cancelar</span>
+            </button>
         </div>
 
-     </div><!--End ventIzq-->
+        <div class="form-group" align="center">
+            <button id="submit" type="button" class="btn btn-primary" onclick="">
+              <i class="fa fa-print" aria-hidden="true"></i>
+              <span>Imprimir</span>
+            </button>
+        </div>
+    </div><!--End ventIzq-->
 
-     <div id="ventCent">
-
-      <table id="tabla" align="center" width="450">
+    <div id="ventCent" class="col-md-6">
+      <table id="tabla" align="center">
           <thead>
             <tr>
               <th width="270">PRODUCTO</th>
               <th>CANT.</th>
-              <th width="60">P. UNIT (Bs)</th>
-              <th>DESC.</th>
-              <th>BONIF.</th>
-              <th width="80">SUBTOTAL (Bs)</th>
+              <th width="70">P. UNIT (Bs)</th>
+              <th width="70">DESC.</th>
+              <th width="70">BONIF.</th>
+              <th width="90">SUBTOTAL (Bs)</th>
               <th id="oculto"></th>
             </tr>
           </thead>
           <tbody>
-          	<?PHP
-				$strSql = "SELECT p.*,pe.*, i.id_inventario, i.detalle FROM pedido AS p, pedidoEmp AS pe, inventario AS i ";
-				$strSql.= "WHERE p.id_pedido = pe.id_pedido ";
-				$strSql.= "AND p.id_pedido = '".$id."' ";
-				$strSql.= "AND i.id_inventario = pe.id_inventario";
+            <?PHP
+              $strSql = "SELECT p.*,pe.*, i.id_inventario, i.detalle FROM pedido AS p, pedidoEmp AS pe, inventario AS i ";
+              $strSql.= "WHERE p.id_pedido = pe.id_pedido ";
+              $strSql.= "AND p.id_pedido = '".$id."' ";
+              $strSql.= "AND i.id_inventario = pe.id_inventario";
 
-				$str = $db->Execute($strSql);
+              $str = $db->Execute($strSql);
 
-				 while($row = $str->FetchRow()){
+              while($row = $str->FetchRow()){
 
-			?>
+            ?>
             <tr id="<?=$row['id_inventario']?>">
               <td class="det"><?=$row['id_inventario']?> <?=$row['detalle']?>
               <input type="hidden" id="item" name="item" value="<?=$row['id_inventario']?>" ></td>
@@ -146,11 +157,11 @@ textarea#obs {     	/* Para el resumen */
               <td></td>
               <td></td>
               <td><input type="text" disabled="disabled" id="subTotal" name="subTotal" value="<?=$row['cantidad']*$row['precio']?>" ></td>
-              <td align="right"><a onclick="eliminarFila('<?=$row['id_inventario']?>')"><img class="delet" src="images/delete.png" width="16" height="16" /></a></td>
+              <td align="right" class="delete"><a class="del" onclick="eliminarFila('<?=$row['id_inventario']?>')"><i class="fa fa-ban fa-2x" aria-hidden="true"></i></a></td>
              </tr>
             <?PHP
-				 }
-			?>
+            }
+            ?>
           </tbody>
           <tfoot>
               <tr>
@@ -185,92 +196,130 @@ textarea#obs {     	/* Para el resumen */
           </tfoot>
 
       </table >
+    </div><!--End ventCent-->
 
-     </div><!--End ventCent-->
-
-     <div id="ventDer">
-      <div id="ventDe">
-        <p>FORMA DE PAGO</p>
-        <div class="idealWrap WrapV">
+   <div id="ventDer" class="col-md-2">
+      <div id="ventDe" class="col-md-12">
+        <h4 align="center">FORMA DE PAGO</h4>
         <?PHP
-			if($row['tipo'] == 'con'){
-		?>
-        <label class="rp"><input type="radio" checked value="con" name="tipo" id="tipo" class="validate[required]"><span>&nbsp;</span>AL CONTADO</label>
-        <label class="rp"><input type="radio" value="cre" name="tipo" id="tipo" class="validate[required]"><span>&nbsp;</span>AL CREDITO</label>
+          if($row['tipo'] == 'con'){
+        ?>
+        <label class="control-label"><input type="radio" checked value="con" name="tipo" id="tipo" data-validation="required" data-validation-error-msg-container="#error-container-radio" ><span>&nbsp;</span> Al contado</label>
+        <label class="control-label"><input type="radio" value="cre" name="tipo" id="tipo" ><span>&nbsp;</span> Al credito</label>
+        <br>
         <?PHP
-			}else{
-		?>
-        <label class="rp"><input type="radio" value="con" name="tipo" id="tipo" class="validate[required]"><span>&nbsp;</span>AL CONTADO</label>
-        <label class="rp"><input type="radio" checked value="cre" name="tipo" id="tipo" class="validate[required]"><span>&nbsp;</span>AL CREDITO</label>
+        }else{
+        ?>
+        <label class="control-label"><input type="radio" value="con" name="tipo" id="tipo" data-validation="required" data-validation-error-msg-container="#error-container-radio" ><span>&nbsp;</span> Al contado</label>
+        <label class="control-label"><input type="radio" checked value="cre" name="tipo" id="tipo" ><span>&nbsp;</span> Al credito</label>
+        <br>
         <?PHP
-			}
-		?>
-        </div><!--End idealWrap-->
-        <div class="clearfix"></div>
-       </div>
-        <div class="idealWrap obs">
-        <label>Observaciones: </label>
-        <textarea id="obs" name="obs"></textarea>
-        </div><!--End idealWrap-->
+          }
+        ?>
 
-     </div><!--End ventDer-->
+      </div>
+      <div class="clearfix"></div>
+      <div id="error-container-radio"></div>
 
-  <div class="clearfix"></div>
-  </div><!--End preventa-->
+      <div class="col-md-12">
+        <label class="control-label">Observaciones: </label><br>
+        <p id="maxText"><span id="max-length-element">200</span> caracteres restantes</p>
+        <textarea id="obs" name="obs" class="form-control"></textarea>
+      </div>
+
+    </div><!--End ventDer-->
+
+     <div id="ventDer1" class="col-md-2">
+      <div id="listaProd">
+        <h4 align="center">LISTA DE PRODUCTOS</h4>
+        <?PHP
+          $sqlProd = "SELECT id_inventario, detalle FROM inventario ORDER BY id_inventario DESC";
+          $sql = $db->Execute($sqlProd);
+        ?>
+        <table id="listaP">
+          <thead>
+            <tr>
+                <th>CODIGO</th>
+                  <th>DETALLE</th>
+              </tr>
+          </thead>
+          <tbody>
+            <?PHP
+             while( $row = $sql->FetchRow()){
+        ?>
+              <tr>
+                <td><a onclick="selecCampo('<?=$row[0]?>');"><?=$row[0]?></a></td>
+                  <td><?=$row[1]?></td>
+              </tr>
+              <?PHP
+         }
+        ?>
+          </tbody>
+        </table>
+    </div>
+  </div>
+  </div>
 
   </form>
   <div class="clearfix"></div>
-</div><!--End titulo-->
+
 
 
 <script type="text/javascript" charset="utf-8">
-//========DataTables========
 
 recargaFila();
 
 var oTable;
 $(document).ready(function() {
 
+  $('#cliente').click(function(){
+    $(this).removeClass('valid');
+    $(this).removeClass('error');
+  });
 
+  $( "#cliente" ).autocomplete({
+    source: "inc/search.php",
+    minLength: 2,
+    select: function( event, ui ) {
+      log( ui.item.id
+        /*"Selected: " + ui.item.value + " aka " + ui.item.id :
+        "Nothing selected, input was " + this.value*/
+        );
+    }
+  });
 
-	function log( message ) {
-		$( "input#idCliente" ).val( message );
-		//$( "#log" ).scrollTop( 0 );
-	}
-	$( "#cliente" ).autocomplete({
-		source: "classes/search.php",
-		minLength: 2,
-		select: function( event, ui ) {
-			log( ui.item.id
+  $.validate({
+    lang: 'es',
+    modules : 'security, modules/logic'
+  });
 
-				/*"Selected: " + ui.item.value + " aka " + ui.item.id :
-				"Nothing selected, input was " + this.value*/
-				);
-		}
-	});
- 	/* idealForm */
-	$('#formPreVenta').idealForms();
-	/* Validación */
-	jQuery("#formPreVenta").validationEngine({
-		prettySelect	: true,
-		useSuffix		: "_chosen"
-	   // scroll		: false,
-	});
+  $('#obs').restrictLength( $('#max-length-element') );
 
-	deleteRow = function(p, idTr, table){
+  $('input').iCheck({
+    checkboxClass: 'icheckbox_square-blue',
+    radioClass: 'iradio_square-blue',
+    //increaseArea: '100%' // optional
+  });
 
-	var respuesta = confirm("SEGURO QUE DESEA ELIMINAR EL "+" ' "+table.toUpperCase()+" ' ");
-
-	if(respuesta){
-		var i = 1;
-		$('#tb'+idTr).addClass('row_selected');
-		var anSelected = fnGetSelected( oTable );
-
-		if ( anSelected.length !== 0 ) {
-			oTable.fnDeleteRow( anSelected[0] );
-			deleteRowBD(p, idTr, table);
-		}
-	}
+  function log( message ) {
+    $( "input#idCliente" ).val( message );
+    //$( "#log" ).scrollTop( 0 );
   }
+
+  deleteRow = function(p, idTr, table){
+
+  var respuesta = confirm("SEGURO QUE DESEA ELIMINAR EL "+" ' "+table.toUpperCase()+" ' ");
+
+  if(respuesta){
+    var i = 1;
+    $('#tb'+idTr).addClass('row_selected');
+    var anSelected = fnGetSelected( oTable );
+
+    if ( anSelected.length !== 0 ) {
+      oTable.fnDeleteRow( anSelected[0] );
+      deleteRowBD(p, idTr, table);
+    }
+  }
+  };
 });
 </script>

@@ -17,10 +17,10 @@
     $content = ob_get_clean();
 
     // convert to PDF
-    require_once(dirname(__FILE__).'/../../html2pdf_v4.03/html2pdf.class.php');
+    require_once(dirname(__FILE__).'/../../html2pdf/html2pdf.class.php');
     try
     {
-        $html2pdf = new HTML2PDF('P', 'letter', 'es', true, 'UTF-8', 3);
+        $html2pdf = new HTML2PDF('P', '140x216', 'es', true, 'UTF-8', 2, 1, 2, 1);
         $html2pdf->pdf->SetDisplayMode('fullpage');
         $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
         $html2pdf->Output('Pedido - '.$fecha.'.pdf');

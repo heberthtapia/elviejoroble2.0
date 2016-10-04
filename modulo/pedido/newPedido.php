@@ -18,14 +18,16 @@
 	else
 		$lastId[0]++;
 ?>
-
+<style type="text/css">
+  #error-container-radio{
+    margin: 5px 0 0 15px;
+  }
+</style>
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12">
     <h1 class="avisos" align="center"><strong>PEDIDO</strong></h1>
   </div>
 </div>
-
-
 
 <form id="formPreVenta" class="form-horizontal" action="javascript:savePedido('formPreVenta','savePedido.php')" >
 <div class="row">
@@ -52,8 +54,8 @@
         <div class="form-group">
         <label class="col-sm-4 control-label">N&deg; pedido: </label>
         <div class="col-sm-8">
-          <input id="pedido" name="pedido" type="text" disabled value="PD-<?=$op->ceros($lastId[0],7);?>" class="form-control"/>
-          <input id="pedido" name="pedido" type="hidden" value="<?=$op->ceros($lastId[0],7);?>"/>
+          <input id="pedido" name="pedido" type="text" disabled value="PD-<?=$op->ceros($lastId[0],5);?>" class="form-control"/>
+          <input id="pedido" name="pedido" type="hidden" value="<?=$op->ceros($lastId[0],5);?>"/>
         </div>
         </div>
 
@@ -70,12 +72,12 @@
 
         <div class="col-md-12">
         <label class="control-label">Producto: </label>
-        <input id="producto" name="producto" type="text" class="form-control" data-validation="required" />
+        <input id="producto" name="producto" type="text" class="form-control" data-validation="required" data-validation-optional="true"/>
         </div>
 
         <div class="col-md-12">
         <label class="control-label">Cantidad: </label>
-        <input id="cant" name="cant" type="text" autocomplete="off" class="form-control" data-validation="required" />
+        <input id="cant" name="cant" type="text" autocomplete="off" class="form-control" data-validation="number" data-validation-optional="true" />
         </div>
         <div class="clearfix"></div>
         <br>
@@ -94,7 +96,7 @@
         </div>
 
         <div class="form-group" align="center">
-            <button id="submit" type="button" class="btn btn-danger" onclick="">
+            <button id="submit" type="reset" class="btn btn-danger" onclick="cancelarPedido();">
               <i class="fa fa-close" aria-hidden="true"></i>
               <span>Cancelar</span>
             </button>
@@ -162,12 +164,12 @@
     <div id="ventDer" class="col-md-2">
       <div id="ventDe" class="col-md-12">
         <h4 align="center">FORMA DE PAGO</h4>
+        <label class="control-label"><input type="radio" value="con" name="tipo" id="tipo" data-validation="required" data-validation-error-msg-container="#error-container-radio" ><span>&nbsp;</span> Al contado</label>
+        <label class="control-label"><input type="radio" value="cre" name="tipo" id="tipo" ><span>&nbsp;</span> Al credito</label>
         <br>
-
-        <label class="control-label"><input type="radio" value="con" name="tipo" id="tipo" class="validate[required]"><span>&nbsp;</span> Al contado</label>
-        <label class="control-label"><input type="radio" value="cre" name="tipo" id="tipo" class="validate[required]"><span>&nbsp;</span> Al credito</label>
-
       </div>
+      <div class="clearfix"></div>
+      <div id="error-container-radio"></div>
 
       <div class="col-md-12">
         <label class="control-label">Observaciones: </label><br>
@@ -196,7 +198,7 @@
           	 while( $row = $sql->FetchRow()){
   			?>
               <tr>
-              	<td><?=$row[0]?></td>
+              	<td><a onclick="selecCampo('<?=$row[0]?>');"><?=$row[0]?></a></td>
                   <td><?=$row[1]?></td>
               </tr>
               <?PHP
@@ -209,21 +211,33 @@
   </div>
 
 </form>
-
-
-  <div class="clearfix"></div>
-
-
-
+<div class="clearfix"></div>
 <script type="text/javascript" charset="utf-8">
-//========DataTables========
+
 var oTable;
 $(document).ready(function() {
 
+  $('#cliente').click(function(){
+    $(this).removeClass('valid');
+    $(this).removeClass('error');
+  });
+
+  $( "#cliente" ).autocomplete({
+    source: "inc/search.php",
+    minLength: 2,
+    select: function( event, ui ) {
+      log( ui.item.id
+        /*"Selected: " + ui.item.value + " aka " + ui.item.id :
+        "Nothing selected, input was " + this.value*/
+        );
+    }
+  });
+
   $.validate({
-        lang: 'es',
-        modules : 'security, modules/logic'
-    });
+    lang: 'es',
+    modules : 'security, modules/logic'
+  });
+
   $('#obs').restrictLength( $('#max-length-element') );
 
   $('input').iCheck({
@@ -236,17 +250,6 @@ $(document).ready(function() {
     $( "input#idCliente" ).val( message );
     //$( "#log" ).scrollTop( 0 );
   }
-  $( "#cliente" ).autocomplete({
-    source: "inc/search.php",
-    minLength: 2,
-    select: function( event, ui ) {
-      log( ui.item.id
-
-        /*"Selected: " + ui.item.value + " aka " + ui.item.id :
-        "Nothing selected, input was " + this.value*/
-        );
-    }
-  });
 
  	deleteRow = function(p, idTr, table){
 

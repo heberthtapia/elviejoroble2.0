@@ -135,7 +135,7 @@ if (isset($_POST['from']))
 
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Administrador - El Viejo Roble</title>

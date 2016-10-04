@@ -53,15 +53,23 @@ $hora = $op->Time();
 						<label for="precioCF" class="control-label col-md-2">Precio C/F:</label>
 						<div class="col-md-4 input-group">
 							<div class="input-group-addon">Bs</div>
-							<input type="text" class="form-control" id="precioCF" name="precioCF" placeholder="Precio C/F:" data-validation="required number" data-validation-allowing="float" >
+							<input type="text" class="form-control" id="precioCF" name="precioCF" placeholder="Precio C/F:"
+							data-validation="required number"
+							data-validation-error-msg-container="#error-container"
+							data-validation-allowing="float" >
 						</div>
+						<div id="error-container"></div>
 					</div>
 					<div class="form-group">
 						<label for="precioSF" class="control-label col-md-2">Precio S/F:</label>
 						<div class="col-md-4 input-group">
 							<div class="input-group-addon">Bs</div>
-							<input type="text" class="form-control" id="precioSF" name="precioSF" placeholder="Precio S/F:" data-validation="required number" data-validation-allowing="float" >
+							<input type="text" class="form-control" id="precioSF" name="precioSF" placeholder="Precio S/F:"
+							data-validation="required number"
+							data-validation-error-msg-container="#error-container1"
+							data-validation-allowing="float" >
 						</div>
+						<div id="error-container1"></div>
 					</div>
 
 				</div>

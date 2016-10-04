@@ -35,7 +35,7 @@
 
 	$sql = 'SELECT * ';
 	$sql.= 'FROM empleado AS e, usuario AS u ';
-	$sql.= 'WHERE u.user = "'.$data->username.'" AND u.pass = "'.$data->password.'" ';
+	$sql.= 'WHERE u.user LIKE "'.$data->username.'" AND u.pass LIKE "'.$data->password.'" ';
 	$sql.= 'AND e.id_empleado = u.id_empleado ' ;
 	$sql.= 'AND e.statusEmp = "Activo" ';
 	$sql.= 'AND u.status= "Inactivo"';

@@ -1,14 +1,14 @@
-<?PHP	
+<?PHP
 include '../../adodb5/adodb.inc.php';
 include '../../classes/function.php';
 
 $db = NewADOConnection('mysqli');
-	
+
 $db->Connect();
 
 $op = new cnFunction();
 
-$fecha	= $op->ToDay();    
+$fecha	= $op->ToDay();
 $hora	= $op->Time();
 $mes	= $op->ToMes();
 $anio	= $op->ToAno();
@@ -46,33 +46,33 @@ $(document).ready(function(e) {
 	<input type="hidden" id="pedido" name="pedido" value="<?=$id;?>"/>
 	<table id="datos" style="border-collapse:collapse; width: 700px;" align="center">
     	<br>
-        <br>  	
+        <br>
       	<tbody>
         	<tr>
             	<td style="width: 100px; text-align:left; font-weight:bold;">Se&ntilde;or(a):</td>
                 <td style="width: 2400px; text-align:left; text-transform:capitalize"><?=$rcl['nombre'].' '.$rcl['apP'].' '.$rcl['apM'];?></td>
-                
+
                 <td style="width: 100px; text-align:left; font-weight:bold;">No:</td>
                 <td style="width: 500px; text-align:left;">PD-<?=$op->ceros($file['id_pedido'],7);?></td>
             </tr>
             <tr>
             	<td style="width: 100px; text-align:left; font-weight:bold;">Direcci&oacute;n:</td>
                 <td style="width: 500px; text-align:left; text-transform:capitalize"><?=$rcl['direccion'];?></td>
-                
+
                 <td style="width: 100px; text-align:left; font-weight:bold;">Fecha:</td>
                 <td style="width: 500px; text-align:left;"><?=$file['dateReg'];?></td>
             </tr>
             <tr>
             	<td style="width: 100px; text-align:left; font-weight:bold;">Zona:</td>
                 <td style="width: 500px; text-align:left; text-transform:capitalize"><?=$rcl['zona'];?></td>
-                
+
                 <td style="width: 70px; text-align:left; font-weight:bold;">Telefono:</td>
                 <td style="width: 430px; text-align:left;"><?=$rcl['phone'];?></td>
             </tr>
             <tr>
             	<td style="width: 70px; text-align:left;"></td>
                 <td style="width: 430px; text-align:left;"></td>
-                
+
                 <td style="width: 70px; text-align:left; font-weight:bold;">Celular:</td>
                 <td style="width: 430px; text-align:left;"><?=$rcl['celular'];?></td>
             </tr>
@@ -82,7 +82,7 @@ $(document).ready(function(e) {
     <br>
 <h4>DETALLE PEDIDO</h4><br>
     <table class="report" style="width: 100%; border-collapse: collapse" align="center">
-    	
+
       <thead>
           <tr>
               <th>N°</th>
@@ -91,21 +91,21 @@ $(document).ready(function(e) {
               <th>PRECIO <br> UNITARIO</th>
               <th>DESCUENTO</th>
               <th>BONIFICACI&Oacute;N</th>
-              <th>SUBTOTAL</th>              
+              <th>SUBTOTAL</th>
           </tr>
       </thead>
       <tbody>
-		<?PHP	  
+		<?PHP
         $sqll = "SELECT p.*, pe.*, i.detalle ";
         $sqll.= "FROM pedidoEmp AS pe, pedido AS p, inventario AS i ";
         $sqll.= "WHERE pe.id_pedido = ".$id." ";
 		$sqll.= "AND pe.id_pedido = p.id_pedido ";
 		$sqll.= "AND pe.id_inventario = i.id_inventario";
-               
+
         $cont = 0;
-		
+
 		$strQuery = $db->Execute($sqll);
-        
+
         while( $row = $strQuery->FetchRow() ){
             $cont = $cont + 1;
             //$cont = $operations->ceros($cont,2);
@@ -123,17 +123,17 @@ $(document).ready(function(e) {
 			$total = $row['total'];
 		}
 		?>
-   
+
       </tbody>
       <tfoot>
         <tr class="footer">
-          <th colspan="5" align="center">TIPO DE PAGO - <?PHP if($file['tipo'] == 'con') echo "CONTADO"; else echo "CREDITO";?></th>               
-          <th align="right">TOTAL (Bs.)</th>          
-          <th align="right"><?=$total;?></th> 
+          <th colspan="5" align="center">TIPO DE PAGO - <?PHP if($file['tipo'] == 'con') echo "CONTADO"; else echo "CREDITO";?></th>
+          <th align="right">TOTAL (Bs.)</th>
+          <th align="right"><?=$total;?></th>
         </tr>
       </tfoot>
     </table>
-</fieldset>	
+</fieldset>
     <div class="idealWrap" align="center">
     <?PHP
 	 if($file['status1'] == 'Aprobado' && $file['status2'] == 'Entregado'){
@@ -143,7 +143,7 @@ $(document).ready(function(e) {
 	 	$msj = 'cancelar Pedido';
 	 else
 	 	$msj = 'Aprobar';
-	?>		
+	?>
         <input type="reset" id="reset" value="Cerrar..." onclick="parent.$.colorbox.close();"/>
         <input type="submit" id="save" value="<?=$msj;?>"/>
     </div>

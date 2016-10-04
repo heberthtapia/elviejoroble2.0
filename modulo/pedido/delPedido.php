@@ -1,29 +1,29 @@
 <?PHP
   include '../../adodb5/adodb.inc.php';
-  include '../../classes/function.php';
-  
+  include '../../inc/function.php';
+
   $db = NewADOConnection('mysqli');
   //$db->debug = true;
-  $db->Connect();	
-  
+  $db->Connect();
+
   $op = new cnFunction();
-  
-  $fecha = $op->ToDay();    
+
+  $fecha = $op->ToDay();
   $hora = $op->Time();
-  
-  $table	= $_POST['table'];	
+
+  $table	= $_POST['table'];
   $id		= $_POST['id'];
   $tipo		= $_POST['tipo'];
-  
+
 	  $q = "DELETE FROM pedidoEmp WHERE id_".$table." = '".$id."' ";
 	  $reg = $db->Execute($q);
-  
-  if($reg){		  
+
+  if($reg){
 	  $q = "DELETE FROM ".$table." WHERE id_".$table." = '".$id."' ";
 	  $reg = $db->Execute($q);
   }
   if($reg)
 	  echo 1;
   else
-	  echo 0;		
+	  echo 0;
 ?>
