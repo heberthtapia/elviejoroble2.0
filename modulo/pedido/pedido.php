@@ -42,7 +42,7 @@ include 'modalCheckPedido.php';
                 <th>Total</th>
                 <th>a cuenta</th>
                 <th>saldo</th>
-                <th>Observaciones</th>
+P                <th>Observaciones</th>
                 <th>Tipo de Pago</th>
                 <th>Status Contador</th>
                 <th>Status Almacen</th>
@@ -102,7 +102,7 @@ include 'modalCheckPedido.php';
                                 <san>Generar PDF</span>
                             </button>
 
-                            <button type="button" class="btn btn-primary btn-sm" onclick="despliega('modulo/pedido/editPedido.php','contenido','<?=$row['id_pedido']?>');" >
+                            <button type ="button" class="btn btn-primary btn-sm" onclick="despliega('modulo/pedido/editPedido.php','contenido','<?=$row['id_pedido']?>');" >
                                 <i class='fa fa-pencil-square-o '></i>
                                 <span>Modificar</span>
                             </button>
@@ -141,6 +141,7 @@ include 'modalCheckPedido.php';
 
     </div>
 </div>
+
 <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIG-WEdvtbElIhE06jzL5Kk1QkFWCvymQ" async  defer></script>
 
 <script type="text/javascript" language="javascript" class="init">
@@ -153,7 +154,7 @@ include 'modalCheckPedido.php';
 
         if(respuesta){
             var i = 1;
-            $('#tb'+idTr).addClass('row_selected');
+            //$('#tb'+idTr).addClass('row_selected');
             var anSelected = fnGetSelected( oTable );
             if ( anSelected.length !== 0 ) {
                 r = deleteRowBD(p, idTr, tipo, table);
@@ -167,7 +168,6 @@ include 'modalCheckPedido.php';
 
     /* Init the table */
 
-    
         oTable = $('#tablaList').DataTable({
             "language": {
                 "lengthMenu": "Mostrar _MENU_ filas por pagina",

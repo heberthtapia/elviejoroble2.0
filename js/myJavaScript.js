@@ -2,7 +2,7 @@
  * Created by TAPIA on 13/07/2016.
  */
 
-function verifica(id_F, p){
+ function verifica(id_F, p){
 
     var dato = JSON.stringify( $('#'+id_F).serializeObject() );
 
@@ -64,7 +64,7 @@ function despliega(p, div, id){
 /**
  * GENERA CONTRASEÑA
  */
-function generaPass(id){
+ function generaPass(id){
     $.ajax({
         url: 'inc/generaPass.php',
         type: 'post',
@@ -78,7 +78,7 @@ function generaPass(id){
 /**
  *  GUARDA FORMULARIO
  */
-function saveForm(idForm, p){
+ function saveForm(idForm, p){
 
     var dato = JSON.stringify( $('#'+idForm).serializeObject() );
 
@@ -223,9 +223,9 @@ function obtenerCoor(id){
  *  WEB CAM
  * */
 
-/* RECARGA IMAGEN */
+ /* RECARGA IMAGEN */
 
-function recargaImg(img, mod){
+ function recargaImg(img, mod){
     $('#foto').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/'+mod+'/uploads/photos/'+img+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
 }
 
@@ -262,7 +262,7 @@ function idImg(mod){
 /**
  * STATUS EMPLEADO
  */
-function statusEmp(id, status){
+ function statusEmp(id, status){
     $.ajax({
         url: 'inc/statusEmp.php',
         type: 'post',
@@ -279,7 +279,7 @@ function statusEmp(id, status){
  * AGREGA PEDIDO
  */
 
-function adicFila(idForm, p){
+ function adicFila(idForm, p){
 
     var dato = JSON.stringify( $('#'+idForm).serializeObject() );
     //alert(dato);
@@ -309,12 +309,12 @@ function adicFila(idForm, p){
                       $('tr#'+data.producto).find('td').eq(5).find('input').val(precio.toFixed(2));
                       //$('tr#'+data.producto).find('td').eq(4).find('input').val(precio);
 
-                    }else{
-                        alert('Producto sin Stock.....');
-                    }
-                    sw = 1;
+                  }else{
+                    alert('Producto sin Stock.....');
                 }
-            });
+                sw = 1;
+            }
+        });
 
             if( sw === 0 && data.producto !== undefined ){
                 agregarFila(data);
@@ -339,16 +339,16 @@ function adicFila(idForm, p){
             /**
              * Quitar la validacion
              */
-            $('#ventIzq').find('div').removeClass('has-success');
-            $('#ventIzq').find('label').removeClass('has-success');
-            $('#ventIzq').find('#producto, #cant').removeClass('valid');
+             $('#ventIzq').find('div').removeClass('has-success');
+             $('#ventIzq').find('label').removeClass('has-success');
+             $('#ventIzq').find('#producto, #cant').removeClass('valid');
             /**
              * Fin
              */
-        },
-        error: function(data){
+         },
+         error: function(data){
             alert('Error al guardar el formulario');
-            }
+        }
     });
     $('#efectivo').val('');
     $('#cambio').val('');
@@ -380,12 +380,12 @@ function adicFilaEdit(idForm, p){
                       //$('tr#'+data.producto).find('td').eq(3).find('input').val(cant);
                       $('tr#'+data.producto).find('td').eq(5).find('input').val(precio.toFixed(2));
                       //$('tr#'+data.producto).find('td').eq(4).find('input').val(precio);
-                    }else{
-                        alert('Producto sin Stock.....');
-                    }
-                    sw = 1;
+                  }else{
+                    alert('Producto sin Stock.....');
                 }
-            });
+                sw = 1;
+            }
+        });
 
             if( sw === 0 && data.producto !== undefined ){
                 agregarFila(data);
@@ -410,7 +410,7 @@ function adicFilaEdit(idForm, p){
         },
         error: function(data){
             alert('Error al guardar el formulario');
-            }
+        }
     });
     $('#efectivo').val('');
     $('#cambio').val('');
@@ -459,13 +459,13 @@ function agregarFila(data){
       $('#tabla tbody').find('tr').each(function(index, element){
         var p = parseFloat($(this).find('td').eq(6).find('input').val());
         $(this).find('td').eq(6).find('input').val(p.toFixed(2));
-      });
+    });
 
   }else{
 
       alert('Producto sin Stock');
 
-    }
+  }
 }
 
 function eliminarFila(idTr){
@@ -531,7 +531,7 @@ function recargaFila(){
     total = parseFloat(subPrecio)-parseFloat(des)-parseFloat(bon);
     $('#tabla tfoot').find('tr').eq(3).find('th').eq(1).find('input').val(total.toFixed(2));
 
-    }
+}
 
 /* GUARDA PEDIDO */
 
@@ -553,7 +553,7 @@ function savePedido(idForm, p){
         },
         error: function(data){
             alert('Error al guardar el formulario');
-            }
+        }
     });
 }
 
@@ -561,7 +561,7 @@ function savePedido(idForm, p){
  * CANCELAR PEDIDO
  */
 
-function cancelarPedido(){
+ function cancelarPedido(){
     despliega('modulo/pedido/tabla.php','ventCent');
 }
 /**
@@ -569,7 +569,7 @@ function cancelarPedido(){
  * @param  {[type]} id [description]
  * @return {[type]}    [description]
  */
-function detalle(id){
+ function detalle(id){
     window.open('modulo/pedido/pdfPedDet.php?res='+id, '_blank');
 }
 /**
@@ -577,7 +577,7 @@ function detalle(id){
  * @param  {[type]} name [input producto]
  * @return {[type]}      [description]
  */
-function selecCampo( name ){
+ function selecCampo( name ){
     $('#producto').val(name);
 }
 /**
@@ -588,22 +588,22 @@ function selecCampo( name ){
  * @param  {[type]} table [tabla de BD]
  * @return {[type]}       [Elimina el item]
  */
-function deleteRowBD(p, idTr, tipo, table){
+ function deleteRowBD(p, idTr, tipo, table){
   var resp=0;
-   rr = $.ajax({
-        url: 'modulo/'+tipo+'/'+p,
-        type: 'post',
-        async:false,
-        data: 'id='+idTr+'&tipo='+tipo+'&table='+table,
-        success: function(data){
-            if(data!=1)
-                alert('No se puede eliminar el ITEM.');
-            else
-                resp = data;
-        },
-        error: function(data){
-            alert('Error al eliminar el ITEM.');
-            }
-      });
-      return resp;
+  rr = $.ajax({
+    url: 'modulo/'+tipo+'/'+p,
+    type: 'post',
+    async:false,
+    data: 'id='+idTr+'&tipo='+tipo+'&table='+table,
+    success: function(data){
+        if(data!=1)
+            alert('No se puede eliminar el ITEM.');
+        else
+            resp = data;
+    },
+    error: function(data){
+        alert('Error al eliminar el ITEM.');
+    }
+});
+  return resp;
 }

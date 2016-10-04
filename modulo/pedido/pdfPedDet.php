@@ -11,7 +11,7 @@
  * it allow to display the result in the HTML format
  */
 	// get the HTML
-	set_time_limit (60);
+	//set_time_limit (60);
     ob_start();
     include(dirname(__FILE__).'/res/pdfPedDet.php');
     $content = ob_get_clean();
