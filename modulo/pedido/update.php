@@ -22,7 +22,7 @@
 	/* REGISTRA VENTA */
 	$strQuery = "UPDATE pedido SET id_cliente = '".$data->idCliente."', dateReg = '".$fecha." ".$hora."', ";
 	$strQuery.= "subtotal = '".$data->subTotal."', descuento = '".$data->descuento."', bonificacion = '".$data->bonificacion."', ";
-	$strQuery.= "total = '".$data->total."', tipo = '".$data->tipo."', obser = '".$data->obs."', status1 = 'Pendiente' ";
+	$strQuery.= "total = '".$data->total."', tipo = '".$data->tipo."', obs = '".$data->obs."', status1 = 'Pendiente' ";
 	$strQuery.= "WHERE id_pedido = '".$data->pedido."' ";
 
 	$sql = $db->Execute($strQuery);

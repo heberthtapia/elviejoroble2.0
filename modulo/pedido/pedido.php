@@ -42,7 +42,7 @@ include 'modalCheckPedido.php';
                 <th>Total</th>
                 <th>a cuenta</th>
                 <th>saldo</th>
-P                <th>Observaciones</th>
+                <th>Observaciones</th>
                 <th>Tipo de Pago</th>
                 <th>Status Contador</th>
                 <th>Status Almacen</th>
@@ -78,7 +78,7 @@ P                <th>Observaciones</th>
                     <td class="last center"><?=$row['total'];?></td>
                     <td class="last center"><?=$row['aCuenta'];?></td>
                     <td class="last center"><?=$row['saldo'];?></td>
-                    <td class="last center"><?=$row['obser'];?></td>
+                    <td class="last center"><?=$row['obs'];?></td>
                     <td class="last center">
                     <?PHP
                       if( $row['tipo']=='con' )
@@ -147,28 +147,17 @@ P                <th>Observaciones</th>
 <script type="text/javascript" language="javascript" class="init">
 
     //========DataTables========
-    var oTable;
+
     $(document).ready(function() {
     deleteRow = function(p, idTr, tipo, table){
         var respuesta = confirm("SEGURO QUE DESEA ELIMINAR EL "+" ' "+tipo.toUpperCase()+" ' ");
-
         if(respuesta){
-            var i = 1;
-            //$('#tb'+idTr).addClass('row_selected');
-            var anSelected = fnGetSelected( oTable );
-            if ( anSelected.length !== 0 ) {
-                r = deleteRowBD(p, idTr, tipo, table);
-                if(r==1)
-                    oTable.fnDeleteRow( anSelected[0] );
-                else
-                    $('#tb'+idTr).removeClass('row_selected');
-            }
+            $('#tb'+idTr).remove();
+            deleteRowBD(p, idTr, tipo, table);
         }
     };
-
     /* Init the table */
-
-        oTable = $('#tablaList').DataTable({
+        $('#tablaList').DataTable({
             "language": {
                 "lengthMenu": "Mostrar _MENU_ filas por pagina",
                 "zeroRecords": "No se encontro nada - Lo siento",

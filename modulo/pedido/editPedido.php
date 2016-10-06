@@ -140,6 +140,8 @@
 
               while($row = $str->FetchRow()){
 
+                $observacion = $row['obs'];
+
             ?>
             <tr id="<?=$row['id_inventario']?>">
               <td class="det"><?=$row['id_inventario']?> <?=$row['detalle']?>
@@ -157,7 +159,7 @@
               <td></td>
               <td></td>
               <td><input type="text" disabled="disabled" id="subTotal" name="subTotal" value="<?=number_format($row['cantidad']*$row['precio'], 2, '.', '')?>" ></td>
-              <td align="right" class="delete"><a class="del" onclick="eliminarFila('<?=$row['id_inventario']?>')"><i class="fa fa-ban fa-2x" aria-hidden="true"></i></a></td>
+              <td align="right" class="delete"><a class="del" onclick="eliminarFila('<?=$row['id_inventario']?>', '1')"><i class="fa fa-ban fa-2x" aria-hidden="true"></i></a></td>
              </tr>
             <?PHP
             }
@@ -224,7 +226,7 @@
       <div class="col-md-12">
         <label class="control-label">Observaciones: </label><br>
         <p id="maxText"><span id="max-length-element">200</span> caracteres restantes</p>
-        <textarea id="obs" name="obs" class="form-control"></textarea>
+        <textarea id="obs" name="obs" class="form-control"><?=$observacion?></textarea>
       </div>
 
     </div><!--End ventDer-->

@@ -443,7 +443,7 @@ function agregarFila(data){
       '<td></td>'+
       '<td></td>'+
       '<td><input type="text" disabled="disabled" id="subTotal" name="subTotal" value="'+precio.toFixed(2)+'" ></td>'+
-      '<td align="right" class="delete"><a class="del" onclick="eliminarFila(&#39;'+data.producto+'&#39;)"><i class="fa fa-ban fa-2x" aria-hidden="true"></i></a></td>'+
+      '<td align="right" class="delete"><a class="del" onclick="eliminarFila(&#39;'+data.producto+'&#39;, &#39;0&#39;)"><i class="fa fa-ban fa-2x" aria-hidden="true"></i></a></td>'+
       '</tr>';
 
       $("#tabla tbody").append(strNueva_Fila);
@@ -468,13 +468,24 @@ function agregarFila(data){
   }
 }
 
-function eliminarFila(idTr){
+function eliminarFila(idTr, sw){
 
     if( $('#tabla tbody').find('tr').length == 1 ){
-        if( !confirm('¿Esta seguro que desea eliminar el pedido?')){
-            return;
+        if(sw === '0'){
+            if( !confirm('¿Esta seguro que desea ELIMINAR PEDIDO?')){
+                return;
+            }
+            despliega('modulo/pedido/newPedido.php','contenido');
+        }else{
+            if( !confirm('Si Elimina el Ultimo Registro. "SE ELIMINARA TODO EL PEDIDO !"')){
+                return;
+            }
+            var dato = $('#formPreVenta').serializeObject();
+            alert(dato.pedido);
+
+            deleteRowBD('delPedido.php',dato[pedido], 'pedido', 'pedido');
+            despliega('modulo/pedido/pedido.php','contenido');
         }
-        despliega('modulo/pedido/newPedido.php','contenido');
     }
 
     $('#'+idTr).remove();
