@@ -65,12 +65,12 @@ Camera slide up
 
     border: 1px solid #f0f0f0;
     -webkit-border-radius: 4px 4px 0 0;
-       -moz-border-radius: 4px 4px 0 0;
-            border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
     background: url('../images/cam_bg.jpg') repeat-y;
     -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, .6);
-       -moz-box-shadow: 0 0 4px rgba(0, 0, 0, .6);
-            box-shadow: 0 0 4px rgba(0, 0, 0, .6);
+    -moz-box-shadow: 0 0 4px rgba(0, 0, 0, .6);
+    box-shadow: 0 0 4px rgba(0, 0, 0, .6);
 }
 
 .camTop {
@@ -164,7 +164,7 @@ Camera slide up
  * Estilos para el modal
  */
 
-#mapa, #mapaU, #mapaP {
+ #mapa, #mapaU, #mapaP {
     width: 345px;
     height: 220px;
 
@@ -189,130 +189,130 @@ div#foto img, div#fotoU img {
  *  ESTILOS GENERALES ADMIN
  */
 
-       .subnavegador{
-            background: #0e1a49 none repeat scroll 0 0;
-        }
-        ul.subnavegador li{
-            margin-left: 5px;
-        }
-        ul.subnavegador li a{
-            font-size: 15px;
-        }
+ .subnavegador{
+    background: #0e1a49 none repeat scroll 0 0;
+}
+ul.subnavegador li{
+    margin-left: 5px;
+}
+ul.subnavegador li a{
+    font-size: 15px;
+}
 /***************************/
-        .at-error {
-            /* placed on a error labels */
-            color: #A94442;
-            margin: 6px 0;
-        }
+.at-error {
+    /* placed on a error labels */
+    color: #A94442;
+    margin: 6px 0;
+}
 
-        .at-warning {
-            /* placed on a warning (invalid) labels */
-            color: #8A6D3B;
-            margin: 6px 0;
-        }
+.at-warning {
+    /* placed on a warning (invalid) labels */
+    color: #8A6D3B;
+    margin: 6px 0;
+}
 
-        .at-invalid {
-            /* placed on a invalid fields (which do not match with their filters or masks) */
-        }
+.at-invalid {
+    /* placed on a invalid fields (which do not match with their filters or masks) */
+}
 
-        .at-required {
-            /* placed on a required fields (which are not filled) */
-        }
+.at-required {
+    /* placed on a required fields (which are not filled) */
+}
 
-        .at-description {
-            /* placed on description paragrapher, right after TEXTAREA fields. */
-        }
+.at-description {
+    /* placed on description paragrapher, right after TEXTAREA fields. */
+}
 
-        .at-description > span {
-            /* into description paragrapher, right after TEXTAREA fields there are 2 span TAGs. */
-        }
+.at-description > span {
+    /* into description paragrapher, right after TEXTAREA fields there are 2 span TAGs. */
+}
 
-        .at-required-highlight {
-            /* highlight required form fields */
-            color: red;
-        }
+.at-required-highlight {
+    /* highlight required form fields */
+    color: red;
+}
 
-        .alert {
-            border: 1px solid transparent;
-            border-radius: 4px;
-            margin-bottom: 0px;
-            padding: 10px;
-        }
+.alert {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-bottom: 0px;
+    padding: 10px;
+}
 
-        #alert{
-            display: none;
-        }
+#alert{
+    display: none;
+}
 
-        input{
-            text-transform: capitalize;
-        }
-        input#idInv, input#producto{
-            text-transform: uppercase;
-        }
-        input#codUser,
-        input#codUserU,
-        input#password,
-        input#passwordU,
-        input#email,
-        input#emailU,
-        input#username{
-            text-transform: none;
-        }
-        .form-error{
-            font-size: 9px;
-        }
-        #error-container, #error-container1{
-            margin-left: 114px;
-        }
-        #tablaList{
-            font-size: 10px;
-        }
-        #tablaList thead tr th, #tablaList tfoot tr th{
-            text-transform: uppercase;
-            text-align: center;
-            vertical-align: middle;
-        }
-        #tablaList tbody tr td{
-            text-transform: capitalize;
-            vertical-align: middle;
-        }
+input{
+    text-transform: capitalize;
+}
+input#idInv, input#producto{
+    text-transform: uppercase;
+}
+input#codUser,
+input#codUserU,
+input#password,
+input#passwordU,
+input#email,
+input#emailU,
+input#username{
+    text-transform: none;
+}
+.form-error{
+    font-size: 9px;
+}
+#error-container, #error-container1{
+    margin-left: 114px;
+}
+#tablaList{
+    font-size: 10px;
+}
+#tablaList thead tr th, #tablaList tfoot tr th{
+    text-transform: uppercase;
+    text-align: center;
+    vertical-align: middle;
+}
+#tablaList tbody tr td{
+    text-transform: capitalize;
+    vertical-align: middle;
+}
 
-        .Pendiente, .NoEntregado {
-            background-color: rgba(249, 2, 2, 0.8);
-            text-align: center;
-        }
-        .Aprobado, .Entregado {
-            background-color: rgba(34, 178, 6, 0.8);
-            text-align: center;
-        }
-        table#tablaList td a {
-            color: #f0f0f0;
-            font-weight: bold;
-            text-decoration: none;
-            text-shadow: 1px 1px #000;
-        }
+.Pendiente, .NoEntregado {
+    background-color: rgba(249, 2, 2, 0.8);
+    text-align: center;
+}
+.Aprobado, .Entregado {
+    background-color: rgba(34, 178, 6, 0.8);
+    text-align: center;
+}
+table#tablaList td a {
+    color: #f0f0f0;
+    font-weight: bold;
+    text-decoration: none;
+    text-shadow: 1px 1px #000;
+}
 
-        #max-length-element,
-        #maxText{
-            font-size: 11px;
-            margin: 0;
-        }
+#max-length-element,
+#maxText{
+    font-size: 11px;
+    margin: 0;
+}
 
-        .ui-helper-hidden-accessible {
-            border: 0 none;
-            clip: rect(0px, 0px, 0px, 0px);
-            height: 1px;
-            margin: -1px;
-            overflow: hidden;
-            padding: 0;
-            position: absolute;
-            width: 1px;
-        }
+.ui-helper-hidden-accessible {
+    border: 0 none;
+    clip: rect(0px, 0px, 0px, 0px);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
 
 /**
  * MODULO PEDIDO
  */
-.ui-autocomplete-loading {
+ .ui-autocomplete-loading {
     background: white url('../images/ui-anim_basic_16x16.gif') right center no-repeat;
 }
 
@@ -414,7 +414,7 @@ textarea#obs {
 /**
  * TABLA DE PRODUCTO
  */
-table thead tr, table tfoot tr {
+ table thead tr, table tfoot tr {
     font-weight: bold;
     /*text-shadow: 1px 1px #000000;*/
 }
@@ -482,8 +482,8 @@ form#formPreVenta input[type='text']#cantidad, form#formPreVenta input[type='tex
 form#venta input[type='text']#subTotal:hover, form#venta input[type='text']#total:hover, form#venta input[type='text']#cantidad:hover, form#venta input[type='text']#precio:hover {
     border: none;
     -webkit-box-shadow: 0 0 0 #fff;
-       -moz-box-shadow: 0 0 0 #fff;
-            box-shadow: 0 0 0 #fff;
+    -moz-box-shadow: 0 0 0 #fff;
+    box-shadow: 0 0 0 #fff;
 }
 #tabla tbody tr td {
     text-align: center;
@@ -494,7 +494,7 @@ form#venta input[type='text']#subTotal:hover, form#venta input[type='text']#tota
 #tabla tbody tr td.det {
     font-size: 12px;
 
-    padding: 7px 0 ;
+    padding: 7px 0;
 }
 #tabla tfoot tr {
     margin: 5px 0;
@@ -506,63 +506,6 @@ form#venta input[type='text']#subTotal:hover, form#venta input[type='text']#tota
 }
 .delet {
     margin-top: 5px;
-}
-form#venta input[type='text']#name, form#venta input[type='text']#paterno, form#venta input[type='text']#materno {
-    font-family: 'Century Gothic';
-    font-size: 12px;
-
-    width: 8.5em;
-
-    text-align: left;
-
-    border: 1px solid #666;
-    background-color: #fff;
-}
-form#venta input[type='text']#nit {
-    font-family: 'Century Gothic';
-    font-size: 12px;
-
-    width: 8.5em;
-
-    text-align: left;
-
-    border: 1px solid #666;
-    background-color: #fff;
-}
-form#venta input[type='text']#name:hover, form#venta input[type='text']#name:focus, form#venta input[type='text']#paterno:hover, form#venta input[type='text']#paterno:focus, form#venta input[type='text']#materno:hover, form#venta input[type='text']#materno:focus {
-    border: 1px solid #207ce5;
-    -webkit-box-shadow: 0 0 3px #207ce5;
-       -moz-box-shadow: 0 0 3px #207ce5;
-            box-shadow: 0 0 3px #207ce5;
-}
-
-form#venta input[type='text']#materno:nit {
-    border: 1px solid #207ce5;
-    -webkit-box-shadow: 0 0 3px #207ce5;
-       -moz-box-shadow: 0 0 3px #207ce5;
-            box-shadow: 0 0 3px #207ce5;
-}
-
-form#venta div.idealWrap > label {
-    font-weight: bold;
-
-    float: left;
-
-    width: 6em;  /* Label width */
-}
-
-form#venta div.Wrap {
-    float: left;
-
-    width: 222px;
-    margin: .5em 0;
-}
-
-form#venta div.WrapD {
-    float: left;
-
-    width: 185px;
-    margin: .5em 0;
 }
 
 .delete{
@@ -581,15 +524,15 @@ form#venta div.WrapD {
  * TABLA LISTA PRODUCTO
  */
 
-table#listaP * {height: auto; min-height: none;} /* fixed ie9 & <*/
-table#listaP {
+ table#listaP * {height: auto; min-height: none;} /* fixed ie9 & <*/
+ table#listaP {
   background: ##F7F7F7;
   table-layout: fixed;
   /*margin: 1rem auto;*/
   width: 100%;
   /*box-shadow: 0 0 4px 2px rgba(0,0,0,.4);*/
   border-collapse: collapse;
- /* border: 1px solid rgba(0,0,0,.5);*/
+  /* border: 1px solid rgba(0,0,0,.5);*/
   border-top: 0 none;
 }
 table#listaP thead {
@@ -626,7 +569,7 @@ table#listaP tbody tr:nth-child(odd) {
 }
 table#listaP td{
     width: 80px;
-    }
+}
 table#listaP th {
   width: 80px;
   /*float:left;*/
@@ -656,27 +599,27 @@ table#listaP th:last-child, table#listaP td:last-child {
 
 
 @media only screen and (max-width:600px) {
- table#listaP {
+   table#listaP {
     border-top: 1px solid ;
-  }
- table#listaP thead {display: none;}
- table#listaP tbody {
+}
+table#listaP thead {display: none;}
+table#listaP tbody {
     height: auto;
     max-height: 55vh;
-  }
- table#listaP tr {
+}
+table#listaP tr {
     border-bottom: 1px solid rgba(0,0,0,.35);
-  }
- table#listaP tbody tr:nth-child(odd) {background: #15BFCC;}
- table#listaP tbody tr:nth-child(even) {background:#FF7361;}
- table#listaP td {
+}
+table#listaP tbody tr:nth-child(odd) {background: #15BFCC;}
+table#listaP tbody tr:nth-child(even) {background:#FF7361;}
+table#listaP td {
     display: block;
     width: 100%;
     min-width: 100%;
     padding: .4rem .5rem .4rem 40%;
     border-right: 0 none;
-  }
- table#listaP td:before {
+}
+table#listaP td:before {
     content: attr(data-campo);
     background: rgba(0,0,0,.1);
     position: absolute;
@@ -690,13 +633,13 @@ table#listaP th:last-child, table#listaP td:last-child {
     font-size: 150%;
     font-variant: small-caps;
     line-height: 1.8;
-  }
- table#listaP tbody td:last-child {
+}
+table#listaP tbody td:last-child {
     text-align: left;
     padding-left: 40%;
-  }
- table#listaP td:nth-child(even) {
+}
+table#listaP td:nth-child(even) {
     background: rgba(0,0,0,.2);
-  }
+}
 }
 a {color: #FF7361}

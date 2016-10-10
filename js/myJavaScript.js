@@ -467,24 +467,29 @@ function agregarFila(data){
 
   }
 }
-
-function eliminarFila(idTr, sw){
+/**
+ * [eliminarFila Elimina los registros de los pedidos]
+ * @param  {[type]} idTr [description]
+ * @param  {[type]} sw   [description]
+ * @return {[type]}      [description]
+ */
+function eliminarFila(idTr, sw, cant){
 
     if( $('#tabla tbody').find('tr').length == 1 ){
         if(sw === '0'){
-            if( !confirm('¿Esta seguro que desea ELIMINAR PEDIDO?')){
+            if( !confirm('¿Esta seguro que desea ELIMINAR EL PEDIDO?')){
                 return;
             }
             despliega('modulo/pedido/newPedido.php','contenido');
         }else{
-            if( !confirm('Si Elimina el Ultimo Registro. "SE ELIMINARA TODO EL PEDIDO !"')){
+            if( !confirm('Si Elimina el Ultimo Registro. "SE ELIMINARA TODO EL PEDIDO !!!"')){
                 return;
             }
             var dato = $('#formPreVenta').serializeObject();
-            alert(dato.pedido);
-
-            deleteRowBD('delPedido.php',dato[pedido], 'pedido', 'pedido');
-            despliega('modulo/pedido/pedido.php','contenido');
+            alert(dato);
+            updateBD(idTr, cant);
+            //deleteRowBD('delPedido.php',dato.pedido, 'pedido', 'pedido');
+            //despliega('modulo/pedido/pedido.php','contenido');
         }
     }
 

@@ -1,63 +1,50 @@
-table
-{
+table {
     font-family: Helvetica, sans-serif;
 }
-table.report
-{
+table.report {
     font-size: 9px;
 }
-table.report thead tr,
-table.report tfoot tr
-{
-    background-color: #f7f7f7;
+table.report thead tr, table.report tfoot tr {
+    background-color: #eaecee;
 }
-table.report thead tr th,
-table.report tfoot tr th
-{
+table.report thead tr th, table.report tfoot tr th {
     font-weight: bold;
 
     padding: 4px 5px;
     /*text-align:center;*/
 
     color: #000;
-    border: 1px solid #999;
+    border: 1px solid #abb2b9;
 }
-table.report tbody tr td
-{
+table.report tbody tr td {
     padding: 10px 5px;
 
-    border: 1px solid #999;
+    border: 1px solid #abb2b9;
 }
-table.report tbody tr.even
-{
-    background-color: #f1eded;
+table.report tbody tr.even {
+    background-color: #f8f9f9;
 }
 
-div#producto p
-{
+div#producto p {
     margin-left: 20px;
 }
-h5
-{
+h5 {
     font-weight: bold;
 
     color: #000;
 }
-table#datos tr td
-{
+table#datos tr td {
     font-size: 10px;
 
     padding: 2px;
 }
-table#datos p span
-{
+table#datos p span {
     display: block;
 
     color: rgba(243,0,4,1.00);
 }
 
-table.page_header
-{
+table.page_header {
     font-size: 10px;
     font-style: italic;
 
@@ -68,8 +55,7 @@ table.page_header
     border: none;
     border-bottom: solid 1px #999;
 }
-table.page_footer
-{
+table.page_footer {
     font-size: 10px;
     font-style: italic;
 
@@ -80,7 +66,6 @@ table.page_footer
     border: none;
     border-top: solid 1px #999;
 }
-table#firma
-{
+table#firma {
     font-size: 10px;
 }
