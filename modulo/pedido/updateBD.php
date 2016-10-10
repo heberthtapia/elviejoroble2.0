@@ -1,4 +1,11 @@
 <?php
+
+if(!$xml = simplexml_load_file('libros.xml')){
+    echo "No se ha podido cargar el archivo";
+} else {
+    echo "El archivo se ha cargado correctamente";
+}
+
   crear(); //Creamos el archivo
   leer();  //Luego lo leemos
   modificar();
@@ -52,16 +59,29 @@
     echo $salida;
   }
 
+
+
   function modificar(){
 
-    $xml = simplexml_load_file('libros.xml');
+    // Nuevo objeto SimpleXMLElement al que se le pasa un archivo xml
+    $pedido = new SimpleXMLElement('libros.xml', 0, true);
 
+    $pedidoEliminado = $pedido->addChild('pedidoEliminado');
 
-    $character = $peliculas->pelicula[0]->personajes->addChild('personaje');
-$character->addChild('nombre', 'Sr. Parser');
-$character->addChild('actor', 'John Doe');
+    // Agregar un atributo al pedidoEliminado
+    $pedidoEliminado->addAttribute('seccion', 'eliminado');
 
-$rating = $peliculas->pelicula[0]->addChild('puntuacion', 'Todos los públicos');
-$rating->addAttribute('tipo', 'clasificación');
+    $pedidoEliminado->addChild('autor','Paulo Coelho');
+
+    $pedidoEliminado->addChild('titulo','El Alquimista');
+
+    $pedidoEliminado->addChild('anio','1988');
+
+    $pedidoEliminado->addChild('editorial','Maxico D.F. - Editorial Grijalbo');
+
+    $nuevoXML = $pedido->asXML('libros.xml');
+    var_dump($nuevoXML); // Devuelve un string con los datos en XML
+
   }
+
 ?>

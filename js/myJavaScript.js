@@ -475,7 +475,11 @@ function agregarFila(data){
  */
 function eliminarFila(idTr, sw, cant){
 
+    num = $('#tabla tbody').find('tr').length;
+    alert(num);
+
     if( $('#tabla tbody').find('tr').length == 1 ){
+
         if(sw === '0'){
             if( !confirm('¿Esta seguro que desea ELIMINAR EL PEDIDO?')){
                 return;
