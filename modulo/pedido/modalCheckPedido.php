@@ -31,6 +31,21 @@
 		// do something...
 		//$('#formNew').get(0).reset();
 		//despliega('modulo/almacen/producto.php','contenido');
+		if(sw === 1){
+			$.ajax({
+		        url: "modulo/pedido/verificaStatusContadorUn.php",
+		        type: 'post',
+		        dataType: 'json',
+		        async:true,
+		        data:{res:idSw},
+		        success: function(data){
+
+		        },
+		        error: function(data){
+		            //alert('Error al guardar el formulario');
+		        }
+	    	});
+		}
 	});
 
 	$('#modalCheckPedido').on('show.bs.modal', function (event) {
@@ -39,6 +54,8 @@
 		var id = button.data('id'); // Extraer la información de atributos de datos
 		var status1 = $('#tb'+id).find('a.status1').text();
 		var status2 = $('#tb'+id).find('a.status2').text();
+		alt = '';
+		sw = 0;
 
 		if( status1 == 'Aprobado' && status2 == 'Entregado' ){
 			msj = 'Cancelar Pedido';
@@ -48,15 +65,42 @@
  		}else{
  			msj = 'Aprobar Pedido';
  		}
-
- 		$('#save').find('span').text(msj);
- 		$('.modal-title').text(msj);
+ 		if(alt === ''){
+	 		$('#save').find('span').text(msj);
+	 		$('.modal-title').text(msj);
+ 		}else{
+ 			$('#save').find('span').text(msj);
+ 			$('#save').attr('disabled','disabled');
+	 		$('.modal-title').text(alt);
+ 		}
 
 		var modal = $(this);
 		modal.find('.modal-body').find('embed').attr({
 			src: 'modulo/pedido/pdfPedDet.php?res='+id
 		});
 		modal.find('.modal-body #pedido').val(id);
+
+		$.ajax({
+	        url: "modulo/pedido/verificaStatusContador.php",
+	        type: 'post',
+	        dataType: 'json',
+	        async:true,
+	        data:{res:id},
+	        success: function(data){
+	        	if(data.sw === 1){
+	            	sw = 1;
+	            	idSw = data.id;
+	            	$('#save').removeAttr('disabled','disabled');
+	        	}else{
+	        		$('.modal-title').text('En este momento no puede realizar cambios');
+	        		$('#save').attr('disabled','disabled');
+	     	  		sw = 0;
+	        	}
+	        },
+	        error: function(data){
+	            //alert('Error al guardar el formulario');
+	        }
+	    });
 
 	});
 </script>

@@ -113,7 +113,6 @@ function despliega(p, div, id){
             if(data.tabla === 'pedido'){
                 //fnClickAddRowInvG(data,true);
                 /* CAMBIIO STASTUS CONTADOR */
-                alert('entra');
                 $('#modalCheckPedido').modal('hide');
                 if(data.OkCont === 0){
                     $('tr#tb'+data.pedido+' td.Pendiente').removeClass('Pendiente').addClass('Aprobado');
