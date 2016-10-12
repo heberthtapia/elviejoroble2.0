@@ -15,15 +15,34 @@
   $id		= $_POST['id'];
   $tipo		= $_POST['tipo'];
 
-	  $q = "DELETE FROM pedidoEmp WHERE id_".$table." = '".$id."' ";
-	  $reg = $db->Execute($q);
+  $strQuery = "SELECT * FROM pedidoEmp WHERE id_pedido = '".$id."' ";
+  $strQuery = $db->Execute($strQuery);
 
-  if($reg){
-	  $q = "DELETE FROM ".$table." WHERE id_".$table." = '".$id."' ";
-	  $reg = $db->Execute($q);
-  }
-  if($reg)
-	  echo 1;
-  else
-	  echo 0;
+    while ( $row = $strQuery->FetchRow() ) {
+
+      $strCant = "SELECT cantidad FROM inventario WHERE id_inventario = '".$row['id_inventario']."'";
+      $strCant = $db->Execute($strCant);
+      $cant = $strCant->FetchRow();
+      $cantidad = $cant[0] + $row['cantidad'];
+
+      $strInv = "UPDATE inventario SET cantidad = '".$cantidad."' WHERE id_inventario = '".$row['id_inventario']."' ";
+
+      $sqlInv = $db->Execute($strInv);
+    }
+
+    if($sqlInv){
+
+  	  $q = "DELETE FROM pedidoEmp WHERE id_pedido = '".$id."' ";
+  	  $reg = $db->Execute($q);
+
+    }
+
+    if($reg){
+
+      $q = "DELETE FROM pedido WHERE id_pedido = '".$id."' ";
+      $reg = $db->Execute($q);
+
+	    echo 1;
+    }else
+  	  echo 0;
 ?>

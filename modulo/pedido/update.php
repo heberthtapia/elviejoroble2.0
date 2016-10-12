@@ -22,7 +22,7 @@
 	/* REGISTRA VENTA */
 	$strQuery = "UPDATE pedido SET id_cliente = '".$data->idCliente."', dateReg = '".$fecha." ".$hora."', ";
 	$strQuery.= "subtotal = '".$data->subTotal."', descuento = '".$data->descuento."', bonificacion = '".$data->bonificacion."', ";
-	$strQuery.= "total = '".$data->total."', tipo = '".$data->tipo."', obs = '".$data->obs."', status1 = 'Pendiente' ";
+	$strQuery.= "total = '".$data->total."', tipo = '".$data->tipo."', obser = '".$data->obs."', status1 = 'Pendiente' ";
 	$strQuery.= "WHERE id_pedido = '".$data->pedido."' ";
 
 	$sql = $db->Execute($strQuery);
@@ -78,9 +78,26 @@
 
 		$i++;
 	}
-	/* -------------------------------------------------------- */
 
-	//print_r($data);
+	/**
+	 * LEE EL XML Y ACTUALIZA LA BD
+	 */
+
+	$xml = new SimpleXMLElement('eliminados.xml', 0, true);
+
+    foreach($xml as $item){
+
+    	$strCant = "SELECT cantidad FROM inventario WHERE id_inventario = '".$item->id."'";
+      	$strCant = $db->Execute($strCant);
+      	$cant = $strCant->FetchRow();
+
+      	$cantidad = $cant[0]+($item->cantidad);
+
+      	$strInv = "UPDATE inventario SET cantidad = '".$cantidad."' WHERE id_inventario = '".$item->id."' ";
+
+		$sqlInv = $db->Execute($strInv);
+    }
+
 	if($sql)
 		echo json_encode($data);
 	else

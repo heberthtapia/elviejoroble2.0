@@ -25,7 +25,7 @@ else
 </style>
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12">
-    <h1 class="avisos" align="center"><strong>PEDIDO</strong></h1>
+    <h1 class="avisos" align="center"><strong>NUEVO PEDIDO</strong></h1>
   </div>
 </div>
 
@@ -265,5 +265,6 @@ else
       }
       }
     };
+
   });
 </script>

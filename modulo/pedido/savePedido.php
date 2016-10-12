@@ -20,7 +20,7 @@
 	//print_r($data);
 
 	/* REGISTRA VENTA */
-	$strQuery = "INSERT INTO pedido (id_empleado, id_cliente, dateReg, subTotal, descuento, bonificacion, total, tipo, obs,  status1)";
+	$strQuery = "INSERT INTO pedido (id_empleado, id_cliente, dateReg, subTotal, descuento, bonificacion, total, tipo, obser,  status1)";
 	$strQuery.= "VALUES ('".$_SESSION['idEmp']."', '".$data->idCliente."', '".$fecha." ".$hora."', '".$data->subTotal."', ";
 	$strQuery.= "'".$data->descuento."', '".$data->bonificacion."', ";
 	$strQuery.= "'".$data->total."', '".$data->tipo."', '".$data->obs."', 'Pendiente')";

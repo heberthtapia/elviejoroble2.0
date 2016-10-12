@@ -24,6 +24,38 @@
 	$sql = $db->Execute($strQuery);
 	$rcl = $sql->FetchRow();
 
+
+  function crear(){
+      $xml = new DomDocument('1.0', 'UTF-8');
+
+      $pedido = $xml->createElement('pedido');
+      $pedido = $xml->appendChild($pedido);
+
+      /*$pedidoEliminado = $xml->createElement('pedidoEliminado');
+      $pedidoEliminado = $pedido->appendChild($pedidoEliminado);
+
+      // Agregar un atributo al pedidoEliminado
+      $pedidoEliminado->setAttribute('seccion', 'eliminado');
+
+      $id = $xml->createElement('id','');
+      $id = $pedidoEliminado->appendChild($id);
+
+      $cantidad = $xml->createElement('cantidad','');
+      $cantidad = $pedidoEliminado->appendChild($cantidad);*/
+
+
+      $xml->formatOutput = true;
+      $el_xml = $xml->saveXML();
+      $xml->save('eliminados.xml');
+
+      //Mostramos el XML puro
+      //echo "<p><b>El XML ha sido creado.... Mostrando en texto plano:</b></p>".
+       //    htmlentities($el_xml)."<br/><hr>";
+  }
+
+  crear();
+
+
 ?>
 <style type="text/css">
   #error-container-radio{
@@ -32,7 +64,7 @@
 </style>
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12">
-    <h1 class="avisos" align="center"><strong>PEDIDO</strong></h1>
+    <h1 class="avisos" align="center"><strong>MODIFICAR PEDIDO</strong></h1>
   </div>
 </div>
 
@@ -102,7 +134,7 @@
         </div>
 
         <div class="form-group" align="center">
-            <button id="submit" type="reset" class="btn btn-danger" onclick="cancelarPedido();">
+            <button id="submit" type="reset" class="btn btn-danger" onclick="cancelarPedidoEdit();">
               <i class="fa fa-close" aria-hidden="true"></i>
               <span>Cancelar</span>
             </button>
@@ -138,12 +170,24 @@
 
               $str = $db->Execute($strSql);
 
+              $c = 0;
+
               while($row = $str->FetchRow()){
+
+                $c++;
 
                 $observacion = $row['obs'];
 
+              if( $c % 2 == 0 ){
             ?>
-            <tr id="<?=$row['id_inventario']?>">
+            <tr id="<?=$row['id_inventario']?>" class="odd">
+            <?php
+            }else{
+            ?>
+            <tr id="<?=$row['id_inventario']?>" class="even">
+            <?php
+            }
+            ?>
               <td class="det"><?=$row['id_inventario']?> <?=$row['detalle']?>
               <input type="hidden" id="item" name="item" value="<?=$row['id_inventario']?>" ></td>
 
@@ -159,7 +203,7 @@
               <td></td>
               <td></td>
               <td><input type="text" disabled="disabled" id="subTotal" name="subTotal" value="<?=number_format($row['cantidad']*$row['precio'], 2, '.', '')?>" ></td>
-              <td align="right" class="delete"><a class="del" onclick="eliminarFila('<?=$row['id_inventario']?>', '1')"><i class="fa fa-ban fa-2x" aria-hidden="true"></i></a></td>
+              <td align="right" class="delete"><a class="del" onclick="eliminarFila('<?=$row['id_pedido']?>', '<?=$row['cantidad']?>', '<?=$row['id_inventario']?>' )"><i class="fa fa-ban fa-2x" aria-hidden="true"></i></a></td>
              </tr>
             <?PHP
             }

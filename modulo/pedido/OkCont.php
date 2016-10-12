@@ -22,35 +22,53 @@ $data = json_decode($data);
 /* POR SI ACASO SI ES NECESARIO ACTUALIZAR ALGUN DATO */
 $strSql = "SELECT * FROM pedido AS p, pedidoEmp AS pe ";
 $strSql.= "WHERE p.id_pedido = pe.id_pedido ";
-$strSql.= "AND p.id_pedido = '".$data->pedido."' ";
+echo $strSql.= "AND p.id_pedido = '".$data->pedido."' ";
 
 $str = $db->Execute($strSql);
 $file = $str->FetchRow();
 
 $data->OkCont = 0;
 
-if($file['status1'] == 'Pendiente'){
-	$status = 'Aprobado';
-}elseif( $file['status1'] == 'Aprobado' && $file['status2'] == 'Entregado'){
-	$status = 'Aprobado';
-}else{
-	$status = 'Pendiente';
-	$data->OkCont = 1;
+if($file['status'] == 'Activo'){
+
+	if($file['status1'] == 'Pendiente'){
+		$status = 'Aprobado';
+
+		$sql = "UPDATE pedido SET status = 'Inactivo' ";
+		$sql.= "WHERE id_pedido = '".$data->pedido."' ";
+
+		$sql = $db->Execute($sql);
+
+	}elseif( $file['status1'] == 'Aprobado' && $file['status2'] == 'Entregado'){
+		$status = 'Aprobado';
+
+		$sql = "UPDATE pedido SET status = 'Inactivo' ";
+		$sql.= "WHERE id_pedido = '".$data->pedido."' ";
+
+		$sql = $db->Execute($sql);
+
+	}else{
+		$status = 'Pendiente';
+		$data->OkCont = 1;
+
+		$sql = "UPDATE pedido SET status = 'Activo' ";
+		$sql.= "WHERE id_pedido = '".$data->pedido."' ";
+
+		$sql = $db->Execute($sql);
+	}
+
+	/* ACTUALIZAR EL STATUS DEL CONTADOR....!!! */
+
+	$strSql = "UPDATE pedido SET status1 = '".$status."', dateStatus1 = '".$fecha." ".$hora."' ";
+	$strSql.= "WHERE id_pedido = '".$data->pedido."' ";
+
+	$sql = $db->Execute($strSql);
+
+	/* -------------------------------------------------------- */
 }
 
-/* ACTUALIZAR EL STATUS DEL CONTADOR....!!! */
-
-$strSql = "UPDATE pedido SET status1 = '".$status."', dateStatus1 = '".$fecha." ".$hora."' ";
-$strSql.= "WHERE id_pedido = '".$data->pedido."' ";
-
-$sql = $db->Execute($strSql);
-
-/* -------------------------------------------------------- */
-
 $data->tabla = 'pedido';
-	//print_r($data);
-if($sql)
-	echo json_encode($data);
-else
-	echo 0;
+
+echo json_encode($data);
+
 ?>

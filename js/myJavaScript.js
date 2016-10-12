@@ -113,6 +113,7 @@ function despliega(p, div, id){
             if(data.tabla === 'pedido'){
                 //fnClickAddRowInvG(data,true);
                 /* CAMBIIO STASTUS CONTADOR */
+                alert('entra');
                 $('#modalCheckPedido').modal('hide');
                 if(data.OkCont === 0){
                     $('tr#tb'+data.pedido+' td.Pendiente').removeClass('Pendiente').addClass('Aprobado');
@@ -443,16 +444,16 @@ function agregarFila(data){
       '<td></td>'+
       '<td></td>'+
       '<td><input type="text" disabled="disabled" id="subTotal" name="subTotal" value="'+precio.toFixed(2)+'" ></td>'+
-      '<td align="right" class="delete"><a class="del" onclick="eliminarFila(&#39;'+data.producto+'&#39;, &#39;0&#39;)"><i class="fa fa-ban fa-2x" aria-hidden="true"></i></a></td>'+
+      '<td align="right" class="delete"><a class="del" onclick="eliminarFila(&#39;&#39;, &#39;'+0+'&#39;, &#39;'+data.producto+'&#39;)"><i class="fa fa-ban fa-2x" aria-hidden="true"></i></a></td>'+
       '</tr>';
 
       $("#tabla tbody").append(strNueva_Fila);
 
       $('#tabla tbody').find('tr').each(function(index, element){
           if( (index % 2) === 0 ){
-              $(this).addClass('odd');
-          }else{
               $(this).addClass('even');
+          }else{
+              $(this).addClass('odd');
           }
       });
 
@@ -473,14 +474,32 @@ function agregarFila(data){
  * @param  {[type]} sw   [description]
  * @return {[type]}      [description]
  */
-function eliminarFila(idTr, sw, cant){
-
-    num = $('#tabla tbody').find('tr').length;
-    alert(num);
+function eliminarFila(idTr, cant, idInv){
 
     if( $('#tabla tbody').find('tr').length == 1 ){
 
-        if(sw === '0'){
+        if(confirm('Si elimina el ultimo registro. "SE ELIMINARA TODO EL PEDIDO...!!!"')){
+            deleteRowBD('delPedido.php',idTr, 'pedido', 'pedido');
+            despliega('modulo/pedido/pedido.php','contenido');
+        }
+
+    }else{
+
+        if(confirm('¿Esta seguro que desea ELIMINAR EL REGISTRO...!!!?')){
+            $.ajax({
+                url: 'modulo/pedido/generaXML.php',
+                type: 'post',
+                cache: false,
+                data: 'id='+idInv+'&cant='+cant,
+                success: function(data){
+
+                }
+            });
+        }
+
+    }
+
+       /* if(sw === '0'){
             if( !confirm('¿Esta seguro que desea ELIMINAR EL PEDIDO?')){
                 return;
             }
@@ -494,15 +513,14 @@ function eliminarFila(idTr, sw, cant){
             updateBD(idTr, cant);
             //deleteRowBD('delPedido.php',dato.pedido, 'pedido', 'pedido');
             //despliega('modulo/pedido/pedido.php','contenido');
-        }
-    }
+        }*/
 
-    $('#'+idTr).remove();
-
+    $('#'+idInv).remove();
     subPrecio = 0;
     $('#tabla tbody').find('tr').each(function(index, element){
         subPrecio = parseFloat(subPrecio) + parseFloat($(this).find('td').eq(5).find('input').val());
     });
+
     $('#tabla tfoot').find('th').eq(1).find('input').val(subPrecio.toFixed(2));
 
     des = $('#tabla tfoot').find('tr').eq(1).find('th').eq(1).find('input').val();
@@ -520,12 +538,12 @@ function eliminarFila(idTr, sw, cant){
         $('#tabla tfoot').find('tr').eq(1).find('th').eq(1).find('input').css('color','#000000');
 
     $('#tabla tbody').find('tr').each(function(index, element){
-        if( index/2 === 0 ){
-            $(this).removeClass('even');
-            $(this).addClass('odd');
-        }else{
+        if( index % 2 === 0 ){
             $(this).removeClass('odd');
             $(this).addClass('even');
+        }else{
+            $(this).removeClass('even');
+            $(this).addClass('odd');
         }
     });
     $('#efectivo').val('');
@@ -581,9 +599,16 @@ function savePedido(idForm, p){
  * CANCELAR PEDIDO
  */
 
- function cancelarPedido(){
-    despliega('modulo/pedido/tabla.php','ventCent');
+function cancelarPedido(){
+    if(confirm("Seguro que desea eliminar pedido..!!!"))
+    despliega('modulo/pedido/pedido.php','contenido');
 }
+
+function cancelarPedidoEdit(){
+    if(confirm("Si cancela la modificación no se guardara ningun cambio..!!!"))
+    despliega('modulo/pedido/pedido.php','contenido');
+}
+
 /**
  * [detalle description genera pdf]
  * @param  {[type]} id [description]
