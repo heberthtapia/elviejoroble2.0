@@ -16,6 +16,7 @@ $cargo = $_SESSION['cargo'];
 
 <?PHP
 include 'modalCheckPedido.php';
+//include 'modalCheckAlmacen.php';
 ?>
 
 <div class="row" id="listTabla">
@@ -89,11 +90,11 @@ include 'modalCheckPedido.php';
                     </td>
                     <td class="last center <?=$row['status1'];?>">
 
-                        <a class="status1" href="javascript:void(0)" data-toggle="modal" data-target="#modalCheckPedido" data-id="<?=$row['id_pedido']?>" data-status1 = "<?=$row['status1'];?>" data-status2 = "<?=$row['status2'];?>" ><?=$row['status1'];?></a></td>
+                        <a class="status1" data-toggle="modal" data-target="#modalCheckPedido" data-id="<?=$row['id_pedido']?>" data-status1 = "<?=$row['status1'];?>" data-status2 = "<?=$row['status2'];?>" ><?=$row['status1'];?></a></td>
 
                     <td class="last center <?=str_replace(' ', '', $row['status2']);?>">
 
-                        <a class="status2" href="javascript:void(0)" onClick="open_win('modulo/pedido/checkPedidoA.php', '', '710', '520', '<?=$row['id_pedido'];?>');"><?=$row['status2'];?></a></td>
+                        <a class="status2" data-toggle="modal" data-target="#modalCheckAlmacen" data-id="<?=$row['id_pedido']?>" data-status1 = "<?=$row['status1'];?>" data-status2 = "<?=$row['status2'];?>"><?=$row['status2'];?></a></td>
 
                     <td width="15%">
                         <div class="btn-group" style="width: 194px">

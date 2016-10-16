@@ -290,6 +290,7 @@ table#tablaList td a {
     font-weight: bold;
     text-decoration: none;
     text-shadow: 1px 1px #000;
+    cursor: pointer;
 }
 
 #max-length-element,

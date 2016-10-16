@@ -487,10 +487,46 @@ function eliminarFila(idTr, cant, idInv){
         if(confirm('¿Esta seguro que desea ELIMINAR EL REGISTRO...!!!?')){
             $.ajax({
                 url: 'modulo/pedido/generaXML.php',
+                async: true,
                 type: 'post',
                 cache: false,
                 data: 'id='+idInv+'&cant='+cant,
                 success: function(data){
+                    $('#'+idInv).remove();
+
+                    subPrecio = 0;
+                    $('#tabla tbody').find('tr').each(function(index, element){
+                        subPrecio = parseFloat(subPrecio) + parseFloat($(this).find('td').eq(5).find('input').val());
+                    });
+
+                    $('#tabla tfoot').find('th').eq(1).find('input').val(subPrecio.toFixed(2));
+
+                    des = $('#tabla tfoot').find('tr').eq(1).find('th').eq(1).find('input').val();
+                    if(des === '') des = 0;
+
+                    bon = $('#tabla tfoot').find('tr').eq(2).find('th').eq(1).find('input').val();
+                    if(bon === '') bon = 0;
+
+                    total = parseFloat(subPrecio)-parseFloat(des)-parseFloat(bon);
+                    $('#tabla tfoot').find('tr').eq(3).find('th').eq(1).find('input').val(total.toFixed(2));
+
+                    if( total < 0  )
+                        $('#tabla tfoot').find('tr').eq(1).find('th').eq(1).find('input').css('color','#F7070B');
+                    else
+                        $('#tabla tfoot').find('tr').eq(1).find('th').eq(1).find('input').css('color','#000000');
+
+                    $('#tabla tbody').find('tr').each(function(index, element){
+                        if( index % 2 === 0 ){
+                            $(this).removeClass('odd');
+                            $(this).addClass('even');
+                        }else{
+                            $(this).removeClass('even');
+                            $(this).addClass('odd');
+                        }
+                    });
+                    $('#efectivo').val('');
+                    $('#cambio').val('');
+                    $('#codigo').focus();
 
                 }
             });
@@ -498,56 +534,6 @@ function eliminarFila(idTr, cant, idInv){
 
     }
 
-       /* if(sw === '0'){
-            if( !confirm('¿Esta seguro que desea ELIMINAR EL PEDIDO?')){
-                return;
-            }
-            despliega('modulo/pedido/newPedido.php','contenido');
-        }else{
-            if( !confirm('Si Elimina el Ultimo Registro. "SE ELIMINARA TODO EL PEDIDO !!!"')){
-                return;
-            }
-            var dato = $('#formPreVenta').serializeObject();
-            alert(dato);
-            updateBD(idTr, cant);
-            //deleteRowBD('delPedido.php',dato.pedido, 'pedido', 'pedido');
-            //despliega('modulo/pedido/pedido.php','contenido');
-        }*/
-
-    $('#'+idInv).remove();
-    subPrecio = 0;
-    $('#tabla tbody').find('tr').each(function(index, element){
-        subPrecio = parseFloat(subPrecio) + parseFloat($(this).find('td').eq(5).find('input').val());
-    });
-
-    $('#tabla tfoot').find('th').eq(1).find('input').val(subPrecio.toFixed(2));
-
-    des = $('#tabla tfoot').find('tr').eq(1).find('th').eq(1).find('input').val();
-    if(des === '') des = 0;
-
-    bon = $('#tabla tfoot').find('tr').eq(2).find('th').eq(1).find('input').val();
-    if(bon === '') bon = 0;
-
-    total = parseFloat(subPrecio)-parseFloat(des)-parseFloat(bon);
-    $('#tabla tfoot').find('tr').eq(3).find('th').eq(1).find('input').val(total.toFixed(2));
-
-    if( total < 0  )
-        $('#tabla tfoot').find('tr').eq(1).find('th').eq(1).find('input').css('color','#F7070B');
-    else
-        $('#tabla tfoot').find('tr').eq(1).find('th').eq(1).find('input').css('color','#000000');
-
-    $('#tabla tbody').find('tr').each(function(index, element){
-        if( index % 2 === 0 ){
-            $(this).removeClass('odd');
-            $(this).addClass('even');
-        }else{
-            $(this).removeClass('even');
-            $(this).addClass('odd');
-        }
-    });
-    $('#efectivo').val('');
-    $('#cambio').val('');
-    $('#codigo').focus();
 }
 
 /* RECARGA TOTALES DEL EDIT */
