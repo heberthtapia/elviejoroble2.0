@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<pedido>
-  <pedidoEliminado seccion="eliminado">
-    <autor>Paulo Coelho</autor>
-    <titulo>El Alquimista</titulo>
-    <anio>1988</anio>
-    <editorial>Maxico D.F. - Editorial Grijalbo</editorial>
-  </pedidoEliminado>
-<pedidoEliminado seccion="eliminado"><autor>Paulo Coelho</autor><titulo>El Alquimista</titulo><anio>1988</anio><editorial>Maxico D.F. - Editorial Grijalbo</editorial></pedidoEliminado></pedido>

@@ -33,28 +33,11 @@ $data->OkCont = 0;
 
 	if($file['status1'] == 'Pendiente'){
 		$status = 'Aprobado';
-
-		$sql = "UPDATE pedido SET status = 'Inactivo' ";
-		$sql.= "WHERE id_pedido = '".$data->pedido."' ";
-
-		$sql = $db->Execute($sql);
-
 	}elseif( $file['status1'] == 'Aprobado' && $file['status2'] == 'Entregado'){
 		$status = 'Aprobado';
-
-		$sql = "UPDATE pedido SET status = 'Inactivo' ";
-		$sql.= "WHERE id_pedido = '".$data->pedido."' ";
-
-		$sql = $db->Execute($sql);
-
 	}else{
 		$status = 'Pendiente';
 		$data->OkCont = 1;
-
-		$sql = "UPDATE pedido SET status = 'Activo' ";
-		$sql.= "WHERE id_pedido = '".$data->pedido."' ";
-
-		$sql = $db->Execute($sql);
 	}
 
 	/* ACTUALIZAR EL STATUS DEL CONTADOR....!!! */

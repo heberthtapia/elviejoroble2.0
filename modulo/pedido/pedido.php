@@ -16,7 +16,7 @@ $cargo = $_SESSION['cargo'];
 
 <?PHP
 include 'modalCheckPedido.php';
-//include 'modalCheckAlmacen.php';
+include 'modalCheckAlmacen.php';
 ?>
 
 <div class="row" id="listTabla">
@@ -55,9 +55,9 @@ include 'modalCheckPedido.php';
             $sql = "SELECT * ";
             $sql.= "FROM pedido AS p, empleado AS e ";
             $sql.= "WHERE p.id_empleado = e.id_empleado ";
-            if($cargo!='adm'){
-                $sql.= "AND p.id_empleado = ".$idEmp." ";
-            }
+            //if($cargo!='adm'){
+             //   $sql.= "AND p.id_empleado = ".$idEmp." ";
+            //}
             $sql.= "ORDER BY (p.dateReg) DESC ";
 
             $cont = 0;

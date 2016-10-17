@@ -92,7 +92,6 @@ function despliega(p, div, id){
             //alert(data.checksEmail);
             //parent.$.colorbox.close();
             //ordena(2);
-            //alert(data.tabla);
             if(data.tabla === 'empleado'){
                 $('#datos_ajax').html('<div class="alert alert-success" role="alert"><strong>Guardado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
                     $('#datos_ajax').fadeOut(2000,function () {
@@ -127,15 +126,17 @@ function despliega(p, div, id){
                         $('tr#tb'+data.pedido+' td.Pendiente a').attr('data-status1','Pendiente');
                     }else{
                         /* CAMBIIO STASTUS ALMACEN */
+                        $('#modalCheckAlmacen').modal('hide');
                         if(data.OkAlm === 0){
                             $('tr#tb'+data.pedido+' td.NoEntregado').removeClass('NoEntregado').addClass('Entregado');
                             $('tr#tb'+data.pedido+' td.Entregado a').text('Entregado');
+                            detalleAlm(data.pedido);
                         }else{
                             if(data.OkAlm === 1){
                                 $('tr#tb'+data.pedido+' td.Entregado').removeClass('Entregado').addClass('NoEntregado');
                                 $('tr#tb'+data.pedido+' td.NoEntregado a').text('No Entregado');
                             }else{
-                                despliega('modulo/pedido/pedido.php','contenido');
+                                //despliega('modulo/pedido/pedido.php','contenido');
                             }
                         }
                     }
@@ -601,6 +602,10 @@ function cancelarPedidoEdit(){
  */
  function detalle(id){
     window.open('modulo/pedido/pdfPedDet.php?res='+id, '_blank');
+}
+
+ function detalleAlm(id){
+    window.open('modulo/pedido/pdfPedAlm.php?res='+id, '_blank');
 }
 /**
  * [selecCampo Recarga camppo producto]

@@ -1,5 +1,5 @@
 
-<form id="formCheck" action="javascript:saveForm('formCheck','pedido/OkAlm.php')" class="form-horizontal" autocomplete="off" >
+<form id="formCheckAlm" action="javascript:saveForm('formCheckAlm','pedido/OkAlm.php')" class="form-horizontal" autocomplete="off" >
 	<div class="modal fade" id="modalCheckAlmacen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -18,7 +18,7 @@
 					</button>
 					<button type="submit" id="saveAlm" class="btn btn-success">
 						<i class="fa fa-check" aria-hidden="true"></i>
-						<span>Aprobar Pedido</span>
+						<span>Entregar Pedido</span>
 					</button>
 				</div>
 			</div>
@@ -27,13 +27,13 @@
 </form>
 
 <script>
-	$('#modalCheckPedido').on('hidden.bs.modal', function (e) {
+	$('#modalCheckAlmacen').on('hidden.bs.modal', function (e) {
 		// do something...
 		//$('#formNew').get(0).reset();
 		//despliega('modulo/almacen/producto.php','contenido');
 		if(sw === 1){
 			$.ajax({
-		        url: "modulo/pedido/verificaStatusContadorUn.php",
+		        url: "modulo/pedido/verificaStatusAlmacenUn.php",
 		        type: 'post',
 		        dataType: 'json',
 		        async:true,
@@ -48,7 +48,7 @@
 		}
 	});
 
-	$('#modalCheckPedido').on('show.bs.modal', function (event) {
+	$('#modalCheckAlmacen').on('show.bs.modal', function (event) {
 
 		var button = $(event.relatedTarget); // Botón que activó el modal
 		var id = button.data('id'); // Extraer la información de atributos de datos
@@ -58,30 +58,33 @@
 		sw = 0;
 
 		if( status1 == 'Aprobado' && status2 == 'Entregado' ){
-			msj = 'Cancelar Pedido';
+			msj = 'Entregar Pedido';
 			alt = 'No puede cancelar el pedido por que ya fue ENTREGADO.';
  		}else if( status1 == 'Aprobado' && status2 != 'Entregado' ){
- 			msj = 'Cancelar Pedido';
+ 			msj = 'Entregar Pedido';
+ 			$('#saveAlm').removeAttr('disabled','disabled');
  		}else{
- 			msj = 'Aprobar Pedido';
+ 			alt = 'El pedido no fue APROBADO todavía';
+ 			msj = 'Entregar Pedido';
+ 			$('#saveAlm').attr('disabled','disabled');
  		}
  		if(alt === ''){
-	 		$('#save').find('span').text(msj);
+	 		$('#saveAlm').find('span').text(msj);
 	 		$('.modal-title').text(msj);
  		}else{
- 			$('#save').find('span').text(msj);
- 			$('#save').attr('disabled','disabled');
+ 			$('#saveAlm').find('span').text(msj);
+ 			$('#saveAlm').attr('disabled','disabled');
 	 		$('.modal-title').text(alt);
  		}
 
 		var modal = $(this);
 		modal.find('.modal-body').find('embed').attr({
-			src: 'modulo/pedido/pdfPedDet.php?res='+id
+			src: 'modulo/pedido/pdfPedAlm.php?res='+id
 		});
 		modal.find('.modal-body #pedido').val(id);
 
 		$.ajax({
-	        url: "modulo/pedido/verificaStatusContador.php",
+	        url: "modulo/pedido/verificaStatusAlmacen.php",
 	        type: 'post',
 	        dataType: 'json',
 	        async:true,
@@ -90,10 +93,10 @@
 	        	if(data.sw === 1){
 	            	sw = 1;
 	            	idSw = data.id;
-	            	$('#save').removeAttr('disabled','disabled');
+	            	//$('#saveAlm').removeAttr('disabled','disabled');
 	        	}else{
 	        		$('.modal-title').text('En este momento no puede realizar cambios');
-	        		$('#save').attr('disabled','disabled');
+	        		$('#saveAlm').attr('disabled','disabled');
 	     	  		sw = 0;
 	        	}
 	        },
