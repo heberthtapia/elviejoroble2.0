@@ -291,12 +291,12 @@ if (isset($_POST['from']))
                             <span class="hidden-xs hidden-sm">Clientes</span>
                         </a>
                         <ul class="subnavegador">
-                            <li><a href="#">
+                            <!--<li><a href="#">
                                     <i class="fa fa-plus-square-o" aria-hidden="true"></i>
                                     <span class="hidden-xs hidden-sm">Nuevo Cliente</span>
                                 </a>
-                            </li>
-                            <li><a href="#">
+                            </li>-->
+                            <li><a href="#" onclick="despliega('modulo/cliente/cliente.php','contenido')">
                                     <i class="fa fa-list" aria-hidden="true"></i>
                                     <span class="hidden-xs hidden-sm">Lista de Clientes</span>
                                 </a>

@@ -63,19 +63,19 @@ $cargo = $_SESSION['cargo'];
     $('#obser').restrictLength( $('#max-length-element') );
 </script>
 <?PHP
-include 'newEmpleado.php';
-include 'editEmpleado.php';
-include 'previewEmpleado.php';
-include 'delEmpleado.php';
+include 'newCliente.php';
+include 'editCliente.php'
+/*include 'previewEmpleado.php';
+include 'delEmpleado.php';*/
 ?>
 <div class="row" id="listTabla">
     <div class="col-xs-12 col-sm-12 col-md-12">
-        <h1 class="avisos" align="center"><strong>EMPLEADOS</strong></h1>
-        <h2 class="avisos">Lista de Empleados</h2>
+        <h1 class="avisos" align="center"><strong>CLIENTES</strong></h1>
+        <h2 class="avisos">Lista de Clientes</h2>
         <div class="pull-right"><br>
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#dataRegister">
                 <i class="fa fa-plus" aria-hidden="true"></i>
-                <span>Agregar Empleado</span>
+                <span>Agregar Cliente</span>
             </button>
         </div>
         <div class="clearfix"></div>
@@ -85,22 +85,27 @@ include 'delEmpleado.php';
             <tr>
                 <th>Nº</th>
                 <th>Fecha</th>
+                <th>Codigo Cliente</th>
                 <th>Foto</th>
+                <th>Nombre Negocio</th>
                 <th>Nombre</th>
                 <th>Ap. Paterno</th>
                 <th>Ap. Materno</th>
-                <th>Cargo</th>
+                <th>Dirección</th>
+                <th>#</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
             <?PHP
             $sql = "SELECT * ";
-            $sql.= "FROM empleado AS e, usuario AS u ";
-            $sql.= "WHERE e.id_empleado = u.id_empleado ";
-            $sql.= "ORDER BY (e.dateReg) DESC ";
+            $sql.= "FROM cliente ";
+            if($cargo!='adm'){
+                $sql.= "WHERE id_empleado = '".$_SESSION['idEmp']."' ";
+            }
+            $sql.= "ORDER BY (dateReg) DESC ";
 
-            $cont = 1;
+            $cont = 0;
 
             $srtQuery = $db->Execute($sql);
             if($srtQuery === false)
@@ -112,12 +117,13 @@ include 'delEmpleado.php';
                 <tr id="tb<?=$row[0]?>">
                     <td align="center"><?=$cont++;?></td>
                     <td><?=$row['dateReg']?></td>
+                    <td align="center" style="text-transform: uppercase;"><?=$row['id_cliente']?></td>
                     <td align="center" width="10%">
                         <?PHP
                         if( $row['foto'] != '' )
                         {
                             ?>
-                            <img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/photos/<?=($row['foto']);?>&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
+                            <img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/photos/<?=($row['foto']);?>&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
 
                             <?PHP
                         }
@@ -128,10 +134,12 @@ include 'delEmpleado.php';
                         }
                         ?>
                     </td>
+                    <td><?=$row['nombreEmp'];?></td>
                     <td><?=$row['nombre'];?></td>
                     <td><?=$row['apP'];?></td>
                     <td><?=$row['apM'];?></td>
-                    <td><?=$op->toSelect($row['cargo']);?></td>
+                    <td><?=$row['direccion'];?></td>
+                    <td><?=$row['numero'];?></td>
                     <td width="15%">
                         <div class="btn-group" style="width: 188px">
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataPreview"
@@ -139,15 +147,13 @@ include 'delEmpleado.php';
                                             data-name="<?=$row['nombre']?>"
                                             data-paterno="<?=$row['apP']?>"
                                             data-materno="<?=$row['apM']?>"
-                                            data-ci="<?=$row['id_empleado']?>"
+                                            data-id="<?=$row['id_cliente']?>"
                                             data-dep="<?=$row['depa']?>"
-                                            data-dateNac="<?=$row['dateNac']?>"
+                                            data-nameEmp="<?=$row['nombreEmp']?>"
                                             data-fono="<?=$row['phone']?>"
                                             data-celular="<?=$row['celular']?>"
                                             data-emailC="<?=$row['email']?>"
-                                            data-cargo="<?=$row['cargo']?>"
-                                            data-codUser="<?=$row['user']?>"
-                                            data-password="<?=$row['pass']?>"
+                                            data-ci="<?=$row['ci']?>"
                                             data-addresC="<?=$row['direccion']?>"
                                             data-Nro="<?=$row['numero']?>"
                                             data-cx="<?=$row['coorX']?>"
@@ -161,15 +167,13 @@ include 'delEmpleado.php';
                                             data-name="<?=$row['nombre']?>"
                                             data-paterno="<?=$row['apP']?>"
                                             data-materno="<?=$row['apM']?>"
-                                            data-ci="<?=$row['id_empleado']?>"
+                                            data-id="<?=$row['id_cliente']?>"
                                             data-dep="<?=$row['depa']?>"
-                                            data-dateNac="<?=$row['dateNac']?>"
+                                            data-nameEmp="<?=$row['nombreEmp']?>"
                                             data-fono="<?=$row['phone']?>"
                                             data-celular="<?=$row['celular']?>"
                                             data-emailC="<?=$row['email']?>"
-                                            data-cargo="<?=$row['cargo']?>"
-                                            data-codUser="<?=$row['user']?>"
-                                            data-password="<?=$row['pass']?>"
+                                            data-ci="<?=$row['ci']?>"
                                             data-addresC="<?=$row['direccion']?>"
                                             data-Nro="<?=$row['numero']?>"
                                             data-cx="<?=$row['coorX']?>"
@@ -181,19 +185,19 @@ include 'delEmpleado.php';
                                     </button>
                         </div>
                         <div style="width: 188px; margin-top: 5px">
-                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#dataDelete" data-id="<?=$row['id_empleado']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#dataDeleteAlm" data-id="<?=$row['id_cliente']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
                             </button>
 
-                            <div class="checkbox" id="status<?=$row['id_empleado']?>">
+                            <div class="checkbox" id="status<?=$row['id_cliente']?>">
                                     <?PHP
-                                    if( $row['statusEmp'] == 'Activo' ){
+                                    if( $row['status'] == 'Activo' ){
                                     ?>
-                                        <input type="checkbox" name="checks" checked id="<?=$row['id_empleado']?>"/>
+                                        <input type="checkbox" name="checks" checked id="<?=$row['id_cliente']?>"/>
                                         <label>Status</label>
                                     <?PHP
                                     }else{
                                     ?>
-                                        <input type="checkbox" name="checks" id="<?=$row['id_empleado']?>"/>
+                                        <input type="checkbox" name="checks" id="<?=$row['id_cliente']?>"/>
                                         <label>Status</label>
                                     <?PHP
                                     }

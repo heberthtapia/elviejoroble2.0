@@ -95,11 +95,12 @@ var id_empleado;
         recargaImgU(msg.filename, 'empleado');
     }
 
-    function initMapU(){
+    function initMapEmp(){
         /* GOOGLE MAPS */
         var formulario = $('#formUpdate');
         //COODENADAS INICIALES -16.5207007,-68.1615534
         //VARIABLE PARA EL PUNTO INICIAL
+
         var punto = new google.maps.LatLng(coorX, coorY);
         //VARIABLE PARA CONFIGURACION INICIAL
         var config = {
@@ -340,7 +341,7 @@ var id_empleado;
 
     $('#dataUpdate').on('show.bs.modal', function() {
         //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
-        initMapU();
+        initMapEmp();
     });
 
     $('#dataUpdate').on('hidden.bs.modal', function (e) {

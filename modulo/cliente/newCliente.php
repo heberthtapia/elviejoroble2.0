@@ -15,7 +15,7 @@ $hora = $op->Time();
 
     function openWebCam(){
         openWebcam();//document.write( webcam.get_html(320, 240) );
-        webcam.set_api_url( 'modulo/empleado/uploadEmp.php' );
+        webcam.set_api_url( 'modulo/cliente/uploadCli.php' );
         webcam.set_hook( 'onComplete', 'my_callback_function');
     }
     function my_callback_function(response) {
@@ -23,7 +23,7 @@ $hora = $op->Time();
         msg = $.parseJSON(response);
         //alert(msg.filename);
         //modificado
-        recargaImg(msg.filename, 'empleado');
+        recargaImg(msg.filename, 'cliente');
     }
 
     function initMap(){
@@ -135,8 +135,6 @@ $hora = $op->Time();
         }
     }
 
-    // $(document).ready(function(e) {
-
     $('#dateNac').datetimepicker({
         locale: 'es',
         viewMode: 'years',
@@ -171,14 +169,14 @@ $hora = $op->Time();
         height       		: 25,
         width        		: 100,
         'formData'      	: {
-            'path' : 'empleado'
+            'path' : 'cliente'
         },
         // ** Eventos **
         'onSelectOnce':function(event,data){
             $('#file_upload').uploadifySettings('scriptData',{'directorio':'a','CodeUser': '21'});
         },
         'onUploadComplete': function(file){
-            idImg('empleado');
+            idImg('cliente');
             //$('#cboxTitle').html('La foto ' + file.name + ' se subio correctamente, <br> ahora puede guardar el formulario.');
 
             setTimeout(function(){
@@ -220,17 +218,19 @@ $hora = $op->Time();
         $('#subir').text("Subir Foto");
         $('#foto').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/photos/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
     });
- // });
-
 </script>
-
-<form id="formNew" action="javascript:saveForm('formNew','empleado/save.php')" class="" autocomplete="off" >
+<style type="text/css">
+	#codCl{
+		text-transform: uppercase;
+	}
+</style>
+<form id="formNew" action="javascript:saveForm('formNew','cliente/save.php')" class="" autocomplete="off" >
 <div class="modal fade bs-example-modal-lg" id="dataRegister" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="gridSystemModalLabel">Nuevo Empleado <span class="fecha">Fecha: <?=$fecha;?> <?=$hora;?></span></h4>
+                <h4 class="modal-title" id="gridSystemModalLabel">Nuevo Cliente <span class="fecha">Fecha: <?=$fecha;?> <?=$hora;?></span></h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -239,102 +239,86 @@ $hora = $op->Time();
                     </div>
                 </div>
                 <div class="row">
-                    <input id="date" name="date" type="hidden" value="<?=$fecha;?> <?=$hora;?>" />
-                    <input id="tabla" name="tabla" type="hidden" value="empleado">
-                    <div class="col-md-9">
+                	<input id="date" name="date" type="hidden" value="<?=$fecha;?> <?=$hora;?>" />
+                    <input id="tabla" name="tabla" type="hidden" value="cliente">
+                	<div class="col-md-9">
+                		<div class="row">
+                            <div class="col-md-4 form-group">
+                                <label for="codCl" class="sr-only">Cod. Clinete:</label>
+                                <input id="codCl" name="codCl" type="text" placeholder="Cod. Cliente" class="form-control" value="<?=$_SESSION['inc'].''.$op->ceros($NumRow[0],2);?>" readonly />
+                                <input id="codCli" name="codCli" type="hidden" value="<?=$_SESSION['inc'].''.$op->ceros($NumRow[0],2);?>"/>
+                            </div>
+                            <div class="col-md-8 form-group">
+                                <label for="nameEmp" class="sr-only">Nombre Negocio:</label>
+                                <input id="nameEmp" name="nameEmp" type="text" placeholder="Nombre Negocio" data-validation="required" class="form-control" autocomplete="off" />
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-4 form-group">
                                 <label for="name" class="sr-only">Nombre:</label>
-                                <input id="name" name="name" type="text" placeholder="Nombre" class="form-control" data-validation="required" autocomplete="off" />
+                                <input id="name" name="name" type="text" placeholder="Nombre" class="form-control" data-validation="required" autocomplete="off" onBlur="cargaCod()"/>
                             </div>
                             <div class="col-md-4 form-group">
                                 <label for="paterno" class="sr-only">Paterno:</label>
-                                <input id="paterno" name="paterno" type="text" placeholder="Paterno" data-validation="required" class="form-control" />
+                                <input id="paterno" name="paterno" type="text" placeholder="Paterno" data-validation="required" class="form-control" onBlur="cargaCod()" />
                             </div>
                             <div class="col-md-4 form-group">
                                 <label for="materno" class="sr-only">Materno:</label>
                                 <input id="materno" name="materno" type="text" placeholder="Materno" data-validation="required" class="form-control" />
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-2 form-group">
-                                <label for="ci" class="sr-only">N° C.I.:</label>
-                                <input id="ci" name="ci" type="text" placeholder="N° C.I." class="form-control"
-                                       data-validation="required number server"
-                                       data-validation-url="modulo/empleado/validateCI.php"/>
-                            </div>
-                            <div class="col-md-3 form-group">
-                                <label for="dep" class="sr-only">Lugar Exp.:</label>
-                                <select id="dep" name="dep" class="form-control" data-validation="required">
-                                    <option value="" disabled selected hidden>Lugar Exp.</option>
-                                    <option value="lp">La Paz</option>
-                                    <option value="cbb">Cochabamba</option>
-                                    <option value="sz">Santa Cruz</option>
-                                    <option value="bn">Beni</option>
-                                    <option value="tr">Tarija</option>
-                                    <option value="pt">Potosi</option>
-                                    <option value="or">Oruro</option>
-                                    <option value="pd">Pando</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3 form-group">
-                                <label for="dateNac" class="sr-only">Fecha de Nacimiento:</label>
-                                <input id="dateNac" name="dateNac" type="text" placeholder="Fecha Nac." class="form-control" data-validation="date" data-validation-format="yyyy-mm-dd"/>
-                            </div>
-                            <div class="col-md-2 form-group">
-                                <label for="fono" class="sr-only">Telefono:</label>
-                                <input id="fono" name="fono" type="text" placeholder="Telefono" class="form-control" data-validation="number" data-validation-optional-if-answered="celular"/>
-                            </div>
-                            <div class="col-md-2 form-group">
-                                <label for="celular" class="sr-only">Celular:</label>
-                                <input id="celular" name="celular" type="text" placeholder="Celular" class="form-control" data-validation="number" data-validation-optional-if-answered="fono"/>
-                            </div>
-                        </div>
                     </div>
+
                     <div class="col-md-3" align="center">
                         <div id="foto" class="form-group">
-                            <img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/photos/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
+                            <img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/photos/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-3 form-group">
+                        <label for="ci" class="sr-only">N° C.I.:</label>
+                        <input id="ci" name="ci" type="text" placeholder="N° C.I." class="form-control"
+                               data-validation="required number server"
+                               data-validation-url="modulo/cliente/validateCI.php"/>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label for="dep" class="sr-only">Lugar Exp.:</label>
+                        <select id="dep" name="dep" class="form-control" data-validation="required">
+                            <option value="" disabled selected hidden>Lugar Exp.</option>
+                            <option value="lp">La Paz</option>
+                            <option value="cbb">Cochabamba</option>
+                            <option value="sz">Santa Cruz</option>
+                            <option value="bn">Beni</option>
+                            <option value="tr">Tarija</option>
+                            <option value="pt">Potosi</option>
+                            <option value="or">Oruro</option>
+                            <option value="pd">Pando</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label for="fono" class="sr-only">Telefono:</label>
+                        <input id="fono" name="fono" type="text" placeholder="Telefono" class="form-control" data-validation="number" data-validation-optional-if-answered="celular"/>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label for="celular" class="sr-only">Celular:</label>
+                        <input id="celular" name="celular" type="text" placeholder="Celular" class="form-control" data-validation="number" data-validation-optional-if-answered="fono"/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 form-group">
                         <label for="email" class="sr-only">Correo Electronico:</label>
                         <input id="email" name="email" type="text" placeholder="Correo Electronico" value="" class="form-control" data-validation="email"/>
                     </div>
-                    <div class="col-md-2 form-group">
-                        <label for="cargo" class="sr-only">Cargo:</label>
-                        <select id="cargo" name="cargo" class="form-control" data-validation="required">
-                            <option value="" disabled selected hidden>Cargo</option>
-                            <option value="adm">Administrador</option>
-                            <option value="alm">Almacen</option>
-                            <option value="con">Contador</option>
-                            <option value="pre">Preventista</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2 form-group">
-                        <label for="codUser" class="sr-only">Usuario:</label>
-                        <input id="codUser" name="codUser" type="text" placeholder="Usuario" class="form-control"
-                               data-validation="required server"
-                               data-validation-url="modulo/empleado/validateUser.php"/>
-                    </div>
-                    <div class="col-md-2 form-group">
-                        <label for="password" class="sr-only">Contraseña:</label>
-                        <input id="password" name="password" type="text" placeholder="Contraseña" value="" class="form-control" data-validation="required"/>
-                    </div>
-                    <div class="col-md-2 form-group">
-                        <button type="button" id="genera" class="btn btn-primary" onclick="generaPass('password');">
-                            <i class="fa fa-cog" aria-hidden="true"></i>
-                            <span>Generar</span>
-                        </button>
-                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8 form-group">
+                    <div class="col-md-9 form-group">
                         <label for="addres" class="sr-only"></label>
                         <input id="addres" name="addres" type="text" placeholder="Direcci&oacute;n" class="form-control" data-validation="required"/>
                     </div>
-                    <div class="col-md-2 form-group">
+                    <div class="col-md-3 form-group">
                         <label for="Nro" class="sr-only"></label>
                         <input id="Nro" name="Nro" type="text" placeholder="N° de domicilio" class="form-control" data-validation="required number"/>
                     </div>
@@ -416,7 +400,7 @@ $hora = $op->Time();
                 </button>
                 <button type="submit" id="save" class="btn btn-success">
                     <i class="fa fa-check" aria-hidden="true"></i>
-                    <span>Agregar Empleado</span>
+                    <span>Agregar Cliente</span>
                 </button>
             </div>
         </div><!-- /.modal-content -->
@@ -442,3 +426,20 @@ $hora = $op->Time();
 
     <span class="settings"></span>
 </div>
+
+<script>
+	function cargaCod(){
+
+      var cod   = $('#codCli').val();
+      var n     = $('#name').val();
+      var p     = $('#paterno').val();
+      var m     = $('#materno').val();
+      var vr    = cod.substr(0,2);
+      var nvr   = cod.substr(3,4);
+
+      var c = vr+'-'+n.substr(0,1)+''+p.substr(0,1)+'-'+nvr;
+
+      $('#codCl').val(c);
+
+    }
+</script>
