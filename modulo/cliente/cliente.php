@@ -214,11 +214,14 @@ include 'delEmpleado.php';*/
             <tr>
                 <th>Nº</th>
                 <th>Fecha</th>
+                <th>Codigo Cliente</th>
                 <th>Foto</th>
+                <th>Nombre Negocio</th>
                 <th>Nombre</th>
                 <th>Ap. Paterno</th>
                 <th>Ap. Materno</th>
-                <th>Cargo</th>
+                <th>Dirección</th>
+                <th>#</th>
                 <th>Acciones</th>
             </tr>
             </tfoot>
