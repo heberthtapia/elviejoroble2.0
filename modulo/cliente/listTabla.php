@@ -42,6 +42,22 @@ $op = new cnFunction();
                 }
             ]
         });
+
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            //increaseArea: '100%' // optional
+          });
+
+        $('input').on('ifChecked', function(event){
+            id = $(this).attr('id');
+            statusEmp(id, 'Activo');
+        });
+        $('input').on('ifUnchecked',function(event){
+            id = $(this).attr('id');
+            statusEmp(id, 'Inactivo');
+        });
+
     });
     $.validate({
         lang: 'es',
@@ -86,7 +102,7 @@ $op = new cnFunction();
             }
             $sql.= "ORDER BY (dateReg) DESC ";
 
-            $cont = 0;
+            $cont = 1;
 
             $srtQuery = $db->Execute($sql);
             if($srtQuery === false)
@@ -199,11 +215,14 @@ $op = new cnFunction();
             <tr>
                 <th>Nº</th>
                 <th>Fecha</th>
+                <th>Codigo Cliente</th>
                 <th>Foto</th>
+                <th>Nombre Negocio</th>
                 <th>Nombre</th>
                 <th>Ap. Paterno</th>
                 <th>Ap. Materno</th>
-                <th>Cargo</th>
+                <th>Dirección</th>
+                <th>#</th>
                 <th>Acciones</th>
             </tr>
             </tfoot>

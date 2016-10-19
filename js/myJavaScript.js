@@ -184,6 +184,14 @@ function updateForm(idForm, p){
                     });
                 });
             }
+            if(data.tabla === 'cliente'){
+                $('#datos_ajax_update').html('<div class="alert alert-success" role="alert"><strong>Modificado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
+                    $('#datos_ajax_update').fadeOut(2000,function () {
+                        $('#dataUpdate').modal('hide').delay(7000);
+                        despliega('modulo/cliente/listTabla.php','listTabla');
+                    });
+                });
+            }
         },
         error: function(data){
             alert('Error al modificar datos');
@@ -201,6 +209,7 @@ function fDelete(idForm, p){
         data:{res:dato},
         success: function(data){
             $('#dataDelete').modal('hide');
+            $('#dataDeleteCli').modal('hide');
             despliega('modulo/'+data.tabla+'/listTabla.php','listTabla');
         },
         error: function(data){
@@ -271,6 +280,20 @@ function idImg(mod){
  function statusEmp(id, status){
     $.ajax({
         url: 'inc/statusEmp.php',
+        type: 'post',
+        async:true,
+        data: 'id='+id+'&status='+status,
+        success: function(data){
+
+        }
+    });
+}
+/**
+ *  STATUS CLIENTE
+ */
+function statusCli(id, status){
+    $.ajax({
+        url: 'inc/statusCli.php',
         type: 'post',
         async:true,
         data: 'id='+id+'&status='+status,

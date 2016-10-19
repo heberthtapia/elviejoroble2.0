@@ -23,7 +23,7 @@ var coorX;
 var coorY;
 var id_cliente;
 
-    $('#dataUpdate').on('show.bs.modal', function (event) {
+    $('#dataPreview').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Botón que activó el modal
         var foto = button.data('foto'); // Extraer la información de atributos de datos
         var nombre = button.data('name'); // Extraer la información de atributos de datos
@@ -105,7 +105,7 @@ var id_cliente;
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
-        mapa = new google.maps.Map( $("#mapaU")[0], config );
+        mapa = new google.maps.Map( $("#mapaP")[0], config );
 
         google.maps.event.addListener(mapa, "click", function(event){
         //OBTENER COORDENADAS POR SEPARADO
@@ -335,12 +335,12 @@ var id_cliente;
             $( ".uploadShowU" ).toggle(1000);
         });
 
-    $('#dataUpdate').on('show.bs.modal', function() {
+    $('#dataPreview').on('show.bs.modal', function() {
         //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
         initMapCli();
     });
 
-    $('#dataUpdate').on('hidden.bs.modal', function (e) {
+    $('#dataPreview').on('hidden.bs.modal', function (e) {
         // do something...
         $('#formUpdate').get(0).reset();
         $('.uploadShowU').css('display','none');
@@ -362,7 +362,7 @@ var id_cliente;
 </style>
 
 <form id="formUpdate" action="javascript:updateForm('formUpdate','cliente/update.php')" class="" autocomplete="off" >
-<div class="modal fade bs-example-modal-lg" id="dataUpdate" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+<div class="modal fade bs-example-modal-lg" id="dataPreview" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -387,21 +387,21 @@ var id_cliente;
                             </div>
                             <div class="col-md-8 form-group">
                                 <label for="nameEmpU" class="sr-only">Nombre Negocio:</label>
-                                <input id="nameEmpU" name="nameEmpU" type="text" placeholder="Nombre Negocio" data-validation="required" class="form-control" autocomplete="off" />
+                                <input id="nameEmpU" name="nameEmpU" type="text" placeholder="Nombre Negocio" data-validation="required" class="form-control" autocomplete="off" disabled="" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4 form-group">
                                 <label for="nameU" class="sr-only">Nombre:</label>
-                                <input id="nameU" name="nameU" type="text" placeholder="Nombre" class="form-control" data-validation="required" autocomplete="off" onBlur="cargaCodU()"/>
+                                <input id="nameU" name="nameU" type="text" placeholder="Nombre" class="form-control" data-validation="required" autocomplete="off" onBlur="cargaCodU()" disabled=""/>
                             </div>
                             <div class="col-md-4 form-group">
                                 <label for="paternoU" class="sr-only">Paterno:</label>
-                                <input id="paternoU" name="paternoU" type="text" placeholder="Paterno" data-validation="required" class="form-control" onBlur="cargaCodU()" />
+                                <input id="paternoU" name="paternoU" type="text" placeholder="Paterno" data-validation="required" class="form-control" onBlur="cargaCodU()" disabled="" />
                             </div>
                             <div class="col-md-4 form-group">
                                 <label for="maternoU" class="sr-only">Materno:</label>
-                                <input id="maternoU" name="maternoU" type="text" placeholder="Materno" data-validation="required" class="form-control" />
+                                <input id="maternoU" name="maternoU" type="text" placeholder="Materno" data-validation="required" class="form-control" disabled="" />
                             </div>
                         </div>
                     </div>
@@ -419,7 +419,7 @@ var id_cliente;
                     </div>
                     <div class="col-md-3 form-group">
                         <label for="depU" class="sr-only">Lugar Exp.:</label>
-                        <select id="depU" name="depU" class="form-control" data-validation="required">
+                        <select id="depU" name="depU" class="form-control" data-validation="required"  disabled="">
                             <option value="" disabled selected hidden>Lugar Exp.</option>
                             <option value="lp">La Paz</option>
                             <option value="cbb">Cochabamba</option>
@@ -433,41 +433,41 @@ var id_cliente;
                     </div>
                     <div class="col-md-3 form-group">
                         <label for="fonoU" class="sr-only">Telefono:</label>
-                        <input id="fonoU" name="fonoU" type="text" placeholder="Telefono" class="form-control" data-validation="number" data-validation-optional-if-answered="celularU"/>
+                        <input id="fonoU" name="fonoU" type="text" placeholder="Telefono" class="form-control" data-validation="number" data-validation-optional-if-answered="celular" disabled=""/>
                     </div>
                     <div class="col-md-3 form-group">
                         <label for="celularU" class="sr-only">Celular:</label>
-                        <input id="celularU" name="celularU" type="text" placeholder="Celular" class="form-control" data-validation="number" data-validation-optional-if-answered="fonoU"/>
+                        <input id="celularU" name="celularU" type="text" placeholder="Celular" class="form-control" data-validation="number" data-validation-optional-if-answered="fono" disabled=""/>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <label for="emailU" class="sr-only">Correo Electronico:</label>
-                        <input id="emailU" name="emailU" type="text" placeholder="Correo Electronico" value="" class="form-control" data-validation="email"/>
+                        <input id="emailU" name="emailU" type="text" placeholder="Correo Electronico" value="" class="form-control" data-validation="email" disabled=""/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-9 form-group">
                         <label for="addresU" class="sr-only"></label>
-                        <input id="addresU" name="addresU" type="text" placeholder="Direcci&oacute;n" class="form-control" data-validation="required"/>
+                        <input id="addresU" name="addresU" type="text" placeholder="Direcci&oacute;n" class="form-control" data-validation="required" disabled=""/>
                     </div>
                     <div class="col-md-3 form-group">
                         <label for="NroU" class="sr-only"></label>
-                        <input id="NroU" name="NroU" type="text" placeholder="N° de domicilio" class="form-control" data-validation="required number"/>
+                        <input id="NroU" name="NroU" type="text" placeholder="N° de domicilio" class="form-control" data-validation="required number" disabled=""/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5" align="center">
-                        <div id="mapaU" class="form-group"></div><!--End mapa-->
+                        <div id="mapaP" class="form-group"></div><!--End mapa-->
                     </div>
                     <div class="col-md-7">
                         <div class="row">
                             <div class="col-md-9 form-group">
-                                <input id="buscarU" name="buscarU" type="text" placeholder="Buscar en Google Maps" value="" class="form-control" autocomplete="off"/>
+                                <input id="buscarU" name="buscarU" type="text" placeholder="Buscar en Google Maps" value="" class="form-control" autocomplete="off" disabled=""/>
                             </div>
                             <div class="col-md-3  form-group">
-                                <button type="button" id="search" class="btn btn-primary" >
+                                <button type="button" id="search" class="btn btn-primary" disabled="" >
                                     <i class="fa fa-search" aria-hidden="true"></i>
                                     <span>Buscar</span>
                                 </button>
@@ -475,18 +475,18 @@ var id_cliente;
                         </div>
                         <div class="row">
                             <div class="col-md-12 form-group">
-                                <input id="cxU" name="cxU" type="text" placeholder="Latitud" value="" readonly class="form-control" data-validation="required"/>
+                                <input id="cxU" name="cxU" type="text" placeholder="Latitud" value="" readonly class="form-control" data-validation="required" disabled=""/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 form-group">
-                                <input id="cyU" name="cyU" type="text" placeholder="Longitud" value="" readonly class="form-control" data-validation="required"/>
+                                <input id="cyU" name="cyU" type="text" placeholder="Longitud" value="" readonly class="form-control" data-validation="required" disabled=""/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 form-group">
                                 <div class="checkbox">
-                                <label><input id="checksEmailU" name="checksEmailU" type="checkbox" checked/> Enviar datos por E-mail</label>
+                                <label><input id="checksEmailU" name="checksEmailU" type="checkbox" checked disabled="" /> Enviar datos por E-mail</label>
                                 </div>
                             </div>
                         </div>
@@ -496,45 +496,15 @@ var id_cliente;
                     <div class="col-md-12 form-group">
                         <label for="obserU" class="sr-only"></label>
                         <p id="maxText"><span id="max-length-element">200</span> caracteres restantes</p>
-                        <textarea id="obserU" name="obserU" cols="2" placeholder="Observaciones" class="form-control"></textarea>
+                        <textarea id="obserU" name="obserU" cols="2" placeholder="Observaciones" class="form-control" disabled=""></textarea>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-2 form-group">
-                        <button type="button" id="capturar" class="btn btn-primary" onclick="openWebCam()">
-                            <i class="fa fa-camera" aria-hidden="true"></i>
-                            <span>Capturar Foto</span>
-                        </button>
-                    </div>
-                    <div class="col-md-2 form-group">
-                        <button type="button" id="subirU" class="btn btn-primary" ">
-                            <i class="fa fa-upload" aria-hidden="true"></i>
-                            <span>Subir Foto</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="idealWrap uploadShowU" style="display:none;">
-                            <div id="some_file_queueU"></div>
-                            <div id="buttonFile">
-                                <input type="file" name="file_uploadU" id="file_uploadU" />
-                                <button type="button" id="uploadU" class="btn btn-success" onclick="$('#file_uploadU').uploadify('upload')">Subir Foto</button>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div><!--End idealWrap-->
-                    </div>
-                </div>
-
+                
             </div>
             <div class="modal-footer">
-                <button type="button" id="closeU" class="btn btn-danger" data-dismiss="modal">
+                <button type="button" id="closeU" class="btn btn-success" data-dismiss="modal">
                     <i class="fa fa-close" aria-hidden="true"></i>
-                    <span>Cancelar</span>
-                </button>
-                <button type="submit" id="saveU" class="btn btn-success">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                    <span>Modificar Cliente</span>
+                    <span>Cerrar</span>
                 </button>
             </div>
         </div><!-- /.modal-content -->

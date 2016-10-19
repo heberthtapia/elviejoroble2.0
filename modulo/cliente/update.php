@@ -2,7 +2,7 @@
 	session_start();
 
 	include '../../adodb5/adodb.inc.php';
-	include '../../classes/function.php';
+	include '../../inc/function.php';
 
 	$db = NewADOConnection('mysqli');
 
@@ -21,10 +21,10 @@
 
 	/* ACTUALIZACION DE EMPLEADO */
 
-	$strQuery = "UPDATE cliente SET nombre = '".$data->name."', apP = '".$data->paterno."', apM = '".$data->materno."', phone = '".$data->fono."', celular = '".$data->celular."', ";
-	$strQuery.= "nombreEmp = '".$data->nameEmp."', email  = '".$data->emailC."', direccion = '".$data->addresC."', coorX = '".$data->cx."', coorY = '".$data->cy."', ";
-	$strQuery.= "obser  = '".$data->obser."', dateReg = '".$data->fecha."' ";
-	$strQuery.= "WHERE id_cliente = '".$data->ci."' ";
+	$strQuery = "UPDATE cliente SET nombre = '".$data->nameU."', apP = '".$data->paternoU."', apM = '".$data->maternoU."', phone = '".$data->fonoU."', celular = '".$data->celularU."', ";
+	$strQuery.= "nombreEmp = '".$data->nameEmpU."', email  = '".$data->emailU."', direccion = '".$data->addresU."', numero = '".$data->NroU."', coorX = '".$data->cxU."', coorY = '".$data->cyU."', ";
+	$strQuery.= "obser  = '".$data->obserU."', dateReg = '".$fecha.' '.$hora."' ";
+	$strQuery.= "WHERE id_cliente = '".$data->codClU."' ";
 
 	$sql = $db->Execute($strQuery);
 
@@ -42,12 +42,12 @@
 		$img = $row['imagen'];
 
 		$strQuery = "UPDATE cliente set foto = '".$img."' ";
-		$strQuery.= "WHERE id_cliente = ".$data->ci." ";
+		$strQuery.= "WHERE id_cliente = '".$data->codClU."' ";
 
 		$strQ = $db->Execute($strQuery);
 		$data->img = $img;
 	}
-	if($data->checksEmail == 'on'){
+	if($data->checksEmailU == 'on'){
 		//echo 'entra......';
 		//include '../../classes/envioData.php';
 	}

@@ -2593,6 +2593,7 @@ fieldset[disabled] .form-control {
   opacity: 1;
 }
 .form-control[disabled],
+.form-control[readonly],
 fieldset[disabled] .form-control {
   cursor: not-allowed;
 }

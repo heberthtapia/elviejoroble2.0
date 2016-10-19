@@ -21,7 +21,7 @@
 	$strQuery.= "nombreEmp, email, direccion, numero, coorX, coorY, obser, dateReg, status ) ";
 	$strQuery.= "VALUES ('".$data->codCl."', ".$data->ci.", '".$data->dep."', '".$_SESSION['idEmp']."', '".$data->name."', '".$data->paterno."', ";
 	$strQuery.= "'".$data->materno."', '".$data->fono."', '".$data->celular."', '".$data->nameEmp."', ";
-	$strQuery.= "'".$data->email."', '".$data->addres."', '".$data->numero."', '".$data->cx."', '".$data->cy."', '".$data->obser."', ";
+	$strQuery.= "'".$data->email."', '".$data->addres."', '".$data->Nro."', '".$data->cx."', '".$data->cy."', '".$data->obser."', ";
 	$strQuery.= "'".$data->date."', 'Activo' )";
 
 	$sql = $db->Execute($strQuery);
@@ -40,7 +40,7 @@
 		$img = $row['imagen'];
 
 		$strQuery = "UPDATE cliente set foto = '".$img."' ";
-		$strQuery.= "WHERE id_cliente = ".$data->ci." ";
+		$strQuery.= "WHERE id_cliente = '".$data->codCl."' ";
 
 		$strQ = $db->Execute($strQuery);
 		$data->img = $img;

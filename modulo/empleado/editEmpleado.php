@@ -5,19 +5,17 @@
  * Date: 25/09/2016
  * Time: 0:56
  */
-$sql = "TRUNCATE TABLE aux_img ";
-$strQ = $db->Execute($sql);
 $fecha = $op->ToDay();
 $hora = $op->Time();
 
-    $id = $_REQUEST['id'];
+$id = $_REQUEST['id'];
 
-    $strSql = "SELECT * FROM empleado AS e, usuario AS u ";
-    $strSql.= "WHERE e.id_empleado = u.id_empleado ";
-    $strSql.= "AND e.id_empleado = '".$id."' ";
+$strSql = "SELECT * FROM empleado AS e, usuario AS u ";
+$strSql.= "WHERE e.id_empleado = u.id_empleado ";
+$strSql.= "AND e.id_empleado = '".$id."' ";
 
-    $str = $db->Execute($strSql);
-    $file = $str->FetchRow();
+$str = $db->Execute($strSql);
+$file = $str->FetchRow();
 ?>
 
 <script>

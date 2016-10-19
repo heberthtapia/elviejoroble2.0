@@ -1,6 +1,4 @@
 <?PHP
-$sql = "TRUNCATE TABLE aux_img ";
-$strQ = $db->Execute($sql);
 $fecha = $op->ToDay();
 $hora = $op->Time();
 ?>

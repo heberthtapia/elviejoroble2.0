@@ -49,11 +49,11 @@ $cargo = $_SESSION['cargo'];
 
         $('input').on('ifChecked', function(event){
             id = $(this).attr('id');
-            statusEmp(id, 'Activo');
+            statusCli(id, 'Activo');
         });
         $('input').on('ifUnchecked',function(event){
             id = $(this).attr('id');
-            statusEmp(id, 'Inactivo');
+            statusCli(id, 'Inactivo');
         });
     });
     $.validate({
@@ -64,9 +64,9 @@ $cargo = $_SESSION['cargo'];
 </script>
 <?PHP
 include 'newCliente.php';
-include 'editCliente.php'
-/*include 'previewEmpleado.php';
-include 'delEmpleado.php';*/
+include 'editCliente.php';
+include 'previewCliente.php';
+include 'delCliente.php';
 ?>
 <div class="row" id="listTabla">
     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -105,7 +105,7 @@ include 'delEmpleado.php';*/
             }
             $sql.= "ORDER BY (dateReg) DESC ";
 
-            $cont = 0;
+            $cont = 1;
 
             $srtQuery = $db->Execute($sql);
             if($srtQuery === false)
@@ -185,7 +185,7 @@ include 'delEmpleado.php';*/
                                     </button>
                         </div>
                         <div style="width: 188px; margin-top: 5px">
-                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#dataDeleteAlm" data-id="<?=$row['id_cliente']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#dataDeleteCli" data-id="<?=$row['id_cliente']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
                             </button>
 
                             <div class="checkbox" id="status<?=$row['id_cliente']?>">

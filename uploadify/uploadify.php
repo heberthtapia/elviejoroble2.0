@@ -8,6 +8,9 @@ $db->Connect();
 
 $op = new cnFunction();
 
+$sql = "TRUNCATE TABLE aux_img ";
+$strImg = $db->Execute($sql);
+
 /* Nombre de la imagen */
 
 $nameImg = $_POST['name'];
