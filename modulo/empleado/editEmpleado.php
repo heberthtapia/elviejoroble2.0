@@ -83,9 +83,9 @@ var id_empleado;
     function openWebCam(){
         openWebcam();//document.write( webcam.get_html(320, 240) );
         webcam.set_api_url( 'modulo/empleado/uploadEmp.php' );
-        webcam.set_hook( 'onComplete', 'my_callback_function');
+        webcam.set_hook( 'onComplete', 'my_callback_functionUp');
     }
-    function my_callback_function(response) {
+    function my_callback_functionUp(response) {
         //alert("Success! PHP returned: " + response);
         msg = $.parseJSON(response);
         //alert(msg.filename);

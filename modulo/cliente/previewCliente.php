@@ -79,19 +79,7 @@ var id_cliente;
     var marcadores_bd=[];
     var mapa = null; //VARIABLE GENERAL PARA EL MAPA
 
-    function openWebCam(){
-        openWebcam();//document.write( webcam.get_html(320, 240) );
-        webcam.set_api_url( 'modulo/cliente/uploadCli.php' );
-        webcam.set_hook( 'onComplete', 'my_callback_function');
-    }
-    function my_callback_function(response) {
-        //alert("Success! PHP returned: " + response);
-        msg = $.parseJSON(response);
-        //alert(msg.filename);
-        //modificado
-        recargaImgU(msg.filename, 'cliente');
-    }
-
+    
    function initMapCli(){
         /* GOOGLE MAPS */
         var formulario = $('#formUpdate');

@@ -79,12 +79,12 @@ var id_cliente;
     var marcadores_bd=[];
     var mapa = null; //VARIABLE GENERAL PARA EL MAPA
 
-    function openWebCam(){
+    function openWebCamCli(){
         openWebcam();//document.write( webcam.get_html(320, 240) );
         webcam.set_api_url( 'modulo/cliente/uploadCli.php' );
-        webcam.set_hook( 'onComplete', 'my_callback_function');
+        webcam.set_hook( 'onComplete', 'my_callback_functionCliUp');
     }
-    function my_callback_function(response) {
+    function my_callback_functionCliUp(response) {
         //alert("Success! PHP returned: " + response);
         msg = $.parseJSON(response);
         //alert(msg.filename);
@@ -501,7 +501,7 @@ var id_cliente;
                 </div>
                 <div class="row">
                     <div class="col-md-2 form-group">
-                        <button type="button" id="capturar" class="btn btn-primary" onclick="openWebCam()">
+                        <button type="button" id="capturar" class="btn btn-primary" onclick="openWebCamCli()">
                             <i class="fa fa-camera" aria-hidden="true"></i>
                             <span>Capturar Foto</span>
                         </button>
