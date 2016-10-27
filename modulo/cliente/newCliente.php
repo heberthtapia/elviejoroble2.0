@@ -17,7 +17,7 @@ $hora = $op->Time();
         webcam.set_hook( 'onComplete', 'my_callback_functionCli');
     }
     function my_callback_functionCli(response) {
-        alert("Success! PHP returned: " + response);
+        //alert("Success! PHP returned: " + response);
         msg = $.parseJSON(response);
         //alert(msg.filename);
         //modificado

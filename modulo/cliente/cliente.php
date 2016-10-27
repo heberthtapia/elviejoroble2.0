@@ -11,6 +11,15 @@ $db->Connect();
 $op = new cnFunction();
 
 $cargo = $_SESSION['cargo'];
+
+/* vaciamos las tablas auxiliares */
+
+$sql = "TRUNCATE TABLE aux_img ";
+$strQ = $db->Execute($sql);
+
+$strEmp = "SELECT COUNT(*) FROM cliente WHERE id_empleado = ".$_SESSION['idEmp']." ";
+$strNum = $db->Execute($strEmp);
+$NumRow = $strNum->FetchRow();
 ?>
 <script type="text/javascript" src="webcam/webcam.js"></script>
 <script type="text/javascript" src="js/script.js"></script>

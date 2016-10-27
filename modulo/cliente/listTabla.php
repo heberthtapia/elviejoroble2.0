@@ -139,20 +139,18 @@ $op = new cnFunction();
                     <td><?=$row['numero'];?></td>
                     <td width="15%">
                         <div class="btn-group" style="width: 188px">
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataPreviewAlm"
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataPreview"
                                             data-foto="<?=$row['foto']?>"
                                             data-name="<?=$row['nombre']?>"
                                             data-paterno="<?=$row['apP']?>"
                                             data-materno="<?=$row['apM']?>"
-                                            data-ci="<?=$row['id_empleado']?>"
+                                            data-id="<?=$row['id_cliente']?>"
                                             data-dep="<?=$row['depa']?>"
-                                            data-dateNac="<?=$row['dateNac']?>"
+                                            data-nameEmp="<?=$row['nombreEmp']?>"
                                             data-fono="<?=$row['phone']?>"
                                             data-celular="<?=$row['celular']?>"
                                             data-emailC="<?=$row['email']?>"
-                                            data-cargo="<?=$row['cargo']?>"
-                                            data-codUser="<?=$row['user']?>"
-                                            data-password="<?=$row['pass']?>"
+                                            data-ci="<?=$row['ci']?>"
                                             data-addresC="<?=$row['direccion']?>"
                                             data-Nro="<?=$row['numero']?>"
                                             data-cx="<?=$row['coorX']?>"
@@ -161,20 +159,18 @@ $op = new cnFunction();
                                     <i class='fa fa-external-link'></i> Vista Previa
                                     </button>
 
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataUpdateAlm"
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataUpdate"
                                             data-foto="<?=$row['foto']?>"
                                             data-name="<?=$row['nombre']?>"
                                             data-paterno="<?=$row['apP']?>"
                                             data-materno="<?=$row['apM']?>"
-                                            data-ci="<?=$row['id_empleado']?>"
+                                            data-id="<?=$row['id_cliente']?>"
                                             data-dep="<?=$row['depa']?>"
-                                            data-dateNac="<?=$row['dateNac']?>"
+                                            data-nameEmp="<?=$row['nombreEmp']?>"
                                             data-fono="<?=$row['phone']?>"
                                             data-celular="<?=$row['celular']?>"
                                             data-emailC="<?=$row['email']?>"
-                                            data-cargo="<?=$row['cargo']?>"
-                                            data-codUser="<?=$row['user']?>"
-                                            data-password="<?=$row['pass']?>"
+                                            data-ci="<?=$row['ci']?>"
                                             data-addresC="<?=$row['direccion']?>"
                                             data-Nro="<?=$row['numero']?>"
                                             data-cx="<?=$row['coorX']?>"
@@ -186,7 +182,7 @@ $op = new cnFunction();
                                     </button>
                         </div>
                         <div style="width: 188px; margin-top: 5px">
-                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#dataDeleteAlm" data-id="<?=$row['id_cliente']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#dataDeleteCli" data-id="<?=$row['id_cliente']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
                             </button>
 
                             <div class="checkbox" id="status<?=$row['id_cliente']?>">
@@ -227,4 +223,5 @@ $op = new cnFunction();
             </tr>
             </tfoot>
         </table>
+
     </div>

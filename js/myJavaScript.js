@@ -241,7 +241,6 @@ function obtenerCoor(id){
  /* RECARGA IMAGEN */
 
  function recargaImg(img, mod){
-    alert(img);
     $('#foto').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/'+mod+'/uploads/photos/'+img+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
 }
 

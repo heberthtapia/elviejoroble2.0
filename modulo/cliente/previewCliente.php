@@ -80,9 +80,9 @@ var id_cliente;
     var mapa = null; //VARIABLE GENERAL PARA EL MAPA
 
     
-   function initMapCli(){
+   function initMapPre(){
         /* GOOGLE MAPS */
-        var formulario = $('#formUpdate');
+        var formulario = $('#formPreview');
         //COODENADAS INICIALES -16.5207007,-68.1615534
         //VARIABLE PARA EL PUNTO INICIAL
         var punto = new google.maps.LatLng(coorX, coorY);
@@ -167,8 +167,8 @@ var id_cliente;
             //var direccion = new google.maps.LatLng(lista[0], lista[1]);
             //PASAR LAS COORDENADAS AL FORMULARIO
 
-            $('#formUpdate').find("input[name='cxU']").val(lista[0]);
-            $('#formUpdate').find("input[name='cyU']").val(lista[1]);
+            $('#formPreview').find("input[name='cxU']").val(lista[0]);
+            $('#formPreview').find("input[name='cyU']").val(lista[1]);
             //$('#form').find("input[name='buscar']").val('');
 
             var marcador = new google.maps.Marker({
@@ -196,7 +196,7 @@ var id_cliente;
     //ANTES DE LISTAR MARCADORES
     //SE DEBEN QUITAR LOS ANTERIORES DEL MAPA
     deleteMarkers(markers);
-    var formulario_edicion = $("#formUpdate");
+    var formulario_edicion = $("#formPreview");
     $.ajax({
         type:"POST",
         url:"inc/listaPuntos.php?bd=cliente",
@@ -271,66 +271,14 @@ var id_cliente;
         geocoder.geocode({ 'address': address}, geocodeResult);
     });
 
-    /* uploadIfy */
-    $('#file_uploadU').uploadify({
-        'queueID'  		: 'some_file_queueU',
-        'swf'      		: 'uploadify/uploadify.swf',
-        'uploader'		: 'uploadify/uploadify.php',
-        'method'   		: 'post',
-        'multi'   		: false,
-        'auto'   			: false,
-        'queueSizeLimit' 	: 1,
-        'fileSizeLimit' 	: '100KB',
-        'fileTypeDesc' 	: 'Imagen',
-        'fileTypeExts' 	: '*.jpg',
-        'removeCompleted' : false,
-        'buttonText'		: 'Examinar...',
-        height       		: 25,
-        width        		: 100,
-        'formData'      	: {
-            'path' : 'cliente'
-        },
-        // ** Eventos **
-        'onSelectOnce':function(event,data){
-            $('#file_uploadU').uploadifySettings('scriptData',{'directorio':'a','CodeUser': '21'});
-        },
-        'onUploadComplete': function(file){
-            idImg('cliente');
-            //$('#cboxTitle').html('La foto ' + file.name + ' se subio correctamente, <br> ahora puede guardar el formulario.');
-
-            setTimeout(function(){
-                $( ".uploadShowU" ).toggle(2000,function(){
-                    $('#saveU, #closeU').removeAttr('disabled','disabled');
-                    $('#subirU').text("Subir Foto");
-                    $('#file_uploadU').uploadify('cancel', '*');
-                });
-            },4000);
-        }
-    });
-    /* Abrir y cerrar uploadIfy */
-    $('#subirU').click(
-        function(){
-            var $this = $(this);
-            var op = $this.find('span').text();
-            if( op == 'Subir Foto' ){
-                $('#subirU').find('span').text("Cancelar");
-                $('#saveU, #closeU').attr('disabled','disabled');
-            }else{
-                $('#subirU').find('span').text("Subir Foto");
-                $('#saveU, #closeU').removeAttr('disabled','disabled');
-                $('#file_uploadU').uploadify('cancel', '*');
-            }
-            $( ".uploadShowU" ).toggle(1000);
-        });
-
     $('#dataPreview').on('show.bs.modal', function() {
         //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
-        initMapCli();
+        initMapPre();
     });
 
     $('#dataPreview').on('hidden.bs.modal', function (e) {
         // do something...
-        $('#formUpdate').get(0).reset();
+        $('#formPreview').get(0).reset();
         $('.uploadShowU').css('display','none');
         //$('#file_upload').uploadify('cancel', '*');
         $('#saveU, #closeU').removeAttr('disabled','disabled');
@@ -349,7 +297,7 @@ var id_cliente;
     }
 </style>
 
-<form id="formUpdate" action="javascript:updateForm('formUpdate','cliente/update.php')" class="" autocomplete="off" >
+<form id="formPreview" action="javascript:updateForm('formPreview','cliente/update.php')" class="" autocomplete="off" >
 <div class="modal fade bs-example-modal-lg" id="dataPreview" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -358,11 +306,7 @@ var id_cliente;
                 <h4 class="modal-title" id="gridSystemModalLabel">Modificar Cliente <span class="fecha">Fecha: <?=$fecha;?> <?=$hora;?></span></h4>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="datos_ajax"></div>
-                    </div>
-                </div>
+                
                 <div class="row">
                     <input id="date" name="date" type="hidden" value="<?=$fecha;?> <?=$hora;?>" />
                     <input id="tabla" name="tabla" type="hidden" value="cliente">

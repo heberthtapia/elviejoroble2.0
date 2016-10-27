@@ -372,7 +372,7 @@ var id_cliente;
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <div id="datos_ajax"></div>
+                        <div id="datos_ajax_update"></div>
                     </div>
                 </div>
                 <div class="row">

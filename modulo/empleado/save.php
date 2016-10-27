@@ -18,7 +18,7 @@
 	$data = json_decode($data);
 
 	$strQuery = "INSERT INTO empleado (id_empleado, depa,  nombre, apP, apM, dateNac, phone, celular, ";
-	$strQuery.= "direccion, numero, coorX, coorY, obser, email, cargo, dateReg, status ) ";
+	$strQuery.= "direccion, numero, coorX, coorY, obser, email, cargo, dateReg, statusEmp ) ";
 	$strQuery.= "VALUES (".$data->ci.", '".$data->dep."', '".$data->name."', '".$data->paterno."', ";
 	$strQuery.= "'".$data->materno."', '".$data->dateNac."', '".$data->fono."', '".$data->celular."',";
 	$strQuery.= "'".$data->addres."', '".$data->Nro."', '".$data->cx."', '".$data->cy."', '".$data->obser."', '".$data->email."', ";
@@ -56,6 +56,9 @@
 	}
 	//print_r($data);
 	/***************************************************************************/
+
+	$sql = "TRUNCATE TABLE aux_img ";
+	$strQ = $db->Execute($sql);
 
 	if($sql)
 		echo json_encode($data);

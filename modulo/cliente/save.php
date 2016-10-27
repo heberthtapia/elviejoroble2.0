@@ -52,6 +52,9 @@
 	//print_r($data);
 	/***************************************************************************/
 
+	$sql = "TRUNCATE TABLE aux_img ";
+	$strQ = $db->Execute($sql);
+
 	if($sql)
 		echo json_encode($data);
 	else

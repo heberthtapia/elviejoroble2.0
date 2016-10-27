@@ -192,12 +192,12 @@ $hora = $op->Time();
     $('#subir').click(
         function(){
             var $this = $(this);
-            var op = $this.text();
+            var op = $this.find('span').text();
             if( op == 'Subir Foto' ){
-                $('#subir').text("Cancelar");
+                $('#subir').find('span').text("Cancelar");
                 $('#save, #close').attr('disabled','disabled');
             }else{
-                $('#subir').text("Subir Foto");
+                $('#subir').find('span').text("Subir Foto");
                 $('#save, #close').removeAttr('disabled','disabled');
                 $('#file_upload').uploadify('cancel', '*');
             }

@@ -50,7 +50,7 @@ $op = new cnFunction();
     });
     $('#obser').restrictLength( $('#max-length-element') );
 </script>
-    <div class="col-xs-12 col-sm-12 col-md-12">
+   <div class="col-xs-12 col-sm-12 col-md-12">
         <h1 class="avisos" align="center"><strong>EMPLEADOS</strong></h1>
         <h2 class="avisos">Lista de Empleados</h2>
         <div class="pull-right"><br>
@@ -91,9 +91,9 @@ $op = new cnFunction();
 
                 ?>
                 <tr id="tb<?=$row[0]?>">
-                    <td class="last center"><?=$cont++;?></td>
-                    <td class="last center"><?=$row['dateReg']?></td>
-                    <td class="last center" align="center" width="10%">
+                    <td align="center"><?=$cont++;?></td>
+                    <td><?=$row['dateReg']?></td>
+                    <td align="center" width="10%">
                         <?PHP
                         if( $row['foto'] != '' )
                         {
@@ -109,13 +109,31 @@ $op = new cnFunction();
                         }
                         ?>
                     </td>
-                    <td class="last center"><?=$row['nombre'];?></td>
-                    <td class="last center"><?=$row['apP'];?></td>
-                    <td class="last center"><?=$row['apM'];?></td>
-                    <td class="last center"><?=$op->toSelect($row['cargo']);?></td>
+                    <td><?=$row['nombre'];?></td>
+                    <td><?=$row['apP'];?></td>
+                    <td><?=$row['apM'];?></td>
+                    <td><?=$op->toSelect($row['cargo']);?></td>
                     <td width="15%">
                         <div class="btn-group" style="width: 188px">
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataUpdate" data-detalle="<?=$row['detalle']?>" data-idInv="<?=$row['id_inventario']?>" data-cant="<?=$row['cantidad']?>" data-vol="<?=$row['volumen']?>" data-precioCF="<?=$row['precioCF']?>" data-precioSF="<?=$row['precioSF']?>">
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataPreview"
+                                            data-foto="<?=$row['foto']?>"
+                                            data-name="<?=$row['nombre']?>"
+                                            data-paterno="<?=$row['apP']?>"
+                                            data-materno="<?=$row['apM']?>"
+                                            data-ci="<?=$row['id_empleado']?>"
+                                            data-dep="<?=$row['depa']?>"
+                                            data-dateNac="<?=$row['dateNac']?>"
+                                            data-fono="<?=$row['phone']?>"
+                                            data-celular="<?=$row['celular']?>"
+                                            data-emailC="<?=$row['email']?>"
+                                            data-cargo="<?=$row['cargo']?>"
+                                            data-codUser="<?=$row['user']?>"
+                                            data-password="<?=$row['pass']?>"
+                                            data-addresC="<?=$row['direccion']?>"
+                                            data-Nro="<?=$row['numero']?>"
+                                            data-cx="<?=$row['coorX']?>"
+                                            data-cy="<?=$row['coorY']?>"
+                                            data-obser="<?=$row['obser']?>"
                                     <i class='fa fa-external-link'></i> Vista Previa
                                     </button>
 
@@ -144,15 +162,24 @@ $op = new cnFunction();
                                     </button>
                         </div>
                         <div style="width: 188px; margin-top: 5px">
-                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#dataDelete" data-id="<?=$row['id_inventario']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
-                                    </button>
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#dataDelete" data-id="<?=$row['id_empleado']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
+                            </button>
 
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Status
-                                        </label>
-                                    </div>
-
+                            <div class="checkbox" id="status<?=$row['id_empleado']?>">
+                                    <?PHP
+                                    if( $row['statusEmp'] == 'Activo' ){
+                                    ?>
+                                        <input type="checkbox" name="checks" checked id="<?=$row['id_empleado']?>"/>
+                                        <label>Status</label>
+                                    <?PHP
+                                    }else{
+                                    ?>
+                                        <input type="checkbox" name="checks" id="<?=$row['id_empleado']?>"/>
+                                        <label>Status</label>
+                                    <?PHP
+                                    }
+                                    ?>
+                            </div>
                         </div>
                     </td>
                 </tr>
