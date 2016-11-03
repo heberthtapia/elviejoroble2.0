@@ -21,12 +21,12 @@ include 'modalCheckAlmacen.php';
 
 <div class="row" id="listTabla">
     <div class="col-xs-12 col-sm-12 col-md-12">
-        <h1 class="avisos" align="center"><strong>PEDIDOS</strong></h1>
-        <h2 class="avisos">Lista de Pedidos</h2>
+        <h1 class="avisos" align="center"><strong>PRODUCCIÓN</strong></h1>
+        <h2 class="avisos">Ordenes de Producción</h2>
         <div class="pull-right"><br>
             <button type="button" class="btn btn-success" data-toggle="modal" onClick="despliega('modulo/pedido/newPedido.php','contenido');">
                 <i class="fa fa-plus" aria-hidden="true"></i>
-                <span>Nuevo Pedido</span>
+                <span>Nueva Orden</span>
             </button>
         </div>
         <div class="clearfix"></div>
@@ -36,29 +36,21 @@ include 'modalCheckAlmacen.php';
             <tr>
                 <th>Nº</th>
                 <th>Fecha</th>
-                <th>N&deg; pedido</th>
-                <th>SubTotal</th>
-                <th>Des.</th>
-                <th>Bonf.</th>
-                <th>Total</th>
-                <th>a cuenta</th>
-                <th>saldo</th>
-                <th>Observaciones</th>
-                <th>Tipo de Pago</th>
-                <th>Status Contador</th>
-                <th>Status Almacen</th>
+                <th>N&deg; de Orden</th>
+                <th>Codigo de Producto</th>
+                <th>Detalle</th>
+                <th>Cantidad</th>
+                <th>Fecha Inicio Producción</th>
+                <th>Fecha Fin Producción</th>
+                <th>Status Producción</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
             <?PHP
             $sql = "SELECT * ";
-            $sql.= "FROM pedido AS p, empleado AS e ";
-            $sql.= "WHERE p.id_empleado = e.id_empleado ";
-            if($cargo!='adm'){
-                $sql.= "AND p.id_empleado = ".$idEmp." ";
-            }
-            $sql.= "ORDER BY (p.dateReg) DESC ";
+            $sql.= "FROM produccion ";
+            $sql.= "ORDER BY (id_produccion) DESC ";
 
             $cont = 0;
 
@@ -70,51 +62,77 @@ include 'modalCheckAlmacen.php';
                 $cont++;
                 ?>
                 <tr id="tb<?=$row[0]?>">
-                    <td class="last center"><?=$cont;?></td>
-                    <td class="last center"><?=$row['dateReg']?></td>
-                    <td class="last center">PD-<?=$op->ceros($row['id_pedido'],5);?></td>
-                    <td class="last center"><?=$row['subTotal'];?></td>
-                    <td class="last center"><?=$row['descuento'];?></td>
-                    <td class="last center"><?=$row['bonificacion'];?></td>
-                    <td class="last center"><?=$row['total'];?></td>
-                    <td class="last center"><?=$row['aCuenta'];?></td>
-                    <td class="last center"><?=$row['saldo'];?></td>
-                    <td class="last center"><?=$row['obs'];?></td>
-                    <td class="last center">
-                    <?PHP
-                      if( $row['tipo']=='con' )
-                        echo 'Al Contado';
-                      else
-                        echo 'Al Credito';
-                    ?>
-                    </td>
-                    <td class="last center <?=$row['status1'];?>">
+                    <td class="last center"></td>
+          <td class="last center">OR-P-<?=$row['id_produccion'];?></td>
+          <td class="last center"><?=$row['id_inventario'];?></td>
+          <td class="last center"><?=$row['detalle'];?></td>
 
-                        <a class="status1" data-toggle="modal" data-target="#modalCheckPedido" data-id="<?=$row['id_pedido']?>" data-status1 = "<?=$row['status1'];?>" data-status2 = "<?=$row['status2'];?>" ><?=$row['status1'];?></a></td>
+          <td class="last center"><?=$row['cantidad'];?></td>
+          <td class="last center"><?=$row['dateInc'];?></td>
+          <td class="last center fin"><?=$row['dateFin'];?></td>
+          <?PHP
+          if(strcmp($row['statusProd'], 'Nueva Orden') == 0){
+              $st="status1";
+          }else{
+              if(strcmp($row['statusProd'], 'En Produccion') == 0){
+                $st="status2";
+              }else {
+                  if (strcmp($row['statusProd'], 'Terminado') == 0) {
+                      $st = "status3";
+                  } else
+                      if (strcmp($row['statusProd'], 'Terminado y Asignado') == 0) {
+                          $st = "status4";
+                      } else
+                          $st = "status5";
+              }
+          }
+          ?>
+          <td class="last center <?=$st;?>">
+            <?=$row['statusProd'];?>
+          </td>
+          <td>
+            <div class="accPro">
 
-                    <td class="last center <?=str_replace(' ', '', $row['status2']);?>">
+              <div class="accion">
+                <a class="tooltip aprob" href="javascript:void(0);" onClick="sProAprobado('<?=$row[0]?>');" title="Aprobar Orden">
+                    <img src="images/icono/checkOff.png" width="32"/>
+                </a>
+              </div><!--End accion-->
 
-                        <a class="status2" data-toggle="modal" data-target="#modalCheckAlmacen" data-id="<?=$row['id_pedido']?>" data-status1 = "<?=$row['status1'];?>" data-status2 = "<?=$row['status2'];?>"><?=$row['status2'];?></a></td>
+              <div class="accion">
+                <a class="tooltip cancel" href="javascript:void(0);" onClick="sProCancelar('<?=$row[0]?>');" title="Cancelar Orden">
+                    <img src="images/icono/delOff.png" width="32" alt="Cancelar" />
+                </a>
+              </div><!--End accion-->
 
-                    <td width="15%">
-                        <div class="btn-group" style="width: 194px">
-                            <button type="button" class="btn btn-primary btn-sm" onclick="detalle('<?=$row['id_pedido'];?>')" >
-                                <i class='fa fa-external-link'></i>
-                                <san>Generar PDF</span>
-                            </button>
+              <div class="accion">
+                <a class="tooltip terminar" href="javascript:void(0);" onClick="sProTerminado('<?=$row[0]?>');" title="Orden Terminada">
+                    <img src="images/icono/asig.png" width="32" alt="Orden Terminada" />
+                </a>
+              </div><!--End accion-->
 
-                            <button type ="button" class="btn btn-primary btn-sm" onclick="despliega('modulo/pedido/editPedido.php','contenido','<?=$row['id_pedido']?>');" >
-                                <i class='fa fa-pencil-square-o '></i>
-                                <span>Modificar</span>
-                            </button>
-                        </div>
-                        <div style="width: 188px; margin-top: 5px">
-                            <button type="button" class="btn btn-danger btn-sm" onclick="javascript:deleteRow('delPedido.php','<?=$row['id_pedido']?>', 'pedido', 'pedido');">
-                            <i class='glyphicon glyphicon-trash'></i>
-                            <span>Eliminar</span>
-                            </button>
-                        </div>
-                    </td>
+              <div class="accion">
+                <a class="tooltip import" href="javascript:void(0);" onClick="open_win('modulo/produccion/importar.php', '', '490', '500', '<?=$row['id_produccion']?>');" title="Asignar Producci&oacute;n">
+                    <img src="images/icono/import.png" width="32" alt="Asignar Produccion" />
+                </a>
+              </div><!--End accion-->
+
+              <div class="accion">
+                <a class="tooltip edit" href="javascript:void(0);" onClick="open_win('modulo/produccion/editProduccion.php', '', '600', '270', '<?=$row['id_produccion']?>');" title="Editar Orden">
+                    <img src="images/icono/edit1.png" width="32" alt="Editar"/>
+                </a>
+              </div><!--End accion-->
+
+              <div class="accion">
+                <a class="tooltip del" href="javascript:void(0);" onclick="deleteRow('delProduccion.php', '<?=$row['id_produccion']?>', 'produccion','produccion');" title="Eliminar Orden" >
+                    <img src="images/icono/recycle.png" width="32" height="32" alt="Eliminar"/>
+                </a>
+              </div><!--End accion-->
+              <div class="cleafix"></div>
+
+            </div><!--End accPro-->
+
+          </td>
                 </tr>
                 <?PHP
             }
