@@ -15,8 +15,8 @@ $cargo = $_SESSION['cargo'];
 ?>
 
 <?PHP
-include 'modalCheckPedido.php';
-include 'modalCheckAlmacen.php';
+//include 'modalCheckPedido.php';
+//include 'modalCheckAlmacen.php';
 ?>
 
 <div class="row" id="listTabla">
@@ -61,78 +61,78 @@ include 'modalCheckAlmacen.php';
             while( $row = $srtQuery->FetchRow()){
                 $cont++;
                 ?>
-                <tr id="tb<?=$row[0]?>">
-                    <td class="last center"></td>
-          <td class="last center">OR-P-<?=$row['id_produccion'];?></td>
-          <td class="last center"><?=$row['id_inventario'];?></td>
-          <td class="last center"><?=$row['detalle'];?></td>
+            <tr id="tb<?=$row[0]?>">
+                <td class="last center"></td>
+                <td class="last center">OR-P-<?=$row['id_produccion'];?></td>
+                <td class="last center"><?=$row['id_inventario'];?></td>
+                <td class="last center"><?=$row['detalle'];?></td>
 
-          <td class="last center"><?=$row['cantidad'];?></td>
-          <td class="last center"><?=$row['dateInc'];?></td>
-          <td class="last center fin"><?=$row['dateFin'];?></td>
-          <?PHP
-          if(strcmp($row['statusProd'], 'Nueva Orden') == 0){
-              $st="status1";
-          }else{
-              if(strcmp($row['statusProd'], 'En Produccion') == 0){
-                $st="status2";
-              }else {
-                  if (strcmp($row['statusProd'], 'Terminado') == 0) {
-                      $st = "status3";
-                  } else
-                      if (strcmp($row['statusProd'], 'Terminado y Asignado') == 0) {
-                          $st = "status4";
-                      } else
-                          $st = "status5";
-              }
-          }
-          ?>
-          <td class="last center <?=$st;?>">
-            <?=$row['statusProd'];?>
-          </td>
-          <td>
-            <div class="accPro">
+                  <td class="last center"><?=$row['cantidad'];?></td>
+                  <td class="last center"><?=$row['dateInc'];?></td>
+                  <td class="last center fin"><?=$row['dateFin'];?></td>
+                  <?PHP
+                  if(strcmp($row['statusProd'], 'Nueva Orden') == 0){
+                      $st="status1";
+                  }else{
+                      if(strcmp($row['statusProd'], 'En Produccion') == 0){
+                        $st="status2";
+                      }else {
+                          if (strcmp($row['statusProd'], 'Terminado') == 0) {
+                              $st = "status3";
+                          } else
+                              if (strcmp($row['statusProd'], 'Terminado y Asignado') == 0) {
+                                  $st = "status4";
+                              } else
+                                  $st = "status5";
+                      }
+                  }
+                  ?>
+                  <td class="last center <?=$st;?>">
+                    <?=$row['statusProd'];?>
+                  </td>
+                  <td>
+                    <div class="accPro">
 
-              <div class="accion">
-                <a class="tooltip aprob" href="javascript:void(0);" onClick="sProAprobado('<?=$row[0]?>');" title="Aprobar Orden">
-                    <img src="images/icono/checkOff.png" width="32"/>
-                </a>
-              </div><!--End accion-->
+                      <div class="accion">
+                        <a class="tooltip aprob" href="javascript:void(0);" onClick="sProAprobado('<?=$row[0]?>');" title="Aprobar Orden">
+                            <img src="images/icono/checkOff.png" width="32"/>
+                        </a>
+                      </div><!--End accion-->
 
-              <div class="accion">
-                <a class="tooltip cancel" href="javascript:void(0);" onClick="sProCancelar('<?=$row[0]?>');" title="Cancelar Orden">
-                    <img src="images/icono/delOff.png" width="32" alt="Cancelar" />
-                </a>
-              </div><!--End accion-->
+                      <div class="accion">
+                        <a class="tooltip cancel" href="javascript:void(0);" onClick="sProCancelar('<?=$row[0]?>');" title="Cancelar Orden">
+                            <img src="images/icono/delOff.png" width="32" alt="Cancelar" />
+                        </a>
+                      </div><!--End accion-->
 
-              <div class="accion">
-                <a class="tooltip terminar" href="javascript:void(0);" onClick="sProTerminado('<?=$row[0]?>');" title="Orden Terminada">
-                    <img src="images/icono/asig.png" width="32" alt="Orden Terminada" />
-                </a>
-              </div><!--End accion-->
+                      <div class="accion">
+                        <a class="tooltip terminar" href="javascript:void(0);" onClick="sProTerminado('<?=$row[0]?>');" title="Orden Terminada">
+                            <img src="images/icono/asig.png" width="32" alt="Orden Terminada" />
+                        </a>
+                      </div><!--End accion-->
 
-              <div class="accion">
-                <a class="tooltip import" href="javascript:void(0);" onClick="open_win('modulo/produccion/importar.php', '', '490', '500', '<?=$row['id_produccion']?>');" title="Asignar Producci&oacute;n">
-                    <img src="images/icono/import.png" width="32" alt="Asignar Produccion" />
-                </a>
-              </div><!--End accion-->
+                      <div class="accion">
+                        <a class="tooltip import" href="javascript:void(0);" onClick="open_win('modulo/produccion/importar.php', '', '490', '500', '<?=$row['id_produccion']?>');" title="Asignar Producci&oacute;n">
+                            <img src="images/icono/import.png" width="32" alt="Asignar Produccion" />
+                        </a>
+                      </div><!--End accion-->
 
-              <div class="accion">
-                <a class="tooltip edit" href="javascript:void(0);" onClick="open_win('modulo/produccion/editProduccion.php', '', '600', '270', '<?=$row['id_produccion']?>');" title="Editar Orden">
-                    <img src="images/icono/edit1.png" width="32" alt="Editar"/>
-                </a>
-              </div><!--End accion-->
+                      <div class="accion">
+                        <a class="tooltip edit" href="javascript:void(0);" onClick="open_win('modulo/produccion/editProduccion.php', '', '600', '270', '<?=$row['id_produccion']?>');" title="Editar Orden">
+                            <img src="images/icono/edit1.png" width="32" alt="Editar"/>
+                        </a>
+                      </div><!--End accion-->
 
-              <div class="accion">
-                <a class="tooltip del" href="javascript:void(0);" onclick="deleteRow('delProduccion.php', '<?=$row['id_produccion']?>', 'produccion','produccion');" title="Eliminar Orden" >
-                    <img src="images/icono/recycle.png" width="32" height="32" alt="Eliminar"/>
-                </a>
-              </div><!--End accion-->
-              <div class="cleafix"></div>
+                      <div class="accion">
+                        <a class="tooltip del" href="javascript:void(0);" onclick="deleteRow('delProduccion.php', '<?=$row['id_produccion']?>', 'produccion','produccion');" title="Eliminar Orden" >
+                            <img src="images/icono/recycle.png" width="32" height="32" alt="Eliminar"/>
+                        </a>
+                      </div><!--End accion-->
+                      <div class="cleafix"></div>
 
-            </div><!--End accPro-->
+                    </div><!--End accPro-->
 
-          </td>
+                  </td>
                 </tr>
                 <?PHP
             }

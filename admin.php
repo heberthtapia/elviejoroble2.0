@@ -253,7 +253,7 @@ if (isset($_POST['from']))
                                     <span class="hidden-xs hidden-sm">Nueva Orden de Producción</span>
                                 </a>
                             </li>
-                            <li><a href="#">
+                            <li><a href="#" onclick="despliega('modulo/produccion/produccion.php','contenido')">
                                     <i class="fa fa-list" aria-hidden="true"></i>
                                     <span class="hidden-xs hidden-sm">Ordenes de Producción</span>
                                 </a>
