@@ -143,8 +143,6 @@ include 'modalCheckAlmacen.php';
     </div>
 </div>
 
-<script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIG-WEdvtbElIhE06jzL5Kk1QkFWCvymQ" async  defer></script>
-
 <script type="text/javascript" language="javascript" class="init">
 
     //========DataTables========

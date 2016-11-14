@@ -18,11 +18,37 @@ $cargo = $_SESSION['cargo'];
 //include 'modalCheckPedido.php';
 //include 'modalCheckAlmacen.php';
 ?>
-
+<style type="text/css">
+    .status1{
+    background-color:#f58400;
+    color:#ffffff;
+    font-weight:bold;
+}
+.status2{
+    background-color:#FCFB00;
+    color:#000000;
+    font-weight:bold;
+  }
+.status3{
+    background-color:#1D5EA3;
+    color:#ffffff;
+    font-weight:bold;
+}
+.status4{
+    background-color: #8AD120;
+    color:#ffffff;
+    font-weight:bold;
+}
+.status5{
+    background-color: #AA0000;
+    color:#ffffff;
+    font-weight:bold;
+}
+</style>
 <div class="row" id="listTabla">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <h1 class="avisos" align="center"><strong>PRODUCCIÓN</strong></h1>
-        <h2 class="avisos">Ordenes de Producción</h2>
+        <h2 class="avisos">Ordenes de Produción</h2>
         <div class="pull-right"><br>
             <button type="button" class="btn btn-success" data-toggle="modal" onClick="despliega('modulo/pedido/newPedido.php','contenido');">
                 <i class="fa fa-plus" aria-hidden="true"></i>
@@ -61,37 +87,37 @@ $cargo = $_SESSION['cargo'];
             while( $row = $srtQuery->FetchRow()){
                 $cont++;
                 ?>
-            <tr id="tb<?=$row[0]?>">
-                <td class="last center"></td>
-                <td class="last center">OR-P-<?=$row['id_produccion'];?></td>
-                <td class="last center"><?=$row['id_inventario'];?></td>
-                <td class="last center"><?=$row['detalle'];?></td>
-
-                  <td class="last center"><?=$row['cantidad'];?></td>
-                  <td class="last center"><?=$row['dateInc'];?></td>
-                  <td class="last center fin"><?=$row['dateFin'];?></td>
-                  <?PHP
-                  if(strcmp($row['statusProd'], 'Nueva Orden') == 0){
-                      $st="status1";
-                  }else{
-                      if(strcmp($row['statusProd'], 'En Produccion') == 0){
-                        $st="status2";
-                      }else {
-                          if (strcmp($row['statusProd'], 'Terminado') == 0) {
-                              $st = "status3";
-                          } else
-                              if (strcmp($row['statusProd'], 'Terminado y Asignado') == 0) {
-                                  $st = "status4";
+                <tr id="tb<?=$row[0]?>">
+                    <td align="center"><?=$cont;?></td>
+                    <td align="center"><?=$row['dateReg']?></td>
+                    <td align="center">OR-P-<?=$row['id_produccion'];?></td>
+                    <td align="center"><?=$row['id_inventario'];?></td>
+                    <td align="center"><?=$row['detalle'];?></td>
+                    <td align="center"><?=$row['cantidad'];?></td>
+                    <td align="center"><?=$row['dateInc'];?></td>
+                    <td align="center"><?=$row['dateFin'];?></td>
+                      <?PHP
+                      if(strcmp($row['statusProd'], 'Nueva Orden') == 0){
+                          $st="status1";
+                      }else{
+                          if(strcmp($row['statusProd'], 'En Produccion') == 0){
+                            $st="status2";
+                          }else {
+                              if (strcmp($row['statusProd'], 'Terminado') == 0) {
+                                  $st = "status3";
                               } else
-                                  $st = "status5";
+                                  if (strcmp($row['statusProd'], 'Terminado y Asignado') == 0) {
+                                      $st = "status4";
+                                  } else
+                                      $st = "status5";
+                          }
                       }
-                  }
-                  ?>
-                  <td class="last center <?=$st;?>">
-                    <?=$row['statusProd'];?>
-                  </td>
-                  <td>
-                    <div class="accPro">
+                      ?>
+                    <td width="10%" class="<?=$st;?>" align="center">
+                        <?=$row['statusProd'];?>
+                    </td>
+                    <td>
+                        <div class="accPro">
 
                       <div class="accion">
                         <a class="tooltip aprob" href="javascript:void(0);" onClick="sProAprobado('<?=$row[0]?>');" title="Aprobar Orden">
@@ -142,17 +168,13 @@ $cargo = $_SESSION['cargo'];
             <tr>
                 <th>Nº</th>
                 <th>Fecha</th>
-                <th>N&deg; pedido</th>
-                <th>SubTotal</th>
-                <th>Des.</th>
-                <th>Bonf.</th>
-                <th>Total</th>
-                <th>a cuenta</th>
-                <th>saldo</th>
-                <th>Observaciones</th>
-                <th>Tipo de Pago</th>
-                <th>Status Contador</th>
-                <th>Status Almacen</th>
+                <th>N&deg; de Orden</th>
+                <th>Codigo de Producto</th>
+                <th>Detalle</th>
+                <th>Cantidad</th>
+                <th>Fecha Inicio Producción</th>
+                <th>Fecha Fin Producción</th>
+                <th>Status Producción</th>
                 <th>Acciones</th>
             </tr>
             </tfoot>
@@ -160,8 +182,6 @@ $cargo = $_SESSION['cargo'];
 
     </div>
 </div>
-
-<script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIG-WEdvtbElIhE06jzL5Kk1QkFWCvymQ" async  defer></script>
 
 <script type="text/javascript" language="javascript" class="init">
 
