@@ -1,104 +1,87 @@
 <?PHP
-	include '../../adodb5/adodb.inc.php';
-	include '../../classes/function.php';
-
-	$db = NewADOConnection('mysqli');
-	//$db->debug = true;
-	$db->Connect();
-
-	$op = new cnFunction();
-
-	$fecha = $op->ToDay();
-	$hora = $op->Time();
+$sql = "TRUNCATE TABLE aux_img ";
+$strQ = $db->Execute($sql);
+$fecha = $op->ToDay();
+$hora = $op->Time();
 ?>
-<script>
+<form id="formNew" action="javascript:saveForm('formNew','almacen/save.php')" class="form-horizontal" autocomplete="off" >
+	<div class="modal fade" id="dataRegister" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="exampleModalLabel">Nueva Orden de Producción</h4>
+				</div>
+				<div class="modal-body">
+					<div id="datos_ajax"></div>
 
-  $(document).ready(function(e) {
-	function log( message ) {
-		//alert(message);
-		$( "input#detalle" ).val( message );
-		//$( "input#idInv" ).val( message );
-		//$( "#log" ).scrollTop( 0 );
-	}
-	$( "#idInv" ).autocomplete({
-		source: "classes/searchProd.php",
-		minLength: 2,
-		select: function( event, ui ) {
-			log(ui.item.id
-				/*ui.item ?
-				"Selected: " + ui.item.value + " aka " + ui.item.id :
-				"Nothing selected, input was " + this.value*/
-				);
-		}
-	});
-  /* idealForm */
-	  $('#form').idealForms();
-  /* Calendario */
-	  $('#dateNac').datepicker({
-		dateFormat: 'yy-mm-dd',
-		changeMonth: true,
-		changeYear: true,
-		yearRange: 'c-40:c-0'
-	  });
-  /* Validación */
-	  jQuery("#form").validationEngine({
-		  prettySelect	: true,
-		  useSuffix		: "_chosen"
-		 // scroll		: false,
-	  });
+					<div class="form-group">
+						<label for="fecha" class="control-label col-md-2">Fecha:</label>
+						<div class="col-md-4">
+							<input id="fecha" name="fecha" type="text" class="form-control" value="<?=$fecha;?> <?=$hora;?>" disabled="disabled" />
+						</div>
+						<input id="date" name="date" type="hidden" value="<?=$fecha;?> <?=$hora;?>" />
+						<input id="tabla" name="tabla" type="hidden" value="inventario">
+					</div>
+					<div class="form-group">
+						<label for="idInv" class="control-label col-md-2">Codigo:</label>
+						<div class="col-md-4">
+							<input type="text" class="form-control" id="idInv" name="idInv" placeholder="Codigo:">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="detalle" class="control-label col-md-2">Producto:</label>
+						<div class="col-md-10">
+							<input type="text" class="form-control" id="detalle" name="detalle" placeholder="Nombre Producto:" data-validation="required">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="cant" class="control-label col-md-2">Cantidad:</label>
+						<div class="col-md-4">
+							<input type="text" class="form-control" id="cant" name="cant" placeholder="Cantidad:" data-validation="required number" >
+						</div>
+					</div>
 
-  });
-</script>
-<style>
-form div.WrapCOD {
-    width: 100px;
-}
-
-form div.WrapDET {
-    width: 360px;
-}
-input#cant[type="text"] {
-	margin: 0px;
-	width: 6em;
-}
-input#detalle[type="text"] {
-	width: 29.5em;
-}
-</style>
-
-  <form id="form" class="ideal-form" action="javascript:saveOrdenP('form','save.php')" >
-  	<fieldset>
-      <legend>N U E V A&nbsp;&nbsp;&nbsp;O R D E N&nbsp;&nbsp;&nbsp;D E&nbsp;&nbsp;&nbsp;P R O D U C I &Oacute; N</legend>
-        <div class="idealWrap WrapDS">
-        <label class="date">Fecha Inicio: </label>
-        <input id="fecha" name="fecha" type="text" value="<?=$fecha;?> <?=$hora;?>" disabled="disabled" />
-        <input id="date" name="date" type="hidden" value="<?=$fecha;?> <?=$hora;?>" />
-        <input id="tabla" name="tabla" type="hidden" value="produccion" />
-        </div><!--End idealWrap-->
-        <div class="clearfix"></div>
-        <br>
-
-        <div class="idealWrap WrapCOD">
-        <input id="idInv" name="idInv" type="text" placeholder="Codigo" class="validate[required,maxSize[20],custom[onlyLetterSpacio]] text-input" value="" />
-        </div><!--End idealWrap-->
-
-        <div class="idealWrap WrapDET">
-        <input id="detalle" name="detalle" type="text" placeholder="Nombre producto" value="" class="validate[required] text-input" autocomplete="off"  />
-        </div><!--End idealWrap-->
-
-        <div class="idealWrap WrapCOD">
-        <input id="cant" name="cant" type="text" placeholder="Cantidad" value="" class="validate[required, custom[number]] text-input" />
-        </div><!--End idealWrap-->
-
-        <!--<div class="idealWrap WrapCOD">
-        <input id="vol" name="vol" type="text" placeholder="Volumen" value="" class="validate[required, custom[number]] text-input" />
-        </div><!--End idealWrap-->
-
-	</fieldset>
-   		<div class="idealWrap" align="center">
-			<input type="reset" id="reset" value="Limpiar..."/>
-			<input type="submit" id="save" value="Guardar..."/>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="close" class="btn btn-danger" data-dismiss="modal">
+						<i class="fa fa-close" aria-hidden="true"></i>
+						<span>Cancelar</span>
+					</button>
+					<button type="submit" id="save" class="btn btn-success">
+						<i class="fa fa-check" aria-hidden="true"></i>
+						<span>Agregar Producto</span>
+					</button>
+				</div>
+			</div>
 		</div>
+	</div>
+</form>
 
-  </form>
-<div class="clearfix"></div>
+<script>
+	$('#dataRegister').on('hidden.bs.modal', function (e) {
+		// do something...
+		$('#formNew').get(0).reset();
+		//despliega('modulo/almacen/producto.php','contenido');
+	});
+
+	$(document).ready(function(){
+		function log( message ) {
+			//alert(message);
+			$( "input#detalle" ).val( message );
+			//$( "input#idInv" ).val( message );
+			//$( "#log" ).scrollTop( 0 );
+		}
+		$( "#idInv" ).autocomplete({
+			source: "inc/produccion.php",
+			minLength: 2,
+			select: function( event, ui ) {
+				log(ui.item.id
+					/*ui.item ?
+					"Selected: " + ui.item.value + " aka " + ui.item.id :
+					"Nothing selected, input was " + this.value*/
+					);
+			}
+		});
+	});
+</script>

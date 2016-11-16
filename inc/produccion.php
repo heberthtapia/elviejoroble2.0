@@ -10,9 +10,7 @@
 	$idEmp = $_SESSION['idEmp'];
 
 	$sql  = "SELECT * ";
-	$sql .= "FROM empleado AS e, cliente AS c ";
-	$sql .= "WHERE e.id_empleado = c.id_empleado ";
-	$sql .= "AND c.id_empleado = '".$idEmp."'";
+	$sql .= "FROM inventario ";
 
 	$strQuery = $db->Execute($sql);
 
@@ -26,7 +24,7 @@ if (get_magic_quotes_gpc()) $q = stripslashes($q);
 $items = array();
 
 	while( $row = $strQuery->FetchRow()){
-		$items[$row['nombreEmp'].' - '.$row['nombre'].' '.$row['apP'].' '.$row['apM']] = $row['id_cliente'];
+		$items[$row['id_inventario']] = $row['detalle'];
 	}
 
 

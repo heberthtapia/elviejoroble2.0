@@ -74,12 +74,15 @@ button.cancel:hover img {
     background: transparent;
 }
 </style>
+<?PHP
+include 'newProduccion.php';
+?>
 <div class="row" id="listTabla">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <h1 class="avisos" align="center"><strong>PRODUCCIÓN</strong></h1>
         <h2 class="avisos">Ordenes de Produción</h2>
         <div class="pull-right"><br>
-            <button type="button" class="btn btn-success" data-toggle="modal" onClick="despliega('modulo/pedido/newPedido.php','contenido');">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#dataRegister">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 <span>Nueva Orden</span>
             </button>
