@@ -44,6 +44,35 @@ $cargo = $_SESSION['cargo'];
     color:#ffffff;
     font-weight:bold;
 }
+
+button.aprob {
+    width: 45px;
+    height: 36px;
+    padding: 5px;
+
+    background-image: url(images/iconos/checkOn.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+button.aprob:hover img {
+    visibility: hidden;
+
+    background: transparent;
+}
+button.cancel:hover {
+    width: 45px;
+    height: 36px;
+    padding: 5px;
+
+    background-image: url(images/iconos/delOn.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+button.cancel:hover img {
+    visibility: hidden;
+
+    background: transparent;
+}
 </style>
 <div class="row" id="listTabla">
     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -116,48 +145,40 @@ $cargo = $_SESSION['cargo'];
                     <td width="10%" class="<?=$st;?>" align="center">
                         <?=$row['statusProd'];?>
                     </td>
-                    <td>
-                        <div class="accPro">
+                    <td width="15%">
+                         <div class="btn-group" style="width: 271px">
 
-                      <div class="accion">
-                        <a class="tooltip aprob" href="javascript:void(0);" onClick="sProAprobado('<?=$row[0]?>');" title="Aprobar Orden">
-                            <img src="images/icono/checkOff.png" width="32"/>
-                        </a>
-                      </div><!--End accion-->
+                            <button type="button" class="btn btn-primary btn-sm aprob tooltipp" onClick="sProAprobado('<?=$row[0]?>');" title="Aprobar Orden" >
+                                <img src="images/iconos/checkOff.png" width="24"/>
+                                <span></span>
+                            </button>
 
-                      <div class="accion">
-                        <a class="tooltip cancel" href="javascript:void(0);" onClick="sProCancelar('<?=$row[0]?>');" title="Cancelar Orden">
-                            <img src="images/icono/delOff.png" width="32" alt="Cancelar" />
-                        </a>
-                      </div><!--End accion-->
+                            <button type ="button" class="btn btn-primary btn-sm cancel tooltipp" onClick="sProCancelar('<?=$row[0]?>');" title="Cancelar Orden" >
+                                <img src="images/iconos/delOff.png" width="24" alt="Cancelar" />
+                                <span></span>
+                            </button>
 
-                      <div class="accion">
-                        <a class="tooltip terminar" href="javascript:void(0);" onClick="sProTerminado('<?=$row[0]?>');" title="Orden Terminada">
-                            <img src="images/icono/asig.png" width="32" alt="Orden Terminada" />
-                        </a>
-                      </div><!--End accion-->
+                            <button type ="button" class="btn btn-primary btn-sm terminar tooltipp" onClick="sProTerminado('<?=$row[0]?>');" title="Orden Terminada" >
+                                <img src="images/iconos/asig.png" width="24" alt="Orden Terminada" />
+                                <span></span>
+                            </button>
 
-                      <div class="accion">
-                        <a class="tooltip import" href="javascript:void(0);" onClick="open_win('modulo/produccion/importar.php', '', '490', '500', '<?=$row['id_produccion']?>');" title="Asignar Producci&oacute;n">
-                            <img src="images/icono/import.png" width="32" alt="Asignar Produccion" />
-                        </a>
-                      </div><!--End accion-->
+                            <button type ="button" class="btn btn-primary btn-sm import tooltipp" open_win('modulo/produccion/importar.php', '', '490', '500', '<?=$row['id_produccion']?>');" title="Asignar Producción" >
+                                <img src="images/iconos/import.png" width="24" alt="Asignar" />
+                                <span></span>
+                            </button>
 
-                      <div class="accion">
-                        <a class="tooltip edit" href="javascript:void(0);" onClick="open_win('modulo/produccion/editProduccion.php', '', '600', '270', '<?=$row['id_produccion']?>');" title="Editar Orden">
-                            <img src="images/icono/edit1.png" width="32" alt="Editar"/>
-                        </a>
-                      </div><!--End accion-->
+                            <button type ="button" class="btn btn-primary btn-sm edit tooltipp" open_win('modulo/produccion/importar.php', '', '490', '500', '<?=$row['id_produccion']?>');" title="Editar Orden" >
+                                <img src="images/iconos/edit1.png" width="24" alt="Editar" />
+                                <span></span>
+                            </button>
 
-                      <div class="accion">
-                        <a class="tooltip del" href="javascript:void(0);" onclick="deleteRow('delProduccion.php', '<?=$row['id_produccion']?>', 'produccion','produccion');" title="Eliminar Orden" >
-                            <img src="images/icono/recycle.png" width="32" height="32" alt="Eliminar"/>
-                        </a>
-                      </div><!--End accion-->
-                      <div class="cleafix"></div>
+                            <button type ="button" class="btn btn-primary btn-sm del tooltipp" open_win('modulo/produccion/importar.php', '', '490', '500', '<?=$row['id_produccion']?>');" title="Eliminar" >
+                                <img src="images/iconos/recycle.png" width="24" alt="Eliminar" />
+                                <span></span>
+                            </button>
 
-                    </div><!--End accPro-->
-
+                        </div>
                   </td>
                 </tr>
                 <?PHP
@@ -188,6 +209,13 @@ $cargo = $_SESSION['cargo'];
     //========DataTables========
 
     $(document).ready(function() {
+
+        $('.tooltipp').tooltipster({
+        animation: 'swing',
+        delay: 200,
+        theme:'tooltipster-shadow'
+        });
+
     deleteRow = function(p, idTr, tipo, table){
         var respuesta = confirm("SEGURO QUE DESEA ELIMINAR EL "+" ' "+tipo.toUpperCase()+" ' ");
         if(respuesta){
@@ -240,4 +268,63 @@ $cargo = $_SESSION['cargo'];
         modules : 'security, modules/logic'
     });
     $('#obser').restrictLength( $('#max-length-element') );
+
+
+  function sProAprobado(id){
+    var val = $('tr#tb'+id).find('td.status1').text();
+    $.ajax({
+        url: 'modulo/produccion/aprobar.php',
+        type: 'post',
+        cache: false,
+        data:{res:id},
+        success: function(data){
+                $('tr#tb'+id).find('td.status1').addClass('status2');
+                $('tr#tb'+id).find('td.status1').text('En Produccion');
+                $('tr#tb'+id).find('td.status1').removeClass('status1');
+                //$('button').tooltip('hide');
+        }
+    });
+  }
+
+  function sProCancelar(id){
+    var val = $('tr#tb'+id).find('td.status1').text();
+    $.ajax({
+        url: 'modulo/produccion/cancelar.php',
+        type: 'post',
+        cache: false,
+        data:{res:id},
+        success: function(data){
+            if(data === "1"){
+                $('tr#tb'+id).find('td.status1').addClass('status5');
+                $('tr#tb'+id).find('td.status1').text('Cancelado');
+                $('tr#tb'+id).find('td.status1').removeClass('status1');
+            }else{
+                alert('En este momento no se puede cancelar la Orden');
+            }
+            //$('button').tooltip('hide');
+        }
+    });
+  }
+
+  function sProTerminado(id){
+    var val = $('tr#tb'+id).find('td.status2').text();
+    $.ajax({
+        url: 'modulo/produccion/terminar.php',
+        type: 'post',
+        cache: false,
+        data:{res:id},
+        success: function(data){
+            var f = new Date();
+            var m = f.getMonth()+1;
+            if(m<10){
+                mm = '0'+m;
+            }
+            $('tr#tb'+id).find('td.status2').addClass('status3');
+            $('tr#tb'+id).find('td.status2').text('Terminado');
+            $('tr#tb'+id).find('td.status2').removeClass('status2');
+            $('tr#tb'+id).find('td.fin').text(f.getFullYear()+'-'+mm+'-'+f.getDate()+' '+f.getHours()+':'+f.getMinutes()+':'+f.getSeconds());
+            window.open('modulo/produccion/pdfOrdenPT.php?res='+id, '_blank');
+        }
+    });
+  }
 </script>

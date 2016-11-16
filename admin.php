@@ -184,6 +184,9 @@ if (isset($_POST['from']))
     <script src="js/ui/jquery.ui.menu.js"></script>
     <script src="js/ui/jquery.ui.autocomplete.js"></script>
 
+    <link rel="stylesheet" type="text/css" href="css/tooltipster.css">
+    <link rel="stylesheet" type="text/css" href="css/tooltipster-shadow.css">
+    <script src="js/jquery.tooltipster.js"></script>
 
     <script type="text/javascript" src="js/myJavaScript.js"></script>
 

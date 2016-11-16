@@ -100,7 +100,7 @@ include 'modalCheckAlmacen.php';
                         <div class="btn-group" style="width: 194px">
                             <button type="button" class="btn btn-primary btn-sm" onclick="detalle('<?=$row['id_pedido'];?>')" >
                                 <i class='fa fa-external-link'></i>
-                                <san>Generar PDF</span>
+                                <span>Generar PDF</span>
                             </button>
 
                             <button type ="button" class="btn btn-primary btn-sm" onclick="despliega('modulo/pedido/editPedido.php','contenido','<?=$row['id_pedido']?>');" >
