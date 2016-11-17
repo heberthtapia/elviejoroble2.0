@@ -1,153 +1,110 @@
 <?PHP
-	include '../../adodb5/adodb.inc.php';
-	include '../../classes/function.php';
+$sql = "TRUNCATE TABLE aux_img ";
+$strQ = $db->Execute($sql);
+$fecha = $op->ToDay();
+$hora = $op->Time();
 
-	$db = NewADOConnection('mysqli');
-	//$db->debug = true;
-	$db->Connect();
-
-	$op = new cnFunction();
-
-	$fecha 	= $op->ToDay();
-	$hora	= $op->Time();
-	$id 	= $_REQUEST['id'];
-
-	$srtQ 	= "SELECT * FROM produccion WHERE id_produccion = '$id'";
-	$srtQr 	= $db->Execute($srtQ);
-	$file 	= $srtQr->FetchRow();
-
-	$srtSql = "SELECT * FROM empleado WHERE cargo = 'pre' ";
-	$srtQuery = $db->Execute($srtSql);
+$srtSql = "SELECT * FROM empleado WHERE cargo = 'pre' ";
+$srtQuery = $db->Execute($srtSql);
 ?>
-<script>
+<form id="formImport" action="javascript:saveForm('formImport','produccion/save.php')" class="form-horizontal" autocomplete="off" >
+  <div class="modal fade" id="dataImport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="exampleModalLabel">Nueva Orden de Producción</h4>
+        </div>
+        <div class="modal-body">
+          <div id="datos_ajax"></div>
 
-  $(document).ready(function(e) {
+          <div class="form-group">
+            <label for="fecha" class="control-label col-md-2">Fecha:</label>
+            <div class="col-md-4">
+              <input id="fecha" name="fecha" type="text" class="form-control" value="<?=$fecha;?> <?=$hora;?>" disabled="disabled" />
+            </div>
+            <input id="date" name="date" type="hidden" value="<?=$fecha;?> <?=$hora;?>" />
+            <input id="idP" name="idP" type="hidden" value="" />
+            <input id="tabla" name="tabla" type="hidden" value="produccion">
+          </div>
+          <div class="form-group">
+            <label for="idInv" class="control-label col-md-2">Codigo:</label>
+            <div class="col-md-4">
+              <input type="text" class="form-control" id="idInv" name="idInv" placeholder="Codigo:" data-validation="required">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="detalle" class="control-label col-md-2">Producto:</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="detalle" name="detalle" placeholder="Nombre Producto:" readonly="" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cant" class="control-label col-md-2">Cantidad:</label>
+            <div class="col-md-4">
+              <input type="text" class="form-control" id="cant" name="cant" placeholder="Cantidad:" data-validation="required number" >
+              <input id="cantP" name="cantP" type="hidden" value=""/>
+            </div>
+          </div>
 
-  /* idealForm */
-	  $('#form').idealForms();
-  /* Calendario */
-	  $('#dateNac').datepicker({
-		dateFormat: 'yy-mm-dd',
-		changeMonth: true,
-		changeYear: true,
-		yearRange: 'c-40:c-0'
-	  });
-  /* Validación */
-	  jQuery("#form").validationEngine({
-          scroll		: false,
-          'custom_error_messages':{
-              'max': {
-                'message': "Se debe asignar toda la producci&oacute;n."
-              },
-              'min': {
-                  'message': "No asignar mas de lo producido."
-              }
+          <p style="text-align: center; font-weight: bold; font-size: 14px; margin: 10px 0; color: #112863">ASIGNAR CANTIDADES</p>
+
+          <?php
+          echo $strEmp = "SELECT COUNT(*) FROM empleado WHERE cargo = 'pre' ";
+          $strNum = $db->Execute($strEmp);
+          $NumRow = $strNum->FetchRow();
+            $c=0;
+           while( $row = $srtQuery->FetchRow() ){
+            $c++;
+          ?>
+
+          <div class="form-group">
+            <label for="pre<?=$c?>" class="control-label col-md-2"><?=$row['nombre'].' '.$row['apP'];?>: </label>
+          <input id="pre<?=$c;?>" name="<?=$row['id_empleado'];?>" type="text" autocomplete="off" placeholder="Cantidad" onblur="actuCant(<?=$NumRow[0];?>)" value="0" data-validation="required number" />
+          </div>
+
+          <?php
           }
-	  });
+          ?>
 
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="close" class="btn btn-danger" data-dismiss="modal">
+            <i class="fa fa-close" aria-hidden="true"></i>
+            <span>Cancelar</span>
+          </button>
+          <button type="submit" id="save" class="btn btn-success">
+            <i class="fa fa-check" aria-hidden="true"></i>
+            <span>Guardar Nueva Orden</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+  $('#dataImport').on('hidden.bs.modal', function (e) {
+    // do something...
+    $('#formImport').get(0).reset();
+    //despliega('modulo/almacen/producto.php','contenido');
   });
-  /**
-   * Funcion para restar actualizar cantidades
-   */
-    function actuCant(num){
-      pre = 'pre';
-      total = 0;
-      cantPro = $('input#cantP').val();
-      for(i=1; i<=num; i++){
-          f = pre+i;
-          //alert(f);
-          cantPre = $('input#'+f).val();
-          //alert(cantPre);
-          total = parseInt(total) + parseInt(cantPre);
-      }
-      resto = parseInt(cantPro) - parseInt(total);
-      $('input#cant').val(resto);
-    }
+
+  $('#dataImport').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Botón que activó el modal
+        var id = button.data('id'); // Extraer la información de atributos de datos
+        var idInv = button.data('idinv'); // Extraer la información de atributos de datos
+        var detalle = button.data('detalle'); // Extraer la información de atributos de datos
+        var cantidad = button.data('cantidad'); // Extraer la información de atributos de datos
+
+        var modal = $(this);
+        //modal.find('.modal-title').text('Modificar Empleado: '+nombre+' '+apP);
+        modal.find('.modal-body #idP').val(id);
+        modal.find('.modal-body #idInv').val(idInv);
+        modal.find('.modal-body #detalle').val(detalle);
+        modal.find('.modal-body #cant').val(cantidad);
+        modal.find('.modal-body #cantP').val(cantidad);
+
+    });
+
 </script>
-<style>
-form div.WrapCOD {
-    width: 100px;
-}
-
-form div.WrapDET {
-    width: 460px;
-}
-input#cant[type="text"] {
-    margin: 0px;
-    width: 6em;
-    cursor: not-allowed;
-}
-input#idInv[type="text"]{
-	cursor: not-allowed;
-}
-input.pro[type="text"] {
-	margin: 0;
-	width: 6em;
-}
-form div.Wrap {
-    width: 233px;
-}
-input#detalle[type="text"] {
-    width: 30.5em;
-    cursor: not-allowed;
-}
-form div.WrapDET {
-    width: 349px;
-}
-</style>
-
-  <form id="form" class="ideal-form" action="javascript:saveInvPro('form','savePro.php','<?=$id?>')" >
-  	<fieldset>
-      <legend>D E S I G N A R&nbsp;&nbsp;&nbsp;P R O D U C C I &Oacute; N</legend>
-        <div class="idealWrap WrapDS">
-        <label class="date">Fecha: </label>
-        <input id="fecha" name="fecha" type="text" value="<?=$fecha;?> <?=$hora;?>" disabled="disabled" />
-        <input id="date" name="date" type="hidden" value="<?=$fecha;?> <?=$hora;?>" />
-        <input id="idP" name="idP" type="hidden" value="<?=$id;?>" />
-        </div><!--End idealWrap-->
-        <div class="clearfix"></div>
-
-        <div class="idealWrap WrapCOD">
-        <input id="idInv" name="idInv" readonly="off" type="text" placeholder="Codigo" value="<?=$file['id_inventario']?>" />
-        </div><!--End idealWrap-->
-
-        <div class="idealWrap WrapDET">
-        <input id="detalle" name="detalle" readonly="off" type="text" placeholder="Nombre producto" value="<?=$file['detalle'];?>"/>
-        </div><!--End idealWrap-->
-        <div class="clearfix"></div>
-
-        <div class="idealWrap Wrap">
-        <label>Cantidad a designar: </label>
-        <input id="cant" name="cant" type="text" placeholder="Cantidad" value="<?=$file['cantidad'];?>" class="validate[max[0], min[0]]"/>
-            <input id="cantP" name="cantP" type="hidden" value="<?=$file['cantidad'];?>"/>
-        </div><!--End idealWrap-->
-        <div class="clearfix"></div>
-
-        <p style="text-align: center; font-weight: bold; font-size: 14px; margin: 10px 0; color: #112863">ASIGNAR CANTIDADES</p>
-
-        <?php
-        $strEmp = "SELECT COUNT(*) FROM empleado WHERE cargo = 'pre' ";
-        $strNum = $db->Execute($strEmp);
-        $NumRow = $strNum->FetchRow();
-        	$c=0;
-         while( $row = $srtQuery->FetchRow() ){
-         	$c++;
-        ?>
-
-        <div class="idealWrap Wrap">
-        <label><?=$row['nombre'].' '.$row['apP'];?>: </label>
-        <input id="pre<?=$c;?>" name="<?=$row['id_empleado'];?>" type="text" autocomplete="off" placeholder="Cantidad" onblur="actuCant(<?=$NumRow[0];?>)" value="0" class="validate[custom[integer]] text-input pro" />
-        </div><!--End idealWrap-->
-        <div class="clearfix"></div>
-        <?php
-    	}
-        ?>
-	</fieldset>
-
-		<div class="idealWrap" align="center">
-			<input id="reset" type="reset" onclick="clearForm('form');" value="Limpiar...">
-			<input id="save" type="submit" value="Guardar...">
-		</div>
-
-  </form>
-<div class="clearfix"></div>

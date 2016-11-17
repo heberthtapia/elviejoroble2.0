@@ -4,7 +4,7 @@ $strQ = $db->Execute($sql);
 $fecha = $op->ToDay();
 $hora = $op->Time();
 ?>
-<form id="formNew" action="javascript:saveForm('formNew','almacen/save.php')" class="form-horizontal" autocomplete="off" >
+<form id="formNew" action="javascript:saveForm('formNew','produccion/save.php')" class="form-horizontal" autocomplete="off" >
 	<div class="modal fade" id="dataRegister" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -18,27 +18,27 @@ $hora = $op->Time();
 					<div class="form-group">
 						<label for="fecha" class="control-label col-md-2">Fecha:</label>
 						<div class="col-md-4">
-							<input id="fecha" name="fecha" type="text" class="form-control" value="<?=$fecha;?> <?=$hora;?>" disabled="disabled" />
+							<input id="fechaN" name="fechaN" type="text" class="form-control" value="<?=$fecha;?> <?=$hora;?>" disabled="disabled" />
 						</div>
-						<input id="date" name="date" type="hidden" value="<?=$fecha;?> <?=$hora;?>" />
-						<input id="tabla" name="tabla" type="hidden" value="inventario">
+						<input id="dateN" name="dateN" type="hidden" value="<?=$fecha;?> <?=$hora;?>" />
+						<input id="tabla" name="tabla" type="hidden" value="produccion">
 					</div>
 					<div class="form-group">
 						<label for="idInv" class="control-label col-md-2">Codigo:</label>
 						<div class="col-md-4">
-							<input type="text" class="form-control" id="idInv" name="idInv" placeholder="Codigo:">
+							<input type="text" class="form-control" id="idInvN" name="idInvN" placeholder="Codigo:" data-validation="required">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="detalle" class="control-label col-md-2">Producto:</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" id="detalle" name="detalle" placeholder="Nombre Producto:" data-validation="required">
+							<input type="text" class="form-control" id="detalleN" name="detalleN" placeholder="Nombre Producto:" readonly="" >
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="cant" class="control-label col-md-2">Cantidad:</label>
 						<div class="col-md-4">
-							<input type="text" class="form-control" id="cant" name="cant" placeholder="Cantidad:" data-validation="required number" >
+							<input type="text" class="form-control" id="cantN" name="cantN" placeholder="Cantidad:" data-validation="required number" >
 						</div>
 					</div>
 
@@ -50,7 +50,7 @@ $hora = $op->Time();
 					</button>
 					<button type="submit" id="save" class="btn btn-success">
 						<i class="fa fa-check" aria-hidden="true"></i>
-						<span>Agregar Producto</span>
+						<span>Guardar Nueva Orden</span>
 					</button>
 				</div>
 			</div>
@@ -68,11 +68,11 @@ $hora = $op->Time();
 	$(document).ready(function(){
 		function log( message ) {
 			//alert(message);
-			$( "input#detalle" ).val( message );
+			$( "input#detalleN" ).val( message );
 			//$( "input#idInv" ).val( message );
 			//$( "#log" ).scrollTop( 0 );
 		}
-		$( "#idInv" ).autocomplete({
+		$( "#idInvN" ).autocomplete({
 			source: "inc/produccion.php",
 			minLength: 2,
 			select: function( event, ui ) {

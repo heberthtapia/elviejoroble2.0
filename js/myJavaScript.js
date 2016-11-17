@@ -150,6 +150,14 @@ function despliega(p, div, id){
                     }
                 }
             }
+            if(data.tabla === 'produccion'){
+                $('#datos_ajax').html('<div class="alert alert-success" role="alert"><strong>Guardado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
+                    $('#datos_ajax').fadeOut(2000,function () {
+                        $('#dataRegister').modal('hide').delay(7000);
+                        despliega('modulo/produccion/listTabla.php','listTabla');
+                    });
+                });
+            }
         },
         error: function(data){
             alert('Error al guardar datos');

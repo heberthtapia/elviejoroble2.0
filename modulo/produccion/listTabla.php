@@ -77,12 +77,7 @@ button.cancel:hover img {
     text-transform: uppercase;
 }
 </style>
-<?PHP
-include 'newProduccion.php';
-include 'importar.php';
-?>
-<div class="row" id="listTabla">
-    <div class="col-xs-12 col-sm-12 col-md-12">
+<div class="col-xs-12 col-sm-12 col-md-12">
         <h1 class="avisos" align="center"><strong>PRODUCCIÓN</strong></h1>
         <h2 class="avisos">Ordenes de Produción</h2>
         <div class="pull-right"><br>
@@ -170,12 +165,7 @@ include 'importar.php';
                                 <span></span>
                             </button>
 
-                            <button type ="button" class="btn btn-primary btn-sm import tooltipp" data-toggle="modal" data-target="#dataImport" title="Asignar Producción"
-                                            data-id="<?=$row['id_produccion']?>"
-                                            data-idInv="<?=$row['id_inventario']?>"
-                                            data-detalle="<?=$row['detalle']?>"
-                                            data-cantidad="<?=$row['cantidad']?>"
-                                >
+                            <button type ="button" class="btn btn-primary btn-sm import tooltipp" open_win('modulo/produccion/importar.php', '', '490', '500', '<?=$row['id_produccion']?>');" title="Asignar Producción" >
                                 <img src="images/iconos/import.png" width="24" alt="Asignar" />
                                 <span></span>
                             </button>
@@ -214,7 +204,6 @@ include 'importar.php';
         </table>
 
     </div>
-</div>
 
 <script type="text/javascript" language="javascript" class="init">
 
