@@ -7,7 +7,7 @@ $hora = $op->Time();
 $srtSql = "SELECT * FROM empleado WHERE cargo = 'pre' ";
 $srtQuery = $db->Execute($srtSql);
 ?>
-<form id="formImport" action="javascript:saveForm('formImport','produccion/save.php')" class="form-horizontal" autocomplete="off" >
+<form id="formImport" action="javascript:saveForm('formImport','produccion/savePro.php')" class="form-horizontal" autocomplete="off" >
   <div class="modal fade" id="dataImport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -42,15 +42,15 @@ $srtQuery = $db->Execute($srtSql);
           <div class="form-group">
             <label for="cant" class="control-label col-md-2">Cantidad:</label>
             <div class="col-md-4">
-              <input type="text" class="form-control" id="cant" name="cant" placeholder="Cantidad:" data-validation="required number" >
+              <input type="text" class="form-control" id="cant" name="cant" placeholder="Cantidad:" data-validation="number" data-validation-allowing="range[0;0]" data-validation-error-msg="Se debe de asignar toda la produccion">
               <input id="cantP" name="cantP" type="hidden" value=""/>
             </div>
           </div>
 
-          <p style="text-align: center; font-weight: bold; font-size: 14px; margin: 10px 0; color: #112863">ASIGNAR CANTIDADES</p>
+          <h4 style="text-align: center; color: #112863">Asignar Cantidades</h4>
 
           <?php
-          echo $strEmp = "SELECT COUNT(*) FROM empleado WHERE cargo = 'pre' ";
+          $strEmp = "SELECT COUNT(*) FROM empleado WHERE cargo = 'pre' ";
           $strNum = $db->Execute($strEmp);
           $NumRow = $strNum->FetchRow();
             $c=0;
@@ -60,7 +60,9 @@ $srtQuery = $db->Execute($srtSql);
 
           <div class="form-group">
             <label for="pre<?=$c?>" class="control-label col-md-2"><?=$row['nombre'].' '.$row['apP'];?>: </label>
-          <input id="pre<?=$c;?>" name="<?=$row['id_empleado'];?>" type="text" autocomplete="off" placeholder="Cantidad" onblur="actuCant(<?=$NumRow[0];?>)" value="0" data-validation="required number" />
+            <div class="col-md-4">
+              <input id="pre<?=$c;?>" name="<?=$row['id_empleado'];?>" type="text" class="form-control" autocomplete="off" placeholder="Cantidad" onblur="actuCant(<?=$NumRow[0];?>)" value="0" data-validation="required number" />
+            </div>
           </div>
 
           <?php
@@ -75,7 +77,7 @@ $srtQuery = $db->Execute($srtSql);
           </button>
           <button type="submit" id="save" class="btn btn-success">
             <i class="fa fa-check" aria-hidden="true"></i>
-            <span>Guardar Nueva Orden</span>
+            <span>Guardar</span>
           </button>
         </div>
       </div>
@@ -106,5 +108,23 @@ $srtQuery = $db->Execute($srtSql);
         modal.find('.modal-body #cantP').val(cantidad);
 
     });
+
+  /**
+   * Funcion para restar actualizar cantidades
+   */
+    function actuCant(num){
+      pre = 'pre';
+      total = 0;
+      cantPro = $('input#cantP').val();
+      for(i=1; i<=num; i++){
+          f = pre+i;
+          //alert(f);
+          cantPre = $('input#'+f).val();
+          //alert(cantPre);
+          total = parseInt(total) + parseInt(cantPre);
+      }
+      resto = parseInt(cantPro) - parseInt(total);
+      $('input#cant').val(resto);
+    }
 
 </script>
