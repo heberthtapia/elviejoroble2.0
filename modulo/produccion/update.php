@@ -8,7 +8,7 @@
 session_start();
 
 include '../../adodb5/adodb.inc.php';
-include '../../classes/function.php';
+include '../../inc/function.php';
 
 $db = NewADOConnection('mysqli');
 
@@ -24,8 +24,8 @@ $data = stripslashes($_POST['res']);
 $data = json_decode($data);
 
 $strQuery = "UPDATE produccion SET dateInc = '".$fecha." ".$hora."', ";
-$strQuery.= "id_inventario = '".$data->idInv."', detalle = '".$data->detalle."', cantidad = '".$data->cant."' ";
-$strQuery.= "WHERE id_produccion = '".$data->id."' ";
+$strQuery.= "id_inventario = '".$data->idInvU."', detalle = '".$data->detalleU."', cantidad = '".$data->cantU."' ";
+$strQuery.= "WHERE id_produccion = '".$data->idU."' ";
 
 $sql = $db->Execute($strQuery);
 

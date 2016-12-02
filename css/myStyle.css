@@ -246,7 +246,7 @@ ul.subnavegador li a{
 input{
     text-transform: capitalize;
 }
-input#idInv, input#producto, input#idInvN{
+input#idInv, input#producto, input#idInvN, input#idInvU{
     text-transform: uppercase;
 }
 input#codUser,

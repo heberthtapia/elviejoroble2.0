@@ -165,20 +165,80 @@ button.cancel:hover img {
                                 <span></span>
                             </button>
 
-                            <button type ="button" class="btn btn-primary btn-sm import tooltipp" open_win('modulo/produccion/importar.php', '', '490', '500', '<?=$row['id_produccion']?>');" title="Asignar Producción" >
+                            <?PHP
+                                if( $row[statusProd] == 'Terminado'){
+                            ?>
+
+                            <button type ="button" class="btn btn-primary btn-sm import tooltipp" data-toggle="modal" data-target="#dataImport" title="Asignar Producción"
+                                            data-id="<?=$row['id_produccion']?>"
+                                            data-idInv="<?=$row['id_inventario']?>"
+                                            data-detalle="<?=$row['detalle']?>"
+                                            data-cantidad="<?=$row['cantidad']?>"
+                                >
                                 <img src="images/iconos/import.png" width="24" alt="Asignar" />
                                 <span></span>
                             </button>
 
-                            <button type ="button" class="btn btn-primary btn-sm edit tooltipp" open_win('modulo/produccion/importar.php', '', '490', '500', '<?=$row['id_produccion']?>');" title="Editar Orden" >
+                            <?PHP
+                            }else{
+                            ?>
+
+                            <button id="<?=$row['id_produccion']?>" type ="button" class="btn btn-primary btn-sm import tooltipp" data-toggle="modal" data-target="#dataImport" title="Asignar Orden de Producción" disabled
+                                            data-id="<?=$row['id_produccion']?>"
+                                            data-idInv="<?=$row['id_inventario']?>"
+                                            data-detalle="<?=$row['detalle']?>"
+                                            data-cantidad="<?=$row['cantidad']?>"
+                                >
+                                <img src="images/iconos/import.png" width="24" alt="Asignar" />
+                                <span></span>
+                            </button>
+
+                            <?PHP
+                            }
+                            if( $row[statusProd] == 'Nueva Orden'){
+                            ?>
+
+                            <button type ="button" class="btn btn-primary btn-sm import tooltipp" data-toggle="modal" data-target="#dataUpdate" title="Editar Orden de Producción"
+                                        data-id="<?=$row['id_produccion']?>"
+                                        data-idInv="<?=$row['id_inventario']?>"
+                                        data-detalle="<?=$row['detalle']?>"
+                                        data-cantidad="<?=$row['cantidad']?>"
+                            >
                                 <img src="images/iconos/edit1.png" width="24" alt="Editar" />
                                 <span></span>
                             </button>
 
-                            <button type ="button" class="btn btn-primary btn-sm del tooltipp" open_win('modulo/produccion/importar.php', '', '490', '500', '<?=$row['id_produccion']?>');" title="Eliminar" >
+                            <button type ="button" class="btn btn-primary btn-sm import tooltipp" data-toggle="modal" data-target="#dataDelete" title="Eliminar Orden de Producción"
+                                        data-id="<?=$row['id_produccion']?>"
+                            >
                                 <img src="images/iconos/recycle.png" width="24" alt="Eliminar" />
                                 <span></span>
                             </button>
+
+                            <?PHP
+                            }else{
+                            ?>
+
+                            <button type ="button" class="btn btn-primary btn-sm import tooltipp" data-toggle="modal" data-target="#dataUpdate" title="Editar Orden de Producción" disabled
+                                        data-id="<?=$row['id_produccion']?>"
+                                        data-idInv="<?=$row['id_inventario']?>"
+                                        data-detalle="<?=$row['detalle']?>"
+                                        data-cantidad="<?=$row['cantidad']?>"
+                            >
+                                <img src="images/iconos/edit1.png" width="24" alt="Editar" />
+                                <span></span>
+                            </button>
+
+                            <button type ="button" class="btn btn-primary btn-sm import tooltipp" data-toggle="modal" data-target="#dataDelete" title="Eliminar Orden de Producción" disabled
+                                        data-id="<?=$row['id_produccion']?>"
+                            >
+                                <img src="images/iconos/recycle.png" width="24" alt="Eliminar" />
+                                <span></span>
+                            </button>
+
+                            <?PHP
+                            }
+                            ?>
 
                         </div>
                   </td>
@@ -317,6 +377,7 @@ button.cancel:hover img {
         success: function(data){
             var f = new Date();
             var m = f.getMonth()+1;
+            var mm = 0;
             if(m<10){
                 mm = '0'+m;
             }
@@ -324,6 +385,7 @@ button.cancel:hover img {
             $('tr#tb'+id).find('td.status2').text('Terminado');
             $('tr#tb'+id).find('td.status2').removeClass('status2');
             $('tr#tb'+id).find('td.fin').text(f.getFullYear()+'-'+mm+'-'+f.getDate()+' '+f.getHours()+':'+f.getMinutes()+':'+f.getSeconds());
+            $('button#'+id).removeAttr('disabled','disabled');
             window.open('modulo/produccion/pdfOrdenPT.php?res='+id, '_blank');
         }
     });

@@ -1,12 +1,6 @@
 <?PHP
-include '../../adodb5/adodb.inc.php';
-include '../../classes/function.php';
-
-$db = NewADOConnection('mysqli');
-//$db->debug = true;
-$db->Connect();
-
-$op = new cnFunction();
+$sql = "TRUNCATE TABLE aux_img ";
+$strQ = $db->Execute($sql);
 
 $fecha = $op->ToDay();
 $hora = $op->Time();
@@ -18,111 +12,105 @@ $sql = "SELECT * FROM produccion WHERE id_produccion = '$id'";
 $str = $db->Execute($sql);
 
 $row = $str->FetchRow();
-?>
-<script>
 
-	$(document).ready(function(e) {
+
+
+?>
+<form id="formUpdate" action="javascript:updateForm('formUpdate','produccion/update.php')" class="form-horizontal" autocomplete="off" >
+	<div class="modal fade" id="dataUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="exampleModalLabel">Editar Orden de Producción</h4>
+				</div>
+				<div class="modal-body">
+					<div id="datos_ajax_update"></div>
+
+					<div class="form-group">
+						<label for="fecha" class="control-label col-md-2">Fecha:</label>
+						<div class="col-md-4">
+							<input id="fechaN" name="fechaN" type="text" class="form-control" value="<?=$fecha;?> <?=$hora;?>" disabled="disabled" />
+						</div>
+						<input id="dateU" name="dateU" type="hidden" value="<?=$fecha;?> <?=$hora;?>" />
+						<input id="idU" name="idU" type="hidden" value="" />
+						<input id="tabla" name="tabla" type="hidden" value="produccion">
+					</div>
+					<div class="form-group">
+						<label for="idInv" class="control-label col-md-2">Codigo:</label>
+						<div class="col-md-4">
+							<input type="text" class="form-control" id="idInvU" name="idInvU" placeholder="Codigo:" data-validation="required">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="detalle" class="control-label col-md-2">Producto:</label>
+						<div class="col-md-10">
+							<input type="text" class="form-control" id="detalleU" name="detalleU" placeholder="Nombre Producto:" readonly="" >
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="cant" class="control-label col-md-2">Cantidad:</label>
+						<div class="col-md-4">
+							<input type="text" class="form-control" id="cantU" name="cantU" placeholder="Cantidad:" data-validation="required number" >
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="close" class="btn btn-danger" data-dismiss="modal">
+						<i class="fa fa-close" aria-hidden="true"></i>
+						<span>Cancelar</span>
+					</button>
+					<button type="submit" id="save" class="btn btn-success">
+						<i class="fa fa-check" aria-hidden="true"></i>
+						<span>Guardar Cambios</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<script>
+	$('#dataUpdate').on('hidden.bs.modal', function (e) {
+		// do something...
+		$('#formUpdate').get(0).reset();
+		//despliega('modulo/almacen/producto.php','contenido');
+	});
+
+	$('#dataUpdate').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Botón que activó el modal
+        var id = button.data('id'); // Extraer la información de atributos de datos
+        var idInv = button.data('idinv'); // Extraer la información de atributos de datos
+        var detalle = button.data('detalle'); // Extraer la información de atributos de datos
+        var cantidad = button.data('cantidad'); // Extraer la información de atributos de datos
+
+        var modal = $(this);
+        //modal.find('.modal-title').text('Modificar Empleado: '+nombre+' '+apP);
+        modal.find('.modal-body #idU').val(id);
+        modal.find('.modal-body #idInvU').val(idInv);
+        modal.find('.modal-body #detalleU').val(detalle);
+        modal.find('.modal-body #cantU').val(cantidad);
+
+    });
+
+	$(document).ready(function(){
 		function log( message ) {
 			//alert(message);
-			$( "input#detalle" ).val( message );
+			$( "input#detalleU" ).val( message );
 			//$( "input#idInv" ).val( message );
 			//$( "#log" ).scrollTop( 0 );
 		}
-		$( "#idInv" ).autocomplete({
-			source: "classes/searchProd.php",
+		$( "#idInvU" ).autocomplete({
+			source: "inc/produccion.php",
 			minLength: 2,
 			select: function( event, ui ) {
 				log(ui.item.id
 					/*ui.item ?
-					 "Selected: " + ui.item.value + " aka " + ui.item.id :
-					 "Nothing selected, input was " + this.value*/
-				);
+					"Selected: " + ui.item.value + " aka " + ui.item.id :
+					"Nothing selected, input was " + this.value*/
+					);
 			}
 		});
-		/* idealForm */
-		$('#form').idealForms();
-		/* Calendario */
-		$('#dateNac').datepicker({
-			dateFormat: 'yy-mm-dd',
-			changeMonth: true,
-			changeYear: true,
-			yearRange: 'c-40:c-0'
-		});
-		/* Validación */
-		jQuery("#form").validationEngine({
-			prettySelect	: true,
-			useSuffix		: "_chosen"
-			// scroll		: false,
-		});
-
 	});
 </script>
-<style>
-	form div.WrapCOD {
-		width: 100px;
-	}
-
-	form div.WrapDET {
-		width: 360px;
-	}
-	input#cant[type="text"] {
-		margin: 0px;
-		width: 6em;
-	}
-	input#detalle[type="text"] {
-		width: 29.5em;
-	}
-</style>
-<?PHP
-if($row['statusProd'] == 'Nueva Orden') {
-	?>
-	<form id="form" class="ideal-form" action="javascript:saveOrdenP('form','update.php')">
-		<fieldset>
-			<legend>E D I T A R&nbsp;&nbsp;&nbsp;O R D E N&nbsp;&nbsp;&nbsp;D E&nbsp;&nbsp;&nbsp;P R O D U C I &Oacute; N</legend>
-			<div class="idealWrap WrapDS">
-				<label class="date">Fecha Inicio: </label>
-				<input id="fecha" name="fecha" type="text" value="<?= $fecha; ?> <?= $hora; ?>" disabled="disabled"/>
-				<input id="date" name="date" type="hidden" value="<?= $fecha; ?> <?= $hora; ?>"/>
-				<input id="id" name="id" type="hidden" value="<?=$row['id_produccion']?>"/>
-			</div><!--End idealWrap-->
-			<div class="clearfix"></div>
-			<br>
-
-			<div class="idealWrap WrapCOD">
-                <label>Codigo: </label>
-				<input id="idInv" name="idInv" type="text" placeholder="Codigo"
-					   class="validate[required,maxSize[20],custom[onlyLetterSpacio]] text-input"
-					   value="<?= $row['id_inventario'] ?>"/>
-			</div><!--End idealWrap-->
-
-			<div class="idealWrap WrapDET">
-                <label>Detalle: </label>
-				<input id="detalle" name="detalle" type="text" placeholder="Nombre producto"
-					   value="<?= $row['detalle'] ?>" class="validate[required] text-input" autocomplete="off"/>
-			</div><!--End idealWrap-->
-
-			<div class="idealWrap WrapCOD">
-                <label>Cantidad: </label>
-				<input id="cant" name="cant" type="text" placeholder="Cantidad" value="<?= $row['cantidad'] ?>"
-					   class="validate[required, custom[number]] text-input"/>
-			</div><!--End idealWrap-->
-
-			<!--<div class="idealWrap WrapCOD">
-            <input id="vol" name="vol" type="text" placeholder="Volumen" value="" class="validate[required, custom[number]] text-input" />
-            </div><!--End idealWrap-->
-
-		</fieldset>
-		<div class="idealWrap" align="center">
-			<input type="reset" id="reset" value="Limpiar..."/>
-			<input type="submit" id="save" value="Guardar..."/>
-		</div>
-
-	</form>
-	<?PHP
-}else {
-	?>
-	<p>EN ESTE MOMENTO NO SE PUEDE EDITAR LA ORDEN</p>
-	<?PHP
-}
-?>
-<div class="clearfix"></div>

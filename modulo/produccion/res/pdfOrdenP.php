@@ -124,7 +124,7 @@
             <td align="right"><?=$row['precio'];?></td>
             <td align="center"><?=$row['descuento'];?></td>
             <td align="center"><?=$row['bonificacion'];?></td>
-            <td align="right"><?=number_format ( $row['precio']*$row['cantidad'] , 2 );;?></td>
+            <td align="right"><?=number_format ( $row['precio']*$row['cantidad'] , 2 );?></td>
         </tr>
         <?PHP
 			$total = $row['total'];

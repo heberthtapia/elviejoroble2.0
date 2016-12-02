@@ -200,6 +200,14 @@ function updateForm(idForm, p){
                     });
                 });
             }
+            if(data.tabla === 'produccion'){
+                $('#datos_ajax_update').html('<div class="alert alert-success" role="alert"><strong>Modificado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
+                    $('#datos_ajax_update').fadeOut(2000,function () {
+                        $('#dataUpdate').modal('hide').delay(7000);
+                        despliega('modulo/produccion/listTabla.php','listTabla');
+                    });
+                });
+            }
         },
         error: function(data){
             alert('Error al modificar datos');
@@ -216,9 +224,19 @@ function fDelete(idForm, p){
         async:false,
         data:{res:dato},
         success: function(data){
-            $('#dataDelete').modal('hide');
-            $('#dataDeleteCli').modal('hide');
-            despliega('modulo/'+data.tabla+'/listTabla.php','listTabla');
+            if(data.tabla === 'cliente'){
+                $('#dataDelete').modal('hide');
+                $('#dataDeleteCli').modal('hide');
+                despliega('modulo/'+data.tabla+'/listTabla.php','listTabla');
+            }
+            if(data.tabla === 'produccion'){
+                $('#datos_ajax_delete').html('<div class="alert alert-success" role="alert"><strong>Eliminado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
+                    $('#datos_ajax_delete').fadeOut(2000,function () {
+                        $('#dataDelete').modal('hide').delay(7000);
+                        despliega('modulo/produccion/listTabla.php','listTabla');
+                    });
+                });
+            }
         },
         error: function(data){
             alert('Error al eliminar');
