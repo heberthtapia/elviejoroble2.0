@@ -13,10 +13,10 @@ $srtQuery = $db->Execute($srtSql);
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="exampleModalLabel">Nueva Orden de Producción</h4>
+          <h4 class="modal-title" id="exampleModalLabel">Asignar Producción</h4>
         </div>
         <div class="modal-body">
-          <div id="datos_ajax"></div>
+          <div id="datos_ajax_import"></div>
 
           <div class="form-group">
             <label for="fecha" class="control-label col-md-2">Fecha:</label>
@@ -25,7 +25,7 @@ $srtQuery = $db->Execute($srtSql);
             </div>
             <input id="date" name="date" type="hidden" value="<?=$fecha;?> <?=$hora;?>" />
             <input id="idP" name="idP" type="hidden" value="" />
-            <input id="tabla" name="tabla" type="hidden" value="produccion">
+            <input id="tabla" name="tabla" type="hidden" value="inventarioPre">
           </div>
           <div class="form-group">
             <label for="idInv" class="control-label col-md-2">Codigo:</label>
@@ -100,7 +100,7 @@ $srtQuery = $db->Execute($srtSql);
         var cantidad = button.data('cantidad'); // Extraer la información de atributos de datos
 
         var modal = $(this);
-        //modal.find('.modal-title').text('Modificar Empleado: '+nombre+' '+apP);
+        modal.find('.modal-title').text('Asignar Orden de Producción: OR-P-'+id);
         modal.find('.modal-body #idP').val(id);
         modal.find('.modal-body #idInv').val(idInv);
         modal.find('.modal-body #detalle').val(detalle);

@@ -158,6 +158,14 @@ function despliega(p, div, id){
                     });
                 });
             }
+            if(data.tabla === 'inventarioPre'){
+                $('#datos_ajax_import').html('<div class="alert alert-success" role="alert"><strong>Asignado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
+                    $('#datos_ajax_import').fadeOut(2000,function () {
+                        $('#dataImport').modal('hide').delay(7000);
+                        despliega('modulo/produccion/listTabla.php','listTabla');
+                    });
+                });
+            }
         },
         error: function(data){
             alert('Error al guardar datos');

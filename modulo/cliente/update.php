@@ -19,12 +19,23 @@
 
 	//print_r($data);
 
-	/* ACTUALIZACION DE EMPLEADO */
+	/**
+	 * Actualiza el CLIENTE
+	 */
 
 	$strQuery = "UPDATE cliente SET nombre = '".$data->nameU."', apP = '".$data->paternoU."', apM = '".$data->maternoU."', phone = '".$data->fonoU."', celular = '".$data->celularU."', ";
 	$strQuery.= "nombreEmp = '".$data->nameEmpU."', email  = '".$data->emailU."', direccion = '".$data->addresU."', numero = '".$data->NroU."', coorX = '".$data->cxU."', coorY = '".$data->cyU."', ";
 	$strQuery.= "obser  = '".$data->obserU."', dateReg = '".$fecha.' '.$hora."' ";
-	$strQuery.= "WHERE id_cliente = '".$data->codClU."' ";
+	$strQuery.= "WHERE id_cliente = '".$data->codCliU."' ";
+
+	$sql = $db->Execute($strQuery);
+
+	/**
+	 * Actualiza el id del CLIENTE
+	 */
+
+	$strQuery = "UPDATE cliente SET id_cliente = '".$data->codClU."' ";
+	$strQuery.= "WHERE id_cliente = '".$data->codCliU."' ";
 
 	$sql = $db->Execute($strQuery);
 

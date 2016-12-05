@@ -86,7 +86,7 @@ $row = $str->FetchRow();
         var cantidad = button.data('cantidad'); // Extraer la información de atributos de datos
 
         var modal = $(this);
-        //modal.find('.modal-title').text('Modificar Empleado: '+nombre+' '+apP);
+        modal.find('.modal-title').text('Editar Orden de Producción: OR-P-'+id);
         modal.find('.modal-body #idU').val(id);
         modal.find('.modal-body #idInvU').val(idInv);
         modal.find('.modal-body #detalleU').val(detalle);

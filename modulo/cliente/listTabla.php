@@ -15,6 +15,8 @@ $db = NewADOConnection('mysqli');
 $db->Connect();
 
 $op = new cnFunction();
+
+$cargo = $_SESSION['cargo'];
 ?>
 <script type="text/javascript" language="javascript" class="init">
 

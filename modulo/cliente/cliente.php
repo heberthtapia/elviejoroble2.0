@@ -112,7 +112,7 @@ include 'delCliente.php';
             if($cargo!='adm'){
                 $sql.= "WHERE id_empleado = '".$_SESSION['idEmp']."' ";
             }
-            $sql.= "ORDER BY (dateReg) DESC ";
+            echo $sql.= "ORDER BY (dateReg) DESC ";
 
             $cont = 1;
 

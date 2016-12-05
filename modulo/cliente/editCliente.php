@@ -43,7 +43,7 @@ var id_cliente;
         var obser = button.data('obser');
 
         var modal = $(this);
-        //modal.find('.modal-title').text('Modificar cliente: '+nombre+' '+apP);
+        modal.find('.modal-title').text('Modificar cliente: '+nombre+' '+apP);
         modal.find('.modal-body #nameEmpU').val(nameEmp);
         modal.find('.modal-body #nameU').val(nombre);
         modal.find('.modal-body #paternoU').val(apP);
