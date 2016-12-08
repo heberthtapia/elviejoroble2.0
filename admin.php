@@ -232,31 +232,28 @@ if (isset($_POST['from']))
                             <span class="hidden-xs hidden-sm">Almacen</span>
                         </a>
                         <ul class="subnavegador">
-                            <!--<li><a href="#">
-                                    <i class="fa fa-plus-square-o" aria-hidden="true"></i>
-                                    <span class="hidden-xs hidden-sm">Nuevo Producto</span>
-                                </a>
-                            </li>-->
                             <li>
                                 <a href="#" onclick="despliega('modulo/almacen/producto.php','contenido')">
                                     <i class="fa fa-list" aria-hidden="true"></i>
-                                    <span class="hidden-xs hidden-sm">Lista de Productos</span>
+                                    <span class="hidden-xs hidden-sm">Lista de Productos en General</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" onclick="despliega('modulo/almacen/producto.php','contenido')">
+                                    <i class="fa fa-list" aria-hidden="true"></i>
+                                    <span class="hidden-xs hidden-sm">Lista de Productos por Preventista</span>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="#" class="desplegable">
-                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <i class="fa fa-industry" aria-hidden="true"></i>
                             <span class="hidden-xs hidden-sm">Producción</span>
                         </a>
                         <ul class="subnavegador">
-                            <li><a href="#">
-                                    <i class="fa fa-plus-square-o" aria-hidden="true"></i>
-                                    <span class="hidden-xs hidden-sm">Nueva Orden de Producción</span>
-                                </a>
-                            </li>
-                            <li><a href="#" onclick="despliega('modulo/produccion/produccion.php','contenido')">
+                            <li>
+                                <a href="#" onclick="despliega('modulo/produccion/produccion.php','contenido')">
                                     <i class="fa fa-list" aria-hidden="true"></i>
                                     <span class="hidden-xs hidden-sm">Ordenes de Producción</span>
                                 </a>

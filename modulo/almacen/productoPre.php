@@ -53,6 +53,58 @@ include 'delProducto.php';
     <div class="col-xs-12 col-sm-12 col-md-12">
         <h1 class="avisos" align="center"><strong>ALMACEN</strong></h1>
         <h2 class="avisos">Lista de Productos</h2>
+
+        <form id="formNew" action="javascript:saveForm('formNew','empleado/save.php')" class="" autocomplete="off" >
+        <div class="modal fade bs-example-modal-lg" id="dataRegister" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Nuevo Empleado <span class="fecha">Fecha: <?=$fecha;?> <?=$hora;?></span></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="datos_ajax"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="row">
+                                    <div class="col-md-3 form-group">
+                                        <label for="dep" class="sr-only">Lugar Exp.:</label>
+                                        <select id="dep" name="dep" class="form-control" data-validation="required">
+                                            <option value="" disabled selected hidden>Lugar Exp.</option>
+                                            <option value="lp">La Paz</option>
+                                            <option value="cbb">Cochabamba</option>
+                                            <option value="sz">Santa Cruz</option>
+                                            <option value="bn">Beni</option>
+                                            <option value="tr">Tarija</option>
+                                            <option value="pt">Potosi</option>
+                                            <option value="or">Oruro</option>
+                                            <option value="pd">Pando</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="close" class="btn btn-danger" data-dismiss="modal">
+                            <i class="fa fa-close" aria-hidden="true"></i>
+                            <span>Cancelar</span>
+                        </button>
+                        <button type="submit" id="save" class="btn btn-success">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            <span>Agregar Empleado</span>
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        </form>
+
         <div class="pull-right"><br>
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#dataRegister">
                 <i class="fa fa-plus" aria-hidden="true"></i>

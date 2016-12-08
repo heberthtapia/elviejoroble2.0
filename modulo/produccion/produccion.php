@@ -167,12 +167,26 @@ include 'delProduccion.php';
                                 <span></span>
                             </button>
 
+                            <?PHP
+                                if( $row[statusProd] == 'Cancelado' || $row[statusProd] == 'Nueva Orden'){
+                            ?>
+
+                            <button type ="button" class="btn btn-primary btn-sm terminar tooltipp" onClick="sProTerminado('<?=$row[0]?>');" title="Orden Terminada" disabled>
+                                <img src="images/iconos/asig.png" width="24" alt="Orden Terminada" />
+                                <span></span>
+                            </button>
+
+                            <?PHP
+                            }else{
+                            ?>
+
                             <button type ="button" class="btn btn-primary btn-sm terminar tooltipp" onClick="sProTerminado('<?=$row[0]?>');" title="Orden Terminada" >
                                 <img src="images/iconos/asig.png" width="24" alt="Orden Terminada" />
                                 <span></span>
                             </button>
 
                             <?PHP
+                            }
                                 if( $row[statusProd] == 'Terminado'){
                             ?>
 

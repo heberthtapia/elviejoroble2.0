@@ -162,6 +162,7 @@ function despliega(p, div, id){
                 $('#datos_ajax_import').html('<div class="alert alert-success" role="alert"><strong>Asignado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
                     $('#datos_ajax_import').fadeOut(2000,function () {
                         $('#dataImport').modal('hide').delay(7000);
+                        window.open('modulo/produccion/pdfOrdenAsig.php?res='+data.idP, '_blank');
                         despliega('modulo/produccion/listTabla.php','listTabla');
                     });
                 });

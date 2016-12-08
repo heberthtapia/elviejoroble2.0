@@ -43,7 +43,7 @@ $incp = strtoupper($file['apP']);
   <table class="page_header">
     <tr>
       <td style="width: 30%">Industrias “El Viejo Roble” s.r.l.</td>
-      <td style="width: 40%; text-align: center;"><strong>OR-P-<?=$op->ceros($orp[0],5);?></strong></td>
+      <td style="width: 40%; text-align: center;"><strong>OR-P-<?=$op->ceros($orp[0],2);?></strong></td>
       <td style="width: 30%; text-align:right;"><strong><?php echo date('d/m/Y'); ?></strong></td>
     </tr>
   </table>
@@ -59,7 +59,7 @@ $incp = strtoupper($file['apP']);
   <link rel="stylesheet" type="text/css" href="../../css/pdf.css"/>
   </page_footer>
 
-  <h4 align="center" style="font-size:26px;">ORDEN DE PRODUCCIÓN TERMINADA</h4>
+  <h4 align="center" style="font-size:26px;">ORDEN DE PRODUCCIÓN OR-P-<?=$op->ceros($orp[0],2);?> TERMINADA</h4>
   <table id="datos" style="border-collapse: collapse;">
     <tbody>
       <tr>
