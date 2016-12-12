@@ -239,7 +239,7 @@ if (isset($_POST['from']))
                                 </a>
                             </li>
                             <li>
-                                <a href="#" onclick="despliega('modulo/almacen/producto.php','contenido')">
+                                <a href="#" onclick="despliega('modulo/almacen/productoPre.php','contenido')">
                                     <i class="fa fa-list" aria-hidden="true"></i>
                                     <span class="hidden-xs hidden-sm">Lista de Productos por Preventista</span>
                                 </a>

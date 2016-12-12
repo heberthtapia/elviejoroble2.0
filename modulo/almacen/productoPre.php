@@ -51,60 +51,43 @@ include 'delProducto.php';
 ?>
 <div class="row" id="listTabla">
     <div class="col-xs-12 col-sm-12 col-md-12">
-        <h1 class="avisos" align="center"><strong>ALMACEN</strong></h1>
+        <h1 class="avisos" align="center"><strong>INVENTARIO POR PREVENTISTA</strong></h1>
         <h2 class="avisos">Lista de Productos</h2>
+        <br>
+        <div class="row">
+            <div class="col-sm-offset-3">
+                <form class="form-horizontal" action="javascript:saveForm('formNew','empleado/save.php')">
+                  <div class="form-group">
+                    <label for="preventista" class="col-sm-2 col-xs-2 control-label">Preventista</label>
+                    <div class="col-sm-4 col-xs-4">
+                        <select id="´pre" name="´pre" class="form-control" data-validation="required">
+                        <?PHP
+                            $sql = "SELECT * ";
+                            $sql.= "FROM empleado ";
+                            $sql.= "WHERE cargo = 'pre' ";
+                            $sql.= "ORDER BY (apP) ASC ";
 
-        <form id="formNew" action="javascript:saveForm('formNew','empleado/save.php')" class="" autocomplete="off" >
-        <div class="modal fade bs-example-modal-lg" id="dataRegister" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="gridSystemModalLabel">Nuevo Empleado <span class="fecha">Fecha: <?=$fecha;?> <?=$hora;?></span></h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div id="datos_ajax"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-9">
-                                <div class="row">
-                                    <div class="col-md-3 form-group">
-                                        <label for="dep" class="sr-only">Lugar Exp.:</label>
-                                        <select id="dep" name="dep" class="form-control" data-validation="required">
-                                            <option value="" disabled selected hidden>Lugar Exp.</option>
-                                            <option value="lp">La Paz</option>
-                                            <option value="cbb">Cochabamba</option>
-                                            <option value="sz">Santa Cruz</option>
-                                            <option value="bn">Beni</option>
-                                            <option value="tr">Tarija</option>
-                                            <option value="pt">Potosi</option>
-                                            <option value="or">Oruro</option>
-                                            <option value="pd">Pando</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            $srtQuery = $db->Execute($sql);
+                            if($srtQuery === false)
+                                die("failed");
 
+                            while( $row = $srtQuery->FetchRow()){
+                        ?>
+                            <option value="<?=$row[0]?>"><?=$row[3].' '.$row[4].' '.$row[2]?></option>
+                        <?PHP
+                        }
+                        ?>
+                        </select>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" id="close" class="btn btn-danger" data-dismiss="modal">
-                            <i class="fa fa-close" aria-hidden="true"></i>
-                            <span>Cancelar</span>
-                        </button>
-                        <button type="submit" id="save" class="btn btn-success">
-                            <i class="fa fa-check" aria-hidden="true"></i>
-                            <span>Agregar Empleado</span>
-                        </button>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-xs-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-default">Ver Inventario</button>
                     </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-        </form>
-
+                  </div>
+                </form>
+            </div>
+        </div>
         <div class="pull-right"><br>
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#dataRegister">
                 <i class="fa fa-plus" aria-hidden="true"></i>

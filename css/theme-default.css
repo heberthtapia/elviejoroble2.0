@@ -26,6 +26,10 @@ input.valid {
     box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
 }
 
+select.valid{
+	background-position: right 17px center;
+}
+
 /* File inputs with invalid value */
 input[type="file"].error {
     color: #b94a48;

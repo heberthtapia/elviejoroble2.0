@@ -42,6 +42,22 @@ $op = new cnFunction();
                 }
             ]
         });
+
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            //increaseArea: '100%' // optional
+          });
+
+        $('input').on('ifChecked', function(event){
+            id = $(this).attr('id');
+            statusEmp(id, 'Activo');
+        });
+        $('input').on('ifUnchecked',function(event){
+            id = $(this).attr('id');
+            statusEmp(id, 'Inactivo');
+        });
+
     });
     $.validate({
         lang: 'es',
@@ -50,7 +66,7 @@ $op = new cnFunction();
     });
     $('#obser').restrictLength( $('#max-length-element') );
 </script>
-   <div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="col-xs-12 col-sm-12 col-md-12">
         <h1 class="avisos" align="center"><strong>EMPLEADOS</strong></h1>
         <h2 class="avisos">Lista de Empleados</h2>
         <div class="pull-right"><br>
