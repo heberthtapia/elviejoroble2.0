@@ -56,11 +56,11 @@ include 'delProducto.php';
         <br>
         <div class="row">
             <div class="col-sm-offset-3">
-                <form class="form-horizontal" action="javascript:saveForm('formNew','empleado/save.php')">
+                <form id="listaEmp" class="form-horizontal" action="javascript:saveForm('formNew','empleado/save.php')">
                   <div class="form-group">
                     <label for="preventista" class="col-sm-2 col-xs-2 control-label">Preventista</label>
                     <div class="col-sm-4 col-xs-4">
-                        <select id="´pre" name="´pre" class="form-control" data-validation="required">
+                        <select id="pre" name="pre" class="form-control" data-validation="required">
                         <?PHP
                             $sql = "SELECT * ";
                             $sql.= "FROM empleado ";
@@ -70,10 +70,15 @@ include 'delProducto.php';
                             $srtQuery = $db->Execute($sql);
                             if($srtQuery === false)
                                 die("failed");
+                            $sw = 0;
 
                             while( $row = $srtQuery->FetchRow()){
+                                if($sw == 0){
+                                    $sw = 1;
+                                    $idemp = $row[0];
+                                }
                         ?>
-                            <option value="<?=$row[0]?>"><?=$row[3].' '.$row[4].' '.$row[2]?></option>
+                            <option value="<?=$row[0]?>"><?=$row[2].' '.$row[3].' '.$row[4]?></option>
                         <?PHP
                         }
                         ?>
@@ -82,16 +87,27 @@ include 'delProducto.php';
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-xs-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-default">Ver Inventario</button>
+                      <button type="button" class="btn btn-default" onclick="listaInv('listaEmp');">Ver Inventario</button>
                     </div>
                   </div>
                 </form>
             </div>
         </div>
+        <?PHP
+            $sqle = "SELECT * ";
+            $sqle.= "FROM empleado ";
+            $sqle.= "WHERE id_empleado = $idemp ";
+
+            $srtQuery = $db->Execute($sqle);
+
+            $rowe = $srtQuery->FetchRow();
+        ?>
+        <div id="lista" >
+        <h2 class="avisos">Preventista: <?=ucfirst($rowe['nombre']).'&nbsp;'.ucfirst($rowe['apP']).'&nbsp;'.ucfirst($rowe['apM']);?></h2>
         <div class="pull-right"><br>
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#dataRegister">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                <span>Agregar Producto</span>
+            <button type="button" class="btn btn-success" onclick="window.open('modulo/almacen/pdfInvPre.php?res=<?=$rowe[0];?>', '_blank');">
+                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                <span>Ver PDF</span>
             </button>
         </div>
         <div class="clearfix"></div>
@@ -101,20 +117,19 @@ include 'delProducto.php';
             <tr>
                 <th>Nº</th>
                 <th>Fecha</th>
-                <th>Codigo</th>
+                <th>Producto</th>
                 <th>Detalle</th>
-                <th>Volumen</th>
                 <th>Cantidad</th>
-                <th>Precio C/F</th>
-                <th>Precio S/F</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
             <?PHP
-            $sql	 = "SELECT * ";
-            $sql	.= "FROM inventario ";
-            $sql	.= "ORDER BY (dateReg) DESC ";
+            $sql	 = "SELECT p.dateReg, p.id_inventario, i.detalle, p.cantidad ";
+            $sql	.= "FROM inventarioPre AS p, inventario AS i, empleado AS e ";
+            $sql    .= "WHERE p.id_inventario =  i.id_inventario ";
+            $sql    .= "AND p.id_empleado = e.id_empleado ";
+            $sql    .= "AND p.id_empleado = $idemp ORDER BY(p.id_inventario) ASC";
 
             $cont = 1;
 
@@ -127,23 +142,12 @@ include 'delProducto.php';
                 ?>
                 <tr id="tb<?=$row[0]?>">
                     <td align="center"><?=$cont++;?></td>
-                    <td align="center"><?=$row['dateReg']?></td>
-                    <td align="center" style="text-transform: uppercase"><?=$row['id_inventario'];?></td>
-                    <td align="center" style="text-transform: uppercase"><?=$row['detalle'];?></td>
-                    <td align="center"><?=$row['volumen'];?></td>
-                    <td align="center"><?=$row['cantidad'];?></td>
-                    <td align="center"><?=$row['precioCF'];?></td>
-                    <td align="center"><?=$row['precioSF'];?></td>
+                    <td align="center"><?=$row[0]?></td>
+                    <td align="center" style="text-transform: uppercase"><?=$row[1];?></td>
+                    <td align="center" style="text-transform: uppercase"><?=$row[2];?></td>
+                    <td align="center"><?=$row[3];?></td>
                     <td width="15%">
-                        <div class="btn-group" style="width: 169px">
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataUpdate" data-detalle="<?=$row['detalle']?>" data-idInv="<?=$row['id_inventario']?>" data-cant="<?=$row['cantidad']?>" data-vol="<?=$row['volumen']?>" data-precioCF="<?=$row['precioCF']?>" data-precioSF="<?=$row['precioSF']?>">
-                                <i class='glyphicon glyphicon-edit'></i> Modificar
-                                </button>
 
-                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#dataDelete" data-id="<?=$row['id_inventario']?>"  >
-                                    <i class='glyphicon glyphicon-trash'></i> Eliminar
-                                </button>
-                        </div>
                     </td>
                 </tr>
                 <?PHP
@@ -154,16 +158,15 @@ include 'delProducto.php';
             <tr>
                 <th>Nº</th>
                 <th>Fecha</th>
-                <th>Codigo</th>
+                <th>Producto</th>
                 <th>Detalle</th>
-                <th>Volumen</th>
                 <th>Cantidad</th>
-                <th>Precio C/F</th>
-                <th>Precio S/F</th>
                 <th>Acciones</th>
             </tr>
             </tfoot>
         </table>
+
+        </div>
 
     </div>
 </div>

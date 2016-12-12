@@ -129,8 +129,8 @@ include 'delProduccion.php';
                     <td align="center"><?=$cont;?></td>
                     <td align="center"><?=$row['dateReg']?></td>
                     <td align="center">OR-P-<?=$row['id_produccion'];?></td>
-                    <td align="center"><?=$row['id_inventario'];?></td>
-                    <td align="center"><?=$row['detalle'];?></td>
+                    <td align="center" style="text-transform: uppercase"><?=$row['id_inventario'];?></td>
+                    <td align="center" style="text-transform: uppercase"><?=$row['detalle'];?></td>
                     <td align="center"><?=$row['cantidad'];?></td>
                     <td align="center"><?=$row['dateInc'];?></td>
                     <td align="center"><?=$row['dateFin'];?></td>

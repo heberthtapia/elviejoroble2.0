@@ -232,9 +232,6 @@ var id_empleado;
     $('#dataPreview').on('show.bs.modal', function() {
         //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
         initMapU();
-        $( "#mapaP" ).animate({
-        	width: "345px"
-	    }, 500, "linear");
     });
 
     $('#dataPreview').on('hidden.bs.modal', function (e) {
@@ -395,6 +392,14 @@ var id_empleado;
                                         <input id="checksEmailU" name="checksEmailU" type="checkbox" checked disabled="" />
                                         <label>Enviar datos por E-mail</label>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <button type="button"  class="btn btn-primary btn-sm" onclick="initMapU();" >
+                                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                                        <span>Cargar Mapa</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>

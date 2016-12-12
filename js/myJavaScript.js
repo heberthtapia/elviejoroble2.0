@@ -253,6 +253,26 @@ function fDelete(idForm, p){
     });
 }
 
+function listaInv(idForm){
+    var dato = JSON.stringify( $('#'+idForm).serializeObject() );
+    $.ajax({
+        url: "modulo/empleado/idListaInv.php",
+        type: 'post',
+        dataType: 'json',
+        async:false,
+        data:{res:dato},
+        beforeSend: function(data){
+            //$("#"+div).html('<div id="load" align="center"><p>Cargando contenido. Por favor, espere ...</p></div>');
+        },
+        success: function(data){
+            despliega('modulo/empleado/listaInv.php', 'lista', data.id);
+        },
+        error: function(data){
+            alert('error al mostrar');
+        }
+    });
+}
+
 function obtenerCoor(id){
     $.ajax({
         url: "modulo/empleado/obtenerCoor.php",

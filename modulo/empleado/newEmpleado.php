@@ -370,6 +370,14 @@ $hora = $op->Time();
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <button type="button"  class="btn btn-primary btn-sm" onclick="initMap();" >
+                                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                                    <span>Cargar Mapa</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
