@@ -50,7 +50,7 @@ function despliega(p, div, id){
         cache: false,
         data: 'id='+id,
         beforeSend: function(data){
-            $("#"+div).html('<div id="load" align="center"><p>Cargando contenido. Por favor, espere ...</p></div>');
+            $("#"+div).html('<div id="load" align="center" class="alert alert-success" role="alert"><p>Cargando contenido. Por favor, espere ...</p></div>');
         },
         success: function(data){
             $("#"+div).fadeOut(1000,function(){
