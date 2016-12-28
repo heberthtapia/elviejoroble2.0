@@ -1,11 +1,11 @@
-<?PHP	
+<?PHP
 	include '../../adodb5/adodb.inc.php';
 	include '../../classes/function.php';
-	
+
 	$db = NewADOConnection('mysqli');
 	//$db->debug = true;
-	$db->Connect();	
-	
+	$db->Connect();
+
 	$op = new cnFunction();
 ?>
 <div class="titulo">
@@ -35,15 +35,15 @@
       $sql = "SELECT * ";
       $sql.= "FROM empleado ";
       $sql.= "ORDER BY (dateReg) DESC ";
-      
+
       $cont = 0;
-      
+
       $srtQuery = $db->Execute($sql);
 	  if($srtQuery === false)
 	  	die("failed");
-	  
+
     while( $row = $srtQuery->FetchRow()){
-	
+
     ?>
       <tr id="tb<?=$row[0]?>">
           <td class="last center"><?=$cont;?></td>
@@ -53,13 +53,13 @@
 			  	if( $row['foto'] != '' )
                 {
               ?>
-                  <img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/photos/<?=($row['foto']);?>&amp;w=100&amp;h=50&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
-                              
+                  <img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/<?=($row['foto']);?>&amp;w=100&amp;h=50&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
+
               <?PHP
                  }
                  else{
               ?>
-              	  <img class="thumb" src="thumb/phpThumb.php?src=../images/sin_imagen.jpg&amp;w=100&amp;h=50&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">                  
+              	  <img class="thumb" src="thumb/phpThumb.php?src=../images/sin_imagen.jpg&amp;w=100&amp;h=50&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
               <?PHP
                   }
               ?>
@@ -70,47 +70,47 @@
           <td class="last center"><?=$op->toSelect($row['cargo']);?></td>
           <td>
           	<div class="accEmp">
-                          
+
               <div class="accion">
                 <a href="javascript:void(0);" onclick="open_win('modulo/empleado/previewEmp.php', '', '710', '580', '<?=$row['id_empleado']?>');">
                     <img src="images/icono/preview.png" width="32" alt="" title="Vista Previa" />
                 </a>
               </div><!--End accion-->
-              
+
               <div class="accion">
                 <a href="javascript:void(0);" onClick="open_win('modulo/empleado/editEmp.php', '', '710', '625', '<?=$row['id_empleado']?>');">
                     <img src="images/icono/edit1.png" width="32" alt="" title="Editar" />
                 </a>
               </div><!--End accion-->
-              
+
               <div class="accion">
                 <a href="javascript:void(0);" onclick="javascript:deleteRow('delEmp.php','<?=$row['id_empleado']?>','empleado');">
                     <img src="images/icono/recycle.png" width="32" height="32" alt="" title="Eliminar" />
                 </a>
               </div><!--End accion-->
-              
+
               <div class="accion check">
-              	<form name="myform<?=$row[0]?>" class="status">                  		
-					          <?PHP									
-                        if( $row['status'] == 'Activo' ){							
-                    ?>				
+              	<form name="myform<?=$row[0]?>" class="status">
+					          <?PHP
+                        if( $row['status'] == 'Activo' ){
+                    ?>
                     <label><input name="checks" type="checkbox" checked="checked" onclick="status(<?=$row['id_empleado']?>,'empleado');" /></label>
                     <?PHP
                     }else{
-                    ?>                                
+                    ?>
                     <label><input name="checks" type="checkbox" onclick="status(<?=$row['id_empleado']?>,'empleado');" /></label>
-                    <?PHP		
+                    <?PHP
                         }
-                    ?>		
+                    ?>
                 </form>
               </div><!--End accion-->
-              <div class="cleafix"></div>           
+              <div class="cleafix"></div>
            	</div><!--End accEmp-->
-            
+
           </td>
-      </tr>                  
-    <?PHP		
-      }                        
+      </tr>
+    <?PHP
+      }
     ?>
   </tbody>
   <tfoot>
@@ -131,27 +131,27 @@
 <div class="clearfix"></div>
 
 <script type="text/javascript" charset="utf-8">
-//========DataTables========	
-var oTable;	
-$(document).ready(function() { 		
+//========DataTables========
+var oTable;
+$(document).ready(function() {
 
-	deleteRow = function(p, idTr, table){ 
+	deleteRow = function(p, idTr, table){
 
 	var respuesta = confirm("SEGURO QUE DESEA ELIMINAR EL "+" ' "+table.toUpperCase()+" ' ");
-	 	  
-	if(respuesta){	
+
+	if(respuesta){
 		var i = 1;
 		$('#tb'+idTr).addClass('row_selected');
 		var anSelected = fnGetSelected( oTable );
-		
+
 		if ( anSelected.length !== 0 ) {
 			oTable.fnDeleteRow( anSelected[0] );
 			deleteRowBD(p, idTr, table);
 		}
-		
+
 	}
   }
-			
+
   /* Init the table */
   oTable = $('#tableList').dataTable({
 	  "bFilter": true,
@@ -181,7 +181,7 @@ $(document).ready(function() {
 			"buttonText": "&nbsp;",
 			"bRestore": true,
 			"sAlign": "right"
-		  }					
+		  }
 });
 
 });

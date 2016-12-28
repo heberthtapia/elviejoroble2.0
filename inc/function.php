@@ -1,5 +1,8 @@
 <?php
+session_start();
+
 class cnFunction{
+
 	public function toSelect($op){
         switch( $op ){
 			case "adm": $select = 'Administrador';

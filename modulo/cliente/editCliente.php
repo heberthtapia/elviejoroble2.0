@@ -43,7 +43,7 @@ var id_cliente;
         var obser = button.data('obser');
 
         var modal = $(this);
-        modal.find('.modal-title').text('Modificar cliente: '+nombre+' '+apP);
+        modal.find('.modal-title').text('Modificar cliente: '+capitalize(nombre)+' '+capitalize(apP));
         modal.find('.modal-body #nameEmpU').val(nameEmp);
         modal.find('.modal-body #nameU').val(nombre);
         modal.find('.modal-body #paternoU').val(apP);
@@ -65,12 +65,28 @@ var id_cliente;
         modal.find('.modal-body #obserU').val(obser);
 
         if(foto !== ''){
-            modal.find('.modal-body #fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/photos/'+foto+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+            modal.find('.modal-body #fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/'+foto+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
         }else {
-            modal.find('.modal-body #fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/photos/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+            modal.find('.modal-body #fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
         }
         //$('.alert').hide();//Oculto alert
     });
+
+    function capitalize(string){
+        var words = string.split(" ");
+        var output = "";
+        for (i = 0 ; i < words.length; i ++){
+        lowerWord = words[i].toLowerCase();
+        lowerWord = lowerWord.trim();
+        capitalizedWord = lowerWord.slice(0,1).toUpperCase() + lowerWord.slice(1);
+        output += capitalizedWord;
+        if (i != words.length-1){
+        output+=" ";
+        }
+        }//for
+        output[output.length-1] = '';
+        return output;
+    }
 
     //VARIABLES GENERALES
     //DECLARAS FUERA DEL READY DE JQUERY
@@ -347,7 +363,7 @@ var id_cliente;
         //$('#file_upload').uploadify('cancel', '*');
         $('#saveU, #closeU').removeAttr('disabled','disabled');
         $('#subirU').find('span').text("Subir Foto");
-        $('#fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/photos/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+        $('#fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
     });
 
 
@@ -467,7 +483,7 @@ var id_cliente;
                                 <input id="buscarU" name="buscarU" type="text" placeholder="Buscar en Google Maps" value="" class="form-control" autocomplete="off"/>
                             </div>
                             <div class="col-md-3  form-group">
-                                <button type="button" id="search" class="btn btn-primary" >
+                                <button type="button" id="searchU" class="btn btn-primary" >
                                     <i class="fa fa-search" aria-hidden="true"></i>
                                     <span>Buscar</span>
                                 </button>

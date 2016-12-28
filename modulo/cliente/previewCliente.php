@@ -65,9 +65,9 @@ var id_cliente;
         modal.find('.modal-body #obserU').val(obser);
 
         if(foto !== ''){
-            modal.find('.modal-body #fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/photos/'+foto+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+            modal.find('.modal-body #fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/'+foto+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
         }else {
-            modal.find('.modal-body #fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/photos/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+            modal.find('.modal-body #fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
         }
         //$('.alert').hide();//Oculto alert
     });
@@ -79,7 +79,7 @@ var id_cliente;
     var marcadores_bd=[];
     var mapa = null; //VARIABLE GENERAL PARA EL MAPA
 
-    
+
    function initMapPre(){
         /* GOOGLE MAPS */
         var formulario = $('#formPreview');
@@ -283,7 +283,7 @@ var id_cliente;
         //$('#file_upload').uploadify('cancel', '*');
         $('#saveU, #closeU').removeAttr('disabled','disabled');
         $('#subirU').find('span').text("Subir Foto");
-        $('#fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/photos/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+        $('#fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
     });
 
 
@@ -303,10 +303,10 @@ var id_cliente;
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="gridSystemModalLabel">Modificar Cliente <span class="fecha">Fecha: <?=$fecha;?> <?=$hora;?></span></h4>
+                <h4 class="modal-title" id="gridSystemModalLabel">Vista Previa<span class="fecha">Fecha: <?=$fecha;?> <?=$hora;?></span></h4>
             </div>
             <div class="modal-body">
-                
+
                 <div class="row">
                     <input id="date" name="date" type="hidden" value="<?=$fecha;?> <?=$hora;?>" />
                     <input id="tabla" name="tabla" type="hidden" value="cliente">
@@ -439,7 +439,7 @@ var id_cliente;
                         <textarea id="obserU" name="obserU" cols="2" placeholder="Observaciones" class="form-control" disabled=""></textarea>
                     </div>
                 </div>
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" id="closeU" class="btn btn-success" data-dismiss="modal">

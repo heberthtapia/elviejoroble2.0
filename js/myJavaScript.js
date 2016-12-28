@@ -296,11 +296,11 @@ function obtenerCoor(id){
  /* RECARGA IMAGEN */
 
  function recargaImg(img, mod){
-    $('#foto').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/'+mod+'/uploads/photos/'+img+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+    $('#foto').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/'+mod+'/uploads/'+img+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
 }
 
 function recargaImgU(img, mod){
-    $('#fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/'+mod+'/uploads/photos/'+img+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+    $('#fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/'+mod+'/uploads/'+img+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
 }
 
 function closeWebcam(){
@@ -724,4 +724,19 @@ function cancelarPedidoEdit(){
     }
 });
   return resp;
+}
+/**
+ * [pad aumenta ceros a la izquierda]
+ * @param  {[type]} n      [description]
+ * @param  {[type]} length [description]
+ * @return {[type]}        [description]
+ */
+function pad (n, length) {
+    var  n = n.toString();
+    l=n.length;
+    while(l!=0){
+        l--;
+         n = "0" + n;
+     }
+return n;
 }

@@ -44,8 +44,8 @@ if($info['mime'] != 'image/jpeg'){
 }
 
 // Moving the temporary file to the originals folder:
-rename($original,'uploads/photos/'.$filename);
-$original = 'uploads/photos/'.$filename;
+rename($original,'uploads/'.$filename);
+$original = 'uploads/'.$filename;
 
 // INSERTAR LA IMAGEN A LA BASE DE DATOS
 

@@ -205,6 +205,21 @@ $hora = $op->Time();
     $('#dataRegister').on('show.bs.modal', function() {
         //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
         initMap();
+        function lastId(){
+            $.ajax({
+                url: 'inc/lastId.php',
+                type: 'post',
+                cache: false,
+                success: function(data){
+                    idCod = $('input#codCl').val();
+                    n = pad(data,2);
+                    f = idCod+n;
+                    $('input#codCl').val(f);
+                    $('input#codCli').val(f);
+                }
+            });
+        }
+        lastId();
     });
 
     $('#dataRegister').on('hidden.bs.modal', function (e) {
@@ -214,7 +229,7 @@ $hora = $op->Time();
         //$('#file_upload').uploadify('cancel', '*');
         $('#save, #close').removeAttr('disabled','disabled');
         $('#subir').text("Subir Foto");
-        $('#foto').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/photos/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+        $('#foto').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
     });
 </script>
 <style type="text/css">
@@ -243,8 +258,10 @@ $hora = $op->Time();
                 		<div class="row">
                             <div class="col-md-4 form-group">
                                 <label for="codCl" class="sr-only">Cod. Clinete:</label>
-                                <input id="codCl" name="codCl" type="text" placeholder="Cod. Cliente" class="form-control" value="<?=$_SESSION['inc'].''.$op->ceros($NumRow[0],2);?>" readonly />
-                                <input id="codCli" name="codCli" type="hidden" value="<?=$_SESSION['inc'].''.$op->ceros($NumRow[0],2);?>"/>
+
+                                <input id="codCl" name="codCl" type="text" placeholder="Cod. Cliente" class="form-control" value="<?=$_SESSION['inc'];?>" readonly />
+
+                                <input id="codCli" name="codCli" type="hidden" value="<?=$_SESSION['inc']?>"/>
                             </div>
                             <div class="col-md-8 form-group">
                                 <label for="nameEmp" class="sr-only">Nombre Negocio:</label>
@@ -269,7 +286,7 @@ $hora = $op->Time();
 
                     <div class="col-md-3" align="center">
                         <div id="foto" class="form-group">
-                            <img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/photos/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
+                            <img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
                         </div>
                     </div>
                 </div>

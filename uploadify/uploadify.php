@@ -41,7 +41,7 @@ if (!empty($_FILES)) {
 
 	$tempFile = $_FILES['Filedata']['tmp_name'];
 	//$targetPath = $_SERVER['DOCUMENT_ROOT'] . $targetFolder;
-	$targetPath = '../modulo/'.$targetFolder.'/uploads/photos';
+	$targetPath = '../modulo/'.$targetFolder.'/uploads';
 	$targetFile = rtrim($targetPath,'/') . '/' . $name;//$_FILES['Filedata']['name'];
 
 	// Validate the file type
