@@ -257,9 +257,9 @@ $hora = $op->Time();
 					<div id="datos_ajax"></div>
 
 
-      	<div id="foto">
-        	<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/photos/sin_imagen.jpg&amp;w=90&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
-        </div>
+		  <div id="foto">
+			<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/photos/sin_imagen.jpg&amp;w=90&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
+		</div>
 
 					<div class="form-group">
 						<label for="fecha" class="control-label">Fecha:</label>
@@ -281,130 +281,130 @@ $hora = $op->Time();
 					</div>
 
 
-        <div class="idealWrap WrapC">
-        <label class="fono">Cargo: </label>
-        <select data-placeholder="Seleccione" id="cargo" name="cargo" title="Seleccione" class="chosen-select validate[required]">
-        	<option value=""></option>
-            <option value="adm">Administrador</option>
-            <option value="alm">Almacen</option>
-            <option value="con">Contador</option>
-            <option value="pre">Preventista</option>
-        </select>
-        </div><!--End idealWrap-->
-        <div class="clearfix"></div>
+		<div class="idealWrap WrapC">
+		<label class="fono">Cargo: </label>
+		<select data-placeholder="Seleccione" id="cargo" name="cargo" title="Seleccione" class="chosen-select validate[required]">
+			<option value=""></option>
+			<option value="adm">Administrador</option>
+			<option value="alm">Almacen</option>
+			<option value="con">Contador</option>
+			<option value="pre">Preventista</option>
+		</select>
+		</div><!--End idealWrap-->
+		<div class="clearfix"></div>
 
-        <div class="idealWrap Wrap">
-        <input id="codUser" name="codUser" type="text" placeholder="Usuario" value="" class="validate[required,custom[onlyLetterNumber],maxSize[20],ajax[ajaxUserCallPhp]] text-input" />
-        </div><!--End idealWrap-->
+		<div class="idealWrap Wrap">
+		<input id="codUser" name="codUser" type="text" placeholder="Usuario" value="" class="validate[required,custom[onlyLetterNumber],maxSize[20],ajax[ajaxUserCallPhp]] text-input" />
+		</div><!--End idealWrap-->
 
-  		<div class="idealWrap Wrap">
-        <input id="password" name="password" type="text" placeholder="Contraseña" value="" />
-        <input type="button" id="genera" value="Generar" onclick="generaPass('password');"/>
-        </div><!--End idealWrap-->
-        <div class="clearfix"></div>
+		  <div class="idealWrap Wrap">
+		<input id="password" name="password" type="text" placeholder="Contraseña" value="" />
+		<input type="button" id="genera" value="Generar" onclick="generaPass('password');"/>
+		</div><!--End idealWrap-->
+		<div class="clearfix"></div>
 
-        <div class="idealWrap Wrap">
-        <input id="name" name="name" type="text" placeholder="Nombre" value="" class="validate[required] text-input" autocomplete="off"  />
-        </div><!--End idealWrap-->
+		<div class="idealWrap Wrap">
+		<input id="name" name="name" type="text" placeholder="Nombre" value="" class="validate[required] text-input" autocomplete="off"  />
+		</div><!--End idealWrap-->
 
-        <div class="idealWrap Wrap">
-        <input id="paterno" name="paterno" type="text" placeholder="Ap. Paterno" value="" class="validate[required] text-input" />
-        </div><!--End idealWrap-->
+		<div class="idealWrap Wrap">
+		<input id="paterno" name="paterno" type="text" placeholder="Ap. Paterno" value="" class="validate[required] text-input" />
+		</div><!--End idealWrap-->
 
-        <div class="idealWrap Wrap">
-        <input id="materno" name="materno" type="text" placeholder="Ap. Materno" value="" class="validate[required] text-input" />
-        </div><!--End idealWrap-->
-        <div class="clearfix"></div>
+		<div class="idealWrap Wrap">
+		<input id="materno" name="materno" type="text" placeholder="Ap. Materno" value="" class="validate[required] text-input" />
+		</div><!--End idealWrap-->
+		<div class="clearfix"></div>
 
-        <div class="idealWrap WrapF">
-        <input id="ci" name="ci" type="text" placeholder="N° C.I." value="" class="validate[required,custom[integer1],ajax[ajaxCiCallPhp]] text-input" />
-        </div><!--End idealWrap-->
+		<div class="idealWrap WrapF">
+		<input id="ci" name="ci" type="text" placeholder="N° C.I." value="" class="validate[required,custom[integer1],ajax[ajaxCiCallPhp]] text-input" />
+		</div><!--End idealWrap-->
 
-        <div class="idealWrap WrapCD">
-        <select data-placeholder="Departamento" id="dep" name="dep" title="Seleccione" class="chosen-select validate[required]">
-        	<option value=""></option>
-            <option value="lp">La Paz</option>
-            <option value="cbb">Cochabamba</option>
-            <option value="sz">Santa Cruz</option>
-            <option value="bn">Beni</option>
-            <option value="tr">Tarija</option>
-            <option value="pt">Potosi</option>
-            <option value="or">Oruro</option>
-            <option value="pd">Pando</option>
-        </select>
-        </div><!--End idealWrap-->
+		<div class="idealWrap WrapCD">
+		<select data-placeholder="Departamento" id="dep" name="dep" title="Seleccione" class="chosen-select validate[required]">
+			<option value=""></option>
+			<option value="lp">La Paz</option>
+			<option value="cbb">Cochabamba</option>
+			<option value="sz">Santa Cruz</option>
+			<option value="bn">Beni</option>
+			<option value="tr">Tarija</option>
+			<option value="pt">Potosi</option>
+			<option value="or">Oruro</option>
+			<option value="pd">Pando</option>
+		</select>
+		</div><!--End idealWrap-->
 
-        <div class="idealWrap WrapN">
-        <input id="dateNac" name="dateNac" type="text" placeholder="Fecha Nac." value="" class="validate[required,custom[date]] text-input datepicker" />
-        </div><!--End idealWrap-->
+		<div class="idealWrap WrapN">
+		<input id="dateNac" name="dateNac" type="text" placeholder="Fecha Nac." value="" class="validate[required,custom[date]] text-input datepicker" />
+		</div><!--End idealWrap-->
 
-        <div class="idealWrap WrapFo">
-        <input id="fono" name="fono" type="text" placeholder="Telefono" value="" class="validate[custom[phone]] text-input" />
-        </div><!--End idealWrap-->
+		<div class="idealWrap WrapFo">
+		<input id="fono" name="fono" type="text" placeholder="Telefono" value="" class="validate[custom[phone]] text-input" />
+		</div><!--End idealWrap-->
 
-        <div class="idealWrap WrapFo">
-        <input id="celular" name="celular" type="text" placeholder="Celular" value="" class="validate[required,custom[celular]] text-input" />
-        </div><!--End idealWrap-->
-        <div class="clearfix"></div>
+		<div class="idealWrap WrapFo">
+		<input id="celular" name="celular" type="text" placeholder="Celular" value="" class="validate[required,custom[celular]] text-input" />
+		</div><!--End idealWrap-->
+		<div class="clearfix"></div>
 
-        <div class="idealWrap WrapBS">
-        <input id="buscar" name="buscar" type="text" placeholder="Buscar" value="" autocomplete="off"  />
-        </div><!--End idealWrap-->
-        <div class="idealWrap WrapB">
-        <input id="search" name="search" type="button" value="Buscar" />
-        </div><!--End idealWrap-->
-        <div class="clearfix"></div>
+		<div class="idealWrap WrapBS">
+		<input id="buscar" name="buscar" type="text" placeholder="Buscar" value="" autocomplete="off"  />
+		</div><!--End idealWrap-->
+		<div class="idealWrap WrapB">
+		<input id="search" name="search" type="button" value="Buscar" />
+		</div><!--End idealWrap-->
+		<div class="clearfix"></div>
 
-        <div class="idealWrap WrapCR">
-        <input id="addresC" name="addresC" type="text" placeholder="Detalle Direcci&oacute;n" value="" class="validate[required] text-input" />
-        </div><!--End idealWrap-->
-        <div class="clearfix"></div>
+		<div class="idealWrap WrapCR">
+		<input id="addresC" name="addresC" type="text" placeholder="Detalle Direcci&oacute;n" value="" class="validate[required] text-input" />
+		</div><!--End idealWrap-->
+		<div class="clearfix"></div>
 
-        <div class="idealWrap WrapCR">
-        <input id="cx" name="cx" type="text" placeholder="Coordenada X" value="" readonly class="validate[required] text-input"/>
-        </div><!--End idealWrap-->
+		<div class="idealWrap WrapCR">
+		<input id="cx" name="cx" type="text" placeholder="Coordenada X" value="" readonly class="validate[required] text-input"/>
+		</div><!--End idealWrap-->
 
-        <div class="idealWrap WrapCR">
-        <input id="cy" name="cy" type="text" placeholder="Coordenada Y" value="" readonly class="validate[required] text-input"/>
-        </div><!--End idealWrap-->
-        <div class="clearfix"></div>
+		<div class="idealWrap WrapCR">
+		<input id="cy" name="cy" type="text" placeholder="Coordenada Y" value="" readonly class="validate[required] text-input"/>
+		</div><!--End idealWrap-->
+		<div class="clearfix"></div>
 
-        <div class="idealWrap WrapCR">
-        <input id="emailC" name="emailC" type="text" placeholder="Correo Electronico" value="" class="validate[required, custom[email]] text-input" />
-        </div><!--End idealWrap-->
-        <div class="clearfix"></div>
+		<div class="idealWrap WrapCR">
+		<input id="emailC" name="emailC" type="text" placeholder="Correo Electronico" value="" class="validate[required, custom[email]] text-input" />
+		</div><!--End idealWrap-->
+		<div class="clearfix"></div>
 
-        <div class="idealWrap WrapLabel">
-        <label><input id="checksEmail" name="checksEmail" type="checkbox" checked />Enviar datos por E-mail</label>
-        </div><!--End idealWrap-->
-        <div class="clearfix"></div>
+		<div class="idealWrap WrapLabel">
+		<label><input id="checksEmail" name="checksEmail" type="checkbox" checked />Enviar datos por E-mail</label>
+		</div><!--End idealWrap-->
+		<div class="clearfix"></div>
 
-        <div id="mapa"></div><!--End mapa-->
-        <div class="clearfix"></div>
+		<div id="mapa"></div><!--End mapa-->
+		<div class="clearfix"></div>
 
-        <div class="idealWrap">
-        <textarea id="obser" name="obser" cols="2" placeholder="Observaciones" class="validate[custom[onlyLetterSp]]"></textarea>
-        </div><!--End idealWrap-->
+		<div class="idealWrap">
+		<textarea id="obser" name="obser" cols="2" placeholder="Observaciones" class="validate[custom[onlyLetterSp]]"></textarea>
+		</div><!--End idealWrap-->
 
-        <div class="idealWrap uploadTitle">
-          <label class="labelWebcam">
-          	<p>Capturar Foto haga clik:</p> <a onclick="openWebCam()" >Aqu&iacute;</a>
-          </label>
-          <div class="clearfix"></div>
-          <label class="labelUpload">
-          	<p>Subir Foto haga clik:</p> <a class="openUpload" >Aqu&iacute;</a>
-          </label>
-        </div><!--End idealWrap-->
-        <div class="clearfix"></div>
+		<div class="idealWrap uploadTitle">
+		  <label class="labelWebcam">
+			  <p>Capturar Foto haga clik:</p> <a onclick="openWebCam()" >Aqu&iacute;</a>
+		  </label>
+		  <div class="clearfix"></div>
+		  <label class="labelUpload">
+			  <p>Subir Foto haga clik:</p> <a class="openUpload" >Aqu&iacute;</a>
+		  </label>
+		</div><!--End idealWrap-->
+		<div class="clearfix"></div>
 
-        <div class="idealWrap uploadShow" style="display:none;">
-            <div id="some_file_queue"></div>
-            <div id="buttonFile">
-            <input type="file" name="file_upload" id="file_upload" />
-            <input type="button" id="upload" value="Subir el Archivo" onclick="$('#file_upload').uploadify('upload')"/>
-            </div>
-            <div class="clearfix"></div>
-        </div><!--End idealWrap-->
+		<div class="idealWrap uploadShow" style="display:none;">
+			<div id="some_file_queue"></div>
+			<div id="buttonFile">
+			<input type="file" name="file_upload" id="file_upload" />
+			<input type="button" id="upload" value="Subir el Archivo" onclick="$('#file_upload').uploadify('upload')"/>
+			</div>
+			<div class="clearfix"></div>
+		</div><!--End idealWrap-->
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -423,14 +423,14 @@ $hora = $op->Time();
 
   <div id="screen"></div>
   <div id="buttons">
-    <div class="buttonPane">
-        <a id="closeButton" onclick="closeWebcam()" class="blueButton">Cerrar</a>
-        <a id="shootButton" href="" class="greenButton">Capturar!</a>
-    </div>
-    <div class="buttonPane hidden">
-        <a id="cancelButton" href="" class="blueButton">Cancelar</a>
-        <a id="uploadButton" href="" class="greenButton">Subir!</a>
-    </div>
+	<div class="buttonPane">
+		<a id="closeButton" onclick="closeWebcam()" class="blueButton">Cerrar</a>
+		<a id="shootButton" href="" class="greenButton">Capturar!</a>
+	</div>
+	<div class="buttonPane hidden">
+		<a id="cancelButton" href="" class="blueButton">Cancelar</a>
+		<a id="uploadButton" href="" class="greenButton">Subir!</a>
+	</div>
   </div>
 
   <span class="settings"></span>
