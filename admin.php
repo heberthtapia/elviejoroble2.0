@@ -9,7 +9,6 @@
   ini_set("session.use_only_cookies","1");
 
   session_start();
-
   date_default_timezone_set("America/La_Paz" );
   session_set_cookie_params(0,"/",$_SERVER["HTTP_HOST"],0);
 
@@ -203,7 +202,7 @@ if (isset($_POST['from']))
 	<div class="row display-table-row">
 		<div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
 			<div class="logo">
-				<a hef="home.html">
+				<a hef="admin.php">
 					<img src="images/logo-elviejoroble.png" alt="El Viejo Roble">
 				</a>
 			</div>

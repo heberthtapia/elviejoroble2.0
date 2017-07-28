@@ -140,6 +140,7 @@ aside {
 aside#sidebar_primary {
 	right: 30px;
 	width: 260px;
+	z-index: 3;
 }
 
 /*aside#sidebar_secondary {
@@ -189,7 +190,7 @@ aside#sidebar_primary {
 	border-radius: 50%;
 	width: 32px;
 }
-img {
+img.md-user-image {
 	border: 0 none;
 	box-sizing: border-box;
 	height: auto;
