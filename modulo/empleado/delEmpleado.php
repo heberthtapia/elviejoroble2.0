@@ -1,5 +1,6 @@
 <form id="formDelete" action="javascript:fDelete('formDelete','empleado/delete.php')" class="form-horizontal" autocomplete="off" >
-    <div class="modal fade" id="dataDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal fade" id="dataDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static"
+   data-keyboard="false">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -7,6 +8,7 @@
                     <h4 class="modal-title" id="exampleModalLabel">Eliminar Producto</h4>
                 </div>
                 <div class="modal-body">
+                    <div id="datos_ajax_delete"></div>
                     <input type="hidden" id="id" name="id">
                     <input type="hidden" id="tabla" name="tabla" value="empleado">
                     <div class="alert alert-warning" role="alert"><p><strong>Advertencia!</strong> está seguro que desea eliminar el empleado </p></div>

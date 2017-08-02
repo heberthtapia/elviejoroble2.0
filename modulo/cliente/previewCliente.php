@@ -298,7 +298,8 @@ var id_cliente;
 </style>
 
 <form id="formPreview" action="javascript:updateForm('formPreview','cliente/update.php')" class="" autocomplete="off" >
-<div class="modal fade bs-example-modal-lg" id="dataPreview" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+<div class="modal fade bs-example-modal-lg" id="dataPreview" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" data-backdrop="static"
+   data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">

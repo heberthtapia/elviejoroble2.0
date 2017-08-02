@@ -236,9 +236,6 @@ var id_empleado;
 
     $('#dataPreview').on('hidden.bs.modal', function (e) {
         // do something...
-        $( "#mapaP" ).animate({
-        	width: "0px"
-	    }, 3000, "swing");
         $('#formPreview').get(0).reset();
         $('.uploadShowU').css('display','none');
         //$('#file_upload').uploadify('cancel', '*');
@@ -253,7 +250,8 @@ var id_empleado;
 </script>
 
 <form id="formPreview" action="javascript:updateForm('formPreview','empleado/update.php')" class="" autocomplete="off" >
-    <div class="modal fade bs-example-modal-lg" id="dataPreview" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal fade bs-example-modal-lg" id="dataPreview" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" data-backdrop="static"
+   data-keyboard="false">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">

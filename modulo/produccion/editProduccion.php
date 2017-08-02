@@ -17,7 +17,8 @@ $row = $str->FetchRow();
 
 ?>
 <form id="formUpdate" action="javascript:updateForm('formUpdate','produccion/update.php')" class="form-horizontal" autocomplete="off" >
-	<div class="modal fade" id="dataUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+	<div class="modal fade" id="dataUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static"
+   data-keyboard="false">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">

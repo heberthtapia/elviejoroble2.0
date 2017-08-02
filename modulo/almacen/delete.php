@@ -22,7 +22,7 @@ $q = "DELETE FROM ".$data->tabla." WHERE id_".$data->tabla." = '".$data->id."' "
 $reg = $db->Execute($q);
 
 if($reg)
-    echo 1;
+    echo json_encode($data);
 else
     echo 0;
 ?>

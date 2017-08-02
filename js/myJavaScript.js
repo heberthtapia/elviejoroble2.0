@@ -233,15 +233,34 @@ function fDelete(idForm, p){
 		data:{res:dato},
 		success: function(data){
 			if(data.tabla === 'cliente'){
-				$('#dataDelete').modal('hide');
-				$('#dataDeleteCli').modal('hide');
-				despliega('modulo/'+data.tabla+'/listTabla.php','listTabla');
+				$('#datos_ajax_delete').html('<div class="alert alert-success" role="alert"><strong>Eliminado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
+					$('#datos_ajax_delete').fadeOut(2000,function () {
+						$('#dataDeleteCli').modal('hide').delay(7000);
+						despliega('modulo/'+data.tabla+'/listTabla.php','listTabla');
+					});
+				});
 			}
 			if(data.tabla === 'produccion'){
 				$('#datos_ajax_delete').html('<div class="alert alert-success" role="alert"><strong>Eliminado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
 					$('#datos_ajax_delete').fadeOut(2000,function () {
 						$('#dataDelete').modal('hide').delay(7000);
 						despliega('modulo/produccion/listTabla.php','listTabla');
+					});
+				});
+			}
+			if(data.tabla === 'inventario'){
+				$('#datos_ajax_delete').html('<div class="alert alert-success" role="alert"><strong>Eliminado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
+					$('#datos_ajax_delete').fadeOut(2000,function () {
+						$('#dataDelete').modal('hide').delay(7000);
+						despliega('modulo/almacen/listTabla.php','listTabla');
+					});
+				});
+			}
+			if(data.tabla === 'empleado'){
+				$('#datos_ajax_delete').html('<div class="alert alert-success" role="alert"><strong>Eliminado Correctamente!!!</strong></div><br>').fadeIn(4000,function () {
+					$('#datos_ajax_delete').fadeOut(2000,function () {
+						$('#dataDelete').modal('hide').delay(7000);
+						despliega('modulo/empleado/listTabla.php','listTabla');
 					});
 				});
 			}

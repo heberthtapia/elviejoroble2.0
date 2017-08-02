@@ -349,7 +349,8 @@ var id_empleado;
 </script>
 
 <form id="formUpdate" action="javascript:updateForm('formUpdate','empleado/update.php')" class="" autocomplete="off" >
-    <div class="modal fade bs-example-modal-lg" id="dataUpdate" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal fade bs-example-modal-lg" id="dataUpdate" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" data-backdrop="static"
+   data-keyboard="false">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">

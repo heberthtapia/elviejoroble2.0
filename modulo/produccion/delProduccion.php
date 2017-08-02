@@ -1,5 +1,6 @@
 <form id="formDelete" action="javascript:fDelete('formDelete','produccion/deletePro.php')" class="form-horizontal" autocomplete="off" >
-    <div class="modal fade" id="dataDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal fade" id="dataDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static"
+   data-keyboard="false">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
