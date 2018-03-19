@@ -51,23 +51,23 @@ Camera slide up
 -----------------------*/
 
 #camera {
-	position: absolute;
-	z-index: 10000;
+    position: absolute;
+    z-index: 10000;
 
-	display: none;
+    display: none;
 
-	width: 465px;
-	height: 330px;
-	margin: 0 auto 0 auto;
+    width: 465px;
+    height: 330px;
+    margin: 0 auto 0 auto;
 
-	border: 1px solid #f0f0f0;
-	-webkit-border-radius: 4px 4px 0 0;
-	-moz-border-radius: 4px 4px 0 0;
-	border-radius: 4px 4px 0 0;
-	background: url('../images/cam_bg.jpg') repeat-y;
-	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, .6);
-	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, .6);
-	box-shadow: 0 0 4px rgba(0, 0, 0, .6);
+    border: 1px solid #f0f0f0;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+    background: url('../images/cam_bg.jpg') repeat-y;
+    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, .6);
+    -moz-box-shadow: 0 0 4px rgba(0, 0, 0, .6);
+    box-shadow: 0 0 4px rgba(0, 0, 0, .6);
 }
 
 .camTop {
@@ -171,7 +171,7 @@ textarea {
 	height: 4em;
 }
 
-div#foto img, div#fotoU img {
+div#foto img, div#fotoU img, div#fotoP img {
 	padding: 3px;
 
 	border: 1px solid #ccc;
@@ -452,7 +452,7 @@ form#venta {
 	color: #fff;
 	border: 1px solid #999;
 }
-form#formPreVenta input[type='text']#subTotal, form#formPreVenta input[type='text']#total, form#formPreVenta input[type='text']#descuento, form#formPreVenta input[type='text']#bonificacion {
+form#formPreVenta input[type='text']#subTotal, form#formPreVenta input[type='text']#total, form#formPreVenta input[type='text']#descuento, form#formPreVenta input[type='text']#bonificacion, form#formPreVenta input[type='text']#iva {
 	font-size: 12px;
 
 	width: 4.5em;
@@ -506,10 +506,10 @@ form#venta input[type='text']#subTotal:hover, form#venta input[type='text']#tota
 	margin-top: 5px;
 }
 
-.delete{
+/*.delete{
 	padding: 0 5px;
 }
-
+*/
 .del{
 	color: #0E1A35;
 	cursor: pointer;
@@ -641,3 +641,34 @@ table#listaP td:nth-child(even) {
 }
 }
 a {color: #FF7361}
+
+/** DROP ZONE **/
+.file-preview {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 5px;
+    width: 100%;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+.file-drop-zone {
+    border: 1px dashed #aaa;
+    border-radius: 4px;
+    height: 100%;
+    text-align: center;
+    vertical-align: middle;
+    margin: 3px 15px 12px 12px;
+    padding: 5px;
+}
+.file-drop-zone-title {
+    color: #aaa;
+    font-size: 12px;
+    text-align: center;
+    /*padding: 85px 10px;*/
+    cursor: default;
+}
+.file-highlighted {
+    border: 2px dashed #999 !important;
+    background-color: #f0f0f0;
+}
+

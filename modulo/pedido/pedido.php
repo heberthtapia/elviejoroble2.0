@@ -52,13 +52,13 @@ include 'modalCheckAlmacen.php';
             </thead>
             <tbody>
             <?PHP
-            $sql = "SELECT * ";
+            $sql = "SELECT *, p.obser AS obs ";
             $sql.= "FROM pedido AS p, empleado AS e ";
             $sql.= "WHERE p.id_empleado = e.id_empleado ";
             if($cargo!='adm'){
                 $sql.= "AND p.id_empleado = ".$idEmp." ";
             }
-            $sql.= "ORDER BY (p.dateReg) DESC ";
+            $sql.= "ORDER BY (p.id_pedido) DESC ";
 
             $cont = 0;
 
@@ -70,7 +70,7 @@ include 'modalCheckAlmacen.php';
                 $cont++;
                 ?>
                 <tr id="tb<?=$row[0]?>">
-                    <td class="last center"><?=$cont;?></td>
+                    <td class="last center" align="center"><?=$cont;?></td>
                     <td class="last center"><?=$row['dateReg']?></td>
                     <td class="last center">PD-<?=$op->ceros($row['id_pedido'],5);?></td>
                     <td class="last center"><?=$row['subTotal'];?></td>
@@ -89,18 +89,21 @@ include 'modalCheckAlmacen.php';
                     ?>
                     </td>
                     <td class="last center <?=$row['status1'];?>">
-
-                        <a class="status1" data-toggle="modal" data-target="#modalCheckPedido" data-id="<?=$row['id_pedido']?>" data-status1 = "<?=$row['status1'];?>" data-status2 = "<?=$row['status2'];?>" ><?=$row['status1'];?></a></td>
-
+                        <a class="status1" data-toggle="modal" data-target="#modalCheckPedido" data-id="<?=$row['id_pedido']?>" data-status1 = "<?=$row['status1'];?>" data-status2 = "<?=$row['status2'];?>" >
+                            <?=$row['status1'];?>
+                        </a>
+                    </td>
                     <td class="last center <?=str_replace(' ', '', $row['status2']);?>">
-
-                        <a class="status2" data-toggle="modal" data-target="#modalCheckAlmacen" data-id="<?=$row['id_pedido']?>" data-status1 = "<?=$row['status1'];?>" data-status2 = "<?=$row['status2'];?>"><?=$row['status2'];?></a></td>
+                        <a class="status2" data-toggle="modal" data-target="#modalCheckAlmacen" data-id="<?=$row['id_pedido']?>" data-status1 = "<?=$row['status1'];?>" data-status2 = "<?=$row['status2'];?>">
+                            <?=$row['status2'];?>
+                        </a>
+                    </td>
 
                     <td width="15%">
-                        <div class="btn-group" style="width: 194px">
+                        <div class="btn-group" style="width: 187px">
                             <button type="button" class="btn btn-primary btn-sm" onclick="detalle('<?=$row['id_pedido'];?>')" >
                                 <i class='fa fa-external-link'></i>
-                                <span>Generar PDF</span>
+                                <span>Ver Pedido</span>
                             </button>
 
                             <button type ="button" class="btn btn-primary btn-sm" onclick="despliega('modulo/pedido/editPedido.php','contenido','<?=$row['id_pedido']?>');" >

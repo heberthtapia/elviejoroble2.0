@@ -62,6 +62,7 @@
   $_SESSION['inc'] = $nombre1[0].''.$apP[0].'-';
 
   $cargo = $op->toSelect($row['cargo']);
+
 /**
  * Fin de inicio de session
  *
@@ -111,8 +112,8 @@ if (isset($_POST['from']))
 
 		$im = $db->Execute("SELECT MAX(id) AS id FROM eventos");
 		//$row = $im->fetch_row();
-		$row = $im->FetchRow();
-		$id = trim($row[0]);
+		$file = $im->FetchRow();
+		$id = trim($file[0]);
 
 		// para generar el link del evento
 		$link = "$base_url"."inc/descripcion_evento.php?id=$id";
@@ -128,7 +129,6 @@ if (isset($_POST['from']))
 		header("Location:admin.php");
 	}
 }
-
 ?>
 <!doctype html>
 <html lang="es">
@@ -154,6 +154,18 @@ if (isset($_POST['from']))
 	<!-- Styles del CHAT -->
 	<link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.css">
 	<link rel="stylesheet" type="text/css" href="css/myStyleChat.css">
+
+	<!-- Jquery File Upload -->
+
+	<!-- blueimp Gallery styles -->
+	<link rel="stylesheet" href="https://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+	<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+	<link rel="stylesheet" href="css/jquery.fileupload.css">
+	<link rel="stylesheet" href="css/jquery.fileupload-ui.css">
+
+	<!-- lightbox -->
+    <link rel="stylesheet" type="text/css" href="css/lightbox.css">
+
 	<!-- Mis Styles -->
 	<link rel="stylesheet" href="css/myStyle.css">
 
@@ -190,6 +202,33 @@ if (isset($_POST['from']))
 	<script type="text/javascript" src="js/push.min.js"></script>
 	<script type="text/javascript" src="js/miChat.js"></script>
 
+	<!-- Jquery File Upload -->
+
+	<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+    <script type="text/javascript" src="js/vendor/jquery.ui.widget.js"></script>
+    <!-- The Templates plugin is included to render the upload/download listings -->
+    <script src="//blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
+    <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+    <script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+    <!-- The Canvas to Blob plugin is included for image resizing functionality -->
+    <script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+    <!-- blueimp Gallery script -->
+    <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+    <!-- The basic File Upload plugin -->
+    <script type="text/javascript" src="js/fileupload/jquery.fileupload.js"></script>
+    <!-- The File Upload processing plugin -->
+    <script type="text/javascript" src="js/fileupload/jquery.fileupload-process.js"></script>
+    <!-- The File Upload image preview & resize plugin -->
+    <script type="text/javascript" src="js/fileupload/jquery.fileupload-image.js"></script>
+    <!-- The File Upload validation plugin -->
+    <script type="text/javascript" src="js/fileupload/jquery.fileupload-validate.js"></script>
+    <!-- The File Upload user interface plugin -->
+    <script type="text/javascript" src="js/fileupload/jquery.fileupload-ui.js"></script>
+    <!-- The main application script -->
+    <!-- <script type="text/javascript" src="../../assets/js/main.js"></script> -->
+    <!-- lightbox -->
+    <script type="text/javascript" src="js/lightbox.js"></script>
+
 	<link rel="stylesheet" type="text/css" href="css/tooltipster.css">
 	<link rel="stylesheet" type="text/css" href="css/tooltipster-shadow.css">
 	<script src="js/jquery.tooltipster.js"></script>
@@ -209,7 +248,7 @@ if (isset($_POST['from']))
 			<div class="navi">
 				<ul>
 					<li class="active">
-						<a href="#">
+						<a href="admin.php">
 							<i class="fa fa-home" aria-hidden="true"></i>
 							<span class="hidden-xs hidden-sm">Inicio</span>
 						</a>
@@ -347,7 +386,17 @@ if (isset($_POST['from']))
 								</li>
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-										<img src="images/iconos/hombre.png" alt="user">
+										<?php
+										if( $row['foto'] != ''){
+										?>
+											<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/files/thumbnail/<?=($row['foto']);?>&amp;w=48&amp;h=48&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
+										<?php
+										}else{
+										?>
+											<img src="images/iconos/hombre.png" alt="user">
+										<?php
+										}
+										?>
 										<b class="caret"></b>
 									</a>
 									<ul class="dropdown-menu">
@@ -355,7 +404,7 @@ if (isset($_POST['from']))
 											<div class="navbar-content">
 												<span><?=$nombre1[0].$nombre2[0];?>&nbsp;<?=ucwords($row['apP']);?></span>
 												<p class="text-muted small">
-													ht.heberth@gmail.com
+													<?=$row['email'];?>
 												</p>
 												<div class="divider">
 												</div>
@@ -370,7 +419,6 @@ if (isset($_POST['from']))
 				</header>
 			</div>
 			<div class="user-dashboard" id="contenido">
-
 				<div class="row">
 					<div class="col-xs-12 col-sm-8 col-md-8">
 						<h2 class="avisos">Aviso Importante</h2>
@@ -425,11 +473,8 @@ if (isset($_POST['from']))
 								<p class="vinculo-especial2">
 									<a href="#">Ver más noticias</a>
 								</p>-->
-
 							</div>
 							<!-- fin nivel slide-vertical -->
-
-
 						</div>
 						<!-- fin	contenido -->
 					</div>
@@ -474,7 +519,7 @@ if (isset($_POST['from']))
 				<p>One fine body&hellip;</p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" onclick="setTimeout(cerrarModal(), 5000);" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-default"  data-dismiss="modal">Cerrar</button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
@@ -483,7 +528,6 @@ if (isset($_POST['from']))
 <!-- Modal -->
 <div id="add_project" class="modal fade" role="dialog">
 	<div class="modal-dialog">
-
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header login-header">
@@ -501,116 +545,112 @@ if (isset($_POST['from']))
 				<button type="button" class="add-project" data-dismiss="modal">Save</button>
 			</div>
 		</div>
-
 	</div>
 </div>
 
 <script type="text/javascript">
-	(function($){
-		//creamos la fecha actual
-		var date = new Date();
-		var yyyy = date.getFullYear().toString();
-		var mm = (date.getMonth()+1).toString().length == 1 ? "0"+(date.getMonth()+1).toString() : (date.getMonth()+1).toString();
-		var dd  = (date.getDate()).toString().length == 1 ? "0"+(date.getDate()).toString() : (date.getDate()).toString();
-		//establecemos los valores del calendario
-		var options = {
+(function($){
+	//creamos la fecha actual
+	var date = new Date();
+	var yyyy = date.getFullYear().toString();
+	var mm = (date.getMonth()+1).toString().length == 1 ? "0"+(date.getMonth()+1).toString() : (date.getMonth()+1).toString();
+	var dd  = (date.getDate()).toString().length == 1 ? "0"+(date.getDate()).toString() : (date.getDate()).toString();
+	//establecemos los valores del calendario
+	var options = {
 
-			// definimos que los eventos se mostraran en ventana modal
-			modal: '#events-modal',
+		// definimos que los eventos se mostraran en ventana modal
+		modal: '#events-modal',
 
-			// dentro de un iframe
-			modal_type:'iframe',
+		// dentro de un iframe
+		modal_type:'iframe',
 
-			//obtenemos los eventos de la base de datos
-			events_source: 'inc/obtener_eventos.php',
+		//obtenemos los eventos de la base de datos
+		events_source: 'inc/obtener_eventos.php',
 
-			// mostramos el calendario en el mes
-			view: 'month',
+		// mostramos el calendario en el mes
+		view: 'month',
 
-			// y dia actual
-			day: yyyy+"-"+mm+"-"+dd,
+		// y dia actual
+		day: yyyy+"-"+mm+"-"+dd,
 
+		// definimos el idioma por defecto
+		language: 'es-ES',
 
+		//Template de nuestro calendario
+		tmpl_path: '<?=$base_url?>tmpls/',
+		tmpl_cache: false,
 
-			// definimos el idioma por defecto
-			language: 'es-ES',
+		// Hora de inicio
+		time_start: '08:00',
 
-			//Template de nuestro calendario
-			tmpl_path: '<?=$base_url?>tmpls/',
-			tmpl_cache: false,
+		// y Hora final de cada dia
+		time_end: '22:00',
 
+		// intervalo de tiempo entre las hora, en este caso son 30 minutos
+		time_split: '30',
 
-			// Hora de inicio
-			time_start: '08:00',
+		// Definimos un ancho del 100% a nuestro calendario
+		width: '100%',
 
-			// y Hora final de cada dia
-			time_end: '22:00',
-
-			// intervalo de tiempo entre las hora, en este caso son 30 minutos
-			time_split: '30',
-
-			// Definimos un ancho del 100% a nuestro calendario
-			width: '100%',
-
-			onAfterEventsLoad: function(events)
+		onAfterEventsLoad: function(events)
+		{
+			if(!events)
 			{
-				if(!events)
-				{
-					return;
-				}
-				var list = $('#eventlist');
-				list.html('');
-
-				$.each(events, function(key, val)
-				{
-					$(document.createElement('li'))
-						.html('<a href="' + val.url + '">' + val.title + '</a>')
-						.appendTo(list);
-				});
-			},
-			onAfterViewLoad: function(view)
-			{
-				$('.page-header h2').text(this.getTitle());
-				$('.btn-group button').removeClass('active');
-				$('button[data-calendar-view="' + view + '"]').addClass('active');
-			},
-			classes: {
-				months: {
-					general: 'label'
-				}
+				return;
 			}
-		};
+			var list = $('#eventlist');
+			list.html('');
 
-
-		// id del div donde se mostrara el calendario
-		var calendar = $('#calendar').calendar(options);
-
-		$('.btn-group button[data-calendar-nav]').each(function()
-		{
-			var $this = $(this);
-			$this.click(function()
+			$.each(events, function(key, val)
 			{
-				calendar.navigate($this.data('calendar-nav'));
+				$(document.createElement('li'))
+					.html('<a href="' + val.url + '">' + val.title + '</a>')
+					.appendTo(list);
 			});
-		});
-
-		$('.btn-group button[data-calendar-view]').each(function()
+		},
+		onAfterViewLoad: function(view)
 		{
-			var $this = $(this);
-			$this.click(function()
-			{
-				calendar.view($this.data('calendar-view'));
-			});
-		});
+			$('.page-header h2').text(this.getTitle());
+			$('.btn-group button').removeClass('active');
+			$('button[data-calendar-view="' + view + '"]').addClass('active');
+		},
+		classes: {
+			months: {
+				general: 'label'
+			}
+		}
+	};
 
-		$('#first_day').change(function()
+
+	// id del div donde se mostrara el calendario
+	var calendar = $('#calendar').calendar(options);
+
+	$('.btn-group button[data-calendar-nav]').each(function()
+	{
+		var $this = $(this);
+		$this.click(function()
 		{
-			var value = $(this).val();
-			value = value.length ? parseInt(value) : null;
-			calendar.setOptions({first_day: value});
-			calendar.view();
+			calendar.navigate($this.data('calendar-nav'));
 		});
-	}(jQuery));
+	});
+
+	$('.btn-group button[data-calendar-view]').each(function()
+	{
+		var $this = $(this);
+		$this.click(function()
+		{
+			calendar.view($this.data('calendar-view'));
+		});
+	});
+
+	$('#first_day').change(function()
+	{
+		var value = $(this).val();
+		value = value.length ? parseInt(value) : null;
+		calendar.setOptions({first_day: value});
+		calendar.view();
+	});
+}(jQuery));
 </script>
 
 <div class="modal fade" id="add_evento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
@@ -740,13 +780,21 @@ if (isset($_POST['from']))
 ?>
 <audio id="audio4"><source src="modulo/chat/tono/Peanut.ogg" type="audio/ogg"></audio>
 
-<aside id="sidebar_primary" class="tabbed_sidebar ng-scope chat_sidebar">
+<aside id="iconChat" class="animation-target">
+	<a href="#" onclick="openChat();">
+		<div>
+			<img src="images/chat4.png" width="45" alt="chat">
+		</div>
+	</a>
+</aside>
+
+<aside id="sidebar_primary" class="tabbed_sidebar ng-scope chat_sidebar animation-target1">
 	<div class="popup-head">
 		<div class="popup-head-left pull-left">
 			<h1>Conectados</h1>
 		</div>
 		<div class="popup-head-right-online pull-right">
-			<button class="chat-header-button" type="button" onclick="minimizar('connect')"><i class="fa fa-minus" aria-hidden="true"></i></button>
+			<button class="chat-header-button" type="button" onclick="closeChat();"><i class="fa fa-minus" aria-hidden="true"></i></button>
 		</div>
 	</div>
 <div id="connect" class="chat_box_wrapper chat_box_small chat_box_active connect mCustomScrollbar">
@@ -762,11 +810,11 @@ if (isset($_POST['from']))
 							<?PHP
 								  if( $row['foto'] != '' ){
 							?>
-								<img class="thumb md-user-image" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/<?=($row['foto']);?>&amp;w=32&amp;h=32&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
+								<img class="thumb md-user-image" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/files/thumbnail/<?=($row['foto']);?>&amp;w=35&amp;h=35&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
 							<?PHP
 								}else{
 							?>
-								<img class="thumb md-user-image" src="thumb/phpThumb.php?src=../images/sin_imagen.jpg&amp;w=32&amp;h=32&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
+								<img class="thumb md-user-image" src="thumb/phpThumb.php?src=../images/sin_imagen.jpg&amp;w=35&amp;h=35&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
 							<?PHP
 								}
 							?>

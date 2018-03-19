@@ -23,6 +23,8 @@ $strSql = "SELECT * FROM pedido WHERE id_pedido = '".$data->id."' ";
 $str = $db->Execute($strSql);
 $file = $str->FetchRow();
 
+$data->fac = $file['fac'];
+
 if($file['statusContador'] == 'Libre' && $file['statusAlmacen'] == 'Libre'){
 
   $strPed = "UPDATE pedido SET statusContador = 'Ocupado' WHERE id_pedido = '".$data->id."' ";

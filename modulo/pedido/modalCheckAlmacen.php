@@ -27,40 +27,20 @@
 </form>
 
 <script>
-	$('#modalCheckAlmacen').on('hidden.bs.modal', function (e) {
-		// do something...
-		//$('#formNew').get(0).reset();
-		//despliega('modulo/almacen/producto.php','contenido');
-		if(sw === 1){
-			$.ajax({
-		        url: "modulo/pedido/verificaStatusAlmacenUn.php",
-		        type: 'post',
-		        dataType: 'json',
-		        async:true,
-		        data:{res:idSw},
-		        success: function(data){
-
-		        },
-		        error: function(data){
-		            //alert('Error al guardar el formulario');
-		        }
-	    	});
-		}
-	});
 
 	$('#modalCheckAlmacen').on('show.bs.modal', function (event) {
 
 		var button = $(event.relatedTarget); // Botón que activó el modal
 		var id = button.data('id'); // Extraer la información de atributos de datos
-		var status1 = $('#tb'+id).find('a.status1').text();
-		var status2 = $('#tb'+id).find('a.status2').text();
+		var status1 = ($('#tb'+id).find('a.status1').text()).trim();
+		var status2 = ($('#tb'+id).find('a.status2').text()).trim();
 		alt = '';
 		sw = 0;
 
 		if( status1 == 'Aprobado' && status2 == 'Entregado' ){
 			msj = 'Entregar Pedido';
 			alt = 'No puede cancelar el pedido por que ya fue ENTREGADO.';
- 		}else if( status1 == 'Aprobado' && status2 != 'Entregado' ){
+ 		}else if( status1 == 'Aprobado' && status2 == 'No Entregado' ){
  			msj = 'Entregar Pedido';
  			$('#saveAlm').removeAttr('disabled','disabled');
  		}else{
@@ -105,5 +85,28 @@
 	        }
 	    });
 
+	});
+
+	$('#modalCheckAlmacen').on('hidden.bs.modal', function (e) {
+		// do something...
+		//$('#formNew').get(0).reset();
+		//despliega('modulo/almacen/producto.php','contenido');
+		//if(sw === 1){
+		//
+		var id = $('#formCheckAlm').find('#pedido').val(); // Extraer la información de atributos de datos
+			$.ajax({
+		        url: "modulo/pedido/verificaStatusAlmacenUn.php",
+		        type: 'post',
+		        dataType: 'json',
+		        async:true,
+		        data:{res:id},
+		        success: function(data){
+
+		        },
+		        error: function(data){
+		            //alert('Error al guardar el formulario');
+		        }
+	    	});
+		//}
 	});
 </script>

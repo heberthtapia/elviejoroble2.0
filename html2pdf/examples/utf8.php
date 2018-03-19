@@ -1,31 +1,33 @@
 <?php
 /**
- * HTML2PDF Librairy - example
+ * Html2Pdf Library - example
  *
- * HTML => PDF convertor
- * distributed under the LGPL License
+ * HTML => PDF converter
+ * distributed under the OSL-3.0 License
  *
- * @author      Laurent MINGUET <webmaster@html2pdf.fr>
- *
- * isset($_GET['vuehtml']) is not mandatory
- * it allow to display the result in the HTML format
+ * @package   Html2pdf
+ * @author    Laurent MINGUET <webmaster@html2pdf.fr>
+ * @copyright 2017 Laurent MINGUET
  */
+require_once dirname(__FILE__).'/../vendor/autoload.php';
 
-    require_once(dirname(__FILE__).'/../html2pdf.class.php');
+use Spipu\Html2Pdf\Html2Pdf;
+use Spipu\Html2Pdf\Exception\Html2PdfException;
+use Spipu\Html2Pdf\Exception\ExceptionFormatter;
 
-    // get the HTML
-    $content = file_get_contents(dirname(__FILE__).'/../_tcpdf_'.HTML2PDF_USED_TCPDF_VERSION.'/cache/utf8test.txt');
+
+try {
+    $html2pdf = new Html2Pdf('P', 'A4', 'fr');
+
+    $content = file_get_contents(K_PATH_MAIN.'examples/data/utf8test.txt');
     $content = '<page style="font-family: freeserif"><br />'.nl2br($content).'</page>';
 
-    // convert to PDF
-    try
-    {
-        $html2pdf = new HTML2PDF('P', 'A4', 'fr');
-        $html2pdf->pdf->SetDisplayMode('real');
-        $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
-        $html2pdf->Output('utf8.pdf');
-    }
-    catch(HTML2PDF_exception $e) {
-        echo $e;
-        exit;
-    }
+    $html2pdf->pdf->SetDisplayMode('real');
+    $html2pdf->writeHTML($content);
+    $html2pdf->output('utf8.pdf');
+} catch (Html2PdfException $e) {
+    $html2pdf->clean();
+
+    $formatter = new ExceptionFormatter($e);
+    echo $formatter->getHtmlMessage();
+}

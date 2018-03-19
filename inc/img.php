@@ -5,13 +5,15 @@
   //$db->debug = true;
   $db->Connect();
 
-  $strQuery = "SELECT max(id_img) FROM aux_img";
+  $tabla = $_POST['tabla'];
+
+  $strQuery = "SELECT max(id) FROM ".$tabla."";
 
   $strQ = $db->Execute($strQuery);
 
   $id = $strQ->FetchRow();
 
-  $sql = "SELECT imagen FROM aux_img WHERE id_img = '".$id[0]."' ";
+  $sql = "SELECT name FROM ".$tabla." WHERE id = '".$id[0]."' ";
 
   $strQ = $db->Execute($sql);
 

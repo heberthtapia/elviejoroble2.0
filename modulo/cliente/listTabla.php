@@ -45,30 +45,28 @@ $cargo = $_SESSION['cargo'];
             ]
         });
 
-        $('input').iCheck({
+        $('input.statusCli').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',
             //increaseArea: '100%' // optional
           });
 
-        $('input').on('ifChecked', function(event){
+        $('input.statusCli').on('ifChecked', function(event){
             id = $(this).attr('id');
-            statusEmp(id, 'Activo');
+            statusCli(id, 'Activo');
         });
-        $('input').on('ifUnchecked',function(event){
+        $('input.statusCli').on('ifUnchecked',function(event){
             id = $(this).attr('id');
-            statusEmp(id, 'Inactivo');
+            statusCli(id, 'Inactivo');
         });
-
     });
     $.validate({
         lang: 'es',
-        modules : 'security',
-        modules : 'modules/logic'
+        modules : 'security, modules/logic'
     });
     $('#obser').restrictLength( $('#max-length-element') );
 </script>
-   <div class="col-xs-12 col-sm-12 col-md-12">
+<div class="col-xs-12 col-sm-12 col-md-12">
         <h1 class="avisos" align="center"><strong>CLIENTES</strong></h1>
         <h2 class="avisos">Lista de Clientes</h2>
         <div class="pull-right"><br>
@@ -122,13 +120,14 @@ $cargo = $_SESSION['cargo'];
                         if( $row['foto'] != '' )
                         {
                             ?>
-                            <img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/<?=($row['foto']);?>&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
-
+                        <a href="modulo/cliente/uploads/files/<?=($row['foto']);?>" title="<?=($row['foto']);?>" download="<?=($row['foto']);?>" data-lightbox="lightbox-admin" data-title="Optional caption.">
+                            <img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/files/<?=($row['foto']);?>&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
+                        </a>
                             <?PHP
                         }
                         else{
                             ?>
-                            <img class="thumb" src="thumb/phpThumb.php?src=../images/sin_imagen.jpg&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
+                            <img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/files/sin_imagen.jpg&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
                             <?PHP
                         }
                         ?>
@@ -139,25 +138,26 @@ $cargo = $_SESSION['cargo'];
                     <td><?=$row['apM'];?></td>
                     <td><?=$row['direccion'];?></td>
                     <td><?=$row['numero'];?></td>
-                    <td width="15%">
-                        <div class="btn-group" style="width: 188px">
+                    <td width="10%">
+                        <div class="btn-group" style="width: 177px">
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataPreview"
-                                            data-foto="<?=$row['foto']?>"
-                                            data-name="<?=$row['nombre']?>"
-                                            data-paterno="<?=$row['apP']?>"
-                                            data-materno="<?=$row['apM']?>"
-                                            data-id="<?=$row['id_cliente']?>"
-                                            data-dep="<?=$row['depa']?>"
-                                            data-nameEmp="<?=$row['nombreEmp']?>"
-                                            data-fono="<?=$row['phone']?>"
-                                            data-celular="<?=$row['celular']?>"
-                                            data-emailC="<?=$row['email']?>"
-                                            data-ci="<?=$row['ci']?>"
-                                            data-addresC="<?=$row['direccion']?>"
-                                            data-Nro="<?=$row['numero']?>"
-                                            data-cx="<?=$row['coorX']?>"
-                                            data-cy="<?=$row['coorY']?>"
-                                            data-obser="<?=$row['obser']?>"
+                                            data-foto    ="<?=$row['foto']?>"
+                                            data-name    ="<?=$row['nombre']?>"
+                                            data-paterno ="<?=$row['apP']?>"
+                                            data-materno ="<?=$row['apM']?>"
+                                            data-id      ="<?=$row['id_cliente']?>"
+                                            data-dep     ="<?=$row['depa']?>"
+                                            data-nameEmp ="<?=$row['nombreEmp']?>"
+                                            data-nit     ="<?=$row['nit']?>"
+                                            data-fono    ="<?=$row['phone']?>"
+                                            data-celular ="<?=$row['celular']?>"
+                                            data-emailC  ="<?=$row['email']?>"
+                                            data-ci      ="<?=$row['ci']?>"
+                                            data-addresC ="<?=$row['direccion']?>"
+                                            data-Nro     ="<?=$row['numero']?>"
+                                            data-cx      ="<?=$row['coorX']?>"
+                                            data-cy      ="<?=$row['coorY']?>"
+                                            data-obser   ="<?=$row['obser']?>"
                                     <i class='fa fa-external-link'></i> Vista Previa
                                     </button>
 
@@ -169,6 +169,7 @@ $cargo = $_SESSION['cargo'];
                                             data-id="<?=$row['id_cliente']?>"
                                             data-dep="<?=$row['depa']?>"
                                             data-nameEmp="<?=$row['nombreEmp']?>"
+                                            data-nit     ="<?=$row['nit']?>"
                                             data-fono="<?=$row['phone']?>"
                                             data-celular="<?=$row['celular']?>"
                                             data-emailC="<?=$row['email']?>"
@@ -183,7 +184,7 @@ $cargo = $_SESSION['cargo'];
                                         <span>Modificar</span>
                                     </button>
                         </div>
-                        <div style="width: 188px; margin-top: 5px">
+                        <div style="width: 177px; margin-top: 5px">
                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#dataDeleteCli" data-id="<?=$row['id_cliente']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
                             </button>
 
@@ -191,12 +192,12 @@ $cargo = $_SESSION['cargo'];
                                     <?PHP
                                     if( $row['status'] == 'Activo' ){
                                     ?>
-                                        <input type="checkbox" name="checks" checked id="<?=$row['id_cliente']?>"/>
+                                        <input type="checkbox" class="statusCli" name="checks" checked id="<?=$row['id_cliente']?>"/>
                                         <label>Status</label>
                                     <?PHP
                                     }else{
                                     ?>
-                                        <input type="checkbox" name="checks" id="<?=$row['id_cliente']?>"/>
+                                        <input type="checkbox" class="statusCli" name="checks" id="<?=$row['id_cliente']?>"/>
                                         <label>Status</label>
                                     <?PHP
                                     }
@@ -225,5 +226,4 @@ $cargo = $_SESSION['cargo'];
             </tr>
             </tfoot>
         </table>
-
-    </div>
+</div>

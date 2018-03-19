@@ -42,7 +42,7 @@ $data->OkCont = 0;
 
 	/* ACTUALIZAR EL STATUS DEL CONTADOR....!!! */
 
-	$strSql = "UPDATE pedido SET status1 = '".$status."', dateStatus1 = '".$fecha." ".$hora."' ";
+	$strSql = "UPDATE pedido SET status1 = '".$status."', dateStatus1 = '".$fecha." ".$hora."', numFac = '".$data->factura."' ";
 	$strSql.= "WHERE id_pedido = '".$data->pedido."' ";
 
 	$reg = $db->Execute($strSql);

@@ -24,7 +24,7 @@
 	 */
 
 	$strQuery = "UPDATE cliente SET nombre = '".$data->nameU."', apP = '".$data->paternoU."', apM = '".$data->maternoU."', depa = '".$data->depU."', phone = '".$data->fonoU."', celular = '".$data->celularU."', ";
-	$strQuery.= "nombreEmp = '".$data->nameEmpU."', email  = '".$data->emailU."', direccion = '".$data->addresU."', numero = '".$data->NroU."', coorX = '".$data->cxU."', coorY = '".$data->cyU."', ";
+	$strQuery.= "nombreEmp = '".$data->nameEmpU."', nit = '".$data->nitU."', email  = '".$data->emailU."', direccion = '".$data->addresU."', numero = '".$data->NroU."', coorX = '".$data->cxU."', coorY = '".$data->cyU."', ";
 	$strQuery.= "obser  = '".$data->obserU."', dateReg = '".$fecha.' '.$hora."' ";
 	$strQuery.= "WHERE id_cliente = '".$data->codCliU."' ";
 
@@ -43,29 +43,26 @@
 
 	$data->img = '';
 
-	$strQuery = "SELECT * FROM aux_img ";
+	$strQuery = "SELECT * FROM auxImg ";
 
 	$srtQ = $db->Execute($strQuery);
 
 	$row = $srtQ->FetchRow();
 
 	if ($row[0]!=''){
-		$img = $row['imagen'];
+		$name = $row['name'];
+		$size = $row['size'];
 
-		$strQuery = "UPDATE cliente set foto = '".$img."' ";
+		$strQuery = "UPDATE cliente set foto = '".$name."', size = '".$size."' ";
 		$strQuery.= "WHERE id_cliente = '".$data->codClU."' ";
 
 		$strQ = $db->Execute($strQuery);
 		$data->img = $img;
 	}
-	if($data->checksEmailU == 'on'){
-		//echo 'entra......';
-		//include '../../classes/envioData.php';
-	}
-	//print_r($data);
+
 	/***************************************************************************/
 
-	$sql = "TRUNCATE TABLE aux_img ";
+	$sql = "TRUNCATE TABLE auxImg";
 	$strQ = $db->Execute($sql);
 
 	if($sql)

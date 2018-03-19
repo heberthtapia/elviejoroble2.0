@@ -1,40 +1,34 @@
 <?php
 /**
- * HTML2PDF Librairy - example
+ * Html2Pdf Library - example
  *
- * HTML => PDF convertor
- * distributed under the LGPL License
+ * HTML => PDF converter
+ * distributed under the OSL-3.0 License
  *
- * @author      Laurent MINGUET <webmaster@html2pdf.fr>
- *
- * isset($_GET['vuehtml']) is not mandatory
- * it allow to display the result in the HTML format
+ * @package   Html2pdf
+ * @author    Laurent MINGUET <webmaster@html2pdf.fr>
+ * @copyright 2017 Laurent MINGUET
  */
-    require_once(dirname(__FILE__).'/../html2pdf.class.php');
+require_once dirname(__FILE__).'/../vendor/autoload.php';
 
-    // get the HTML
-     ob_start();
-     include(dirname('__FILE__').'/res/about.php');
+use Spipu\Html2Pdf\Html2Pdf;
+use Spipu\Html2Pdf\Exception\Html2PdfException;
+use Spipu\Html2Pdf\Exception\ExceptionFormatter;
+
+try {
+    $html2pdf = new Html2Pdf('P', 'A4', 'fr', true, 'UTF-8', array(0, 0, 0, 0));
+    $html2pdf->pdf->SetDisplayMode('fullpage');
+
+    ob_start();
+    include dirname(__FILE__).'/res/about.php';
     $content = ob_get_clean();
 
-    try
-    {
-        // init HTML2PDF
-        $html2pdf = new HTML2PDF('P', 'A4', 'fr', true, 'UTF-8', array(0, 0, 0, 0));
+    $html2pdf->writeHTML($content);
+    $html2pdf->createIndex('Sommaire', 30, 12, false, true, 2);
+    $html2pdf->output('about.pdf');
+} catch (Html2PdfException $e) {
+    $html2pdf->clean();
 
-        // display the full page
-        $html2pdf->pdf->SetDisplayMode('fullpage');
-
-        // convert
-        $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
-
-        // add the automatic index
-        $html2pdf->createIndex('Sommaire', 30, 12, false, true, 2);
-
-        // send the PDF
-        $html2pdf->Output('about.pdf');
-    }
-    catch(HTML2PDF_exception $e) {
-        echo $e;
-        exit;
-    }
+    $formatter = new ExceptionFormatter($e);
+    echo $formatter->getHtmlMessage();
+}

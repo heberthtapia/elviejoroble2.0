@@ -43,11 +43,20 @@ $op = new cnFunction();
             ]
         });
 
-        $('input').iCheck({
+        $('input.statusEmp , #checksEmail, #checksEmailU').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',
             //increaseArea: '100%' // optional
           });
+
+        $('input.statusEmp').on('ifChecked', function(event){
+            id = $(this).attr('id');
+            statusEmp(id, 'Activo');
+        });
+        $('input.statusEmp').on('ifUnchecked',function(event){
+            id = $(this).attr('id');
+            statusEmp(id, 'Inactivo');
+        });
 
         $('input').on('ifChecked', function(event){
             id = $(this).attr('id');
@@ -61,10 +70,11 @@ $op = new cnFunction();
     });
     $.validate({
         lang: 'es',
-        modules : 'security',
-        modules : 'modules/logic'
+        modules : 'security, modules/logic'
     });
     $('#obser').restrictLength( $('#max-length-element') );
+    $('#obserU').restrictLength( $('#max-length-elementU') );
+</script>
 </script>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <h1 class="avisos" align="center"><strong>EMPLEADOS</strong></h1>
@@ -114,13 +124,14 @@ $op = new cnFunction();
                         if( $row['foto'] != '' )
                         {
                             ?>
-                            <img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/<?=($row['foto']);?>&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
-
+                            <a href="modulo/empleado/uploads/files/<?=($row['foto']);?>" title="<?=($row['foto']);?>" download="<?=($row['foto']);?>" data-lightbox="lightbox-admin" data-title="Optional caption.">
+                                <img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/files/thumbnail/<?=($row['foto']);?>&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
+                            </a>
                             <?PHP
                         }
                         else{
                             ?>
-                            <img class="thumb" src="thumb/phpThumb.php?src=../images/sin_imagen.jpg&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
+                            <img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/files/sin_imagen.jpg&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
                             <?PHP
                         }
                         ?>
@@ -185,12 +196,12 @@ $op = new cnFunction();
                                     <?PHP
                                     if( $row['statusEmp'] == 'Activo' ){
                                     ?>
-                                        <input type="checkbox" name="checks" checked id="<?=$row['id_empleado']?>"/>
+                                        <input type="checkbox" class="statusEmp" name="checks" checked id="<?=$row['id_empleado']?>"/>
                                         <label>Status</label>
                                     <?PHP
                                     }else{
                                     ?>
-                                        <input type="checkbox" name="checks" id="<?=$row['id_empleado']?>"/>
+                                        <input type="checkbox" class="statusEmp" name="checks" id="<?=$row['id_empleado']?>"/>
                                         <label>Status</label>
                                     <?PHP
                                     }

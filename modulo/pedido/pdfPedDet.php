@@ -10,22 +10,30 @@
  * isset($_GET['vuehtml']) is not mandatory
  * it allow to display the result in the HTML format
  */
-	// get the HTML
-	//set_time_limit (60);
+    // get the HTML
+    //set_time_limit (60);
     ob_start();
-    include(dirname(__FILE__).'/res/pdfPedDet.php');
+    include(dirname(__FILE__).'/res/pdfPedDetDiv.php');
     $content = ob_get_clean();
 
     // convert to PDF
-    require_once(dirname(__FILE__).'/../../html2pdf/html2pdf.class.php');
+    require_once(dirname(__FILE__).'/../../html2pdf/vendor/autoload.php');
+
+    use Spipu\Html2Pdf\Html2Pdf;
+    use Spipu\Html2Pdf\Exception\Html2PdfException;
+    use Spipu\Html2Pdf\Exception\ExceptionFormatter;
+
     try
     {
-        $html2pdf = new HTML2PDF('P', '140x216', 'es', true, 'UTF-8', 2, 1, 2, 1);
+        $html2pdf = new Html2Pdf('P', 'LETTER', 'es', true, 'UTF-8',array(3, 5, 3, 5));
         $html2pdf->pdf->SetDisplayMode('fullpage');
         $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
-        $html2pdf->Output('Pedido - '.$fecha.'.pdf');
+        $html2pdf->Output('Pedido_'.$fecha.'.pdf');
     }
-    catch(HTML2PDF_exception $e) {
-        echo $e;
-        exit;
+    catch(Html2PdfException $e) {
+        $html2pdf->clean();
+
+        $formatter = new ExceptionFormatter($e);
+        echo $formatter->getHtmlMessage();
     }
+?>

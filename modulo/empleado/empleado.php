@@ -12,8 +12,7 @@ $op = new cnFunction();
 
 $cargo = $_SESSION['cargo'];
 ?>
-<script type="text/javascript" src="webcam/webcam.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
+
 <script type="text/javascript" language="javascript" class="init">
 
     $(document).ready(function() {
@@ -41,11 +40,20 @@ $cargo = $_SESSION['cargo'];
             ]
         });
 
-        $('input').iCheck({
+        $('input.statusEmp , #checksEmail, #checksEmailU').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',
             //increaseArea: '100%' // optional
           });
+
+        $('input.statusEmp').on('ifChecked', function(event){
+            id = $(this).attr('id');
+            statusEmp(id, 'Activo');
+        });
+        $('input.statusEmp').on('ifUnchecked',function(event){
+            id = $(this).attr('id');
+            statusEmp(id, 'Inactivo');
+        });
 
         $('input').on('ifChecked', function(event){
             id = $(this).attr('id');
@@ -55,12 +63,14 @@ $cargo = $_SESSION['cargo'];
             id = $(this).attr('id');
             statusEmp(id, 'Inactivo');
         });
+
     });
     $.validate({
         lang: 'es',
         modules : 'security, modules/logic'
     });
     $('#obser').restrictLength( $('#max-length-element') );
+    $('#obserU').restrictLength( $('#max-length-elementU') );
 </script>
 <?PHP
 include 'newEmpleado.php';
@@ -68,6 +78,19 @@ include 'editEmpleado.php';
 include 'previewEmpleado.php';
 include 'delEmpleado.php';
 ?>
+
+  <!-- The blueimp Gallery widget -->
+  <!-- <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even"> -->
+  <div id="blueimp-gallery" class="blueimp-gallery" >
+      <div class="slides"></div>
+      <h3 class="title"></h3>
+      <a class="prev">‹</a>
+      <a class="next">›</a>
+      <a class="close">×</a>
+      <a class="play-pause"></a>
+      <ol class="indicator"></ol>
+  </div>
+
 <div class="row" id="listTabla">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <h1 class="avisos" align="center"><strong>EMPLEADOS</strong></h1>
@@ -117,13 +140,14 @@ include 'delEmpleado.php';
                         if( $row['foto'] != '' )
                         {
                             ?>
-                            <img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/<?=($row['foto']);?>&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
-
+                            <a href="modulo/empleado/uploads/files/<?=($row['foto']);?>" title="<?=($row['foto']);?>" download="<?=($row['foto']);?>" data-lightbox="lightbox-admin" data-title="Optional caption.">
+                                <img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/files/thumbnail/<?=($row['foto']);?>&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
+                            </a>
                             <?PHP
                         }
                         else{
                             ?>
-                            <img class="thumb" src="thumb/phpThumb.php?src=../images/sin_imagen.jpg&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
+                            <img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/files/sin_imagen.jpg&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
                             <?PHP
                         }
                         ?>
@@ -188,12 +212,12 @@ include 'delEmpleado.php';
                                     <?PHP
                                     if( $row['statusEmp'] == 'Activo' ){
                                     ?>
-                                        <input type="checkbox" name="checks" checked id="<?=$row['id_empleado']?>"/>
+                                        <input type="checkbox" class="statusEmp" name="checks" checked id="<?=$row['id_empleado']?>"/>
                                         <label>Status</label>
                                     <?PHP
                                     }else{
                                     ?>
-                                        <input type="checkbox" name="checks" id="<?=$row['id_empleado']?>"/>
+                                        <input type="checkbox" class="statusEmp" name="checks" id="<?=$row['id_empleado']?>"/>
                                         <label>Status</label>
                                     <?PHP
                                     }
@@ -223,3 +247,79 @@ include 'delEmpleado.php';
     </div>
 </div>
 <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIG-WEdvtbElIhE06jzL5Kk1QkFWCvymQ&force=lite"></script>
+
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td>
+            <span class="preview"></span>
+        </td>
+        <td>
+            <p class="name">{%=file.name%}</p>
+            <strong class="error text-danger"></strong>
+        </td>
+        <td>
+            <p class="size">Procesando...</p>
+            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+        </td>
+        <td>
+            {% if (!i && !o.options.autoUpload) { %}
+                <button class="btn btn-primary start" disabled>
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Iniciar</span>
+                </button>
+            {% } %}
+            {% if (!i) { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancelar</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        <td>
+            <span class="preview">
+                {% if (file.thumbnailUrl) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                {% } %}
+            </span>
+        </td>
+        <td>
+            <p class="name">
+                {% if (file.url) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                {% } else { %}
+                    <span>{%=file.name%}</span>
+                {% } %}
+            </p>
+            {% if (file.error) { %}
+                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+            {% } %}
+        </td>
+        <td>
+            <span class="size">{%=o.formatFileSize(file.size)%}</span>
+        </td>
+        <td>
+            {% if (file.deleteUrl) { %}
+                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Delete</span>
+                </button>
+                <input type="checkbox" name="delete" value="1" class="toggle">
+            {% } else { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancelar</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>

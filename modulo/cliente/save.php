@@ -18,9 +18,9 @@
 	$data  = json_decode($data);
 
 	$strQuery = "INSERT INTO cliente (id_cliente, ci, depa, id_empleado, nombre, apP, apM, phone, celular, ";
-	$strQuery.= "nombreEmp, email, direccion, numero, coorX, coorY, obser, dateReg, status ) ";
+	$strQuery.= "nombreEmp, iva, email, direccion, numero, coorX, coorY, obser, dateReg, status ) ";
 	$strQuery.= "VALUES ('".$data->codCl."', ".$data->ci.", '".$data->dep."', '".$_SESSION['idEmp']."', '".$data->name."', '".$data->paterno."', ";
-	$strQuery.= "'".$data->materno."', '".$data->fono."', '".$data->celular."', '".$data->nameEmp."', ";
+	$strQuery.= "'".$data->materno."', '".$data->fono."', '".$data->celular."', '".$data->nameEmp."', '".$data->iva."', ";
 	$strQuery.= "'".$data->email."', '".$data->addres."', '".$data->Nro."', '".$data->cx."', '".$data->cy."', '".$data->obser."', ";
 	$strQuery.= "'".$data->date."', 'Activo' )";
 
@@ -30,29 +30,26 @@
 
 	$data->img = '';
 
-	$strQuery = "SELECT * FROM aux_img ";
+	$strQuery = "SELECT * FROM auxImg ";
 
 	$srtQ = $db->Execute($strQuery);
 
 	$row = $srtQ->FetchRow();
 
 	if ($row[0]!=''){
-		$img = $row['imagen'];
+		$name = $row['name'];
+		$size = $row['size'];
 
-		$strQuery = "UPDATE cliente set foto = '".$img."' ";
+		$strQuery = "UPDATE cliente set foto = '".$name."', size = '".$size."' ";
 		$strQuery.= "WHERE id_cliente = '".$data->codCl."' ";
 
 		$strQ = $db->Execute($strQuery);
 		$data->img = $img;
 	}
-	if($data->checksEmail == 'on'){
-		//echo 'entra......';
-		//include '../../classes/envioData.php';
-	}
-	//print_r($data);
+
 	/***************************************************************************/
 
-	$sql = "TRUNCATE TABLE aux_img ";
+	$sql = "TRUNCATE TABLE auxImg ";
 	$strQ = $db->Execute($sql);
 
 	if($sql)

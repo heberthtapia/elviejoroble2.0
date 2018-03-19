@@ -1,20 +1,3 @@
-function minimizar(id){
-	$('.'+id).slideToggle();
-	var str = id;
-	var res = str.split("chat");
-	$("#chat_box_"+res[1]).mCustomScrollbar('scrollTo','bottom');
-}
-function cerrar(id){
-	$("aside").remove("#"+id);
-	num = 1;
-	$('#sidebar aside').each(function (index)
-	{
-		id = $(this).attr('id');
-		r = ((280*num)+30);
-		$('aside#'+id).css('right', r+'px');
-		num++;
-	});
-}
 Push.create("Bienbenido al CHAT...!!!",{
 	body: "Este es el cuerpo de la notificación.",
 	icon: "images/logo-elviejoroble.png",
@@ -23,7 +6,97 @@ Push.create("Bienbenido al CHAT...!!!",{
 		this.close();
 	}
 });
-/*	Funcion para obtener ID de SESSION */
+/**
+ * [openChat description] Abrir chat por medio del boton
+ * @return {[type]} [description]
+ */
+function openChat(){
+	$('#sidebar_primary').css({
+		display: 'block'
+	});
+	$('#iconChat').css({
+		display: 'none'
+	});
+	num = 1;
+	$('#sidebar aside').each(function (index){
+		id = $(this).attr('id');
+		r = ((265*num)+2);
+		$('aside#'+id).css('right', r+'px');
+		num++;
+	});
+}
+/**
+ * [closeChat description] Cerrar chat por medio del boton
+ * @return {[type]} [description]
+ */
+function closeChat(){
+	$('#sidebar_primary').css({
+		display: 'none'
+	});
+	$('#iconChat').css({
+		display: 'block'
+	});
+	num = 1;
+	$('#sidebar aside').each(function (index){
+		id = $(this).attr('id');
+		if( num == 1 ){
+			r = ((100*num));
+		}else{
+			r = ((265*num)) - 165;
+		};
+		$('aside#'+id).css('right', r+'px');
+		num++;
+	});
+}
+/**
+ * [minimizar description] minimiza cada chat
+ * @param  {[type]} id [description]
+ * @return {[type]}    [description]
+ */
+function minimizar(id){
+	$('.'+id).slideToggle();
+	var str = id;
+	var res = str.split("chat");
+	$("#chat_box_"+res[1]).mCustomScrollbar('scrollTo','bottom');
+}
+/**
+ * [remove description] elimina el chat
+ * @param  {[type]} id [description]
+ * @return {[type]}    [description]
+ */
+function remove(id){
+	//$("aside").remove("#"+id);
+	setTimeout(function() {
+    	$("aside").remove("#"+id);
+    	num = 1;
+		var coordenadas = $("#sidebar_primary").position();
+		//alert(coordenadas.top);
+		if( coordenadas.top == 0){
+			right = 165;
+		}else{
+			right = -2;
+		}
+		$('#sidebar aside').each(function (index)
+		{
+			id = $(this).attr('id');
+			r = ((265*num)-right);
+			$('aside#'+id).css('right', r+'px');
+			num++;
+		});
+    }, 1950 );
+}
+/**
+ * [cerrar description] llama a remove();
+ * @param  {[type]} id [description]
+ * @return {[type]}    [description]
+ */
+function cerrar(id){
+	$("aside#"+id).addClass("animation-target4", remove(id) );
+}
+/**
+ * [obtenerSession description] Funcion para obtener ID de SESSION
+ * @return {[type]} [description]
+ */
 function obtenerSession(){
 	var resp;
 	$.ajax({
@@ -47,13 +120,19 @@ function obtenerSession(){
 function chatClickSend(userTo, e){
 	var userFrom = obtenerSession();
 	num = $('#sidebar > aside').length;
+	var coordenadas = $("#sidebar_primary").position();
+	if( coordenadas.top == 0){
+		right = 167;
+	}else{
+		right = 0;
+	}
 	sw = 0;
 	$('#sidebar aside').each(function (index)
 	{
-		id = $(this).attr('id');
-		userFrom	= new String(userFrom);
-		userTo		= new String(userTo);
-		stringB = userFrom.concat(userTo);
+		id       = $(this).attr('id');
+		userFrom = new String(userFrom);
+		userTo   = new String(userTo);
+		stringB  = userFrom.concat(userTo);
 		if( id == stringB && userFrom == e.userTo ){
 			sw = 1;
 			sendMessage(e);
@@ -65,7 +144,7 @@ function chatClickSend(userTo, e){
 			url: 'modulo/chat/sidebarChat.php',
 			type: 'POST',
 			async:true,
-			data: {userTo: userTo, num: num, userFrom: userFrom}
+			data: {userTo: userTo, num: num, userFrom: userFrom, right: right}
 		})
 		.done(function(data) {
 			console.log("success");
@@ -124,7 +203,7 @@ function chatClick(userTo, userFrom){
 			console.log("error");
 		})
 		.always(function() {
-			console.log("complete");
+			//console.log("complete");
 			$("#chat_box_"+userFrom+userTo).mCustomScrollbar('scrollTo','bottom');
 			$('#submit_message'+userTo).focus();
 		});
@@ -147,7 +226,7 @@ function sendMessage(data){
 	if( f == 'true' ){
 		t = '<div class="chat_message_wrapper">';
 		t+= '<div class="chat_user_avatar">';
-		t+= '<img class="thumb md-user-image" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/'+data.foto+'&amp;w=32&amp;h=32&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="Foto de Perfil" title="Foto de Perfil">';
+		t+= '<img class="thumb md-user-image" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/files/thumbnail/'+data.foto+'&amp;w=35&amp;h=35&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="Foto de Perfil" title="Foto de Perfil">';
 		t+= '</div>';
 		t+= '	<ul class="chat_message">';
 		t+= '        <li>';
@@ -162,7 +241,7 @@ function sendMessage(data){
 		if( $('div#chat_box_'+data.userTo+data.userFrom).find('div.mCSB_container').is(':empty') ){
 			t = '<div class="chat_message_wrapper">';
 			t+= '<div class="chat_user_avatar">';
-			t+= '     <img class="thumb md-user-image" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/'+data.foto+'&amp;w=32&amp;h=32&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="Foto de Perfil" title="Foto de Perfil">';
+			t+= '     <img class="thumb md-user-image" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/files/thumbnail/'+data.foto+'&amp;w=35&amp;h=35&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="Foto de Perfil" title="Foto de Perfil">';
 			t+= '</div>';
 			t+= '	<ul class="chat_message">';
 			t+= '        <li>';
@@ -199,46 +278,50 @@ function sendMessage(data){
 }
 
 function sendSubmit(idTo, userFrom){
-	r = $('div#chat_box_'+userFrom+idTo+' div.chat_message_wrapper:last').hasClass( "chat_message_right" ).toString();
-	if( r == 'true' ){
-		$.post(
-			'modulo/chat/ajax.php',
-			{ msj : $('#submit_message'+idTo).val(), userFrom : userFrom, userTo : idTo, socket_id : pusher.connection.socket_id},
-			function(data){
-					$('div#chat_box_'+data.userFrom+idTo+' div.chat_message_wrapper:last').find('ul').append('<li id="effect"><p>'+data.mensaje+'</p></li>');
-				},
-				'json')
-			.always(function(data) {
-				console.log("complete");
-				$("#chat_box_"+data.userFrom+idTo).mCustomScrollbar('scrollTo','bottom');
-				$('#submit_message'+idTo).val('');
-				limpNMessaje(data.userFrom+idTo);
-			});
-		return false;
-	}else{
-		$.post(
-			'modulo/chat/ajax.php',
-			{ msj : $('#submit_message'+idTo).val(), userFrom : userFrom, userTo : idTo, socket_id : pusher.connection.socket_id},
-			function(data){
-					t = '<div class="chat_message_wrapper chat_message_right">';
-					t+= '<div class="chat_user_avatar">';
-					t+= '     <img class="thumb md-user-image" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/'+data.foto+'&amp;w=32&amp;h=32&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="Foto de Perfil" title="Foto de Perfil">';
-					t+= '</div>';
-					t+= '	<ul class="chat_message">';
-					t+= '        <li>';
-					t+= '            <p>'+data.mensaje+'</p>';
-					t+= '        </li>';
-					t+= '    </ul> </div>';
-					$('div#chat_box_'+data.userFrom+idTo).find('div.mCSB_container').append(t);
-				},
-				'json')
+	if($('#submit_message'+idTo).val() != ''){
+		r = $('div#chat_box_'+userFrom+idTo+' div.chat_message_wrapper:last').hasClass( "chat_message_right" ).toString();
+		if( r == 'true' ){
+			$.post(
+				'modulo/chat/ajax.php',
+				{ msj : $('#submit_message'+idTo).val(), userFrom : userFrom, userTo : idTo, socket_id : pusher.connection.socket_id},
+				function(data){
+						$('div#chat_box_'+data.userFrom+idTo+' div.chat_message_wrapper:last').find('ul').append('<li id="effect"><p>'+data.mensaje+'</p></li>');
+					},
+					'json')
 				.always(function(data) {
 					console.log("complete");
 					$("#chat_box_"+data.userFrom+idTo).mCustomScrollbar('scrollTo','bottom');
 					$('#submit_message'+idTo).val('');
 					limpNMessaje(data.userFrom+idTo);
 				});
-		return false;
+			return false;
+		}else{
+			$.post(
+				'modulo/chat/ajax.php',
+				{ msj : $('#submit_message'+idTo).val(), userFrom : userFrom, userTo : idTo, socket_id : pusher.connection.socket_id},
+				function(data){
+						t = '<div class="chat_message_wrapper chat_message_right">';
+						t+= '<div class="chat_user_avatar">';
+						t+= '     <img class="thumb md-user-image" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/files/thumbnail/'+data.foto+'&amp;w=35&amp;h=35&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="Foto de Perfil" title="Foto de Perfil">';
+						t+= '</div>';
+						t+= '	<ul class="chat_message">';
+						t+= '        <li>';
+						t+= '            <p>'+data.mensaje+'</p>';
+						t+= '        </li>';
+						t+= '    </ul> </div>';
+						$('div#chat_box_'+data.userFrom+idTo).find('div.mCSB_container').append(t);
+					},
+					'json')
+					.always(function(data) {
+						console.log("complete");
+						$("#chat_box_"+data.userFrom+idTo).mCustomScrollbar('scrollTo','bottom');
+						$('#submit_message'+idTo).val('');
+						limpNMessaje(data.userFrom+idTo);
+					});
+			return false;
+		}
+	}else{
+		alert('No puede enviar mensajes vacios.')
 	}
 }
 function limpNMessaje(id){

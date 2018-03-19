@@ -1,28 +1,15 @@
 <?PHP
 $fecha = $op->ToDay();
-$hora = $op->Time();
+$hora  = $op->Time();
 ?>
 
 <script>
 	//VARIABLES GENERALES
 	//DECLARAS FUERA DEL READY DE JQUERY
 	var map;
-	var markers = [];
-	var marcadores_bd=[];
-	var mapa = null; //VARIABLE GENERAL PARA EL MAPA
-
-	function openWebCam(){
-		openWebcam();//document.write( webcam.get_html(320, 240) );
-		webcam.set_api_url( 'modulo/empleado/uploadEmp.php' );
-		webcam.set_hook( 'onComplete', 'my_callback_function');
-	}
-	function my_callback_function(response) {
-		//alert("Success! PHP returned: " + response);
-		msg = $.parseJSON(response);
-		//alert(msg.filename);
-		//modificado
-		recargaImg(msg.filename, 'empleado');
-	}
+	var markers       = [];
+	var marcadores_bd = [];
+	var mapa          = null; //VARIABLE GENERAL PARA EL MAPA
 
 	function initMap(){
 		/* GOOGLE MAPS */
@@ -42,10 +29,10 @@ $hora = $op->Time();
 		google.maps.event.addListener(mapa, "click", function(event){
 			//OBTENER COORDENADAS POR SEPARADO
 			var coordenadas = event.latLng.toString();
-			coordenadas = coordenadas.replace("(", "");
-			coordenadas = coordenadas.replace(")", "");
+			coordenadas     = coordenadas.replace("(", "");
+			coordenadas     = coordenadas.replace(")", "");
 
-			var lista = coordenadas.split(",");
+			var lista       = coordenadas.split(",");
 			//alert(lista[0]+"---"+lista[1])
 			var direccion = new google.maps.LatLng(lista[0], lista[1]);
 			//variable marcador
@@ -133,7 +120,6 @@ $hora = $op->Time();
 		}
 	}
 
-	// $(document).ready(function(e) {
 
 	$('#dateNac').datetimepicker({
 		locale: 'es',
@@ -152,75 +138,53 @@ $hora = $op->Time();
 		geocoder.geocode({ 'address': address}, geocodeResult);
 	});
 
-	/* uploadIfy */
-	$('#file_upload').uploadify({
-		'queueID'  		: 'some_file_queue',
-		'swf'      		: 'uploadify/uploadify.swf',
-		'uploader'		: 'uploadify/uploadify.php',
-		'method'   		: 'post',
-		'multi'   		: false,
-		'auto'   			: false,
-		'queueSizeLimit' 	: 1,
-		'fileSizeLimit' 	: '100KB',
-		'fileTypeDesc' 	: 'Imagen',
-		'fileTypeExts' 	: '*.jpg',
-		'removeCompleted' : false,
-		'buttonText'		: 'Examinar...',
-		height       		: 25,
-		width        		: 100,
-		'formData'      	: {
-			'path' : 'empleado'
-		},
-		// ** Eventos **
-		'onSelectOnce':function(event,data){
-			$('#file_upload').uploadifySettings('scriptData',{'directorio':'a','CodeUser': '21'});
-		},
-		'onUploadComplete': function(file){
-			idImg('empleado');
-			//$('#cboxTitle').html('La foto ' + file.name + ' se subio correctamente, <br> ahora puede guardar el formulario.');
-
-			setTimeout(function(){
-				$( ".uploadShow" ).toggle(2000,function(){
-					$('#save, #close').removeAttr('disabled','disabled');
-					$('#subir').text("Subir Foto");
-					$('#file_upload').uploadify('cancel', '*');
-				});
-			},4000);
-		}
-	});
-	/* Abrir y cerrar uploadIfy */
-	$('#subir').click(
-		function(){
-			var $this = $(this);
-			var op = $this.find('span').text();
-			if( op == 'Subir Foto' ){
-				$('#subir').find('span').text("Cancelar");
-				$('#save, #close').attr('disabled','disabled');
-			}else{
-				$('#subir').find('span').text("Subir Foto");
-				$('#save, #close').removeAttr('disabled','disabled');
-				$('#file_upload').uploadify('cancel', '*');
-			}
-			$( ".uploadShow" ).toggle(1000);
-		});
-
 	$('#dataRegister').on('show.bs.modal', function() {
 		//Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
 		initMap();
+		$('#foto').html('<img class="thumb" src="../../thumb/phpThumb.php?src=../modulo/empleado/uploads/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
 	});
 
 	$('#dataRegister').on('hidden.bs.modal', function (e) {
 		// do something...
 		$('#formNew').get(0).reset();
-		$('.uploadShow').css('display','none');
-		//$('#file_upload').uploadify('cancel', '*');
-		$('#save, #close').removeAttr('disabled','disabled');
-		$('#subir').text("Subir Foto");
-		$('#foto').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+		$('#foto').html('<img class="thumb" src="../../thumb/phpThumb.php?src=../modulo/empleado/uploads/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
 	});
- // });
+
+$(document).ready(function() {
+	/* JQUERY FILE UPLOAD */
+	//UPLOAD FILES
+	'use strict';
+	$('#formNew').fileupload({
+        // Uncomment the following to send cross-domain cookies:
+        //xhrFields: {withCredentials: true},
+        url: 'modulo/empleado/uploads/',
+        disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator && navigator.userAgent),
+        imageMaxWidth: 1200,
+        //imageMaxHeight: 800,
+        imageCrop: false, // Force cropped images
+        //maxFileSize: 999,
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+        limitMultiFileUploads: 1,
+        maxNumberOfFiles: 1
+    });
+
+    $('#formNew').bind('fileuploadcompleted', function (e, data) {
+	    $.each(data.files, function (index, file) {
+	    //console.log('Added file: ' + file.name);
+	      	//saveImg('empleado', file.name, file.size);
+            loadImg('empleado', 'auxImgEmp');
+	    });
+	});
+
+});
 
 </script>
+
+<style type="text/css">
+	.table {
+		margin-bottom: 0;
+	}
+</style>
 
 <form id="formNew" action="javascript:saveForm('formNew','empleado/save.php')" class="" autocomplete="off" >
 <div class="modal fade bs-example-modal-lg" id="dataRegister" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" data-backdrop="static"
@@ -388,35 +352,53 @@ $hora = $op->Time();
 						<textarea id="obser" name="obser" cols="2" placeholder="Observaciones" class="form-control"></textarea>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-2 form-group">
-						<button type="button" id="capturar" class="btn btn-primary" onclick="openWebCam()">
-							<i class="fa fa-camera" aria-hidden="true"></i>
-							<span>Capturar Foto</span>
-						</button>
-					</div>
-					<div class="col-md-2 form-group">
-						<button type="button" id="subir" class="btn btn-primary" ">
-							<i class="fa fa-upload" aria-hidden="true"></i>
-							<span>Subir Foto</span>
-						</button>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="idealWrap uploadShow" style="display:none;">
-							<div id="some_file_queue"></div>
-							<div id="buttonFile">
-								<input type="file" name="file_upload" id="file_upload" />
-								<button type="button" id="upload" class="btn btn-success" onclick="$('#file_upload').uploadify('upload')">Subir Foto</button>
-							</div>
-							<div class="clearfix"></div>
-						</div><!--End idealWrap-->
-					</div>
-				</div>
 
-			</div>
-			<div class="modal-footer">
+				<!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+		        <div class="row fileupload-buttonbar">
+		            <div class="col-md-7">
+		                <!-- The fileinput-button span is used to style the file input field as button -->
+		                <span class="btn btn-success btn-sm fileinput-button">
+		                    <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+		                    <span>Examinar...</span>
+		                    <input type="file" id="files" name="files[]" multiple>
+		                </span>
+		                <button type="submit" class="btn btn-primary btn-sm start">
+		                    <i class="fa fa-upload"></i>
+		                    <span>Iniciar Subida</span>
+		                </button>
+		                <button type="reset" class="btn btn-warning btn-sm cancel">
+		                    <i class="fa fa-ban"></i>
+		                    <span>Cancelar</span>
+		                </button>
+		                <button type="button" class="btn btn-danger btn-sm delete">
+		                    <i class="fa fa-trash-o"></i>
+		                    <span>Borrar</span>
+		                </button>
+		                <input type="checkbox" class="toggle">
+		                <!-- The global file processing state -->
+		                <span class="fileupload-process"></span>
+		            </div>
+		            <!-- The global progress state -->
+		            <div class="col-md-5 fileupload-progress fade">
+		                <!-- The global progress bar -->
+		                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+		                    <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+		                </div>
+		                <!-- The extended global progress state -->
+		                <div class="progress-extended">&nbsp;</div>
+		            </div>
+		        </div>
+		        <div class="file-preview">
+		        	<div class="file-drop-zone-title">
+		        		Arrastre y suelte aquí los archivos …
+		        	</div>
+		        	<div class="file-drop-zone">
+			        	<!-- The table listing the files available for upload/download -->
+			        	<table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+		        	</div>
+		        </div>
+		</div>
+		<div class="modal-footer">
 				<button type="button" id="close" class="btn btn-danger" data-dismiss="modal">
 					<i class="fa fa-close" aria-hidden="true"></i>
 					<span>Cancelar</span>
@@ -425,27 +407,8 @@ $hora = $op->Time();
 					<i class="fa fa-check" aria-hidden="true"></i>
 					<span>Agregar Empleado</span>
 				</button>
-			</div>
+		</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 </form>
-
-<div id="camera">
-	<span class="tooltip"></span>
-	<span class="camTop"></span>
-
-	<div id="screen"></div>
-	<div id="buttons">
-		<div class="buttonPane">
-			<a id="closeButton" onclick="closeWebcam()" class="btn btn-danger">Cerrar</a>
-			<a id="shootButton" href="" class="btn btn-primary">Capturar!</a>
-		</div>
-		<div class="buttonPane" style="display: none">
-			<a id="cancelButton" href="" class="btn btn-danger">Cancelar</a>
-			<a id="uploadButton" href="" class="btn btn-primary">Subir!</a>
-		</div>
-	</div>
-
-	<span class="settings"></span>
-</div>

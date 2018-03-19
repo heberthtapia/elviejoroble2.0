@@ -36,29 +36,30 @@
 
 	$data->img = '';
 
-	$strQuery = "SELECT * FROM aux_img ";
+	$strQuery = "SELECT * FROM auxImgEmp ";
 
 	$srtQ = $db->Execute($strQuery);
 
 	$row = $srtQ->FetchRow();
 
 	if ($row[0]!=''){
-		$img = $row['imagen'];
+		$name = $row['name'];
+		$size = $row['size'];
 
-		$strQuery = "UPDATE empleado set foto = '".$img."' ";
+		$strQuery = "UPDATE empleado set foto = '".$name."', size = '".$size."' ";
 		$strQuery.= "WHERE id_empleado = ".$data->ciU." ";
 
 		$strQ = $db->Execute($strQuery);
 		$data->img = $img;
 	}
-	if($data->checksEmailU == 'on'){
+	if($data->checksEmail == 'on'){
 		//echo 'entra......';
 		//include '../../classes/envioData.php';
 	}
 	//print_r($data);
 	/***************************************************************************/
 
-	$sql = "TRUNCATE TABLE aux_img ";
+	$sql = "TRUNCATE TABLE auxImgEmp ";
 	$strQ = $db->Execute($sql);
 
 	if($sql)

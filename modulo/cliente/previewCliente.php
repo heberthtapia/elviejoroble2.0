@@ -23,28 +23,32 @@ var coorX;
 var coorY;
 var id_cliente;
 
+$(document).ready(function(e) {
+
     $('#dataPreview').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Botón que activó el modal
-        var foto = button.data('foto'); // Extraer la información de atributos de datos
-        var nombre = button.data('name'); // Extraer la información de atributos de datos
-        var apP = button.data('paterno'); // Extraer la información de atributos de datos
-        var apM = button.data('materno'); // Extraer la información de atributos de datos
-            id_cliente = button.data('id'); // Extraer la información de atributos de datos
-        var depa = button.data('dep'); // Extraer la información de atributos de datos
-        var nameEmp = button.data('nameemp');
-        var phone = button.data('fono');
-        var celular = button.data('celular');
-        var email = button.data('emailc');
-        var ci = button.data('ci');
+        var button    = $(event.relatedTarget); // Botón que activó el modal
+        var foto      = button.data('foto'); // Extraer la información de atributos de datos
+        var nombre    = button.data('name'); // Extraer la información de atributos de datos
+        var apP       = button.data('paterno'); // Extraer la información de atributos de datos
+        var apM       = button.data('materno'); // Extraer la información de atributos de datos
+        id_cliente    = button.data('id'); // Extraer la información de atributos de datos
+        var depa      = button.data('dep'); // Extraer la información de atributos de datos
+        var nameEmp   = button.data('nameemp');
+        var nit       = button.data('nit');
+        var phone     = button.data('fono');
+        var celular   = button.data('celular');
+        var email     = button.data('emailc');
+        var ci        = button.data('ci');
         var direccion = button.data('addresc');
-        var numero = button.data('nro');
-            coorX = button.data('cx');
-            coorY = button.data('cy');
-        var obser = button.data('obser');
+        var numero    = button.data('nro');
+        coorX         = button.data('cx');
+        coorY         = button.data('cy');
+        var obser     = button.data('obser');
 
         var modal = $(this);
         //modal.find('.modal-title').text('Modificar cliente: '+nombre+' '+apP);
         modal.find('.modal-body #nameEmpU').val(nameEmp);
+        modal.find('.modal-body #nitU').val(nit);
         modal.find('.modal-body #nameU').val(nombre);
         modal.find('.modal-body #paternoU').val(apP);
         modal.find('.modal-body #maternoU').val(apM);
@@ -65,12 +69,27 @@ var id_cliente;
         modal.find('.modal-body #obserU').val(obser);
 
         if(foto !== ''){
-            modal.find('.modal-body #fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/'+foto+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+            modal.find('.modal-body #fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/files/thumbnail/'+foto+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
         }else {
-            modal.find('.modal-body #fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+            modal.find('.modal-body #fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/files/thumbnail/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
         }
         //$('.alert').hide();//Oculto alert
+        initMapPre();
     });
+
+    $('#dataPreview').on('hidden.bs.modal', function (e) {
+        // do something...
+        $('#formPreview').get(0).reset();
+        $('#fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/files/thumbnail/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+    });
+
+    $('#dateNacU').datetimepicker({
+        locale: 'es',
+        viewMode: 'years',
+        format: 'YYYY-MM-DD'
+    });
+
+ });
 
     //VARIABLES GENERALES
     //DECLARAS FUERA DEL READY DE JQUERY
@@ -79,8 +98,8 @@ var id_cliente;
     var marcadores_bd=[];
     var mapa = null; //VARIABLE GENERAL PARA EL MAPA
 
+    function initMapPre(){
 
-   function initMapPre(){
         /* GOOGLE MAPS */
         var formulario = $('#formPreview');
         //COODENADAS INICIALES -16.5207007,-68.1615534
@@ -95,44 +114,8 @@ var id_cliente;
 
         mapa = new google.maps.Map( $("#mapaP")[0], config );
 
-        google.maps.event.addListener(mapa, "click", function(event){
-        //OBTENER COORDENADAS POR SEPARADO
-        var coordenadas = event.latLng.toString();
-        coordenadas = coordenadas.replace("(", "");
-        coordenadas = coordenadas.replace(")", "");
 
-        var lista = coordenadas.split(",");
-        //alert(lista[0]+"---"+lista[1])
-        var direccion = new google.maps.LatLng(lista[0], lista[1]);
-        //variable marcador
-        var marcador = new google.maps.Marker({
-            //titulo: prompt("Titulo del marcador"),
-            position: direccion,
-            map: mapa, //ENQUE MAPA SE UBICARA EL MARCADOR
-            animation: google.maps.Animation.DROP, //COMO APARECERA EL MARCADOR
-            draggable: false // NO PERMITIR EL ARRASTRE DEL MARCADOR
-            //title:"Hello World!"
-        });
-
-        //PASAR LAS COORDENADAS AL FORMULARIO
-        formulario.find("input[name='cxU']").val(lista[0]);
-        formulario.find("input[name='cyU']").val(lista[1]);
-        //UBICAR EL FOCO EN EL CAMPO TITULO
-        formulario.find("input[name='addresC']").focus();
-
-        //UBICAR EL MARCADOR EN EL MAPA
-        //setMapOnAll(null);
-        markers.push(marcador);
-
-        //AGREGAR EVENTO CLICK AL MARCADOR
-        google.maps.event.addListener(marcador, "click", function(){
-            //alert(marcador.titulo);
-        });
-        deleteMarkers(markers);
-        deleteMarkers(marcadores_bd);
-        marcador.setMap(mapa);
-   });
-   listarU();
+    listarU();
   }
 
     //FUNCIONES PARA EL GOOGLE MAPS
@@ -167,8 +150,8 @@ var id_cliente;
             //var direccion = new google.maps.LatLng(lista[0], lista[1]);
             //PASAR LAS COORDENADAS AL FORMULARIO
 
-            $('#formPreview').find("input[name='cxU']").val(lista[0]);
-            $('#formPreview').find("input[name='cyU']").val(lista[1]);
+            $('#formUpdate').find("input[name='cxU']").val(lista[0]);
+            $('#formUpdate').find("input[name='cyU']").val(lista[1]);
             //$('#form').find("input[name='buscar']").val('');
 
             var marcador = new google.maps.Marker({
@@ -196,7 +179,7 @@ var id_cliente;
     //ANTES DE LISTAR MARCADORES
     //SE DEBEN QUITAR LOS ANTERIORES DEL MAPA
     deleteMarkers(markers);
-    var formulario_edicion = $("#formPreview");
+    var formulario_edicion = $("#formUpdate");
     $.ajax({
         type:"POST",
         url:"inc/listaPuntos.php?bd=cliente",
@@ -252,42 +235,16 @@ var id_cliente;
     });
   }
 
-    // $(document).ready(function(e) {
-
-    $('#dateNacU').datetimepicker({
-        locale: 'es',
-        viewMode: 'years',
-        format: 'YYYY-MM-DD'
-    });
-
-    // BUSCADOR
-    $('#searchU').on('click', function() {
-        // Obtenemos la dirección y la asignamos a una variable
-        var address = $('#buscarU').val();
-        // Creamos el Objeto Geocoder
-        var geocoder = new google.maps.Geocoder();
-        // Hacemos la petición indicando la dirección e invocamos la función
-        // geocodeResult enviando todo el resultado obtenido
-        geocoder.geocode({ 'address': address}, geocodeResult);
-    });
-
-    $('#dataPreview').on('show.bs.modal', function() {
-        //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
-        initMapPre();
-    });
-
-    $('#dataPreview').on('hidden.bs.modal', function (e) {
-        // do something...
-        $('#formPreview').get(0).reset();
-        $('.uploadShowU').css('display','none');
-        //$('#file_upload').uploadify('cancel', '*');
-        $('#saveU, #closeU').removeAttr('disabled','disabled');
-        $('#subirU').find('span').text("Subir Foto");
-        $('#fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
-    });
-
-
-    // });
+// BUSCADOR
+$('#searchU').on('click', function() {
+    // Obtenemos la dirección y la asignamos a una variable
+    var address = $('#buscarU').val();
+    // Creamos el Objeto Geocoder
+    var geocoder = new google.maps.Geocoder();
+    // Hacemos la petición indicando la dirección e invocamos la función
+    // geocodeResult enviando todo el resultado obtenido
+    geocoder.geocode({ 'address': address}, geocodeResult);
+});
 
 </script>
 
@@ -318,9 +275,15 @@ var id_cliente;
                                 <input id="codClU" name="codClU" type="text" placeholder="Cod. Cliente" class="form-control" readonly />
                                 <input id="codCliU" name="codCliU" type="hidden" value="<?=$_SESSION['inc'].''.$op->ceros($NumRow[0],2);?>"/>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-8 form-group">
                                 <label for="nameEmpU" class="sr-only">Nombre Negocio:</label>
                                 <input id="nameEmpU" name="nameEmpU" type="text" placeholder="Nombre Negocio" data-validation="required" class="form-control" autocomplete="off" disabled="" />
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="nitU" class="sr-only">NIT:</label>
+                                <input id="nitU" name="nitU" type="text" placeholder="NIT" data-validation="required number" class="form-control" autocomplete="off" disabled="" />
                             </div>
                         </div>
                         <div class="row">
@@ -418,13 +381,6 @@ var id_cliente;
                         </div>
                         <div class="row">
                             <div class="col-md-12 form-group">
-                                <div class="checkbox">
-                                <label><input id="checksEmailU" name="checksEmailU" type="checkbox" checked disabled="" /> Enviar datos por E-mail</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 form-group">
                                 <button type="button"  class="btn btn-primary btn-sm" onclick="initMapPre();" >
                                     <i class="fa fa-refresh" aria-hidden="true"></i>
                                     <span>Cargar Mapa</span>
@@ -453,24 +409,6 @@ var id_cliente;
 </div><!-- /.modal -->
 </form>
 
-<div id="camera">
-    <span class="tooltip"></span>
-    <span class="camTop"></span>
-
-    <div id="screen"></div>
-    <div id="buttons">
-        <div class="buttonPane">
-            <a id="closeButton" onclick="closeWebcam()" class="btn btn-danger">Cerrar</a>
-            <a id="shootButton" href="" class="btn btn-primary">Capturar!</a>
-        </div>
-        <div class="buttonPane" style="display: none">
-            <a id="cancelButton" href="" class="btn btn-danger">Cancelar</a>
-            <a id="uploadButton" href="" class="btn btn-primary">Subir!</a>
-        </div>
-    </div>
-
-    <span class="settings"></span>
-</div>
 <script>
     function cargaCodU(){
 

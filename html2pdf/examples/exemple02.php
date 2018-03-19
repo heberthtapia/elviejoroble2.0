@@ -1,32 +1,32 @@
 <?php
 /**
- * HTML2PDF Librairy - example
+ * Html2Pdf Library - example
  *
- * HTML => PDF convertor
- * distributed under the LGPL License
+ * HTML => PDF converter
+ * distributed under the OSL-3.0 License
  *
- * @author      Laurent MINGUET <webmaster@html2pdf.fr>
- *
- * isset($_GET['vuehtml']) is not mandatory
- * it allow to display the result in the HTML format
+ * @package   Html2pdf
+ * @author    Laurent MINGUET <webmaster@html2pdf.fr>
+ * @copyright 2017 Laurent MINGUET
  */
+require_once dirname(__FILE__).'/../vendor/autoload.php';
 
-    // get the HTML
+use Spipu\Html2Pdf\Html2Pdf;
+use Spipu\Html2Pdf\Exception\Html2PdfException;
+use Spipu\Html2Pdf\Exception\ExceptionFormatter;
+
+try {
     ob_start();
-    include(dirname(__FILE__).'/res/exemple02.php');
+    include dirname(__FILE__).'/res/exemple02.php';
     $content = ob_get_clean();
 
-    // convert in PDF
-    require_once(dirname(__FILE__).'/../html2pdf.class.php');
-    try
-    {
-        $html2pdf = new HTML2PDF('P', 'A4', 'fr', true, 'UTF-8', array(15, 5, 15, 5));
-        $html2pdf->pdf->SetDisplayMode('fullpage');
-        $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
-        $html2pdf->Output('exemple02.pdf');
-    }
-    catch(HTML2PDF_exception $e) {
-        echo $e;
-        exit;
-    }
+    $html2pdf = new Html2Pdf('P', 'A4', 'fr', true, 'UTF-8', array(15, 5, 15, 5));
+    $html2pdf->pdf->SetDisplayMode('fullpage');
+    $html2pdf->writeHTML($content);
+    $html2pdf->output('exemple02.pdf');
+} catch (Html2PdfException $e) {
+    $html2pdf->clean();
 
+    $formatter = new ExceptionFormatter($e);
+    echo $formatter->getHtmlMessage();
+}

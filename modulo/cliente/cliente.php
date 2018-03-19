@@ -14,15 +14,13 @@ $cargo = $_SESSION['cargo'];
 
 /* vaciamos las tablas auxiliares */
 
-$sql = "TRUNCATE TABLE aux_img ";
+$sql = "TRUNCATE TABLE auxImg ";
 $strQ = $db->Execute($sql);
 
 $strEmp = "SELECT COUNT(*) FROM cliente WHERE id_empleado = ".$_SESSION['idEmp']." ";
 $strNum = $db->Execute($strEmp);
 $NumRow = $strNum->FetchRow();
 ?>
-<script type="text/javascript" src="webcam/webcam.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" language="javascript" class="init">
 
     $(document).ready(function() {
@@ -50,17 +48,17 @@ $NumRow = $strNum->FetchRow();
             ]
         });
 
-        $('input').iCheck({
+        $('input.statusCli').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',
             //increaseArea: '100%' // optional
           });
 
-        $('input').on('ifChecked', function(event){
+        $('input.statusCli').on('ifChecked', function(event){
             id = $(this).attr('id');
             statusCli(id, 'Activo');
         });
-        $('input').on('ifUnchecked',function(event){
+        $('input.statusCli').on('ifUnchecked',function(event){
             id = $(this).attr('id');
             statusCli(id, 'Inactivo');
         });
@@ -132,12 +130,14 @@ include 'delCliente.php';
                         if( $row['foto'] != '' )
                         {
                             ?>
-                            <img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/<?=($row['foto']);?>&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
+                        <a href="modulo/cliente/uploads/files/<?=($row['foto']);?>" title="<?=($row['foto']);?>" download="<?=($row['foto']);?>" data-lightbox="lightbox-admin" data-title="Optional caption.">
+                            <img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/files/<?=($row['foto']);?>&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
+                        </a>
                             <?PHP
                         }
                         else{
                             ?>
-                            <img class="thumb" src="thumb/phpThumb.php?src=../images/sin_imagen.jpg&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
+                            <img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/files/sin_imagen.jpg&amp;w=120&amp;h=80&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">
                             <?PHP
                         }
                         ?>
@@ -148,25 +148,26 @@ include 'delCliente.php';
                     <td><?=$row['apM'];?></td>
                     <td><?=$row['direccion'];?></td>
                     <td><?=$row['numero'];?></td>
-                    <td width="15%">
-                        <div class="btn-group" style="width: 188px">
+                    <td width="10%">
+                        <div class="btn-group" style="width: 177px">
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataPreview"
-                                            data-foto="<?=$row['foto']?>"
-                                            data-name="<?=$row['nombre']?>"
-                                            data-paterno="<?=$row['apP']?>"
-                                            data-materno="<?=$row['apM']?>"
-                                            data-id="<?=$row['id_cliente']?>"
-                                            data-dep="<?=$row['depa']?>"
-                                            data-nameEmp="<?=$row['nombreEmp']?>"
-                                            data-fono="<?=$row['phone']?>"
-                                            data-celular="<?=$row['celular']?>"
-                                            data-emailC="<?=$row['email']?>"
-                                            data-ci="<?=$row['ci']?>"
-                                            data-addresC="<?=$row['direccion']?>"
-                                            data-Nro="<?=$row['numero']?>"
-                                            data-cx="<?=$row['coorX']?>"
-                                            data-cy="<?=$row['coorY']?>"
-                                            data-obser="<?=$row['obser']?>"
+                                            data-foto    ="<?=$row['foto']?>"
+                                            data-name    ="<?=$row['nombre']?>"
+                                            data-paterno ="<?=$row['apP']?>"
+                                            data-materno ="<?=$row['apM']?>"
+                                            data-id      ="<?=$row['id_cliente']?>"
+                                            data-dep     ="<?=$row['depa']?>"
+                                            data-nameEmp ="<?=$row['nombreEmp']?>"
+                                            data-nit     ="<?=$row['nit']?>"
+                                            data-fono    ="<?=$row['phone']?>"
+                                            data-celular ="<?=$row['celular']?>"
+                                            data-emailC  ="<?=$row['email']?>"
+                                            data-ci      ="<?=$row['ci']?>"
+                                            data-addresC ="<?=$row['direccion']?>"
+                                            data-Nro     ="<?=$row['numero']?>"
+                                            data-cx      ="<?=$row['coorX']?>"
+                                            data-cy      ="<?=$row['coorY']?>"
+                                            data-obser   ="<?=$row['obser']?>"
                                     <i class='fa fa-external-link'></i> Vista Previa
                                     </button>
 
@@ -178,6 +179,7 @@ include 'delCliente.php';
                                             data-id="<?=$row['id_cliente']?>"
                                             data-dep="<?=$row['depa']?>"
                                             data-nameEmp="<?=$row['nombreEmp']?>"
+                                            data-nit     ="<?=$row['nit']?>"
                                             data-fono="<?=$row['phone']?>"
                                             data-celular="<?=$row['celular']?>"
                                             data-emailC="<?=$row['email']?>"
@@ -192,7 +194,7 @@ include 'delCliente.php';
                                         <span>Modificar</span>
                                     </button>
                         </div>
-                        <div style="width: 188px; margin-top: 5px">
+                        <div style="width: 177px; margin-top: 5px">
                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#dataDeleteCli" data-id="<?=$row['id_cliente']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
                             </button>
 
@@ -200,12 +202,12 @@ include 'delCliente.php';
                                     <?PHP
                                     if( $row['status'] == 'Activo' ){
                                     ?>
-                                        <input type="checkbox" name="checks" checked id="<?=$row['id_cliente']?>"/>
+                                        <input type="checkbox" class="statusCli" name="checks" checked id="<?=$row['id_cliente']?>"/>
                                         <label>Status</label>
                                     <?PHP
                                     }else{
                                     ?>
-                                        <input type="checkbox" name="checks" id="<?=$row['id_cliente']?>"/>
+                                        <input type="checkbox" class="statusCli" name="checks" id="<?=$row['id_cliente']?>"/>
                                         <label>Status</label>
                                     <?PHP
                                     }
@@ -234,7 +236,82 @@ include 'delCliente.php';
             </tr>
             </tfoot>
         </table>
-
     </div>
 </div>
 <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIG-WEdvtbElIhE06jzL5Kk1QkFWCvymQ" async  defer></script>
+
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td>
+            <span class="preview"></span>
+        </td>
+        <td>
+            <p class="name">{%=file.name%}</p>
+            <strong class="error text-danger"></strong>
+        </td>
+        <td>
+            <p class="size">Procesando...</p>
+            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+        </td>
+        <td>
+            {% if (!i && !o.options.autoUpload) { %}
+                <button class="btn btn-primary start" disabled>
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Iniciar</span>
+                </button>
+            {% } %}
+            {% if (!i) { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancelar</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        <td>
+            <span class="preview">
+                {% if (file.thumbnailUrl) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                {% } %}
+            </span>
+        </td>
+        <td>
+            <p class="name">
+                {% if (file.url) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                {% } else { %}
+                    <span>{%=file.name%}</span>
+                {% } %}
+            </p>
+            {% if (file.error) { %}
+                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+            {% } %}
+        </td>
+        <td>
+            <span class="size">{%=o.formatFileSize(file.size)%}</span>
+        </td>
+        <td>
+            {% if (file.deleteUrl) { %}
+                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Delete</span>
+                </button>
+                <input type="checkbox" name="delete" value="1" class="toggle">
+            {% } else { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancelar</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>

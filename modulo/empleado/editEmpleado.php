@@ -1,88 +1,10 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: TAPIA
- * Date: 25/09/2016
- * Time: 0:56
- */
-$fecha = $op->ToDay();
-$hora = $op->Time();
-?>
-
 <script>
-
-var coorX;
-var coorY;
-var id_empleado;
-
-    $('#dataUpdate').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Botón que activó el modal
-        var foto = button.data('foto'); // Extraer la información de atributos de datos
-        var nombre = button.data('name'); // Extraer la información de atributos de datos
-        var apP = button.data('paterno'); // Extraer la información de atributos de datos
-        var apM = button.data('materno'); // Extraer la información de atributos de datos
-            id_empleado = button.data('ci'); // Extraer la información de atributos de datos
-        var depa = button.data('dep'); // Extraer la información de atributos de datos
-        var dateNac = button.data('datenac');
-        var phone = button.data('fono');
-        var celular = button.data('celular');
-        var email = button.data('emailc');
-        var cargo = button.data('cargo');
-        var user = button.data('coduser');
-        var pass = button.data('password');
-        var direccion = button.data('addresc');
-        var numero = button.data('nro');
-            coorX = button.data('cx');
-            coorY = button.data('cy');
-        var obser = button.data('obser');
-
-        var modal = $(this);
-        //modal.find('.modal-title').text('Modificar Empleado: '+nombre+' '+apP);
-        modal.find('.modal-body #nameU').val(nombre);
-        modal.find('.modal-body #paternoU').val(apP);
-        modal.find('.modal-body #maternoU').val(apM);
-        modal.find('.modal-body #ciU').val(id_empleado);
-        modal.find('.modal-body #depU').val(depa);
-        modal.find('.modal-body #dateNacU').val(dateNac);
-        modal.find('.modal-body #fonoU').val(phone);
-        modal.find('.modal-body #celularU').val(celular);
-        modal.find('.modal-body #emailU').val(email);
-        modal.find('.modal-body #cargoU').val(cargo);
-        modal.find('.modal-body #codUserU').val(user);
-        modal.find('.modal-body #passwordU').val(pass);
-        modal.find('.modal-body #addresU').val(direccion);
-        modal.find('.modal-body #NroU').val(numero);
-        modal.find('.modal-body #cxU').val(coorX);
-        modal.find('.modal-body #cyU').val(coorY);
-        modal.find('.modal-body #obserU').val(obser);
-
-        if(foto !== ''){
-            modal.find('.modal-body #fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/'+foto+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
-        }else {
-            modal.find('.modal-body #fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
-        }
-        //$('.alert').hide();//Oculto alert
-    });
-
     //VARIABLES GENERALES
     //DECLARAS FUERA DEL READY DE JQUERY
     var map;
     var markers = [];
     var marcadores_bd=[];
     var mapa = null; //VARIABLE GENERAL PARA EL MAPA
-
-    function openWebCam(){
-        openWebcam();//document.write( webcam.get_html(320, 240) );
-        webcam.set_api_url( 'modulo/empleado/uploadEmp.php' );
-        webcam.set_hook( 'onComplete', 'my_callback_functionUp');
-    }
-    function my_callback_functionUp(response) {
-        //alert("Success! PHP returned: " + response);
-        msg = $.parseJSON(response);
-        //alert(msg.filename);
-        //modificado
-        recargaImgU(msg.filename, 'empleado');
-    }
 
     function initMapEmp(){
         /* GOOGLE MAPS */
@@ -257,7 +179,124 @@ var id_empleado;
     });
   }
 
-    // $(document).ready(function(e) {
+ // BUSCADOR
+$('#searchU').on('click', function() {
+    // Obtenemos la dirección y la asignamos a una variable
+    var address = $('#buscarU').val();
+    // Creamos el Objeto Geocoder
+    var geocoder = new google.maps.Geocoder();
+    // Hacemos la petición indicando la dirección e invocamos la función
+    // geocodeResult enviando todo el resultado obtenido
+    geocoder.geocode({ 'address': address}, geocodeResult);
+});
+
+var coorX;
+var coorY;
+var id_empleado;
+
+$(document).ready(function(e) {
+
+    $('#dataUpdate').on('show.bs.modal', function (event) {
+
+        var button = $(event.relatedTarget); // Botón que activó el modal
+        var foto = button.data('foto'); // Extraer la información de atributos de datos
+        var nombre = button.data('name'); // Extraer la información de atributos de datos
+        var apP = button.data('paterno'); // Extraer la información de atributos de datos
+        var apM = button.data('materno'); // Extraer la información de atributos de datos
+            id_empleado = button.data('ci'); // Extraer la información de atributos de datos
+        var depa = button.data('dep'); // Extraer la información de atributos de datos
+        var dateNac = button.data('datenac');
+        var phone = button.data('fono');
+        var celular = button.data('celular');
+        var email = button.data('emailc');
+        var cargo = button.data('cargo');
+        var user = button.data('coduser');
+        var pass = button.data('password');
+        var direccion = button.data('addresc');
+        var numero = button.data('nro');
+            coorX = button.data('cx');
+            coorY = button.data('cy');
+        var obser = button.data('obser');
+        var sucur = button.data('sucur');
+        //alert(cargo);
+
+        var modal = $(this);
+        //modal.find('.modal-title').text('Modificar Empleado: '+nombre+' '+apP);
+        modal.find('.modal-body #nameU').val(nombre);
+        modal.find('.modal-body #paternoU').val(apP);
+        modal.find('.modal-body #maternoU').val(apM);
+        modal.find('.modal-body #ciU').val(id_empleado);
+        modal.find('.modal-body #depU').val(depa);
+        modal.find('.modal-body #dateNacU').val(dateNac);
+        modal.find('.modal-body #fonoU').val(phone);
+        modal.find('.modal-body #celularU').val(celular);
+        modal.find('.modal-body #emailU').val(email);
+        modal.find('.modal-body #cargoU').val(cargo);
+        modal.find('.modal-body #codUserU').val(user);
+        modal.find('.modal-body #passwordU').val(pass);
+        modal.find('.modal-body #addresU').val(direccion);
+        modal.find('.modal-body #NroU').val(numero);
+        modal.find('.modal-body #cxU').val(coorX);
+        modal.find('.modal-body #cyU').val(coorY);
+        modal.find('.modal-body #obserU').val(obser);
+        modal.find('.modal-body #sucursalU').val(sucur);
+
+        if(foto !== ''){
+            modal.find('.modal-body #fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/files/'+foto+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+        }else {
+            modal.find('.modal-body #fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/files/thumbnail/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+        }
+        //$('.alert').hide();//Oculto alert
+        //
+        //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
+        initMapEmp();
+        'use strict';
+        // Initialize the jQuery File Upload widget:
+        $('#formUpdate').fileupload({
+            // Uncomment the following to send cross-domain cookies:
+            //xhrFields: {withCredentials: true},
+            url: 'modulo/empleado/uploads/?idEmp='+id_empleado,
+            disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator && navigator.userAgent),
+            imageMaxWidth: 1200,
+            //imageMaxHeight: 800,
+            imageCrop: false, // Force cropped images
+            //maxFileSize: 999,
+            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+            limitMultiFileUploads: 1,
+            maxNumberOfFiles: 1
+        });
+
+        $('#formUpdate').bind('fileuploadcompleted', function (e, data) {
+            $.each(data.files, function (index, file) {
+                //console.log('Added file: ' + file.name);
+                //saveImg('empleado', file.name, file.size);
+                loadImg('empleado', 'auxImgEmp');
+            });
+        })
+
+        // Load existing files:
+        $('#formUpdate').addClass('fileupload-processing');
+        $.ajax({
+            // Uncomment the following to send cross-domain cookies:
+            //xhrFields: {withCredentials: true},
+            url: $('#formUpdate').fileupload('option', 'url'),
+            dataType: 'json',
+            context: $('#formUpdate')[0]
+        }).always(function () {
+            $(this).removeClass('fileupload-processing');
+        }).done(function (result) {
+            $(this).fileupload('option', 'done')
+                .call(this, $.Event('done'), {result: result});
+        });
+    });
+
+    $('#dataUpdate').on('hidden.bs.modal', function (e) {
+        // do something...
+        $('#formUpdate').get(0).reset();
+        $('#fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=modulo/empleado/uploads/files/thumbnail/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+        html = '';
+        $('#loadImages tbody').html(html);
+    });
 
     $('#dateNacU').datetimepicker({
         locale: 'es',
@@ -265,86 +304,7 @@ var id_empleado;
         format: 'YYYY-MM-DD'
     });
 
-    // BUSCADOR
-    $('#searchU').on('click', function() {
-        // Obtenemos la dirección y la asignamos a una variable
-        var address = $('#buscarU').val();
-        // Creamos el Objeto Geocoder
-        var geocoder = new google.maps.Geocoder();
-        // Hacemos la petición indicando la dirección e invocamos la función
-        // geocodeResult enviando todo el resultado obtenido
-        geocoder.geocode({ 'address': address}, geocodeResult);
-    });
-
-    /* uploadIfy */
-    $('#file_uploadU').uploadify({
-        'queueID'  		: 'some_file_queueU',
-        'swf'      		: 'uploadify/uploadify.swf',
-        'uploader'		: 'uploadify/uploadify.php',
-        'method'   		: 'post',
-        'multi'   		: false,
-        'auto'   			: false,
-        'queueSizeLimit' 	: 1,
-        'fileSizeLimit' 	: '100KB',
-        'fileTypeDesc' 	: 'Imagen',
-        'fileTypeExts' 	: '*.jpg',
-        'removeCompleted' : false,
-        'buttonText'		: 'Examinar...',
-        height       		: 25,
-        width        		: 100,
-        'formData'      	: {
-            'path' : 'empleado'
-        },
-        // ** Eventos **
-        'onSelectOnce':function(event,data){
-            $('#file_uploadU').uploadifySettings('scriptData',{'directorio':'a','CodeUser': '21'});
-        },
-        'onUploadComplete': function(file){
-            idImg('empleado');
-            //$('#cboxTitle').html('La foto ' + file.name + ' se subio correctamente, <br> ahora puede guardar el formulario.');
-
-            setTimeout(function(){
-                $( ".uploadShowU" ).toggle(2000,function(){
-                    $('#saveU, #closeU').removeAttr('disabled','disabled');
-                    $('#subirU').text("Subir Foto");
-                    $('#file_uploadU').uploadify('cancel', '*');
-                });
-            },4000);
-        }
-    });
-    /* Abrir y cerrar uploadIfy */
-    $('#subirU').click(
-        function(){
-            var $this = $(this);
-            var op = $this.find('span').text();
-            if( op == 'Subir Foto' ){
-                $('#subirU').find('span').text("Cancelar");
-                $('#saveU, #closeU').attr('disabled','disabled');
-            }else{
-                $('#subirU').find('span').text("Subir Foto");
-                $('#saveU, #closeU').removeAttr('disabled','disabled');
-                $('#file_uploadU').uploadify('cancel', '*');
-            }
-            $( ".uploadShowU" ).toggle(1000);
-        });
-
-    $('#dataUpdate').on('show.bs.modal', function() {
-        //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
-        initMapEmp();
-    });
-
-    $('#dataUpdate').on('hidden.bs.modal', function (e) {
-        // do something...
-        $('#formUpdate').get(0).reset();
-        $('.uploadShowU').css('display','none');
-        //$('#file_upload').uploadify('cancel', '*');
-        $('#saveU, #closeU').removeAttr('disabled','disabled');
-        $('#subirU').find('span').text("Subir Foto");
-        $('#fotoU').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
-    });
-
-
-    // });
+});
 
 </script>
 
@@ -507,37 +467,55 @@ var id_empleado;
                     <div class="row">
                         <div class="col-md-12 form-group">
                             <label for="obser" class="sr-only"></label>
-                            <span id="max-length-element">200</span><span id="maxText"> caracteres restantes</span>
+                            <span id="max-length-elementU">200</span><span id="maxTextU"> caracteres restantes</span>
                             <textarea id="obserU" name="obserU" cols="2" placeholder="Observaciones" class="form-control"></textarea>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-2 form-group">
-                            <button type="button" id="capturar" class="btn btn-primary" onclick="openWebCam()">
-                                <i class="fa fa-camera" aria-hidden="true"></i>
-                                <span>Capturar Foto</span>
-                            </button>
-                        </div>
-                        <div class="col-md-2 form-group">
-                            <button type="button" id="subirU" class="btn btn-primary">
-                                <i class="fa fa-upload" aria-hidden="true"></i>
-                                <span>Subir Foto</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="idealWrap uploadShowU" style="display:none;">
-                                <div id="some_file_queueU"></div>
-                                <div id="buttonFile">
-                                    <input type="file" name="file_uploadU" id="file_uploadU" />
-                                    <button type="button" id="uploadU" class="btn btn-success" onclick="$('#file_uploadU').uploadify('upload')">Subir Foto</button>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div><!--End idealWrap-->
-                        </div>
-                    </div>
 
+                    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+                    <div class="row fileupload-buttonbar">
+                        <div class="col-md-7">
+                            <!-- The fileinput-button span is used to style the file input field as button -->
+                            <span class="btn btn-success btn-sm fileinput-button">
+                                <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+                                <span>Examinar...</span>
+                                <input type="file" id="files" name="files[]" multiple>
+                            </span>
+                            <button type="submit" class="btn btn-primary btn-sm start">
+                                <i class="fa fa-upload"></i>
+                                <span>Iniciar Subida</span>
+                            </button>
+                            <button type="reset" class="btn btn-warning btn-sm cancel">
+                                <i class="fa fa-ban"></i>
+                                <span>Cancelar</span>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm delete">
+                                <i class="fa fa-trash-o"></i>
+                                <span>Borrar</span>
+                            </button>
+                            <input type="checkbox" class="toggle">
+                            <!-- The global file processing state -->
+                            <span class="fileupload-process"></span>
+                        </div>
+                        <!-- The global progress state -->
+                        <div class="col-md-5 fileupload-progress fade">
+                            <!-- The global progress bar -->
+                            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                            </div>
+                            <!-- The extended global progress state -->
+                            <div class="progress-extended">&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="file-preview">
+                        <div class="file-drop-zone-title">
+                            Arrastre y suelte aquí los archivos …
+                        </div>
+                        <div class="file-drop-zone">
+                            <!-- The table listing the files available for upload/download -->
+                            <table id="loadImages" role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="closeU" class="btn btn-danger" data-dismiss="modal">
@@ -553,22 +531,3 @@ var id_empleado;
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 </form>
-
-<div id="camera">
-    <span class="tooltip"></span>
-    <span class="camTop"></span>
-
-    <div id="screen"></div>
-    <div id="buttons">
-        <div class="buttonPane">
-            <a id="closeButton" onclick="closeWebcam()" class="btn btn-danger">Cerrar</a>
-            <a id="shootButton" href="" class="btn btn-primary">Capturar!</a>
-        </div>
-        <div class="buttonPane" style="display: none">
-            <a id="cancelButton" href="" class="btn btn-danger">Cancelar</a>
-            <a id="uploadButton" href="" class="btn btn-primary">Subir!</a>
-        </div>
-    </div>
-
-    <span class="settings"></span>
-</div>

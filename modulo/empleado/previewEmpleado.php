@@ -24,6 +24,8 @@ var coorX;
 var coorY;
 var id_empleado;
 
+$(document).ready(function(e) {
+
     $('#dataPreview').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Botón que activó el modal
         var foto = button.data('foto'); // Extraer la información de atributos de datos
@@ -66,12 +68,27 @@ var id_empleado;
         modal.find('.modal-body #obserP').val(obser);
 
         if(foto !== ''){
-            modal.find('.modal-body #fotoP').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/'+foto+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+            modal.find('.modal-body #fotoP').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/files/thumbnail/'+foto+'&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
         }else {
-            modal.find('.modal-body #fotoP').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+            modal.find('.modal-body #fotoP').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/files/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
         }
         //$('.alert').hide();//Oculto alert
+        initMapU();
     });
+
+    $('#dataPreview').on('hidden.bs.modal', function (e) {
+        // do something...
+        $('#formPreview').get(0).reset();
+        $('#fotoP').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+    });
+
+    $('#dateNacP').datetimepicker({
+        locale: 'es',
+        viewMode: 'years',
+        format: 'YYYY-MM-DD'
+    });
+
+});
 
     //VARIABLES GENERALES
     //DECLARAS FUERA DEL READY DE JQUERY
@@ -79,19 +96,6 @@ var id_empleado;
     var markers = [];
     var marcadores_bd=[];
     var mapa = null; //VARIABLE GENERAL PARA EL MAPA
-
-    function openWebCam(){
-        openWebcam();//document.write( webcam.get_html(320, 240) );
-        webcam.set_api_url( 'modulo/empleado/uploadEmp.php' );
-        webcam.set_hook( 'onComplete', 'my_callback_function');
-    }
-    function my_callback_function(response) {
-        //alert("Success! PHP returned: " + response);
-        msg = $.parseJSON(response);
-        //alert(msg.filename);
-        //modificado
-        recargaImgU(msg.filename, 'empleado');
-    }
 
     function initMapU(){
         /* GOOGLE MAPS */
@@ -228,25 +232,6 @@ var id_empleado;
         }
     });
   }
-
-    $('#dataPreview').on('show.bs.modal', function() {
-        //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
-        initMapU();
-    });
-
-    $('#dataPreview').on('hidden.bs.modal', function (e) {
-        // do something...
-        $('#formPreview').get(0).reset();
-        $('.uploadShowU').css('display','none');
-        //$('#file_upload').uploadify('cancel', '*');
-        $('#saveU, #closeU').removeAttr('disabled','disabled');
-        $('#subirU').find('span').text("Subir Foto");
-        $('#fotoP').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
-    });
-
-
-    // });
-
 </script>
 
 <form id="formPreview" action="javascript:updateForm('formPreview','empleado/update.php')" class="" autocomplete="off" >
