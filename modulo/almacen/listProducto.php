@@ -1,13 +1,13 @@
-<?PHP	
+<?PHP
 	session_start();
-	
+
 	include '../../adodb5/adodb.inc.php';
 	include '../../classes/function.php';
-	
+
 	$db = NewADOConnection('mysqli');
 	//$db->debug = true;
 	$db->Connect();
-	
+
 	$op = new cnFunction();
 ?>
 <div class="titulo">
@@ -29,8 +29,8 @@
       <th>Volumen</th>
       <th>Cantidad</th>
       <th>Precio C/F</th>
-      <th>Precio S/F</th>      
-      <th width="70px">Acciones</th>     
+      <th>Precio S/F</th>
+      <th width="70px">Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -38,15 +38,15 @@
       $sql	 = "SELECT * ";
       $sql	.= "FROM inventario ";
       $sql	.= "ORDER BY (dateReg) DESC ";
-      
+
       $cont = 0;
-      
+
       $srtQuery = $db->Execute($sql);
 	  if($srtQuery === false)
 	  	die("failed");
-	  
+
     while( $row = $srtQuery->FetchRow()){
-	
+
     ?>
       <tr id="tb<?=$row[0]?>">
           <td class="last center"><?=$cont;?></td>
@@ -56,29 +56,29 @@
           <td class="last center"><?=$row['volumen'];?></td>
           <td class="last center"><?=$row['cantidad'];?></td>
           <td class="last center"><?=$row['precioCF'];?></td>
-          <td class="last center"><?=$row['precioSF'];?></td>          
+          <td class="last center"><?=$row['precioSF'];?></td>
           <td>
           	<div class="accPro">
-                          
+
               <div class="accion">
                 <a href="javascript:void(0);" onClick="open_win('modulo/producto/editProducto.php', '', '710', '310', '<?=$row['id_inventario']?>');">
                     <img src="images/icono/edit1.png" width="32" alt="" title="Editar" />
                 </a>
               </div><!--End accion-->
-              
+
               <div class="accion">
                 <a href="javascript:void(0);" onclick="deleteRow('delProducto.php', '<?=$row['id_inventario']?>', 'producto','inventario');">
                     <img src="images/icono/recycle.png" width="32" height="32" alt="" title="Eliminar" />
                 </a>
-              </div><!--End accion-->             
+              </div><!--End accion-->
 
-              <div class="cleafix"></div>           
+              <div class="cleafix"></div>
            	</div><!--End accEmp-->
-            
+
           </td>
-      </tr>                  
-    <?PHP		
-      }                        
+      </tr>
+    <?PHP
+      }
     ?>
   </tbody>
   <tfoot>
@@ -90,7 +90,7 @@
       <th>Volumen</th>
       <th>Cantidad</th>
       <th>Precio C/F</th>
-      <th>Precio S/F</th>    
+      <th>Precio S/F</th>
       <th>Acciones</th>
     </tr>
   </tfoot>
@@ -100,28 +100,28 @@
 <div class="clearfix"></div>
 
 <script type="text/javascript" charset="utf-8">
-//========DataTables========	
-var oTable;	
-$(document).ready(function() { 		
+//========DataTables========
+var oTable;
+$(document).ready(function() {
 
-	deleteRow = function(p, idTr, tipo, table){ 
+	deleteRow = function(p, idTr, tipo, table){
 
 		var respuesta = confirm("SEGURO QUE DESEA ELIMINAR EL "+" ' "+tipo.toUpperCase()+" ' ");
-			  
-		if(respuesta){	
-			var i = 1;			
+
+		if(respuesta){
+			var i = 1;
 			$('#tb'+idTr).addClass('row_selected');
 			var anSelected = fnGetSelected( oTable );
-			if ( anSelected.length !== 0 ) {				
+			if ( anSelected.length !== 0 ) {
 				r = deleteRowBD(p, idTr, tipo, table);
-				if(r==1)					
-					oTable.fnDeleteRow( anSelected[0] );				
+				if(r==1)
+					oTable.fnDeleteRow( anSelected[0] );
 				else
 					$('#tb'+idTr).removeClass('row_selected');
-			}		
+			}
 		}
 	  }
-			
+
   /* Init the table */
   oTable = $('#tableList').dataTable({
 	  "bFilter": true,
@@ -151,7 +151,7 @@ $(document).ready(function() {
 			"buttonText": "&nbsp;",
 			"bRestore": true,
 			"sAlign": "right"
-		  }					
+		  }
 });
 
 });

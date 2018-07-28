@@ -13,7 +13,8 @@
 	$fecha = $op->ToDay();
 	$hora  = $op->Time();
 
-	$data  = stripslashes($_POST['res']);
+	//$data  = stripslashes($_POST['res']);
+	$data  = trim($_POST['res']);
 
 	$data  = json_decode($data);
 
@@ -23,10 +24,12 @@
 	 * Actualiza el CLIENTE
 	 */
 
-	$strQuery = "UPDATE cliente SET nombre = '".$data->nameU."', apP = '".$data->paternoU."', apM = '".$data->maternoU."', depa = '".$data->depU."', phone = '".$data->fonoU."', celular = '".$data->celularU."', ";
-	$strQuery.= "nombreEmp = '".$data->nameEmpU."', nit = '".$data->nitU."', email  = '".$data->emailU."', direccion = '".$data->addresU."', numero = '".$data->NroU."', coorX = '".$data->cxU."', coorY = '".$data->cyU."', ";
-	$strQuery.= "obser  = '".$data->obserU."', dateReg = '".$fecha.' '.$hora."' ";
-	$strQuery.= "WHERE id_cliente = '".$data->codCliU."' ";
+	$strQuery = "UPDATE cliente SET nombre = '".trim($data->nameU)."', apP = '".trim($data->paternoU)."', apM = '".trim($data->maternoU)."', phone = '".trim($data->fonoU)."', celular = '".trim($data->celularU)."', ";
+	$strQuery.= "calle = '".trim($data->calleU)."', nom_calle = '".trim($data->nom_calleU)."', numero = '".trim($data->NroU)."', ";
+	$strQuery.= "zona = '".trim($data->zonaU)."', nom_zona = '".trim($data->nom_zonaU)."', departamento = '".trim($data->departamentoU)."', ";
+	$strQuery.= "direccion_des = '".trim($data->direccionU)."', nombreEmp = '".trim($data->nameEmpU)."', nit = '".trim($data->nitU)."', email  = '".trim($data->emailU)."', coorX = '".trim($data->cxU)."', coorY = '".trim($data->cyU)."', ";
+	$strQuery.= "obser  = '".trim($data->obserU)."', dateReg = '".$fecha.' '.$hora."' ";
+	$strQuery.= "WHERE id_cliente = '".trim($data->codCliU)."' ";
 
 	$sql = $db->Execute($strQuery);
 

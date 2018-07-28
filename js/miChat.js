@@ -1,11 +1,11 @@
-Push.create("Bienbenido al CHAT...!!!",{
+/*Push.create("Bienbenido al CHAT...!!!",{
 	body: "Este es el cuerpo de la notificación.",
 	icon: "images/logo-elviejoroble.png",
 	timeout: 4000,
 	onClick: function(){
 		this.close();
 	}
-});
+});*/
 /**
  * [openChat description] Abrir chat por medio del boton
  * @return {[type]} [description]
@@ -66,7 +66,7 @@ function minimizar(id){
  */
 function remove(id){
 	//$("aside").remove("#"+id);
-	setTimeout(function() {
+	//setTimeout(function() {
     	$("aside").remove("#"+id);
     	num = 1;
 		var coordenadas = $("#sidebar_primary").position();
@@ -83,7 +83,7 @@ function remove(id){
 			$('aside#'+id).css('right', r+'px');
 			num++;
 		});
-    }, 1950 );
+    //}, 1950 );
 }
 /**
  * [cerrar description] llama a remove();

@@ -78,192 +78,206 @@ button.cancel:hover img {
 }
 </style>
 <div class="col-xs-12 col-sm-12 col-md-12">
-        <h1 class="avisos" align="center"><strong>PRODUCCIÓN</strong></h1>
-        <h2 class="avisos">Ordenes de Produción</h2>
-        <div class="pull-right"><br>
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#dataRegister">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                <span>Nueva Orden</span>
-            </button>
-        </div>
-        <div class="clearfix"></div>
-        <br>
-        <table id="tablaList" class="table table-striped table-bordered" cellspacing="0" width="100%">
-            <thead>
-            <tr>
-                <th>Nº</th>
-                <th>Fecha</th>
-                <th>N&deg; de Orden</th>
-                <th>Codigo de Producto</th>
-                <th>Detalle</th>
-                <th>Cantidad</th>
-                <th>Fecha Inicio Producción</th>
-                <th>Fecha Fin Producción</th>
-                <th>Status Producción</th>
-                <th>Acciones</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?PHP
-            $sql = "SELECT * ";
-            $sql.= "FROM produccion ";
-            $sql.= "ORDER BY (id_produccion) DESC ";
-
-            $cont = 0;
-
-            $srtQuery = $db->Execute($sql);
-            if($srtQuery === false)
-                die("failed");
-
-            while( $row = $srtQuery->FetchRow()){
-                $cont++;
-                ?>
-                <tr id="tb<?=$row[0]?>">
-                    <td align="center"><?=$cont;?></td>
-                    <td align="center"><?=$row['dateReg']?></td>
-                    <td align="center">OR-P-<?=$row['id_produccion'];?></td>
-                    <td align="center" style="text-transform: uppercase"><?=$row['id_inventario'];?></td>
-                    <td align="center" style="text-transform: uppercase"><?=$row['detalle'];?></td>
-                    <td align="center"><?=$row['cantidad'];?></td>
-                    <td align="center"><?=$row['dateInc'];?></td>
-                    <td align="center"><?=$row['dateFin'];?></td>
-                      <?PHP
-                      if(strcmp($row['statusProd'], 'Nueva Orden') == 0){
-                          $st="status1";
-                      }else{
-                          if(strcmp($row['statusProd'], 'En Produccion') == 0){
-                            $st="status2";
-                          }else {
-                              if (strcmp($row['statusProd'], 'Terminado') == 0) {
-                                  $st = "status3";
-                              } else
-                                  if (strcmp($row['statusProd'], 'Terminado y Asignado') == 0) {
-                                      $st = "status4";
-                                  } else
-                                      $st = "status5";
-                          }
-                      }
-                      ?>
-                    <td width="10%" class="<?=$st;?>" align="center">
-                        <?=$row['statusProd'];?>
-                    </td>
-                    <td width="15%">
-                         <div class="btn-group" style="width: 271px">
-
-                            <button type="button" class="btn btn-primary btn-sm aprob tooltipp" onClick="sProAprobado('<?=$row[0]?>');" title="Aprobar Orden" >
-                                <img src="images/iconos/checkOff.png" width="24"/>
-                                <span></span>
-                            </button>
-
-                            <button type ="button" class="btn btn-primary btn-sm cancel tooltipp" onClick="sProCancelar('<?=$row[0]?>');" title="Cancelar Orden" >
-                                <img src="images/iconos/delOff.png" width="24" alt="Cancelar" />
-                                <span></span>
-                            </button>
-
-                            <button type ="button" class="btn btn-primary btn-sm terminar tooltipp" onClick="sProTerminado('<?=$row[0]?>');" title="Orden Terminada" >
-                                <img src="images/iconos/asig.png" width="24" alt="Orden Terminada" />
-                                <span></span>
-                            </button>
-
-                            <?PHP
-                                if( $row[statusProd] == 'Terminado'){
-                            ?>
-
-                            <button type ="button" class="btn btn-primary btn-sm import tooltipp" data-toggle="modal" data-target="#dataImport" title="Asignar Producción"
-                                            data-id="<?=$row['id_produccion']?>"
-                                            data-idInv="<?=$row['id_inventario']?>"
-                                            data-detalle="<?=$row['detalle']?>"
-                                            data-cantidad="<?=$row['cantidad']?>"
-                                >
-                                <img src="images/iconos/import.png" width="24" alt="Asignar" />
-                                <span></span>
-                            </button>
-
-                            <?PHP
-                            }else{
-                            ?>
-
-                            <button id="<?=$row['id_produccion']?>" type ="button" class="btn btn-primary btn-sm import tooltipp" data-toggle="modal" data-target="#dataImport" title="Asignar Orden de Producción" disabled
-                                            data-id="<?=$row['id_produccion']?>"
-                                            data-idInv="<?=$row['id_inventario']?>"
-                                            data-detalle="<?=$row['detalle']?>"
-                                            data-cantidad="<?=$row['cantidad']?>"
-                                >
-                                <img src="images/iconos/import.png" width="24" alt="Asignar" />
-                                <span></span>
-                            </button>
-
-                            <?PHP
-                            }
-                            if( $row[statusProd] == 'Nueva Orden'){
-                            ?>
-
-                            <button type ="button" class="btn btn-primary btn-sm import tooltipp" data-toggle="modal" data-target="#dataUpdate" title="Editar Orden de Producción"
-                                        data-id="<?=$row['id_produccion']?>"
-                                        data-idInv="<?=$row['id_inventario']?>"
-                                        data-detalle="<?=$row['detalle']?>"
-                                        data-cantidad="<?=$row['cantidad']?>"
-                            >
-                                <img src="images/iconos/edit1.png" width="24" alt="Editar" />
-                                <span></span>
-                            </button>
-
-                            <button type ="button" class="btn btn-primary btn-sm import tooltipp" data-toggle="modal" data-target="#dataDelete" title="Eliminar Orden de Producción"
-                                        data-id="<?=$row['id_produccion']?>"
-                            >
-                                <img src="images/iconos/recycle.png" width="24" alt="Eliminar" />
-                                <span></span>
-                            </button>
-
-                            <?PHP
-                            }else{
-                            ?>
-
-                            <button type ="button" class="btn btn-primary btn-sm import tooltipp" data-toggle="modal" data-target="#dataUpdate" title="Editar Orden de Producción" disabled
-                                        data-id="<?=$row['id_produccion']?>"
-                                        data-idInv="<?=$row['id_inventario']?>"
-                                        data-detalle="<?=$row['detalle']?>"
-                                        data-cantidad="<?=$row['cantidad']?>"
-                            >
-                                <img src="images/iconos/edit1.png" width="24" alt="Editar" />
-                                <span></span>
-                            </button>
-
-                            <button type ="button" class="btn btn-primary btn-sm import tooltipp" data-toggle="modal" data-target="#dataDelete" title="Eliminar Orden de Producción" disabled
-                                        data-id="<?=$row['id_produccion']?>"
-                            >
-                                <img src="images/iconos/recycle.png" width="24" alt="Eliminar" />
-                                <span></span>
-                            </button>
-
-                            <?PHP
-                            }
-                            ?>
-
-                        </div>
-                  </td>
-                </tr>
-                <?PHP
-            }
-            ?>
-            </tbody>
-            <tfoot>
-            <tr>
-                <th>Nº</th>
-                <th>Fecha</th>
-                <th>N&deg; de Orden</th>
-                <th>Codigo de Producto</th>
-                <th>Detalle</th>
-                <th>Cantidad</th>
-                <th>Fecha Inicio Producción</th>
-                <th>Fecha Fin Producción</th>
-                <th>Status Producción</th>
-                <th>Acciones</th>
-            </tr>
-            </tfoot>
-        </table>
-
+    <h1 class="avisos" align="center"><strong>PRODUCCIÓN</strong></h1>
+    <h2 class="avisos">Ordenes de Produción</h2>
+    <div class="pull-right"><br>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#dataRegister">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <span>Nueva Orden</span>
+        </button>
     </div>
+    <div class="clearfix"></div>
+    <br>
+    <table id="tablaList" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>Nº</th>
+            <th>Fecha</th>
+            <th>N&deg; de Orden</th>
+            <th>Codigo de Producto</th>
+            <th>Detalle</th>
+            <th>Cantidad</th>
+            <th>Fecha Inicio Producción</th>
+            <th>Fecha Fin Producción</th>
+            <th>Status Producción</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?PHP
+        $sql = "SELECT * ";
+        $sql.= "FROM produccion ";
+        $sql.= "ORDER BY (id_produccion) DESC ";
+
+        $cont = 0;
+
+        $srtQuery = $db->Execute($sql);
+        if($srtQuery === false)
+            die("failed");
+
+        while( $row = $srtQuery->FetchRow()){
+            $cont++;
+            ?>
+            <tr id="tb<?=$row[0]?>">
+                <td align="center"><?=$cont;?></td>
+                <td align="center"><?=$row['dateReg']?></td>
+                <td align="center">OR-P-<?=$row['id_produccion'];?></td>
+                <td align="center" style="text-transform: uppercase"><?=$row['id_inventario'];?></td>
+                <td align="center" style="text-transform: uppercase"><?=$row['detalle'];?></td>
+                <td align="center"><?=$row['cantidad'];?></td>
+                <td align="center"><?=$row['dateInc'];?></td>
+                <td align="center"><?=$row['dateFin'];?></td>
+                  <?PHP
+                  if(strcmp($row['statusProd'], 'Nueva Orden') == 0){
+                      $st="status1";
+                  }else{
+                      if(strcmp($row['statusProd'], 'En Produccion') == 0){
+                        $st="status2";
+                      }else {
+                          if (strcmp($row['statusProd'], 'Terminado') == 0) {
+                              $st = "status3";
+                          } else
+                              if (strcmp($row['statusProd'], 'Terminado y Asignado') == 0) {
+                                  $st = "status4";
+                              } else
+                                  $st = "status5";
+                      }
+                  }
+                  ?>
+                <td width="10%" class="<?=$st;?>" align="center">
+                    <?=$row['statusProd'];?>
+                </td>
+                <td width="15%">
+                     <div class="btn-group" style="width: 271px">
+
+                        <button type="button" class="btn btn-primary btn-sm aprob tooltipp" onClick="sProAprobado('<?=$row[0]?>');" title="Aprobar Orden" >
+                            <img src="images/iconos/checkOff.png" width="24"/>
+                            <span></span>
+                        </button>
+
+                        <button type ="button" class="btn btn-primary btn-sm cancel tooltipp" onClick="sProCancelar('<?=$row[0]?>');" title="Cancelar Orden" >
+                            <img src="images/iconos/delOff.png" width="24" alt="Cancelar" />
+                            <span></span>
+                        </button>
+
+                        <?PHP
+                            if( $row[statusProd] == 'Cancelado' || $row[statusProd] == 'Nueva Orden'){
+                        ?>
+
+                        <button type ="button" class="btn btn-primary btn-sm terminar tooltipp" onClick="sProTerminado('<?=$row[0]?>');" title="Orden Terminada" disabled>
+                            <img src="images/iconos/asig.png" width="24" alt="Orden Terminada" />
+                            <span></span>
+                        </button>
+
+                        <?PHP
+                        }else{
+                        ?>
+
+                        <button type ="button" class="btn btn-primary btn-sm terminar tooltipp" onClick="sProTerminado('<?=$row[0]?>');" title="Orden Terminada" >
+                            <img src="images/iconos/asig.png" width="24" alt="Orden Terminada" />
+                            <span></span>
+                        </button>
+
+                        <?PHP
+                        }
+                            if( $row[statusProd] == 'Terminado'){
+                        ?>
+
+                        <button type ="button" class="btn btn-primary btn-sm import tooltipp" data-toggle="modal" data-target="#dataImport" title="Asignar Producción"
+                                        data-id="<?=$row['id_produccion']?>"
+                                        data-idInv="<?=$row['id_inventario']?>"
+                                        data-detalle="<?=$row['detalle']?>"
+                                        data-cantidad="<?=$row['cantidad']?>"
+                            >
+                            <img src="images/iconos/import.png" width="24" alt="Asignar" />
+                            <span></span>
+                        </button>
+
+                        <?PHP
+                        }else{
+                        ?>
+
+                        <button id="<?=$row['id_produccion']?>" type ="button" class="btn btn-primary btn-sm import tooltipp" data-toggle="modal" data-target="#dataImport" title="Asignar Orden de Producción" disabled
+                                        data-id="<?=$row['id_produccion']?>"
+                                        data-idInv="<?=$row['id_inventario']?>"
+                                        data-detalle="<?=$row['detalle']?>"
+                                        data-cantidad="<?=$row['cantidad']?>"
+                            >
+                            <img src="images/iconos/import.png" width="24" alt="Asignar" />
+                            <span></span>
+                        </button>
+
+                        <?PHP
+                        }
+                        if( $row[statusProd] == 'Nueva Orden'){
+                        ?>
+
+                        <button type ="button" class="btn btn-primary btn-sm import tooltipp" data-toggle="modal" data-target="#dataUpdate" title="Editar Orden de Producción"
+                                    data-id="<?=$row['id_produccion']?>"
+                                    data-idInv="<?=$row['id_inventario']?>"
+                                    data-detalle="<?=$row['detalle']?>"
+                                    data-cantidad="<?=$row['cantidad']?>"
+                        >
+                            <img src="images/iconos/edit1.png" width="24" alt="Editar" />
+                            <span></span>
+                        </button>
+
+                        <button type ="button" class="btn btn-primary btn-sm import tooltipp" data-toggle="modal" data-target="#dataDelete" title="Eliminar Orden de Producción"
+                                    data-id="<?=$row['id_produccion']?>"
+                        >
+                            <img src="images/iconos/recycle.png" width="24" alt="Eliminar" />
+                            <span></span>
+                        </button>
+
+                        <?PHP
+                        }else{
+                        ?>
+
+                        <button type ="button" class="btn btn-primary btn-sm import tooltipp" data-toggle="modal" data-target="#dataUpdate" title="Editar Orden de Producción" disabled
+                                    data-id="<?=$row['id_produccion']?>"
+                                    data-idInv="<?=$row['id_inventario']?>"
+                                    data-detalle="<?=$row['detalle']?>"
+                                    data-cantidad="<?=$row['cantidad']?>"
+                        >
+                            <img src="images/iconos/edit1.png" width="24" alt="Editar" />
+                            <span></span>
+                        </button>
+
+                        <button type ="button" class="btn btn-primary btn-sm import tooltipp" data-toggle="modal" data-target="#dataDelete" title="Eliminar Orden de Producción" disabled
+                                    data-id="<?=$row['id_produccion']?>"
+                        >
+                            <img src="images/iconos/recycle.png" width="24" alt="Eliminar" />
+                            <span></span>
+                        </button>
+
+                        <?PHP
+                        }
+                        ?>
+
+                    </div>
+              </td>
+            </tr>
+            <?PHP
+        }
+        ?>
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>Nº</th>
+            <th>Fecha</th>
+            <th>N&deg; de Orden</th>
+            <th>Codigo de Producto</th>
+            <th>Detalle</th>
+            <th>Cantidad</th>
+            <th>Fecha Inicio Producción</th>
+            <th>Fecha Fin Producción</th>
+            <th>Status Producción</th>
+            <th>Acciones</th>
+        </tr>
+        </tfoot>
+    </table>
+
+</div>
 
 <script type="text/javascript" language="javascript" class="init">
 

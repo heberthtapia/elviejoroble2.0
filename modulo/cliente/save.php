@@ -13,16 +13,18 @@
 	$fecha = $op->ToDay();
 	$hora  = $op->Time();
 
-	$data  = stripslashes($_POST['res']);
+	$data  = $_POST['res'];
 
 	$data  = json_decode($data);
 
-	$strQuery = "INSERT INTO cliente (id_cliente, ci, depa, id_empleado, nombre, apP, apM, phone, celular, ";
-	$strQuery.= "nombreEmp, iva, email, direccion, numero, coorX, coorY, obser, dateReg, status ) ";
-	$strQuery.= "VALUES ('".$data->codCl."', ".$data->ci.", '".$data->dep."', '".$_SESSION['idEmp']."', '".$data->name."', '".$data->paterno."', ";
-	$strQuery.= "'".$data->materno."', '".$data->fono."', '".$data->celular."', '".$data->nameEmp."', '".$data->iva."', ";
-	$strQuery.= "'".$data->email."', '".$data->addres."', '".$data->Nro."', '".$data->cx."', '".$data->cy."', '".$data->obser."', ";
-	$strQuery.= "'".$data->date."', 'Activo' )";
+	$strQuery = "INSERT INTO cliente (id_cliente, ci, depa, id_empleado, nombre, apP, apM, phone, celular, calle, nom_calle, numero, zona, nom_zona, ";
+	$strQuery.= "departamento, direccion_des, nombreEmp, nit, email, coorX, coorY, obser, dateReg, status ) ";
+	$strQuery.= "VALUES ('".trim($data->codCl)."', '".trim($data->ci)."', '".trim($data->dep)."', '".$_SESSION['idEmp']."', '".trim($data->name)."', '".trim($data->paterno)."', ";
+	$strQuery.= "'".trim($data->materno)."', '".trim($data->fono)."', '".trim($data->celular)."', '".trim($data->calle)."', '".trim($data->nom_calle)."', ";
+	$strQuery.= "'".trim($data->Nro)."', '".trim($data->zona)."', '".trim($data->nom_zona)."', '".trim($data->departamento)."', '".trim($data->direccion)."', ";
+	$strQuery.= "'".trim($data->nameEmp)."', '".trim($data->nit)."', '".trim($data->email)."', ";
+	$strQuery.= "'".trim($data->cx)."', '".trim($data->cy)."', '".trim($data->obser)."', ";
+	$strQuery.= "'".trim($data->date)."', 'Activo' )";
 
 	$sql = $db->Execute($strQuery);
 

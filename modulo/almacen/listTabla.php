@@ -60,7 +60,7 @@ $op = new cnFunction();
             <th>Cantidad</th>
             <th>Precio C/F</th>
             <th>Precio S/F</th>
-            <th width="106px">Acciones</th>
+            <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
@@ -88,7 +88,7 @@ $op = new cnFunction();
                 <td class="last center"><?=$row['precioCF'];?></td>
                 <td class="last center"><?=$row['precioSF'];?></td>
                 <td width="15%">
-                    <div class="btn-group" style="width: 169px">
+                    <div class="btn-group" style="width: 172px">
                         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataUpdate" data-detalle="<?=$row['detalle']?>" data-idInv="<?=$row['id_inventario']?>" data-cant="<?=$row['cantidad']?>" data-vol="<?=$row['volumen']?>" data-precioCF="<?=$row['precioCF']?>" data-precioSF="<?=$row['precioSF']?>">
                             <i class='glyphicon glyphicon-edit'></i> Modificar
                         </button>
@@ -117,5 +117,4 @@ $op = new cnFunction();
         </tr>
         </tfoot>
     </table>
-
 </div>

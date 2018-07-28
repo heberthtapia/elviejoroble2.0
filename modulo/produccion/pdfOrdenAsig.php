@@ -17,16 +17,23 @@
     $content = ob_get_clean();
 
     // convert to PDF
-    require_once(dirname(__FILE__).'/../../html2pdf/html2pdf.class.php');
+    require_once(dirname(__FILE__).'/../../html2pdf/vendor/autoload.php');
+
+    use Spipu\Html2Pdf\Html2Pdf;
+    use Spipu\Html2Pdf\Exception\Html2PdfException;
+    use Spipu\Html2Pdf\Exception\ExceptionFormatter;
+
     try
     {
         $html2pdf = new HTML2PDF('P', 'letter', 'es', true, 'UTF-8', 3);
         $html2pdf->pdf->SetDisplayMode('fullpage');
         $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
-        $html2pdf->Output('Pedido - '.$fecha.'.pdf');
+        $html2pdf->Output('OrProdAsig_'.$fecha.'.pdf');
     }
     catch(HTML2PDF_exception $e) {
-        echo $e;
-        exit;
+        $html2pdf->clean();
+
+        $formatter = new ExceptionFormatter($e);
+        echo $formatter->getHtmlMessage();
     }
 ?>

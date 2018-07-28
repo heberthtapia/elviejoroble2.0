@@ -215,24 +215,31 @@ var id_cliente;
 $(document).ready(function(e) {
 
 	$('#dataUpdate').on('show.bs.modal', function (event) {
-		var button    = $(event.relatedTarget); // Botón que activó el modal
-		var foto      = button.data('foto'); // Extraer la información de atributos de datos
-		var nombre    = button.data('name'); // Extraer la información de atributos de datos
-		var apP       = button.data('paterno'); // Extraer la información de atributos de datos
-		var apM       = button.data('materno'); // Extraer la información de atributos de datos
-		id_cliente    = button.data('id'); // Extraer la información de atributos de datos
-		var depa      = button.data('dep'); // Extraer la información de atributos de datos
-		var nameEmp   = button.data('nameemp');
-		var nit		  = button.data('nit');
-		var phone     = button.data('fono');
-		var celular   = button.data('celular');
-		var email     = button.data('emailc');
-		var ci        = button.data('ci');
-		var direccion = button.data('addresc');
-		var numero    = button.data('nro');
-		coorX         = button.data('cx');
-		coorY         = button.data('cy');
-		var obser     = button.data('obser');
+		var button       = $(event.relatedTarget); // Botón que activó el modal
+		var foto         = button.data('foto'); // Extraer la información de atributos de datos
+		var nombre       = button.data('name'); // Extraer la información de atributos de datos
+		var apP          = button.data('paterno'); // Extraer la información de atributos de datos
+		var apM          = button.data('materno'); // Extraer la información de atributos de datos
+		id_cliente       = button.data('id'); // Extraer la información de atributos de datos
+		var depa         = button.data('dep'); // Extraer la información de atributos de datos
+		var nameEmp      = button.data('nameemp');
+		var nit          = button.data('nit');
+		var phone        = button.data('fono');
+		var celular      = button.data('celular');
+		var email        = button.data('emailc');
+		var ci           = button.data('ci');
+		var calle        = button.data('calle');
+		var nom_calle    = button.data('nom_calle');
+		var numero       = button.data('nro');
+		var zona         = button.data('zona');
+		var nom_zona     = button.data('nom_zona');
+		var departamento = button.data('departamento');
+		var direccion    = button.data('direccion');
+		coorX            = button.data('cx');
+		coorY            = button.data('cy');
+		var obser        = button.data('obser');
+
+		//alert(calle);
 
 		var modal = $(this);
 		modal.find('.modal-title').text('Modificar cliente: '+capitalize(nombre)+' '+capitalize(apP));
@@ -250,6 +257,9 @@ $(document).ready(function(e) {
 		modal.find('.modal-body #fonoU').val(phone);
 		modal.find('.modal-body #celularU').val(celular);
 		modal.find('.modal-body #emailU').val(email);
+
+		modal.find('.modal-body #calleU').val(calle);
+		modal.find('.modal-body #nom_calleU').val(nom_calle);
 
 		modal.find('.modal-body #addresU').val(direccion);
 		modal.find('.modal-body #NroU').val(numero);
@@ -438,21 +448,74 @@ $(document).ready(function(e) {
 				</div>
 
 				<div class="row">
-					<div class="col-md-6 form-group">
+					<div class="col-md-5 form-group">
 						<label for="emailU" class="sr-only">Correo Electronico:</label>
 						<input id="emailU" name="emailU" type="text" placeholder="Correo Electronico" value="" class="form-control" data-validation="email"/>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-9 form-group">
-						<label for="addresU" class="sr-only"></label>
-						<input id="addresU" name="addresU" type="text" placeholder="Direcci&oacute;n" class="form-control" data-validation="required"/>
-					</div>
 					<div class="col-md-3 form-group">
+						<label for="calleU" class="sr-only">Calle/Avenida/Plaza/Otro (*):</label>
+						<select data-validation="required" class="form-control" id="calleU" name="calleU">
+							<option disabled selected hidden>Calle/Avenida/Plaza/Otro</option>
+                          	<option>Avenida</option>
+                          	<option>Calle</option>
+                          	<option>Carretera</option>
+                          	<option>Pasaje</option>
+                          	<option>Plaza</option>
+                        </select>
+					</div>
+					<div class="col-md-4 form-group">
+						<label for="nom_calleU" class="sr-only">Nombre Calle:</label>
+						<input id="nom_calleU" name="nom_calleU" type="text" placeholder="Nombre Calle" class="form-control" data-validation="required"/>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
 						<label for="NroU" class="sr-only"></label>
 						<input id="NroU" name="NroU" type="text" placeholder="N° de domicilio" class="form-control" data-validation="required number"/>
 					</div>
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+                        <label for="zonaU" class="sr-only">Zona/Barrio/Otro (*):</label>
+                        <select data-validation="required" class="form-control" name="zonaU">
+                        	<option disabled selected hidden>Zona/Barrio/Otro</option>
+                          	<option>Zona</option>
+                          	<option>Anillo</option>
+                          	<option>Barrio</option>
+                          	<option>Comunidad</option>
+                          	<option>Localidad</option>
+                          	<option>Manzano</option>
+                          	<option>Plan</option>
+                          	<option>Unidad Vecinal</option>
+                          	<option>Urbanización</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+                            <label for="nom_zonaU" class="sr-only">Nombre Zona/Barrio/Otro (*):</label>
+                            <input id="nom_zonaU" type="text" maxlength="70" name="nom_zonaU" data-validation="required" placeholder="Nombre Zona/Barrio/Otro" class="form-control" autofocus="" />
+                    </div>
 				</div>
+
+				<div class="row">
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+						<label for="departamentoU" class="sr-only">Departamento:</label>
+						<select id="departamentoU" name="departamentoU" class="form-control" data-validation="required">
+							<option value="" disabled selected hidden>Departamento</option>
+							<option value="lp">La Paz</option>
+							<option value="cbb">Cochabamba</option>
+							<option value="sz">Santa Cruz</option>
+							<option value="bn">Beni</option>
+							<option value="tr">Tarija</option>
+							<option value="pt">Potosi</option>
+							<option value="or">Oruro</option>
+							<option value="pd">Pando</option>
+						</select>
+					</div>
+					<div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 form-group">
+                            <label for="direccionU" class="sr-only">Nombre Zona/Barrio/Otro (*):</label>
+                            <input id="direccionU" type="text" maxlength="70" name="direccionU" data-validation="required" placeholder="Direción" class="form-control" autofocus="" />
+                    </div>
+				</div>
+
 				<div class="row">
 					<div class="col-md-5" align="center">
 						<div id="mapaU" class="form-group"></div><!--End mapa-->

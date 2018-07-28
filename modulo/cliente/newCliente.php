@@ -160,7 +160,7 @@ $hora = $op->Time();
 	$('#dataRegister').on('hidden.bs.modal', function (e) {
 		// do something...
 		$('#formNew').get(0).reset();
-		$('#foto').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/empleado/uploads/files/thumbnail/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
+		$('#foto').html('<img class="thumb" src="thumb/phpThumb.php?src=../modulo/cliente/uploads/files/sin_imagen.jpg&amp;w=120&amp;h=75&amp;far=1&amp;bg=FFFFFF&amp;hash=361c2f150d825e79283a1dcc44502a76" alt="">');
 	});
 
 $(document).ready(function() {
@@ -293,21 +293,74 @@ $(document).ready(function() {
 				</div>
 
 				<div class="row">
-					<div class="col-md-6 form-group">
+					<div class="col-md-5 form-group">
 						<label for="email" class="sr-only">Correo Electronico:</label>
 						<input id="email" name="email" type="text" placeholder="Correo Electronico" value="" class="form-control" data-validation="email"/>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-9 form-group">
-						<label for="addres" class="sr-only"></label>
-						<input id="addres" name="addres" type="text" placeholder="Direcci&oacute;n" class="form-control" data-validation="required"/>
-					</div>
 					<div class="col-md-3 form-group">
+						<label for="calle" class="sr-only">Calle/Avenida/Plaza/Otro (*):</label>
+						<select data-validation="required" class="form-control" name="calle">
+							<option disabled selected hidden>Calle/Avenida/Plaza/Otro</option>
+                          	<option>Avenida</option>
+                          	<option>Calle</option>
+                          	<option>Carretera</option>
+                          	<option>Pasaje</option>
+                          	<option>Plaza</option>
+                        </select>
+					</div>
+					<div class="col-md-4 form-group">
+						<label for="nom_calle" class="sr-only">Nombre Calle:</label>
+						<input id="nom_calle" name="nom_calle" type="text" placeholder="Nombre Calle" class="form-control" data-validation="required"/>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
 						<label for="Nro" class="sr-only"></label>
 						<input id="Nro" name="Nro" type="text" placeholder="N° de domicilio" class="form-control" data-validation="required number"/>
 					</div>
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+                        <label for="zona" class="sr-only">Zona/Barrio/Otro (*):</label>
+                        <select data-validation="required" class="form-control" name="zona">
+                        	<option disabled selected hidden>Zona/Barrio/Otro</option>
+                          	<option>Zona</option>
+                          	<option>Anillo</option>
+                          	<option>Barrio</option>
+                          	<option>Comunidad</option>
+                          	<option>Localidad</option>
+                          	<option>Manzano</option>
+                          	<option>Plan</option>
+                          	<option>Unidad Vecinal</option>
+                          	<option>Urbanización</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+                            <label for="nom_zona" class="sr-only">Nombre Zona/Barrio/Otro (*):</label>
+                            <input id="nom_zona" type="text" maxlength="70" name="nom_zona" data-validation="required" placeholder="Nombre Zona/Barrio/Otro" class="form-control" autofocus="" />
+                    </div>
 				</div>
+
+				<div class="row">
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
+						<label for="departamento" class="sr-only">Departamento:</label>
+						<select id="departamento" name="departamento" class="form-control" data-validation="required">
+							<option value="" disabled selected hidden>Departamento</option>
+							<option value="lp">La Paz</option>
+							<option value="cbb">Cochabamba</option>
+							<option value="sz">Santa Cruz</option>
+							<option value="bn">Beni</option>
+							<option value="tr">Tarija</option>
+							<option value="pt">Potosi</option>
+							<option value="or">Oruro</option>
+							<option value="pd">Pando</option>
+						</select>
+					</div>
+					<div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 form-group">
+                            <label for="direccion" class="sr-only">Nombre Zona/Barrio/Otro (*):</label>
+                            <input id="direccion" type="text" maxlength="70" name="direccion" data-validation="required" placeholder="Direción" class="form-control" autofocus="" />
+                    </div>
+				</div>
+
 				<div class="row">
 					<div class="col-md-5" align="center">
 						<div id="mapa" class="form-group"></div><!--End mapa-->

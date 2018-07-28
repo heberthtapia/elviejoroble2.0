@@ -100,7 +100,7 @@ include 'delProducto.php';
                     <td align="center"><?=$row['precioCF'];?></td>
                     <td align="center"><?=$row['precioSF'];?></td>
                     <td width="15%">
-                        <div class="btn-group" style="width: 169px">
+                        <div class="btn-group" style="width: 172px">
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataUpdate" data-detalle="<?=$row['detalle']?>" data-idInv="<?=$row['id_inventario']?>" data-cant="<?=$row['cantidad']?>" data-vol="<?=$row['volumen']?>" data-precioCF="<?=$row['precioCF']?>" data-precioSF="<?=$row['precioSF']?>">
                                 <i class='glyphicon glyphicon-edit'></i> Modificar
                                 </button>

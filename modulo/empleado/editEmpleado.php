@@ -107,7 +107,7 @@
             });
             markers.push(marcador);
             deleteMarkersU(markers);
-            marcador.setMap(mapa);
+            //marcador.setMap(mapa);
             //marker.setMap(mapa);
 
         } else {

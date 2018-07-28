@@ -132,7 +132,8 @@ aside.tabbed_sidebar {
 	width: 300px;*/
 	font-family: 'Open Sans', sans-serif;
 	border-radius: 5px 5px 0 0;
-	z-index: 2;
+	z-index: 3;
+	box-shadow: 0px 0px 10px #0D0D0D;
 }
 /**
  * modificaciones
@@ -143,6 +144,7 @@ aside#sidebar_primary {
 	display: none;
 	height: 500px;
 	z-index: 3;
+	box-shadow: 0px 0px 10px #0D0D0D;
 }
 aside#sidebar_primary .chat_box {
 	padding: 16px 0 0 16px;
@@ -383,7 +385,7 @@ img.md-user-image {
 	  padding: 2px;
 	  height: 47px;
 	}
-  50% { background: #2E2E2E;
+  50% { background: #A3441A;
 	  border-bottom: 3px solid #ccc;
 	  border-radius: 0 0 8px 8px;
 	  color: #fff;
@@ -413,7 +415,7 @@ img.md-user-image {
 	  padding: 2px;
 	  height: 47px;
 	}
-  50% { background: #2E2E2E;
+  50% { background: #A3441A;
 	  border-bottom: 3px solid #ccc;
 	  border-radius: 0 0 8px 8px;
 	  color: #fff;
@@ -443,7 +445,7 @@ img.md-user-image {
 	  padding: 2px;
 	  height: 47px;
 	}
-  50% { background: #2E2E2E;
+  50% { background: #A3441A;
 	  border-bottom: 3px solid #ccc;
 	  border-radius: 0 0 8px 8px;
 	  color: #fff;
@@ -483,13 +485,14 @@ aside#iconChat div {
     border: none;
     width: 60px;
     height: 60px;
-    padding: 14px 0 0 8px;
     border-radius: 45px;
-    box-shadow: 4px 4px 6px #999;
-
+    box-shadow: 0px 0px 10px #0D0D0D;
 }
 aside#iconChat a{
 	display: block;
+}
+aside#iconChat a div img{
+	margin: 14px 0 0px 8px;
 }
 /**
  * animaciones

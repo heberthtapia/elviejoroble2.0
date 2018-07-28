@@ -75,7 +75,7 @@ $op = new cnFunction();
     $('#obser').restrictLength( $('#max-length-element') );
     $('#obserU').restrictLength( $('#max-length-elementU') );
 </script>
-</script>
+
     <div class="col-xs-12 col-sm-12 col-md-12">
         <h1 class="avisos" align="center"><strong>EMPLEADOS</strong></h1>
         <h2 class="avisos">Lista de Empleados</h2>

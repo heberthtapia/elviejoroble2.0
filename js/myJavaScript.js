@@ -174,9 +174,7 @@ function saveForm(idForm, p) {
 }
 
 function updateForm(idForm, p) {
-
     var dato = JSON.stringify($('#' + idForm).serializeObject());
-
     $.ajax({
         url: "modulo/" + p,
         type: 'post',
@@ -274,7 +272,7 @@ function fDelete(idForm, p) {
 function listaInv(idForm) {
     var dato = JSON.stringify($('#' + idForm).serializeObject());
     $.ajax({
-        url: "modulo/empleado/idListaInv.php",
+        url: "modulo/produccion/idListaInv.php",
         type: 'post',
         dataType: 'json',
         async: false,
@@ -283,7 +281,7 @@ function listaInv(idForm) {
             //$("#"+div).html('<div id="load" align="center"><p>Cargando contenido. Por favor, espere ...</p></div>');
         },
         success: function(data) {
-            despliega('modulo/empleado/listaInv.php', 'lista', data.id);
+            despliega('modulo/produccion/listaInv.php', 'lista', data.id);
         },
         error: function(data) {
             alert('error al mostrar');

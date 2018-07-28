@@ -56,7 +56,6 @@
   $nombre1 = strtoupper($nom[0]);
   $nombre2 = strtoupper($nom[1]);
 
-
   $apP = strtoupper($row['apP']);
 
   $_SESSION['inc'] = $nombre1[0].''.$apP[0].'-';
@@ -228,12 +227,15 @@ if (isset($_POST['from']))
     <!-- <script type="text/javascript" src="../../assets/js/main.js"></script> -->
     <!-- lightbox -->
     <script type="text/javascript" src="js/lightbox.js"></script>
+    <!-- lettering -->
+    <script type="text/javascript" src="js/jquery.lettering.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="css/tooltipster.css">
 	<link rel="stylesheet" type="text/css" href="css/tooltipster-shadow.css">
 	<script src="js/jquery.tooltipster.js"></script>
 
 	<script type="text/javascript" src="js/myJavaScript.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIG-WEdvtbElIhE06jzL5Kk1QkFWCvymQ" async defer></script>
 
 </head>
 <body>
@@ -280,13 +282,13 @@ if (isset($_POST['from']))
 							<li>
 								<a href="#" onclick="despliega('modulo/almacen/producto.php','contenido')">
 									<i class="fa fa-list" aria-hidden="true"></i>
-									<span class="hidden-xs hidden-sm">Lista de Productos en General</span>
+									<span class="hidden-xs hidden-sm">Productos en General</span>
 								</a>
 							</li>
 							<li>
 								<a href="#" onclick="despliega('modulo/almacen/productoPre.php','contenido')">
 									<i class="fa fa-list" aria-hidden="true"></i>
-									<span class="hidden-xs hidden-sm">Lista de Productos por Preventista</span>
+									<span class="hidden-xs hidden-sm">Productos por Preventista</span>
 								</a>
 							</li>
 						</ul>
@@ -346,6 +348,11 @@ if (isset($_POST['from']))
 									<span class="hidden-xs hidden-sm">Lista de Clientes</span>
 								</a>
 							</li>
+							<li><a href="#" onclick="despliega('modulo/cliente/localizacionCliente.php','contenido')">
+									<i class="fa fa-list" aria-hidden="true"></i>
+									<span class="hidden-xs hidden-sm">Localización de Clientes</span>
+								</a>
+							</li>
 						</ul>
 					</li>
 				</ul>
@@ -366,8 +373,10 @@ if (isset($_POST['from']))
 								</button>
 							</div>
 						</nav>
-						<div class="">
-							<h1 id="titleEmp">Sistema de Administracion</h1>
+						<div id="letter-container" class="letter-container">
+							<h1>
+								<a href="#">Sistema de Administracion</a>
+							</h1>
 						</div>
 						<!--<div class="search hidden-xs hidden-sm">
 							<input type="text" placeholder="Search" id="search">
@@ -730,6 +739,11 @@ if (isset($_POST['from']))
 <script type="text/javascript" language="javascript" class="init">
 
 	$(document).ready(function() {
+		/**
+		 * Estilos para el titulo
+		 */
+		$("#letter-container h1 a").lettering();
+
 		$('[data-toggle="offcanvas"]').click(function(){
 			$("#navigation").toggleClass("hidden-xs");
 		});
@@ -783,7 +797,7 @@ if (isset($_POST['from']))
 <aside id="iconChat" class="animation-target">
 	<a href="#" onclick="openChat();">
 		<div>
-			<img src="images/chat4.png" width="45" alt="chat">
+			<img src="images/chat4.png" width="45">
 		</div>
 	</a>
 </aside>
@@ -828,6 +842,7 @@ if (isset($_POST['from']))
 			</div>
 		</div>
 	</div>
+</div>
 </aside>
 <div id="sidebar"></div>
 <!-- AQUI TERMINA -->

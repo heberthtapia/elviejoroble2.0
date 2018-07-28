@@ -141,44 +141,44 @@ $cargo = $_SESSION['cargo'];
                     <td width="10%">
                         <div class="btn-group" style="width: 177px">
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataPreview"
-                                            data-foto    ="<?=$row['foto']?>"
-                                            data-name    ="<?=$row['nombre']?>"
-                                            data-paterno ="<?=$row['apP']?>"
-                                            data-materno ="<?=$row['apM']?>"
-                                            data-id      ="<?=$row['id_cliente']?>"
-                                            data-dep     ="<?=$row['depa']?>"
-                                            data-nameEmp ="<?=$row['nombreEmp']?>"
-                                            data-nit     ="<?=$row['nit']?>"
-                                            data-fono    ="<?=$row['phone']?>"
-                                            data-celular ="<?=$row['celular']?>"
-                                            data-emailC  ="<?=$row['email']?>"
-                                            data-ci      ="<?=$row['ci']?>"
-                                            data-addresC ="<?=$row['direccion']?>"
-                                            data-Nro     ="<?=$row['numero']?>"
-                                            data-cx      ="<?=$row['coorX']?>"
-                                            data-cy      ="<?=$row['coorY']?>"
-                                            data-obser   ="<?=$row['obser']?>"
+                                            data-foto    ='<?=$row['foto']?>'
+                                            data-name    ='<?=$row['nombre']?>'
+                                            data-paterno ='<?=$row['apP']?>'
+                                            data-materno ='<?=$row['apM']?>'
+                                            data-id      ='<?=$row['id_cliente']?>'
+                                            data-dep     ='<?=$row['depa']?>'
+                                            data-nameEmp ='<?=$row['nombreEmp']?>'
+                                            data-nit     ='<?=$row['nit']?>'
+                                            data-fono    ='<?=$row['phone']?>'
+                                            data-celular ='<?=$row['celular']?>'
+                                            data-emailC  ='<?=$row['email']?>'
+                                            data-ci      ='<?=$row['ci']?>'
+                                            data-addresC ='<?=$row['direccion']?>'
+                                            data-Nro     ='<?=$row['numero']?>'
+                                            data-cx      ='<?=$row['coorX']?>'
+                                            data-cy      ='<?=$row['coorY']?>'
+                                            data-obser   ='<?=$row['obser']?>'
                                     <i class='fa fa-external-link'></i> Vista Previa
                                     </button>
 
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataUpdate"
-                                            data-foto="<?=$row['foto']?>"
-                                            data-name="<?=$row['nombre']?>"
-                                            data-paterno="<?=$row['apP']?>"
-                                            data-materno="<?=$row['apM']?>"
-                                            data-id="<?=$row['id_cliente']?>"
-                                            data-dep="<?=$row['depa']?>"
-                                            data-nameEmp="<?=$row['nombreEmp']?>"
-                                            data-nit     ="<?=$row['nit']?>"
-                                            data-fono="<?=$row['phone']?>"
-                                            data-celular="<?=$row['celular']?>"
-                                            data-emailC="<?=$row['email']?>"
-                                            data-ci="<?=$row['ci']?>"
-                                            data-addresC="<?=$row['direccion']?>"
-                                            data-Nro="<?=$row['numero']?>"
-                                            data-cx="<?=$row['coorX']?>"
-                                            data-cy="<?=$row['coorY']?>"
-                                            data-obser="<?=$row['obser']?>"
+                                            data-foto    ='<?=$row['foto']?>'
+                                            data-name    ='<?=$row['nombre']?>'
+                                            data-paterno ='<?=$row['apP']?>'
+                                            data-materno ='<?=$row['apM']?>'
+                                            data-id      ='<?=$row['id_cliente']?>'
+                                            data-dep     ='<?=$row['depa']?>'
+                                            data-nameEmp ='<?=$row['nombreEmp']?>'
+                                            data-nit     ='<?=$row['nit']?>'
+                                            data-fono    ='<?=$row['phone']?>'
+                                            data-celular ='<?=$row['celular']?>'
+                                            data-emailC  ='<?=$row['email']?>'
+                                            data-ci      ='<?=$row['ci']?>'
+                                            data-addresC ='<?=$row['direccion']?>'
+                                            data-Nro     ='<?=$row['numero']?>'
+                                            data-cx      ='<?=$row['coorX']?>'
+                                            data-cy      ='<?=$row['coorY']?>'
+                                            data-obser   ='<?=$row['obser']?>'
                                     >
                                         <i class='fa fa-pencil-square-o '></i>
                                         <span>Modificar</span>

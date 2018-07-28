@@ -44,11 +44,7 @@ $op = new cnFunction();
     });
 
 </script>
-<?PHP
-include 'newProducto.php';
-include 'editProducto.php';
-include 'delProducto.php';
-?>
+
 <div class="row" id="listTabla">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <h1 class="avisos" align="center"><strong>INVENTARIO POR PREVENTISTA</strong></h1>
@@ -56,7 +52,7 @@ include 'delProducto.php';
         <br>
         <div class="row">
             <div class="col-sm-offset-3">
-                <form id="listaEmp" class="form-horizontal" action="javascript:saveForm('formNew','empleado/save.php')">
+                <form id="listaEmp" class="form-horizontal" >
                   <div class="form-group">
                     <label for="preventista" class="col-sm-2 col-xs-2 control-label">Preventista</label>
                     <div class="col-sm-4 col-xs-4">
