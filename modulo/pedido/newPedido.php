@@ -100,7 +100,7 @@ if (!$lastId[0]) {
 			<div class="form-group" align="center">
 				<button id="confPedido" type="button" class="btn btn-primary" onclick="adicFila('formPreVenta','producto.php');">
 					<i class="fa fa-plus" aria-hidden="true"></i>
-					<span>Anadir</span>
+					<span>Añadir</span>
 				</button>
 			</div>
 

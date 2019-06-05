@@ -260,8 +260,11 @@ $(document).ready(function(e) {
 
 		modal.find('.modal-body #calleU').val(calle);
 		modal.find('.modal-body #nom_calleU').val(nom_calle);
+		modal.find('.modal-body #zonaU').val(zona);
+		modal.find('.modal-body #nom_zonaU').val(nom_zona);
 
-		modal.find('.modal-body #addresU').val(direccion);
+		modal.find('.modal-body #departamentoU').val(departamento);
+		modal.find('.modal-body #direccionU').val(direccion);
 		modal.find('.modal-body #NroU').val(numero);
 		modal.find('.modal-body #cxU').val(coorX);
 		modal.find('.modal-body #cyU').val(coorY);
@@ -476,7 +479,7 @@ $(document).ready(function(e) {
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 form-group">
                         <label for="zonaU" class="sr-only">Zona/Barrio/Otro (*):</label>
-                        <select data-validation="required" class="form-control" name="zonaU">
+                        <select data-validation="required" class="form-control" name="zonaU" id="zonaU">
                         	<option disabled selected hidden>Zona/Barrio/Otro</option>
                           	<option>Zona</option>
                           	<option>Anillo</option>

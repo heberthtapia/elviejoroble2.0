@@ -14,47 +14,47 @@ $zona   = $_POST["zona"];
 $fecha  = $_POST["fecha"];
 
 $sql = "SELECT *
-        FROM persona
-        WHERE  tipo_persona = 'Cliente'
+        FROM cliente
+        WHERE  id_empleado = ".$_SESSION['idEmp']."
         AND coorX != '' ";
 
 if ($zona != '') {
-    $sql.= "AND direccion_nom_zona like '%".$zona."%' ";
+    $sql.= "AND nom_zona like '%".$zona."%' ";
 }
 
-$sql = $db->Execute($vara);
-
-$Query = $conexion->query($sql);
+$Query = $db->Execute($sql);
 
 $data = new stdClass();
-$data->coordenada = new stdClass();
 $c=0;
-while ($reg = $Query->fetch_object()) {
-    if ($reg->coorX != '') {
 
-        $id = $reg->idpersona;
+while ($reg = $Query->FetchRow()) {
 
-        $data->coordenada->cx[$c]      = $reg->coorX;
-        $data->coordenada->cy[$c]      = $reg->coorY;
-        $data->coordenada->nombre[$c]  = $reg->nombre;
-        $data->coordenada->avenida[$c] = $reg->direccion_calle;
-        $data->coordenada->nomAve[$c]  = $reg->direccion_nom_calle;
-        $data->coordenada->num[$c]     = $reg->direccion_num;
-        $data->coordenada->zona[$c]    = $reg->direccion_zona;
-        $data->coordenada->nomZona[$c] = $reg->direccion_nom_zona;
+    if ($reg['coorX'] != '') {
 
-        $sqlQuery = "SELECT * FROM status_cliente WHERE idpersona = '".$id."' AND fecha = '".$fecha."' ORDER BY (idstatus_cliente) ASC ";
-        $query = $conexion->query($sqlQuery);
-        $row = $query->fetch_object();
+        $id = $reg['id_cliente'];
+
+        $data->cx[$c]      = $reg['coorX'];
+        $data->cy[$c]      = $reg['coorY'];
+        $data->nombre[$c]  = $reg['nombre'];
+        $data->avenida[$c] = $reg['calle'];
+        $data->nomAve[$c]  = $reg['nom_calle'];
+        $data->num[$c]     = $reg['numero'];
+        $data->zona[$c]    = $reg['zona'];
+        $data->nomZona[$c] = $reg['nom_zona'];
+
+        $sqlQuery = "SELECT * FROM status_cliente WHERE id_cliente = '".$id."' AND fecha = '".$fecha."' ORDER BY (idstatus_cliente) ASC ";
+        $query = $db->Execute($sqlQuery);
+        $row = $query->FetchRow();
 
         if ($row->status == ''){
-            $data->coordenada->status[$c]  = $reg->status;
+            $data->status[$c]  = $reg['estado'];
         }else{
-            $data->coordenada->status[$c]  = $row->status;
+            $data->status[$c]  = $row['estado'];
         }
 
         $c++;
     }
+
 }
 //print_r($data);
 if($data){

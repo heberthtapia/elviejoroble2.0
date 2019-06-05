@@ -17,8 +17,6 @@
 
 	$data = json_decode($data);
 
-	//print_r($data);
-
 	/* REGISTRA VENTA */
 	$strQuery = "INSERT INTO pedido (id_empleado, id_cliente, dateReg, subTotal, descuento, bonificacion, total, iva, tipo, fac, obser,  status1)";
 	$strQuery.= "VALUES ('".$_SESSION['idEmp']."', '".$data->idCliente."', '".$fecha." ".$hora."', '".$data->subTotal."', ";
@@ -31,7 +29,9 @@
 	$query = $db->Execute($strQuery);
 	$idPedido = $query->FetchRow();
 
-	$data->pedido = $idPedido[0];
+	if($quey){
+		$data->pedido = $idPedido[0];
+	}
 
 	$i = 0;
 

@@ -5,29 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="73c4bc01-f6ca-4825-b2bd-cb905a4b665c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/myStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/myStyle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/myStyleChat.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/myStyleChat.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/miChat.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/miChat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/myJavaScript.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/myJavaScript.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulo/almacen/editProducto.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulo/almacen/editProducto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulo/almacen/listProducto.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulo/almacen/listProducto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulo/almacen/listTabla.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulo/almacen/listTabla.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulo/almacen/pdfInvPre.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulo/almacen/pdfInvPre.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulo/almacen/producto.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulo/almacen/producto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulo/almacen/productoPre.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulo/almacen/productoPre.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulo/cliente/cliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulo/cliente/cliente.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulo/cliente/listTabla.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulo/cliente/listTabla.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulo/cliente/newCliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulo/cliente/newCliente.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulo/cliente/save.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulo/cliente/save.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulo/cliente/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulo/cliente/update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulo/empleado/editEmpleado.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulo/empleado/editEmpleado.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulo/empleado/listTabla.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulo/empleado/listTabla.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulo/pedido/eliminados.xml" beforeDir="false" afterPath="$PROJECT_DIR$/modulo/pedido/eliminados.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulo/produccion/listTabla.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulo/produccion/listTabla.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulo/produccion/pdfOrdenAsig.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulo/produccion/pdfOrdenAsig.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulo/produccion/pdfOrdenPT.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulo/produccion/pdfOrdenPT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inc/listPuntos.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/listPuntos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modulo/cliente/localizacionCliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulo/cliente/localizacionCliente.php" afterDir="false" />
     </list>
     <ignored path="elviejoroble2.0.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,8 +32,12 @@
       <file leaf-file-name="admin.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-135">
-              <caret line="56" column="33" lean-forward="true" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+            <state relative-caret-position="17">
+              <caret line="56" column="33" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+              <folding>
+                <element signature="e#15314#15320#0#HTML" expanded="true" />
+                <element signature="e#20512#20520#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -243,11 +226,12 @@
       <workItem from="1530374466697" duration="9569000" />
       <workItem from="1530389393274" duration="4844000" />
       <workItem from="1530396072732" duration="793000" />
+      <workItem from="1533150467155" duration="2389000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="358692000" />
+    <option name="totallyTimeSpent" value="361081000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
@@ -598,8 +582,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-135">
-          <caret line="56" column="33" lean-forward="true" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+        <state relative-caret-position="17">
+          <caret line="56" column="33" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+          <folding>
+            <element signature="e#15314#15320#0#HTML" expanded="true" />
+            <element signature="e#20512#20520#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

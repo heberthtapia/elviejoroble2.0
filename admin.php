@@ -168,7 +168,7 @@ if (isset($_POST['from']))
 	<!-- Mis Styles -->
 	<link rel="stylesheet" href="css/myStyle.css">
 
-	<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 
 	<script type="text/javascript" src="js/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="js/dataTables.bootstrap.js"></script>

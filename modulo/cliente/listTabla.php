@@ -139,50 +139,62 @@ $cargo = $_SESSION['cargo'];
                     <td><?=$row['direccion'];?></td>
                     <td><?=$row['numero'];?></td>
                     <td width="10%">
-                        <div class="btn-group" style="width: 177px">
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataPreview"
-                                            data-foto    ='<?=$row['foto']?>'
-                                            data-name    ='<?=$row['nombre']?>'
-                                            data-paterno ='<?=$row['apP']?>'
-                                            data-materno ='<?=$row['apM']?>'
-                                            data-id      ='<?=$row['id_cliente']?>'
-                                            data-dep     ='<?=$row['depa']?>'
-                                            data-nameEmp ='<?=$row['nombreEmp']?>'
-                                            data-nit     ='<?=$row['nit']?>'
-                                            data-fono    ='<?=$row['phone']?>'
-                                            data-celular ='<?=$row['celular']?>'
-                                            data-emailC  ='<?=$row['email']?>'
-                                            data-ci      ='<?=$row['ci']?>'
-                                            data-addresC ='<?=$row['direccion']?>'
-                                            data-Nro     ='<?=$row['numero']?>'
-                                            data-cx      ='<?=$row['coorX']?>'
-                                            data-cy      ='<?=$row['coorY']?>'
-                                            data-obser   ='<?=$row['obser']?>'
-                                    <i class='fa fa-external-link'></i> Vista Previa
-                                    </button>
+                        <div class="btn-group" style="width: 191px">
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataPreview"
+                                    data-foto         ='<?=$row['foto']?>'
+                                    data-name         ='<?=$row['nombre']?>'
+                                    data-paterno      ='<?=$row['apP']?>'
+                                    data-materno      ='<?=$row['apM']?>'
+                                    data-id           ='<?=$row['id_cliente']?>'
+                                    data-dep          ='<?=$row['depa']?>'
+                                    data-nameEmp      ='<?=$row['nombreEmp']?>'
+                                    data-nit          ='<?=$row['nit']?>'
+                                    data-fono         ='<?=$row['phone']?>'
+                                    data-celular      ='<?=$row['celular']?>'
+                                    data-calle        ='<?=$row['calle']?>'
+                                    data-nom_calle    ='<?=$row['nom_calle']?>'
+                                    data-Nro          ='<?=$row['numero']?>'
+                                    data-zona         ='<?=$row['zona']?>'
+                                    data-nom_zona     ='<?=$row['nom_zona']?>'
+                                    data-departamento ='<?=$row['departamento']?>'
+                                    data-direccion    ='<?=$row['direccion_des']?>'
+                                    data-emailC       ='<?=$row['email']?>'
+                                    data-ci           ='<?=$row['ci']?>'
+                                    data-cx           ='<?=$row['coorX']?>'
+                                    data-cy           ='<?=$row['coorY']?>'
+                                    data-obser        ='<?=$row['obser']?>'
+                            >
+                                <i class='fa fa-external-link'></i>
+                                <span>Vista Previa</span>
+                            </button>
 
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataUpdate"
-                                            data-foto    ='<?=$row['foto']?>'
-                                            data-name    ='<?=$row['nombre']?>'
-                                            data-paterno ='<?=$row['apP']?>'
-                                            data-materno ='<?=$row['apM']?>'
-                                            data-id      ='<?=$row['id_cliente']?>'
-                                            data-dep     ='<?=$row['depa']?>'
-                                            data-nameEmp ='<?=$row['nombreEmp']?>'
-                                            data-nit     ='<?=$row['nit']?>'
-                                            data-fono    ='<?=$row['phone']?>'
-                                            data-celular ='<?=$row['celular']?>'
-                                            data-emailC  ='<?=$row['email']?>'
-                                            data-ci      ='<?=$row['ci']?>'
-                                            data-addresC ='<?=$row['direccion']?>'
-                                            data-Nro     ='<?=$row['numero']?>'
-                                            data-cx      ='<?=$row['coorX']?>'
-                                            data-cy      ='<?=$row['coorY']?>'
-                                            data-obser   ='<?=$row['obser']?>'
-                                    >
-                                        <i class='fa fa-pencil-square-o '></i>
-                                        <span>Modificar</span>
-                                    </button>
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dataUpdate"
+                                    data-foto         ='<?=$row['foto']?>'
+                                    data-name         ='<?=$row['nombre']?>'
+                                    data-paterno      ='<?=$row['apP']?>'
+                                    data-materno      ='<?=$row['apM']?>'
+                                    data-id           ='<?=$row['id_cliente']?>'
+                                    data-dep          ='<?=$row['depa']?>'
+                                    data-nameEmp      ='<?=$row['nombreEmp']?>'
+                                    data-nit          ='<?=$row['nit']?>'
+                                    data-fono         ='<?=$row['phone']?>'
+                                    data-celular      ='<?=$row['celular']?>'
+                                    data-calle        ='<?=$row['calle']?>'
+                                    data-nom_calle    ='<?=$row['nom_calle']?>'
+                                    data-Nro          ='<?=$row['numero']?>'
+                                    data-zona         ='<?=$row['zona']?>'
+                                    data-nom_zona     ='<?=$row['nom_zona']?>'
+                                    data-departamento ='<?=$row['departamento']?>'
+                                    data-direccion    ='<?=$row['direccion_des']?>'
+                                    data-emailC       ='<?=$row['email']?>'
+                                    data-ci           ='<?=$row['ci']?>'
+                                    data-cx           ='<?=$row['coorX']?>'
+                                    data-cy           ='<?=$row['coorY']?>'
+                                    data-obser        ='<?=$row['obser']?>'
+                            >
+                                <i class='fa fa-pencil-square-o '></i>
+                                <span>Modificar</span>
+                            </button>
                         </div>
                         <div style="width: 177px; margin-top: 5px">
                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#dataDeleteCli" data-id="<?=$row['id_cliente']?>"  ><i class='glyphicon glyphicon-trash'></i> Eliminar
@@ -226,4 +238,4 @@ $cargo = $_SESSION['cargo'];
             </tr>
             </tfoot>
         </table>
-</div>
+    </div>

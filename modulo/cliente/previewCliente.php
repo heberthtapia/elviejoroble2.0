@@ -26,27 +26,32 @@ var id_cliente;
 $(document).ready(function(e) {
 
     $('#dataPreview').on('show.bs.modal', function (event) {
-        var button    = $(event.relatedTarget); // Botón que activó el modal
-        var foto      = button.data('foto'); // Extraer la información de atributos de datos
-        var nombre    = button.data('name'); // Extraer la información de atributos de datos
-        var apP       = button.data('paterno'); // Extraer la información de atributos de datos
-        var apM       = button.data('materno'); // Extraer la información de atributos de datos
-        id_cliente    = button.data('id'); // Extraer la información de atributos de datos
-        var depa      = button.data('dep'); // Extraer la información de atributos de datos
-        var nameEmp   = button.data('nameemp');
-        var nit       = button.data('nit');
-        var phone     = button.data('fono');
-        var celular   = button.data('celular');
-        var email     = button.data('emailc');
-        var ci        = button.data('ci');
-        var direccion = button.data('addresc');
-        var numero    = button.data('nro');
-        coorX         = button.data('cx');
-        coorY         = button.data('cy');
-        var obser     = button.data('obser');
+        var button       = $(event.relatedTarget); // Botón que activó el modal
+        var foto         = button.data('foto'); // Extraer la información de atributos de datos
+        var nombre       = button.data('name'); // Extraer la información de atributos de datos
+        var apP          = button.data('paterno'); // Extraer la información de atributos de datos
+        var apM          = button.data('materno'); // Extraer la información de atributos de datos
+        id_cliente       = button.data('id'); // Extraer la información de atributos de datos
+        var depa         = button.data('dep'); // Extraer la información de atributos de datos
+        var nameEmp      = button.data('nameemp');
+        var nit          = button.data('nit');
+        var phone        = button.data('fono');
+        var celular      = button.data('celular');
+        var email        = button.data('emailc');
+        var ci           = button.data('ci');
+        var calle        = button.data('calle');
+        var nom_calle    = button.data('nom_calle');
+        var numero       = button.data('nro');
+        var zona         = button.data('zona');
+        var nom_zona     = button.data('nom_zona');
+        var departamento = button.data('departamento');
+        var direccion    = button.data('direccion');
+        coorX            = button.data('cx');
+        coorY            = button.data('cy');
+        var obser        = button.data('obser');
 
         var modal = $(this);
-        //modal.find('.modal-title').text('Modificar cliente: '+nombre+' '+apP);
+        modal.find('.modal-title').text('Modificar cliente: '+capitalize(nombre)+' '+capitalize(apP));
         modal.find('.modal-body #nameEmpU').val(nameEmp);
         modal.find('.modal-body #nitU').val(nit);
         modal.find('.modal-body #nameU').val(nombre);
@@ -62,7 +67,13 @@ $(document).ready(function(e) {
         modal.find('.modal-body #celularU').val(celular);
         modal.find('.modal-body #emailU').val(email);
 
-        modal.find('.modal-body #addresU').val(direccion);
+        modal.find('.modal-body #calleU').val(calle);
+        modal.find('.modal-body #nom_calleU').val(nom_calle);
+        modal.find('.modal-body #zonaU').val(zona);
+        modal.find('.modal-body #nom_zonaU').val(nom_zona);
+
+        modal.find('.modal-body #departamentoU').val(departamento);
+        modal.find('.modal-body #direccionU').val(direccion);
         modal.find('.modal-body #NroU').val(numero);
         modal.find('.modal-body #cxU').val(coorX);
         modal.find('.modal-body #cyU').val(coorY);
@@ -245,6 +256,22 @@ $('#searchU').on('click', function() {
     // geocodeResult enviando todo el resultado obtenido
     geocoder.geocode({ 'address': address}, geocodeResult);
 });
+
+function capitalize(string){
+    var words = string.split(" ");
+    var output = "";
+    for (i = 0 ; i < words.length; i ++){
+    lowerWord = words[i].toLowerCase();
+    lowerWord = lowerWord.trim();
+    capitalizedWord = lowerWord.slice(0,1).toUpperCase() + lowerWord.slice(1);
+    output += capitalizedWord;
+    if (i != words.length-1){
+    output+=" ";
+    }
+    }//for
+    output[output.length-1] = '';
+    return output;
+}
 
 </script>
 

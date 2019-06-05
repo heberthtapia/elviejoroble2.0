@@ -16,6 +16,8 @@
 	$data = stripslashes($_POST['res']);
 	$data = json_decode($data);
 
+	//print_r($data);
+
 	$strQuery = "SELECT * FROM inventario WHERE id_inventario = '".$data->producto."' ";
 
 	$sql = $db->Execute($strQuery);

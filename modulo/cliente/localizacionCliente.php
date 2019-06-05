@@ -24,13 +24,12 @@ $NumRow = $strNum->FetchRow();
 <script type="text/javascript">
     //VARIABLES GENERALES
     //DECLARAS FUERA DEL READY DE JQUERY
-    var map;
-    var markers       = [];
-    var marcadores_bd = [];
-    var mapa          = null; //VARIABLE GENERAL PARA EL MAPA
+    var mapl;
+    var markersl       = [];
+    var marcadores_bdl = [];
+    var mapal          = null; //VARIABLE GENERAL PARA EL MAPAl
 
-    function initMap(){
-        alert('entra');
+    function initMapLoc(){
         /* GOOGLE MAPS */
         //var formulario = $('#frmCliente');
         //COODENADAS INICIALES -16.5207007,-68.1615534
@@ -42,11 +41,11 @@ $NumRow = $strNum->FetchRow();
             center:punto,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        mapa = new google.maps.Map( $("#maps")[0], config );
+        mapal = new google.maps.Map( $("#mapsLoc")[0], config );
     }
 
     //FUNCIONES PARA EL GOOGLE MAPS
-    function deleteMarkers(lista){
+    function deleteMarkersLoc(lista){
         for(i in lista){
             lista[i].setMap(null);
         }
@@ -54,9 +53,9 @@ $NumRow = $strNum->FetchRow();
 
     function listaCliente(status,zona,fecha){
         //ANTES DE LISTAR MARCADORES
-        //SE DEBEN QUITAR LOS ANTERIORES DEL MAPA
-        deleteMarkers(markers);
-        //deleteMarkers(marcadores_bd);
+        //SE DEBEN QUITAR LOS ANTERIORES DEL MAPAl
+        deleteMarkersLoc(markersl);
+        //deleteMarkersLoc(marcadores_bdl);
         var img;
         //var formulario_edicion = $("#formUpdate");
         $.ajax({
@@ -77,19 +76,19 @@ $NumRow = $strNum->FetchRow();
 
                 $.each(data, function(i, item){
                     $.each(item, function(j, val){
-                        contentString[c] = '<div>'
-                         +'<h3>Cliente: '+item.nombre[c]+'</h3>'
-                         +'<p>Dirección: <strong>'+item.avenida[c]+'</strong> '+item.nomAve[c]+' </p>'
-                         +'<p><strong># </strong>: '+item.num[c]+' </p>'
-                         +'<p><strong>'+item.zona[c]+': </strong> '+item.nomZona[c]+' </p>'
+                        contentString[j] = '<div>'
+                         +'<h3>Cliente: '+data.nombre[j]+'</h3>'
+                         +'<p>Dirección: <strong>'+data.avenida[j]+'</strong> '+data.nomAve[j]+' </p>'
+                         +'<p><strong># </strong>: '+data.num[j]+' </p>'
+                         +'<p><strong>'+data.zona[j]+': </strong> '+data.nomZona[j]+' </p>'
                          +'</div>';
 
                         var infowindow = new google.maps.InfoWindow({
-                            content: contentString[c],
+                            content: contentString[j],
                             maxWidth: 300
                         });
 
-                        switch (item.status[c]) {
+                        switch (data.status[j]) {
                             case 'V':
                                 img = 'green.png';
                                 break;
@@ -103,30 +102,30 @@ $NumRow = $strNum->FetchRow();
                         //alert(item.status[c]+'---'+img);
 
                         //OBTENER LAS COORDENADAS DEL PUNTO
-                        var posi = new google.maps.LatLng(item.cx[c], item.cy[c]);
+                        var posi = new google.maps.LatLng(data.cx[c], data.cy[c]);
                         //CARGAR LAS PROPIEDADES AL MARCADOR
                         var marca = new google.maps.Marker({
-                            //idMarcador:item.IdPunto,
+                            //idMarcador:data.IdPunto,
                             position:posi,
-                            icon: 'img/'+img,
+                            icon: 'images/iconos/'+img,
                             //zoom:15,
-                            //titulo: item.Titulo,
-                            cx:item.cx[c],//esas coordenadas vienen de la BD
-                            cy:item.cy[c],//esas coordenadas vienen de la BD
+                            //titulo: data.Titulo,
+                            cx:data.cx[c],//esas coordenadas vienen de la BD
+                            cy:data.cy[c],//esas coordenadas vienen de la BD
                             draggable: false
                         });
                         // Add info window to marker
                         google.maps.event.addListener(marca, 'click', (function(marca, c) {
                             return function() {
                                 infoWindow.setContent(contentString[c]);
-                                infoWindow.open(mapa, marca);
+                                infoWindow.open(mapal, marca);
                             }
                         })(marca, c));
-                        //AGREGAR EL MARCADOR A LA VARIABLE MARCADORES_BD
-                        // marcadores_bd.push(marca);
-                        //UBICAR EL MARCADOR EN EL MAPA
-                        markers.push(marca);
-                        marca.setMap(mapa);
+                        //AGREGAR EL MARCADOR A LA VARIABLE MARCADORES_BDl
+                        // marcadores_bdl.push(marca);
+                        //UBICAR EL MARCADOR EN EL MAPAl
+                        markersl.push(marca);
+                        marca.setMap(mapal);
                         c++;
                     });
                 });
@@ -143,10 +142,22 @@ $NumRow = $strNum->FetchRow();
         zona   = $("#txtZona").val();
         fecha  = $("#cboFecha").val();
 
-        initMap();
-        //listaCliente(status,zona,fecha);
+        initMapLoc();
+        listaCliente(status,zona,fecha);
+
+        $("#status, #txtZona, #cboEmpleado").change(function(){
+            status     = $("#status").val();
+            zona       = $("#txtZona").val();
+            fecha      = $("#cboFecha").val();
+            idempleado = $("#cboEmpleado").val();
+
+            listaCliente(status,zona,fecha,idempleado);
+        });
     });
 </script>
+<?php
+    include 'newCliente.php';
+?>
 <div class="row" id="listTabla">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <h1 class="avisos" align="center"><strong>CLIENTES</strong></h1>
@@ -192,14 +203,14 @@ $NumRow = $strNum->FetchRow();
                 </div>
             </form>
             <br>
-            <div id="maps" class="table-responsive">
+            <div id="mapsLoc" class="table-responsive">
                 <!-- Listado de articulos por vendedor -->
             </div>
         </div>
     </div>
 </div>
 <style>
-#maps {
+#mapsLoc {
     height: 500px;
     border: 1px #ccc solid;
 }

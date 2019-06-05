@@ -44,7 +44,6 @@
         $strQ = $db->Execute($strQuery);
     }
 
-
 class UploadHandler
 {
 

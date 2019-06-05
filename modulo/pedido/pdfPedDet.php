@@ -17,7 +17,7 @@
     $content = ob_get_clean();
 
     // convert to PDF
-    require_once(dirname(__FILE__).'/../../html2pdf/vendor/autoload.php');
+    require_once(dirname(__FILE__).'/../../vendor/autoload.php');
 
     use Spipu\Html2Pdf\Html2Pdf;
     use Spipu\Html2Pdf\Exception\Html2PdfException;
